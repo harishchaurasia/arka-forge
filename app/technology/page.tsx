@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Section } from "@/components/site/section";
-import { Cpu, Code, Boxes } from "lucide-react";
+import { Cpu, Code, Boxes, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Technology",
@@ -34,24 +33,30 @@ export default function TechnologyPage() {
   return (
     <Section>
       <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Technology</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl">
-          Core technical capabilities and expertise areas
+        <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+          Capabilities
+        </span>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Technology</h1>
+        <p className="text-base text-muted-foreground max-w-xl">
+          Core technical capabilities and expertise areas.
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-3">
         {technologies.map((tech) => {
           const Icon = tech.icon;
           return (
-            <Link key={tech.href} href={tech.href}>
-              <Card className="h-full transition-all hover:border-primary/50 hover:shadow-lg hover:-translate-y-1">
-                <CardHeader>
-                  <Icon className="h-10 w-10 mb-4 text-primary" />
-                  <CardTitle>{tech.title}</CardTitle>
-                  <CardDescription>{tech.description}</CardDescription>
-                </CardHeader>
-              </Card>
+            <Link key={tech.href} href={tech.href} className="group block">
+              <div className="h-full glass-card p-6 transition-all duration-300 hover:-translate-y-1.5">
+                <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl glass-icon">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <h2 className="text-[15px] font-semibold mb-2 group-hover:text-primary transition-colors flex items-center gap-1.5">
+                  {tech.title}
+                  <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-60 transition-opacity" />
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">{tech.description}</p>
+              </div>
             </Link>
           );
         })}

@@ -4,28 +4,37 @@ import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
+const ease = [0.25, 0.1, 0.25, 1];
 
 export function CTABand() {
   return (
-    <section className="py-32 md:py-40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-background" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,107,53,0.1),transparent_50%)]" />
-      <div className="container mx-auto px-6 md:px-8 relative z-10">
+    <section className="py-28 md:py-36 relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.06] blur-[140px] pointer-events-none" />
+
+      <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="max-w-4xl mx-auto text-center"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease }}
+          className="glass-card p-12 md:p-20 text-center"
         >
-          <h2 className="font-bold mb-6">
-            Build with <span className="gradient-text-primary">Kepler Forge</span>
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
+            Let&apos;s Build Together
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
+            Build with <span className="gradient-text">Kepler Forge</span>
           </h2>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-            Let's discuss how we can help bring your vision to life.
+          <p className="text-base text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
+            Have a project that demands engineering excellence? Let&apos;s discuss how we can bring your vision to life.
           </p>
-          <Button asChild size="lg" className="px-10 py-6 text-base font-medium glow-primary hover:glow-primary-lg">
-            <Link href="/contact">Get in Touch</Link>
+          <Button asChild size="lg" className="glow px-8">
+            <Link href="/contact">
+              Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
+            </Link>
           </Button>
         </motion.div>
       </div>

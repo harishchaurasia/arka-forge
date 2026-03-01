@@ -2,91 +2,117 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, Layers } from "lucide-react";
 import type { WorkPost } from "@/lib/content/loader";
 
-interface FeaturedWorkClientProps {
-  work: WorkPost[];
-}
+const ease = [0.25, 0.1, 0.25, 1];
 
-export function FeaturedWorkClient({ work }: FeaturedWorkClientProps) {
+const placeholders = [
+  {
+    title: "Project Showcase Coming Soon",
+    description: "Real-time simulation platform built for demanding enterprise applications. Full case study in progress.",
+    tags: ["simulation", "enterprise"],
+    client: null as string | null,
+  },
+  {
+    title: "Case Study Coming Soon",
+    description: "Custom engine and tooling pipeline developed for a AAA-quality interactive experience.",
+    tags: ["engine", "tooling"],
+    client: null as string | null,
+  },
+];
+
+export function FeaturedWorkClient({ work }: { work: WorkPost[] }) {
   const featured = work.slice(0, 2);
-
-  if (featured.length === 0) {
-    return null;
-  }
+  const hasContent = featured.length > 0;
+  const items = hasContent
+    ? featured.map((item) => ({
+        title: item.frontmatter.title,
+        description: item.frontmatter.description,
+        tags: item.frontmatter.tags.slice(0, 3),
+        client: item.frontmatter.client || null,
+        href: `/work/${item.slug}`,
+        date: item.frontmatter.date,
+      }))
+    : placeholders.map((p) => ({
+        ...p,
+        href: "/work",
+        date: null as string | null,
+      }));
 
   return (
-    <section className="py-32 md:py-40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-muted/20 to-background" />
-      <div className="container mx-auto px-6 md:px-8 relative z-10">
+    <section className="py-28 md:py-36 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] via-white/[0.02] to-transparent pointer-events-none" />
+
+      <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="flex justify-between items-center mb-16"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease }}
+          className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-12"
         >
           <div>
-            <h2 className="font-bold mb-4">Featured Work</h2>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light">
-              Case studies and projects
+            <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+              Portfolio
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Work</h2>
+            <p className="text-base text-muted-foreground max-w-md">
+              Projects and case studies showcasing our technical capabilities.
             </p>
           </div>
-          <Button asChild variant="outline" className="hidden md:flex border-2">
-            <Link href="/work">View All</Link>
+          <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex gap-1.5">
+            <Link href="/work">View All <ArrowRight className="h-3.5 w-3.5" /></Link>
           </Button>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {featured.map((item, index) => (
+        <div className="grid gap-5 md:grid-cols-2">
+          {items.map((item, i) => (
             <motion.div
-              key={item.slug}
-              initial={{ opacity: 0, y: 30 }}
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.4, 0, 0.2, 1] }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease }}
             >
-              <Link href={`/work/${item.slug}`} className="group block h-full">
-                <Card className="h-full transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 group-hover:bg-opacity-80">
-                  <CardHeader className="p-8">
-                    <CardTitle className="text-2xl mb-3 group-hover:text-primary transition-colors">{item.frontmatter.title}</CardTitle>
-                    <CardDescription className="text-base leading-relaxed">{item.frontmatter.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-8 pt-0">
-                    {item.frontmatter.client && (
-                      <p className="text-sm font-medium text-primary mb-4">
-                        Client: {item.frontmatter.client}
-                      </p>
-                    )}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {item.frontmatter.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+              <Link href={item.href} className="group block h-full">
+                <article className="h-full glass-card p-7 transition-all duration-300 hover:-translate-y-1.5">
+                  {!hasContent && (
+                    <div className="mb-4 inline-flex items-center justify-center w-10 h-10 rounded-lg glass-icon">
+                      <Layers className="h-4 w-4 text-primary" />
                     </div>
-                    <time className="text-sm text-muted-foreground font-medium">
-                      {new Date(item.frontmatter.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
+                  )}
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                    {item.description}
+                  </p>
+                  {item.client && (
+                    <p className="text-xs font-medium text-primary mb-4">{item.client}</p>
+                  )}
+                  <div className="flex flex-wrap gap-1.5">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="text-[11px] px-2.5 py-1 rounded-full glass-pill text-primary/80 font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {item.date && (
+                    <time className="block mt-4 text-xs text-muted-foreground">
+                      {new Date(item.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                     </time>
-                  </CardContent>
-                </Card>
+                  )}
+                </article>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 text-center md:hidden">
-          <Button asChild variant="outline">
+        <div className="mt-8 text-center sm:hidden">
+          <Button asChild variant="outline" size="sm">
             <Link href="/work">View All Work</Link>
           </Button>
         </div>

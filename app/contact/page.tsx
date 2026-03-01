@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Section } from "@/components/site/section";
 import { useToast } from "@/components/ui/use-toast";
+import { Mail, Clock } from "lucide-react";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -29,27 +29,18 @@ export default function ContactPage() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Failed to send message");
 
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to send message");
-      }
-
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you soon.",
-      });
+      toast({ title: "Message sent!", description: "We'll get back to you soon." });
       reset();
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to send message.",
         variant: "destructive",
       });
     } finally {
@@ -58,112 +49,86 @@ export default function ContactPage() {
   };
 
   return (
-    <Section>
-      <div className="max-w-2xl mx-auto">
+    <section className="py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-5">
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact</h1>
-          <p className="text-xl text-muted-foreground">
-            Have a project in mind? Let's discuss how we can help.
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+            Get in Touch
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Contact</h1>
+          <p className="text-base text-muted-foreground max-w-md">
+            Have a project in mind? Let&apos;s discuss how we can help.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Honeypot field - hidden from users */}
-          <input
-            type="text"
-            {...register("honeypot")}
-            className="hidden"
-            tabIndex={-1}
-            autoComplete="off"
-          />
-
-          <div>
-            <Label htmlFor="name">Name *</Label>
-            <Input
-              id="name"
-              {...register("name")}
-              className="mt-2"
-              aria-invalid={errors.name ? "true" : "false"}
-            />
-            {errors.name && (
-              <p className="mt-1 text-sm text-destructive">{errors.name.message}</p>
-            )}
+        <div className="grid gap-8 md:grid-cols-[1fr,1.4fr] items-start">
+          {/* Left — info cards */}
+          <div className="space-y-4">
+            <div className="glass-card p-6 flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
+                <Mail className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold mb-1">Email</h3>
+                <a href="mailto:contact@keplerforge.com" className="text-sm text-primary hover:underline">
+                  contact@keplerforge.com
+                </a>
+              </div>
+            </div>
+            <div className="glass-card p-6 flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
+                <Clock className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold mb-1">Response Time</h3>
+                <p className="text-sm text-muted-foreground">Typically within 1-2 business days</p>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <Label htmlFor="email">Email *</Label>
-            <Input
-              id="email"
-              type="email"
-              {...register("email")}
-              className="mt-2"
-              aria-invalid={errors.email ? "true" : "false"}
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-destructive">{errors.email.message}</p>
-            )}
+          {/* Right — form */}
+          <div className="glass-card p-6 md:p-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <input type="text" {...register("honeypot")} className="hidden" tabIndex={-1} autoComplete="off" />
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <Label htmlFor="name" className="text-xs font-medium text-muted-foreground mb-1.5 block">Name *</Label>
+                  <Input id="name" placeholder="Your name" {...register("name")} aria-invalid={errors.name ? "true" : "false"} />
+                  {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name.message}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="email" className="text-xs font-medium text-muted-foreground mb-1.5 block">Email *</Label>
+                  <Input id="email" type="email" placeholder="you@company.com" {...register("email")} aria-invalid={errors.email ? "true" : "false"} />
+                  {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>}
+                </div>
+              </div>
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <Label htmlFor="company" className="text-xs font-medium text-muted-foreground mb-1.5 block">Company</Label>
+                  <Input id="company" placeholder="Company name" {...register("company")} />
+                </div>
+                <div>
+                  <Label htmlFor="subject" className="text-xs font-medium text-muted-foreground mb-1.5 block">Subject *</Label>
+                  <Input id="subject" placeholder="Project inquiry" {...register("subject")} aria-invalid={errors.subject ? "true" : "false"} />
+                  {errors.subject && <p className="mt-1 text-xs text-destructive">{errors.subject.message}</p>}
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="message" className="text-xs font-medium text-muted-foreground mb-1.5 block">Message *</Label>
+                <Textarea id="message" rows={6} placeholder="Tell us about your project..." {...register("message")} aria-invalid={errors.message ? "true" : "false"} />
+                {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>}
+              </div>
+
+              <Button type="submit" size="lg" disabled={isSubmitting} className="w-full glow">
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </Button>
+            </form>
           </div>
-
-          <div>
-            <Label htmlFor="company">Company</Label>
-            <Input
-              id="company"
-              {...register("company")}
-              className="mt-2"
-              aria-invalid={errors.company ? "true" : "false"}
-            />
-            {errors.company && (
-              <p className="mt-1 text-sm text-destructive">{errors.company.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="subject">Subject *</Label>
-            <Input
-              id="subject"
-              {...register("subject")}
-              className="mt-2"
-              aria-invalid={errors.subject ? "true" : "false"}
-            />
-            {errors.subject && (
-              <p className="mt-1 text-sm text-destructive">{errors.subject.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="message">Message *</Label>
-            <Textarea
-              id="message"
-              rows={8}
-              {...register("message")}
-              className="mt-2"
-              aria-invalid={errors.message ? "true" : "false"}
-            />
-            {errors.message && (
-              <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>
-            )}
-          </div>
-
-          <Button type="submit" size="lg" disabled={isSubmitting} className="w-full">
-            {isSubmitting ? "Sending..." : "Send Message"}
-          </Button>
-        </form>
-
-        <div className="mt-12 pt-8 border-t border-border">
-          <h2 className="text-2xl font-semibold mb-4">Alternative Contact Methods</h2>
-          <p className="text-muted-foreground mb-4">
-            Prefer to reach out directly? You can contact us at:
-          </p>
-          <p>
-            <a
-              href="mailto:contact@keplerforge.com"
-              className="text-primary hover:underline"
-            >
-              contact@keplerforge.com
-            </a>
-          </p>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

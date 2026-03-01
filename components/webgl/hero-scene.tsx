@@ -3,7 +3,6 @@
 import * as React from "react";
 import * as THREE from "three";
 
-// Lazy load react-three-fiber to avoid SSR issues
 let Canvas: any;
 let useFrame: any;
 
@@ -17,118 +16,238 @@ if (typeof window !== "undefined") {
   }
 }
 
-function OrbitalRings() {
-  const ring1Ref = React.useRef<THREE.Mesh>(null);
-  const ring2Ref = React.useRef<THREE.Mesh>(null);
-  const ring3Ref = React.useRef<THREE.Mesh>(null);
+/* ── Star field ─────────────────────────────── */
+function StarField({ count = 1200 }: { count?: number }) {
+  const ref = React.useRef<THREE.Points>(null);
 
-  useFrame((state) => {
-    if (ring1Ref.current) {
-      ring1Ref.current.rotation.x = state.clock.elapsedTime * 0.2;
-      ring1Ref.current.rotation.z = state.clock.elapsedTime * 0.1;
+  const [positions, sizes] = React.useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const sz = new Float32Array(count);
+    for (let i = 0; i < count; i++) {
+      // Distribute in a sphere shell (radius 6–18)
+      const r = 6 + Math.random() * 12;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = r * Math.cos(phi);
+      sz[i] = 0.5 + Math.random() * 1.5;
     }
-    if (ring2Ref.current) {
-      ring2Ref.current.rotation.y = state.clock.elapsedTime * 0.3;
-      ring2Ref.current.rotation.x = state.clock.elapsedTime * 0.15;
-    }
-    if (ring3Ref.current) {
-      ring3Ref.current.rotation.z = state.clock.elapsedTime * 0.25;
-      ring3Ref.current.rotation.y = state.clock.elapsedTime * 0.2;
+    return [pos, sz];
+  }, [count]);
+
+  useFrame(({ clock }: { clock: THREE.Clock }) => {
+    if (ref.current) {
+      ref.current.rotation.y = clock.elapsedTime * 0.008;
+      ref.current.rotation.x = Math.sin(clock.elapsedTime * 0.005) * 0.05;
     }
   });
 
   return (
-    <group>
-      {/* Outer ring - cyan/blue */}
-      <mesh ref={ring1Ref}>
-        <torusGeometry args={[2, 0.05, 16, 100]} />
-        <meshStandardMaterial color="#3b82f6" emissive="#3b82f6" emissiveIntensity={0.4} />
-      </mesh>
-      {/* Middle ring - blue */}
-      <mesh ref={ring2Ref}>
-        <torusGeometry args={[1.5, 0.04, 16, 100]} />
-        <meshStandardMaterial color="#60a5fa" emissive="#60a5fa" emissiveIntensity={0.3} />
-      </mesh>
-      {/* Inner ring - light blue */}
-      <mesh ref={ring3Ref}>
-        <torusGeometry args={[1, 0.03, 16, 100]} />
-        <meshStandardMaterial color="#93c5fd" emissive="#93c5fd" emissiveIntensity={0.2} />
-      </mesh>
-      {/* Center sphere */}
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[positions, 3]}
+        />
+        <bufferAttribute
+          attach="attributes-size"
+          args={[sizes, 1]}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#8ab4f8"
+        size={0.04}
+        sizeAttenuation
+        transparent
+        opacity={0.7}
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
+}
+
+/* ── Nebula glow layers ─────────────────────── */
+function NebulaGlow() {
+  const ref = React.useRef<THREE.Group>(null);
+
+  useFrame(({ clock }: { clock: THREE.Clock }) => {
+    if (ref.current) {
+      ref.current.rotation.z = clock.elapsedTime * 0.015;
+    }
+  });
+
+  return (
+    <group ref={ref}>
+      {/* Large ambient glow */}
       <mesh>
-        <sphereGeometry args={[0.15, 32, 32]} />
-        <meshStandardMaterial color="#dbeafe" emissive="#dbeafe" emissiveIntensity={0.8} />
+        <sphereGeometry args={[3.5, 32, 32]} />
+        <meshBasicMaterial
+          color="#1d4ed8"
+          transparent
+          opacity={0.03}
+          depthWrite={false}
+          side={THREE.BackSide}
+        />
+      </mesh>
+      {/* Mid glow */}
+      <mesh>
+        <sphereGeometry args={[2.2, 32, 32]} />
+        <meshBasicMaterial
+          color="#3b82f6"
+          transparent
+          opacity={0.045}
+          depthWrite={false}
+          side={THREE.BackSide}
+        />
+      </mesh>
+      {/* Inner haze */}
+      <mesh>
+        <sphereGeometry args={[1.2, 32, 32]} />
+        <meshBasicMaterial
+          color="#60a5fa"
+          transparent
+          opacity={0.06}
+          depthWrite={false}
+          side={THREE.BackSide}
+        />
       </mesh>
     </group>
   );
 }
 
-function HeroSceneContent() {
+/* ── Orbital rings ──────────────────────────── */
+function OrbitalRings() {
+  const ring1 = React.useRef<THREE.Mesh>(null);
+  const ring2 = React.useRef<THREE.Mesh>(null);
+  const ring3 = React.useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }: { clock: THREE.Clock }) => {
+    const t = clock.elapsedTime;
+    if (ring1.current) {
+      ring1.current.rotation.x = t * 0.15;
+      ring1.current.rotation.z = t * 0.08;
+    }
+    if (ring2.current) {
+      ring2.current.rotation.y = t * 0.2;
+      ring2.current.rotation.x = t * 0.1;
+    }
+    if (ring3.current) {
+      ring3.current.rotation.z = t * 0.18;
+      ring3.current.rotation.y = t * 0.12;
+    }
+  });
+
+  return (
+    <group scale={1.3}>
+      {/* Outer ring */}
+      <mesh ref={ring1}>
+        <torusGeometry args={[2.8, 0.12, 32, 128]} />
+        <meshStandardMaterial
+          color="#4d9af5"
+          emissive="#4d9af5"
+          emissiveIntensity={0.6}
+          transparent
+          opacity={0.85}
+          roughness={0.2}
+          metalness={0.4}
+        />
+      </mesh>
+
+      {/* Middle ring */}
+      <mesh ref={ring2}>
+        <torusGeometry args={[2.1, 0.09, 32, 128]} />
+        <meshStandardMaterial
+          color="#60a5fa"
+          emissive="#60a5fa"
+          emissiveIntensity={0.5}
+          transparent
+          opacity={0.8}
+          roughness={0.25}
+          metalness={0.35}
+        />
+      </mesh>
+
+      {/* Inner ring */}
+      <mesh ref={ring3}>
+        <torusGeometry args={[1.4, 0.07, 32, 100]} />
+        <meshStandardMaterial
+          color="#93c5fd"
+          emissive="#93c5fd"
+          emissiveIntensity={0.4}
+          transparent
+          opacity={0.75}
+          roughness={0.3}
+          metalness={0.3}
+        />
+      </mesh>
+
+      {/* Core sphere */}
+      <mesh>
+        <sphereGeometry args={[0.28, 48, 48]} />
+        <meshStandardMaterial
+          color="#dbeafe"
+          emissive="#dbeafe"
+          emissiveIntensity={1.2}
+          roughness={0.1}
+          metalness={0.5}
+        />
+      </mesh>
+
+      {/* Core glow bloom */}
+      <mesh>
+        <sphereGeometry args={[0.55, 32, 32]} />
+        <meshBasicMaterial
+          color="#4d9af5"
+          transparent
+          opacity={0.08}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+/* ── Full scene ─────────────────────────────── */
+function SceneContent() {
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[10, 10, 10]} intensity={1.2} />
-      <pointLight position={[-10, -10, -10]} intensity={0.6} color="#3b82f6" />
+      <ambientLight intensity={0.3} />
+      <pointLight position={[8, 8, 8]} intensity={1.5} color="#ffffff" />
+      <pointLight position={[-6, -6, -8]} intensity={0.8} color="#4d9af5" />
+      <pointLight position={[0, 0, 6]} intensity={0.5} color="#93c5fd" />
+
+      <StarField count={1400} />
+      <NebulaGlow />
       <OrbitalRings />
     </>
   );
 }
 
 export function HeroScene() {
-  const [hasWebGL, setHasWebGL] = React.useState(false);
-  const [hasR3F, setHasR3F] = React.useState(false);
+  const [ready, setReady] = React.useState(false);
 
   React.useEffect(() => {
-    // Check for WebGL support
     const canvas = document.createElement("canvas");
     const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    const webglSupported = !!gl;
-    
-    // Check if react-three-fiber loaded
-    const r3fLoaded = typeof Canvas !== "undefined" && typeof useFrame !== "undefined";
-    
-    setHasWebGL(webglSupported);
-    setHasR3F(r3fLoaded);
+    const ok = !!gl && typeof Canvas !== "undefined" && typeof useFrame !== "undefined";
+    setReady(ok);
   }, []);
 
-  if (!hasWebGL || !hasR3F || !Canvas) {
-    return <HeroFallback />;
-  }
+  if (!ready || !Canvas) return null;
 
   return (
     <div className="absolute inset-0 w-full h-full">
       <Canvas
         className="w-full h-full"
-        camera={{ position: [0, 0, 5], fov: 50 }}
+        camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
       >
-        <HeroSceneContent />
+        <SceneContent />
       </Canvas>
-    </div>
-  );
-}
-
-function HeroFallback() {
-  return (
-    <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-      <svg
-        className="w-full h-full"
-        viewBox="0 0 400 400"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <radialGradient id="gradient" cx="50%" cy="50%">
-            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#0a0a0f" stopOpacity="0.2" />
-          </radialGradient>
-        </defs>
-        <circle cx="200" cy="200" r="150" stroke="#3b82f6" strokeWidth="2" fill="url(#gradient)" opacity="0.25" />
-        <circle cx="200" cy="200" r="100" stroke="#60a5fa" strokeWidth="2" fill="none" opacity="0.3" />
-        <circle cx="200" cy="200" r="50" stroke="#93c5fd" strokeWidth="2" fill="none" opacity="0.4" />
-        <circle cx="200" cy="200" r="5" fill="#dbeafe" />
-      </svg>
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -22,61 +22,51 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/50 glass-strong supports-[backdrop-filter]:backdrop-blur-xl">
-      <div className="container mx-auto flex h-20 items-center justify-between px-6 md:px-8">
-        <Link
-          href="/"
-          className="flex items-center space-x-2 font-semibold text-foreground hover:text-primary transition-colors group"
-        >
-          <span className="text-xl tracking-tight group-hover:tracking-normal transition-all">Kepler Forge</span>
+    <nav className="sticky top-0 z-50 w-full border-b border-white/[0.06] glass-surface">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <Link href="/" className="text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors">
+          Kepler Forge
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+            const active = pathname === item.href || pathname.startsWith(item.href + "/");
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium transition-all rounded-lg relative",
-                  isActive
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                  "px-3.5 py-1.5 text-[13px] font-medium rounded-lg transition-all duration-200",
+                  active
+                    ? "text-primary bg-primary/[0.08] shadow-[inset_0_0.5px_0_0_rgba(77,154,245,0.2)]"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
                 )}
               >
-                {isActive && (
-                  <span className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20" />
-                )}
-                <span className="relative z-10">{item.label}</span>
+                {item.label}
               </Link>
             );
           })}
         </div>
 
-        {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="h-9 w-9">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <nav className="flex flex-col space-y-4 mt-8">
+          <SheetContent side="right" className="w-72 glass-surface border-l border-white/[0.06]">
+            <nav className="flex flex-col gap-1 mt-10">
               {navItems.map((item) => {
-                const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                const active = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "px-3 py-2 text-base font-medium transition-colors rounded-md",
-                      isActive
-                        ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      "px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                      active ? "text-primary bg-primary/[0.08]" : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
                     )}
                   >
                     {item.label}

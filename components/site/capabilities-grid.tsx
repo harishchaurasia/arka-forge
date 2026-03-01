@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Cpu, Code, Boxes, Sparkles } from "lucide-react";
+import { Cpu, Code, Boxes, Sparkles, ArrowUpRight } from "lucide-react";
 
 const capabilities = [
   {
@@ -33,44 +32,50 @@ const capabilities = [
   },
 ];
 
+const ease = [0.25, 0.1, 0.25, 1];
+
 export function CapabilitiesGrid() {
   return (
-    <section className="py-32 md:py-40 relative">
-      <div className="container mx-auto px-6 md:px-8">
+    <section className="py-28 md:py-36">
+      <div className="mx-auto max-w-6xl px-5">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease }}
+          className="mb-14"
         >
-          <h2 className="font-bold mb-6">What We Forge</h2>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light">
-            Core capabilities that power our work
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+            Capabilities
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What We Forge</h2>
+          <p className="text-base text-muted-foreground max-w-md">
+            Core technical capabilities that power everything we build.
           </p>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {capabilities.map((capability, index) => {
-            const Icon = capability.icon;
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {capabilities.map((cap, i) => {
+            const Icon = cap.icon;
             return (
               <motion.div
-                key={capability.href}
-                initial={{ opacity: 0, y: 30 }}
+                key={cap.href}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.4, 0, 0.2, 1] }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease }}
               >
-                <Link href={capability.href} className="group block h-full">
-                  <Card className="h-full transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 group-hover:bg-opacity-80">
-                    <CardHeader className="p-8">
-                      <div className="mb-6 inline-flex p-4 rounded-xl glass-strong border border-primary/30 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all">
-                        <Icon className="h-8 w-8 text-primary" />
-                      </div>
-                      <CardTitle className="text-2xl mb-3 group-hover:text-primary transition-colors">{capability.title}</CardTitle>
-                      <CardDescription className="text-base leading-relaxed">{capability.description}</CardDescription>
-                    </CardHeader>
-                  </Card>
+                <Link href={cap.href} className="group block h-full">
+                  <div className="h-full glass-card p-6 transition-all duration-300 hover:-translate-y-1.5">
+                    <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl glass-icon">
+                      <Icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="text-[15px] font-semibold mb-2 group-hover:text-primary transition-colors flex items-center gap-1.5">
+                      {cap.title}
+                      <ArrowUpRight className="h-3.5 w-3.5 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover:opacity-60 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{cap.description}</p>
+                  </div>
                 </Link>
               </motion.div>
             );

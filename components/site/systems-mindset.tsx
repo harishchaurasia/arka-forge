@@ -7,57 +7,63 @@ import { Gauge, Zap, CheckCircle2 } from "lucide-react";
 const principles = [
   {
     title: "Performance",
-    description: "Every system is optimized for real-time performance. We measure, profile, and optimize relentlessly.",
+    description: "Every system is optimized for real-time. We measure, profile, and optimize relentlessly.",
     icon: Gauge,
   },
   {
     title: "Iteration Speed",
-    description: "Fast feedback loops enable rapid experimentation. Our tools and workflows prioritize developer velocity.",
+    description: "Fast feedback loops enable rapid experimentation. Our tools prioritize developer velocity.",
     icon: Zap,
   },
   {
     title: "Correctness",
-    description: "Systems must be correct by design. We use type safety, testing, and formal methods where appropriate.",
+    description: "Systems must be correct by design. Type safety, testing, and formal methods where appropriate.",
     icon: CheckCircle2,
   },
 ];
 
+const ease = [0.25, 0.1, 0.25, 1];
+
 export function SystemsMindset() {
   return (
-    <section className="py-32 md:py-40 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-muted/20 to-background" />
-      <div className="container mx-auto px-6 md:px-8 relative z-10">
+    <section className="py-28 md:py-36 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] via-white/[0.02] to-transparent pointer-events-none" />
+
+      <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease }}
+          className="text-center mb-14"
         >
-          <h2 className="font-bold mb-6">Systems Mindset</h2>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light">
-            Three principles that guide everything we build
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+            Philosophy
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Systems Mindset</h2>
+          <p className="text-base text-muted-foreground max-w-md mx-auto">
+            Three principles that guide everything we build.
           </p>
         </motion.div>
 
-        <div className="grid gap-12 md:grid-cols-3 max-w-6xl mx-auto">
-          {principles.map((principle, index) => {
-            const Icon = principle.icon;
+        <div className="grid gap-5 md:grid-cols-3">
+          {principles.map((p, i) => {
+            const Icon = p.icon;
             return (
               <motion.div
-                key={principle.title}
-                initial={{ opacity: 0, y: 30 }}
+                key={p.title}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.15, ease: [0.4, 0, 0.2, 1] }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease }}
                 className="group"
               >
-                <div className="text-center p-8 rounded-2xl glass-card hover:border-primary/30 transition-all duration-300">
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl glass-strong border border-primary/30 mb-6 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300">
-                    <Icon className="h-10 w-10 text-primary" />
+                <div className="text-center glass-card p-8 transition-all duration-300 hover:-translate-y-1.5">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl glass-icon mb-5 group-hover:scale-105 transition-transform duration-300">
+                    <Icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors">{principle.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-base">{principle.description}</p>
+                  <h3 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
                 </div>
               </motion.div>
             );
