@@ -111,14 +111,16 @@ export const mdxComponents = {
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => {
     if (!src) return null;
+    const imageSrc = typeof src === "string" ? src : "";
+    const { width: _width, height: _height, ...rest } = props;
     return (
       <Image
-        src={src}
+        src={imageSrc}
         alt={alt || ""}
         width={1200}
         height={630}
         className={cn("rounded-lg my-8", className)}
-        {...props}
+        {...rest}
       />
     );
   },

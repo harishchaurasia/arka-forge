@@ -37,12 +37,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationSchema = await generateOrganizationSchema();
+  const organizationSchema = generateOrganizationSchema();
 
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>

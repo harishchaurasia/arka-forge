@@ -31,7 +31,7 @@ export function generateSiteMetadata(
   };
 }
 
-export async function generateOrganizationSchema() {
+export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",

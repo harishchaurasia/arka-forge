@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { z } from "zod";
 import { contactFormSchema } from "@/lib/validations/contact";
 
 // In-memory rate limiting store (in production, use Redis or similar)
