@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     default: "Arka Forge | Forging Intelligent Worlds",
     template: "%s | Arka Forge",
   },
-  description: "Premium engineering-first game-tech & simulation studio. Forging intelligent worlds through cutting-edge technology.",
-  keywords: ["game engine", "simulation", "XR", "spatial computing", "game technology", "simulation systems"],
+  description: "Arka Forge — Game-tech studio building digital twins and gamified simulation for workforce training. Manufacturing, robotics, energy, defense.",
+  keywords: ["digital twins", "simulation", "workforce training", "game development", "XR", "gamification", "training simulation"],
   authors: [{ name: "Arka Forge" }],
   creator: "Arka Forge",
   openGraph: {
@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     url: "https://arkaforge.com",
     siteName: "Arka Forge",
     title: "Arka Forge | Forging Intelligent Worlds",
-    description: "Premium engineering-first game-tech & simulation studio.",
+    description: "Game-tech studio for digital twins, simulation, and workforce training.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Arka Forge | Forging Intelligent Worlds",
-    description: "Premium engineering-first game-tech & simulation studio.",
+    description: "Game-tech studio for digital twins, simulation, and workforce training.",
   },
   robots: {
     index: true,

@@ -38,7 +38,7 @@ export function generateOrganizationSchema() {
     name: "Arka Forge",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com",
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
-    description: "Premium engineering-first game-tech & simulation studio",
+    description: "Game-tech studio building digital twins and gamified simulation for workforce training",
     sameAs: [
       // Add social media links here when available
     ],

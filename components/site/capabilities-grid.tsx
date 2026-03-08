@@ -7,28 +7,28 @@ import { Cpu, Code, Boxes, Sparkles, ArrowUpRight } from "lucide-react";
 
 const capabilities = [
   {
-    title: "Simulation Systems",
-    description: "Large-scale simulation infrastructure for training, research, and entertainment.",
+    title: "Digital Twins",
+    description: "Digitize complex workflows and build interactive simulations of real-world systems.",
     href: "/technology/simulation",
     icon: Cpu,
   },
   {
-    title: "Engine & Tooling",
-    description: "Custom game engines, optimization tools, and development pipelines.",
+    title: "Gamified Training",
+    description: "Training scenarios with performance analytics and readiness scoring.",
+    href: "/technology/simulation",
+    icon: Sparkles,
+  },
+  {
+    title: "Game Development",
+    description: "Full-stack game-tech and simulation engineering for enterprise clients.",
     href: "/technology/engine",
     icon: Code,
   },
   {
     title: "XR / Spatial",
-    description: "Immersive experiences for AR, VR, and mixed reality platforms.",
+    description: "AR, VR, and mixed reality training delivered across web, desktop, and mobile.",
     href: "/technology/xr",
     icon: Boxes,
-  },
-  {
-    title: "Applied AI",
-    description: "Intelligent systems for behavior simulation and procedural generation.",
-    href: "/technology",
-    icon: Sparkles,
   },
 ];
 
@@ -48,9 +48,9 @@ export function CapabilitiesGrid() {
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
             Capabilities
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What We Forge</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What We Deliver</h2>
           <p className="text-base text-muted-foreground max-w-md">
-            Core technical capabilities that power everything we build.
+            Simulation engineering and game technology for manufacturing, robotics, energy, and defense.
           </p>
         </motion.div>
 

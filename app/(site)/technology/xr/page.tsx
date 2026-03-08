@@ -2,20 +2,20 @@ import { Metadata } from "next";
 import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
-  title: "XR / Spatial",
-  description: "Immersive experiences for AR, VR, and mixed reality platforms.",
+  title: "XR & Spatial",
+  description: "AR, VR, and mixed reality training — web, desktop, and mobile delivery.",
 };
 
 export default function XRPage() {
   return (
     <Section>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">XR / Spatial</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">XR & Spatial</h1>
         
         <div className="prose prose-invert max-w-none mb-8">
           <p className="text-xl text-muted-foreground mb-6">
-            We build immersive XR experiences that leverage spatial computing, 
-            hand tracking, and advanced rendering techniques.
+            Training simulations delivered across AR, VR, web, desktop, and mobile.
+            We build for Meta Quest, Apple Vision Pro, WebXR, and custom platforms.
           </p>
 
           <h2 className="text-3xl font-semibold mt-8 mb-4">Spatial Tracking</h2>

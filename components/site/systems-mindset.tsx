@@ -6,19 +6,19 @@ import { Gauge, Zap, CheckCircle2 } from "lucide-react";
 
 const principles = [
   {
-    title: "Performance",
-    description: "Every system is optimized for real-time. We measure, profile, and optimize relentlessly.",
+    title: "Measurable Outcomes",
+    description: "Up to 60% faster training cycles, fewer operational errors, and real readiness scoring — not guesswork.",
     icon: Gauge,
   },
   {
-    title: "Iteration Speed",
-    description: "Fast feedback loops enable rapid experimentation. Our tools prioritize developer velocity.",
-    icon: Zap,
+    title: "Safe Practice",
+    description: "Workers learn inside simulated systems before touching real equipment. Zero downtime, zero risk.",
+    icon: CheckCircle2,
   },
   {
-    title: "Correctness",
-    description: "Systems must be correct by design. Type safety, testing, and formal methods where appropriate.",
-    icon: CheckCircle2,
+    title: "Scale",
+    description: "From pilot simulations to enterprise deployment. We deliver across AR/VR, web, desktop, and mobile.",
+    icon: Zap,
   },
 ];
 
@@ -40,9 +40,9 @@ export function SystemsMindset() {
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
             Philosophy
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Systems Mindset</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Why Simulation</h2>
           <p className="text-base text-muted-foreground max-w-md mx-auto">
-            Three principles that guide everything we build.
+            Studies show gamified simulation dramatically improves how people learn complex tasks.
           </p>
         </motion.div>
 

@@ -6,7 +6,7 @@ import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Case studies and projects from Arka Forge.",
+  description: "Case studies and simulation projects from Arka Forge — digital twins, gamified training, and game-tech.",
 };
 
 export default async function WorkPage() {

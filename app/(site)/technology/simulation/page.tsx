@@ -2,49 +2,46 @@ import { Metadata } from "next";
 import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
-  title: "Simulation Systems",
-  description: "Large-scale simulation infrastructure for training, research, and entertainment.",
+  title: "Simulation & Digital Twins",
+  description: "Digital twin workflows and gamified simulation for manufacturing, robotics, energy, and defense.",
 };
 
 export default function SimulationPage() {
   return (
     <Section>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Simulation Systems</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">Simulation & Digital Twins</h1>
         
         <div className="prose prose-invert max-w-none mb-8">
           <p className="text-xl text-muted-foreground mb-6">
-            We build simulation systems that handle millions of entities in real-time, 
-            enabling training platforms, research environments, and entertainment experiences.
+            We create digital twins of real-world workflows and convert them into
+            interactive training environments. Workers practice inside simulated systems
+            before touching real equipment — faster onboarding, better readiness.
           </p>
 
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Architecture</h2>
+          <h2 className="text-3xl font-semibold mt-8 mb-4">Digitize</h2>
           <p>
-            Our simulation framework uses an Entity Component System (ECS) architecture 
-            that enables efficient data-oriented design. By separating data from behavior, 
-            we achieve better cache locality and parallelization opportunities.
+            Complex processes and workflows transformed into structured digital models.
+            We capture real equipment behavior, procedures, and constraints so simulations
+            mirror operational reality.
           </p>
 
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Performance</h2>
+          <h2 className="text-3xl font-semibold mt-8 mb-4">Gamify</h2>
           <p>
-            Our systems are optimized for real-time performance:
+            Game design principles make learning engaging and measurable:
           </p>
           <ul>
-            <li>10M+ entities simulated at 60 FPS</li>
-            <li>Sub-millisecond update times for physics systems</li>
-            <li>Linear scaling with entity count</li>
+            <li>Scenario and training builders</li>
+            <li>Performance analytics and evaluation</li>
+            <li>Readiness scoring instead of guesswork</li>
+            <li>Up to 60% faster training cycles (industry studies)</li>
           </ul>
 
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Applications</h2>
+          <h2 className="text-3xl font-semibold mt-8 mb-4">Sectors</h2>
           <p>
-            Our simulation systems power:
+            We deliver across manufacturing, robotics, energy, defense, research,
+            and education. Each simulation is built for the domain — no generic templates.
           </p>
-          <ul>
-            <li>Military training platforms</li>
-            <li>Research environments</li>
-            <li>Large-scale game worlds</li>
-            <li>Virtual testing environments</li>
-          </ul>
         </div>
       </div>
     </Section>

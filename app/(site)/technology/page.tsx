@@ -10,20 +10,20 @@ export const metadata: Metadata = {
 
 const technologies = [
   {
-    title: "Simulation Systems",
-    description: "Large-scale simulation infrastructure for training, research, and entertainment applications.",
+    title: "Simulation & Digital Twins",
+    description: "Digitize workflows, design gamified scenarios, and build interactive training environments.",
     href: "/technology/simulation",
     icon: Cpu,
   },
   {
-    title: "Engine & Tooling",
-    description: "Custom game engines, optimization tools, and development pipelines.",
+    title: "Game Development Services",
+    description: "Full-stack game-tech and simulation engineering for enterprise clients.",
     href: "/technology/engine",
     icon: Code,
   },
   {
-    title: "XR / Spatial",
-    description: "Immersive experiences for AR, VR, and mixed reality platforms.",
+    title: "XR & Spatial",
+    description: "AR, VR, web, desktop, and mobile — multi-platform delivery for training simulations.",
     href: "/technology/xr",
     icon: Boxes,
   },
@@ -38,7 +38,7 @@ export default function TechnologyPage() {
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Technology</h1>
         <p className="text-base text-muted-foreground max-w-xl">
-          Core technical capabilities and expertise areas.
+          Digital twins, gamified training, and game development for manufacturing, robotics, energy, and defense.
         </p>
       </div>
 

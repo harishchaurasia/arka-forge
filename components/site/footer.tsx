@@ -19,7 +19,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-base font-semibold tracking-tight mb-2">Arka Forge</h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px]">
-              Forging intelligent worlds through cutting-edge technology.
+              Game-tech infrastructure for digital twins, simulation, and workforce training.
             </p>
           </div>
 

@@ -5,7 +5,7 @@ import { Briefcase, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Careers",
-  description: "Join Arka Forge — build cutting-edge game-tech and simulation systems.",
+  description: "Join Arka Forge — build digital twins, gamified training, and simulation systems.",
 };
 
 const openRoles = [
