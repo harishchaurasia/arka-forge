@@ -2,49 +2,58 @@
 
 import * as React from "react";
 import * as THREE from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { MeshTransmissionMaterial, Environment } from "@react-three/drei";
 
-let Canvas: any;
-let useFrame: any;
-let useThree: any;
-let MeshTransmissionMaterial: any;
-let Environment: any;
+const GLASS_PROPS = {
+  thickness: 0.2,
+  roughness: 0,
+  transmission: 1,
+  ior: 1.3,
+  chromaticAberration: 0.04,
+  backside: false,
+};
 
-if (typeof window !== "undefined") {
-  try {
-    const r3f = require("@react-three/fiber");
-    Canvas = r3f.Canvas;
-    useFrame = r3f.useFrame;
-    useThree = r3f.useThree;
-    const drei = require("@react-three/drei");
-    MeshTransmissionMaterial = drei.MeshTransmissionMaterial;
-    Environment = drei.Environment;
-  } catch (e) {
-    console.warn("Failed to load three.js libraries", e);
-  }
-}
+/* ── Orbital Glass Rings ─────────────────────── */
+function OrbitalRings() {
+  const outer = React.useRef<THREE.Mesh>(null);
+  const middle = React.useRef<THREE.Mesh>(null);
+  const inner = React.useRef<THREE.Mesh>(null);
 
-/* ── Glass Torus ─────────────────────────────── */
-function GlassTorus() {
-  const meshRef = React.useRef<THREE.Mesh>(null);
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
 
-  useFrame(() => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.x += 0.003;
-    meshRef.current.rotation.y += 0.002;
+    if (outer.current) {
+      outer.current.rotation.x = Math.PI * 0.35 + t * 0.08;
+      outer.current.rotation.y = t * 0.12;
+    }
+    if (middle.current) {
+      middle.current.rotation.z = Math.PI * 0.25 + t * 0.15;
+      middle.current.rotation.x = t * 0.1;
+    }
+    if (inner.current) {
+      inner.current.rotation.y = Math.PI * 0.15 + t * 0.2;
+      inner.current.rotation.z = t * 0.14;
+    }
   });
 
   return (
-    <mesh ref={meshRef}>
-      <torusGeometry args={[2.5, 0.35, 64, 128]} />
-      <MeshTransmissionMaterial
-        thickness={0.2}
-        roughness={0}
-        transmission={1}
-        ior={1.3}
-        chromaticAberration={0.04}
-        backside={false}
-      />
-    </mesh>
+    <group>
+      <mesh ref={outer}>
+        <torusGeometry args={[3.0, 0.1, 64, 128]} />
+        <MeshTransmissionMaterial {...GLASS_PROPS} />
+      </mesh>
+
+      <mesh ref={middle}>
+        <torusGeometry args={[2.2, 0.12, 64, 128]} />
+        <MeshTransmissionMaterial {...GLASS_PROPS} />
+      </mesh>
+
+      <mesh ref={inner}>
+        <torusGeometry args={[1.4, 0.14, 64, 128]} />
+        <MeshTransmissionMaterial {...GLASS_PROPS} />
+      </mesh>
+    </group>
   );
 }
 
@@ -97,8 +106,8 @@ function SceneContent() {
       <ambientLight intensity={0.3} />
 
       <StarField count={1000} />
-      <GlassTorus />
-      <Environment preset="city" />
+      <OrbitalRings />
+      <Environment preset="sunset" />
     </>
   );
 }
@@ -112,14 +121,10 @@ export function HeroScene() {
       canvas.getContext("webgl2") ||
       canvas.getContext("webgl") ||
       canvas.getContext("experimental-webgl");
-    const ok =
-      !!gl &&
-      typeof Canvas !== "undefined" &&
-      typeof MeshTransmissionMaterial !== "undefined";
-    setReady(ok);
+    setReady(!!gl);
   }, []);
 
-  if (!ready || !Canvas) return null;
+  if (!ready) return null;
 
   return (
     <div className="absolute inset-0 w-full h-full">
