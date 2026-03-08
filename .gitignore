@@ -19,7 +19,8 @@
 # misc
 .DS_Store
 *.pem
-
+.zsh_history
+.zsh_sessions
 # debug
 npm-debug.log*
 yarn-debug.log*
