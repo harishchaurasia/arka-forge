@@ -67,6 +67,7 @@ function OrbitalRings() {
         <mesh rotation={[0, Math.PI / 2, 0]}>
           <torusGeometry args={[2.7, 0.18, 48, 100]} />
           <MeshTransmissionMaterial
+            color="#ffffff"
             thickness={0.2}
             roughness={0}
             transmission={1}
@@ -83,6 +84,7 @@ function OrbitalRings() {
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[2.2, 0.2, 48, 100]} />
           <MeshTransmissionMaterial
+            color="#ffffff"
             thickness={0.2}
             roughness={0}
             transmission={1}
@@ -99,11 +101,12 @@ function OrbitalRings() {
         <mesh>
           <torusGeometry args={[1.4, 0.2, 48, 100]} />
           <MeshTransmissionMaterial
+            color="#1e293b"
             thickness={0.2}
             roughness={0}
-            transmission={1}
+            transmission={0.95}
             ior={1.3}
-            chromaticAberration={0.03}
+            chromaticAberration={0.02}
             backside
             samples={4}
             resolution={512}

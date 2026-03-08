@@ -24,7 +24,6 @@ export function Nav() {
   const pathname = usePathname();
 
   const [atTop, setAtTop] = React.useState(true);
-  const [scrollProgress, setScrollProgress] = React.useState(0);
 
   React.useEffect(() => {
     let ticking = false;
@@ -32,14 +31,7 @@ export function Nav() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const y = window.scrollY;
-        setAtTop(y < SCROLL_THRESHOLD);
-        setScrollProgress(
-          Math.min(
-            1,
-            y / Math.max(1, document.documentElement.scrollHeight - window.innerHeight - 1)
-          )
-        );
+        setAtTop(window.scrollY < SCROLL_THRESHOLD);
         ticking = false;
       });
     };
@@ -129,23 +121,8 @@ export function Nav() {
           })}
         </div>
 
-        <div className="hidden md:flex items-center gap-2 pl-3">
-          <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-            Forge Heat
-          </span>
-          <div className="flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-primary shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-            <span className="h-2 w-2 rounded-full bg-gradient-to-r from-primary to-cyan-400 animate-pulse" />
-            <span>{Math.round(scrollProgress * 100)}%</span>
-          </div>
-        </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-4 bottom-0 h-[2px] overflow-hidden rounded-full bg-white/5">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-primary via-cyan-400 to-primary transition-all duration-150"
-          style={{ width: `${scrollProgress * 100}%` }}
-        />
-      </div>
     </nav>
   );
 }
