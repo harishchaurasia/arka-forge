@@ -56,57 +56,57 @@ function OrbitalRings() {
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
-    if (xOrbit.current) xOrbit.current.rotation.x = t * 0.6;
-    if (yOrbit.current) yOrbit.current.rotation.y = t * 0.8;
-    if (zOrbit.current) zOrbit.current.rotation.z = t * 0.5;
+    if (xOrbit.current) xOrbit.current.rotation.y = t * 0.6;
+    if (yOrbit.current) yOrbit.current.rotation.z = t * -0.8;
+    if (zOrbit.current) zOrbit.current.rotation.x = t * 0.7;
   });
 
   return (
     <group>
       <group ref={xOrbit}>
         <mesh rotation={[0, Math.PI / 2, 0]}>
-          <torusGeometry args={[3.0, 0.15, 32, 64]} />
+          <torusGeometry args={[2.7, 0.18, 48, 100]} />
           <MeshTransmissionMaterial
             thickness={0.2}
             roughness={0}
             transmission={1}
             ior={1.3}
-            chromaticAberration={0.02}
+            chromaticAberration={0.03}
             backside
-            samples={1}
-            resolution={64}
+            samples={4}
+            resolution={512}
           />
         </mesh>
       </group>
 
       <group ref={yOrbit}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[2.2, 0.2, 32, 64]} />
+          <torusGeometry args={[2.2, 0.2, 48, 100]} />
           <MeshTransmissionMaterial
             thickness={0.2}
             roughness={0}
             transmission={1}
             ior={1.3}
-            chromaticAberration={0.02}
+            chromaticAberration={0.03}
             backside
-            samples={1}
-            resolution={64}
+            samples={4}
+            resolution={512}
           />
         </mesh>
       </group>
 
       <group ref={zOrbit}>
         <mesh>
-          <torusGeometry args={[1.4, 0.2, 32, 64]} />
+          <torusGeometry args={[1.4, 0.2, 48, 100]} />
           <MeshTransmissionMaterial
             thickness={0.2}
             roughness={0}
             transmission={1}
             ior={1.3}
-            chromaticAberration={0.02}
+            chromaticAberration={0.03}
             backside
-            samples={1}
-            resolution={64}
+            samples={4}
+            resolution={512}
           />
         </mesh>
       </group>
@@ -211,7 +211,7 @@ export function HeroScene() {
         className="w-full h-full"
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
       >
         <SceneContent />
       </Canvas>
