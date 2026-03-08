@@ -59,16 +59,54 @@ export function Nav() {
     >
       <div
         className={cn(
-          "relative mx-auto flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-background/80 px-5 shadow-[0_10px_60px_-30px_rgba(80,140,255,0.7)]",
+          "relative mx-auto flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-background/65 px-5 shadow-[0_10px_60px_-30px_rgba(80,140,255,0.7)]",
           "backdrop-blur-2xl ring-1 ring-white/5"
         )}
       >
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent
+            side="left"
+            className="w-72 border-r border-white/10 bg-background/60 backdrop-blur-2xl shadow-[0_20px_70px_-30px_rgba(0,0,0,0.7)]"
+          >
+            <nav className="flex flex-col gap-1 mt-10">
+              {navItems.map((item) => {
+                const active =
+                  pathname === item.href ||
+                  pathname.startsWith(item.href + "/");
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                      active
+                        ? "text-primary bg-primary/[0.08]"
+                        : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </SheetContent>
+        </Sheet>
+
         <Link
           href="/"
           className="text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
         >
           Arka Forge
         </Link>
+
+        <div className="h-9 w-9 md:hidden" aria-hidden />
 
         <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
@@ -100,42 +138,6 @@ export function Nav() {
             <span>{Math.round(scrollProgress * 100)}%</span>
           </div>
         </div>
-
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent
-            side="right"
-            className="w-72 glass-surface border-l border-white/[0.06]"
-          >
-            <nav className="flex flex-col gap-1 mt-10">
-              {navItems.map((item) => {
-                const active =
-                  pathname === item.href ||
-                  pathname.startsWith(item.href + "/");
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
-                      active
-                        ? "text-primary bg-primary/[0.08]"
-                        : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
-          </SheetContent>
-        </Sheet>
       </div>
 
       <div className="pointer-events-none absolute inset-x-4 bottom-0 h-[2px] overflow-hidden rounded-full bg-white/5">
