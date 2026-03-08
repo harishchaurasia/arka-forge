@@ -51,7 +51,7 @@ export function Footer() {
         </div>
 
         <div className="pt-6 border-t border-white/[0.04]">
-          <p className="text-xs text-muted-foreground text-center">
+          <p className="text-xs text-muted-foreground text-center" suppressHydrationWarning>
             &copy; {new Date().getFullYear()} Arka Forge. All rights reserved.
           </p>
         </div>

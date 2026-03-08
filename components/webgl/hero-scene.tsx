@@ -5,60 +5,117 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { MeshTransmissionMaterial, Environment } from "@react-three/drei";
 
-const GLASS_PROPS = {
-  thickness: 0.2,
-  roughness: 0,
-  transmission: 1,
-  ior: 1.3,
-  chromaticAberration: 0.04,
-  backside: false,
-};
+/* ── Shared mouse state (avoid re-renders) ───── */
+const pointer = { x: 0, y: 0 };
 
-/* ── Orbital Glass Rings ─────────────────────── */
-function OrbitalRings() {
-  const outer = React.useRef<THREE.Mesh>(null);
-  const middle = React.useRef<THREE.Mesh>(null);
-  const inner = React.useRef<THREE.Mesh>(null);
+function useMouseParallax() {
+  React.useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+}
 
-  useFrame(({ clock }) => {
-    const t = clock.elapsedTime;
-
-    if (outer.current) {
-      outer.current.rotation.x = Math.PI * 0.35 + t * 0.08;
-      outer.current.rotation.y = t * 0.12;
-    }
-    if (middle.current) {
-      middle.current.rotation.z = Math.PI * 0.25 + t * 0.15;
-      middle.current.rotation.x = t * 0.1;
-    }
-    if (inner.current) {
-      inner.current.rotation.y = Math.PI * 0.15 + t * 0.2;
-      inner.current.rotation.z = t * 0.14;
-    }
-  });
-
+/* ── Saffron Sun (origin) ────────────────────── */
+function GlassSun() {
   return (
     <group>
-      <mesh ref={outer}>
-        <torusGeometry args={[3.0, 0.1, 64, 128]} />
-        <MeshTransmissionMaterial {...GLASS_PROPS} />
+      <mesh>
+        <sphereGeometry args={[0.15, 32, 32]} />
+        <meshStandardMaterial
+          color="#FF9933"
+          emissive="#FF7700"
+          emissiveIntensity={3}
+          roughness={0.2}
+          metalness={0.1}
+        />
       </mesh>
 
-      <mesh ref={middle}>
-        <torusGeometry args={[2.2, 0.12, 64, 128]} />
-        <MeshTransmissionMaterial {...GLASS_PROPS} />
-      </mesh>
-
-      <mesh ref={inner}>
-        <torusGeometry args={[1.4, 0.14, 64, 128]} />
-        <MeshTransmissionMaterial {...GLASS_PROPS} />
+      <mesh>
+        <sphereGeometry args={[0.4, 24, 24]} />
+        <meshBasicMaterial
+          color="#FF9933"
+          transparent
+          opacity={0.08}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
       </mesh>
     </group>
   );
 }
 
+/* ── Orbital Glass Rings (X / Y / Z axes) ───── */
+function OrbitalRings() {
+  const xOrbit = React.useRef<THREE.Group>(null);
+  const yOrbit = React.useRef<THREE.Group>(null);
+  const zOrbit = React.useRef<THREE.Group>(null);
+
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
+    if (xOrbit.current) xOrbit.current.rotation.x = t * 0.6;
+    if (yOrbit.current) yOrbit.current.rotation.y = t * 0.8;
+    if (zOrbit.current) zOrbit.current.rotation.z = t * 0.5;
+  });
+
+  return (
+    <group>
+      <group ref={xOrbit}>
+        <mesh rotation={[0, Math.PI / 2, 0]}>
+          <torusGeometry args={[3.0, 0.15, 32, 64]} />
+          <MeshTransmissionMaterial
+            thickness={0.2}
+            roughness={0}
+            transmission={1}
+            ior={1.3}
+            chromaticAberration={0.02}
+            backside
+            samples={1}
+            resolution={64}
+          />
+        </mesh>
+      </group>
+
+      <group ref={yOrbit}>
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[2.2, 0.2, 32, 64]} />
+          <MeshTransmissionMaterial
+            thickness={0.2}
+            roughness={0}
+            transmission={1}
+            ior={1.3}
+            chromaticAberration={0.02}
+            backside
+            samples={1}
+            resolution={64}
+          />
+        </mesh>
+      </group>
+
+      <group ref={zOrbit}>
+        <mesh>
+          <torusGeometry args={[1.4, 0.2, 32, 64]} />
+          <MeshTransmissionMaterial
+            thickness={0.2}
+            roughness={0}
+            transmission={1}
+            ior={1.3}
+            chromaticAberration={0.02}
+            backside
+            samples={1}
+            resolution={64}
+          />
+        </mesh>
+      </group>
+    </group>
+  );
+}
+
 /* ── Star field ─────────────────────────────── */
-function StarField({ count = 1000 }: { count?: number }) {
+function StarField({ count = 600 }: { count?: number }) {
   const ref = React.useRef<THREE.Points>(null);
 
   const positions = React.useMemo(() => {
@@ -98,16 +155,38 @@ function StarField({ count = 1000 }: { count?: number }) {
   );
 }
 
-/* ── Full scene ─────────────────────────────── */
+/* ── Full scene with parallax ────────────────── */
 function SceneContent() {
+  const orreryRef = React.useRef<THREE.Group>(null);
+  useMouseParallax();
+
+  useFrame(() => {
+    if (!orreryRef.current) return;
+    orreryRef.current.rotation.y +=
+      (pointer.x * 0.6 - orreryRef.current.rotation.y) * 0.08;
+    orreryRef.current.rotation.x +=
+      (pointer.y * 0.4 - orreryRef.current.rotation.x) * 0.08;
+  });
+
   return (
     <>
       <directionalLight intensity={2} position={[0, 2, 3]} />
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.4} />
+      <pointLight
+        position={[0, 0, 0]}
+        intensity={1.5}
+        color="#FF9933"
+        distance={10}
+        decay={2}
+      />
 
-      <StarField count={1000} />
-      <OrbitalRings />
-      <Environment preset="sunset" />
+      <group ref={orreryRef}>
+        <StarField count={600} />
+        <GlassSun />
+        <OrbitalRings />
+      </group>
+
+      <Environment preset="city" />
     </>
   );
 }
@@ -132,7 +211,7 @@ export function HeroScene() {
         className="w-full h-full"
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
       >
         <SceneContent />
       </Canvas>
