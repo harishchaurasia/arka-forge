@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
+  { href: "/", label: "Home" },
   { href: "/technology", label: "Technology" },
   { href: "/labs", label: "Labs" },
   { href: "/work", label: "Work" },
@@ -64,20 +65,20 @@ export function Nav() {
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="w-72 border-r border-white/10 bg-background/60 backdrop-blur-2xl shadow-[0_20px_70px_-30px_rgba(0,0,0,0.7)]"
+            className="w-72 border-r border-white/10 bg-background/60 backdrop-blur-2xl shadow-[0_20px_70px_-30px_rgba(0,0,0,0.7)] [&>button]:left-4 [&>button]:right-auto"
           >
-            <nav className="flex flex-col gap-1 mt-10">
+            <nav className="flex flex-col gap-1 mt-10 w-full">
               {navItems.map((item) => {
                 const active =
                   pathname === item.href ||
-                  pathname.startsWith(item.href + "/");
+                  (item.href !== "/" && pathname.startsWith(item.href + "/"));
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                      "w-full text-left px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
                       active
                         ? "text-primary bg-primary/[0.08]"
                         : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
@@ -103,7 +104,8 @@ export function Nav() {
         <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
             const active =
-              pathname === item.href || pathname.startsWith(item.href + "/");
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href + "/"));
             return (
               <Link
                 key={item.href}
