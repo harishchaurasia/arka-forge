@@ -4,7 +4,7 @@ import { Target, Layers, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Company",
-  description: "About Kepler Forge — our mission, values, and engineering-first culture.",
+  description: "About Arka Forge — our mission, values, and engineering-first culture.",
 };
 
 const values = [
@@ -34,7 +34,7 @@ export default function CompanyPage() {
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Company</h1>
         <p className="text-base text-muted-foreground leading-relaxed mb-12 max-w-lg">
-          Kepler Forge is a premium engineering-first game-tech &amp; simulation
+          Arka Forge is a premium engineering-first game-tech &amp; simulation
           studio. We forge intelligent worlds through cutting-edge technology.
         </p>
 

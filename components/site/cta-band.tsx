@@ -26,7 +26,7 @@ export function CTABand() {
             Let&apos;s Build Together
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
-            Build with <span className="gradient-text">Kepler Forge</span>
+            Build with <span className="gradient-text">Arka Forge</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
             Have a project that demands engineering excellence? Let&apos;s discuss how we can bring your vision to life.

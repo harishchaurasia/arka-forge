@@ -25,7 +25,7 @@ export function Nav() {
     <nav className="sticky top-0 z-50 w-full border-b border-white/[0.06] glass-surface">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <Link href="/" className="text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors">
-          Kepler Forge
+          Arka Forge
         </Link>
 
         <div className="hidden md:flex items-center gap-1">

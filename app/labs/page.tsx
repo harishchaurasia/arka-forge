@@ -6,7 +6,7 @@ import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Labs",
-  description: "Research, experiments, and technical deep-dives from Kepler Forge.",
+  description: "Research, experiments, and technical deep-dives from Arka Forge.",
 };
 
 export default async function LabsPage() {

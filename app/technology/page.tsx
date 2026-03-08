@@ -5,7 +5,7 @@ import { Cpu, Code, Boxes, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Technology",
-  description: "Technical capabilities and expertise areas at Kepler Forge.",
+  description: "Technical capabilities and expertise areas at Arka Forge.",
 };
 
 const technologies = [

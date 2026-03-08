@@ -6,7 +6,7 @@ export function generateSiteMetadata(
   description: string,
   path: string = ""
 ): Metadata {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://keplerforge.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com";
   const url = `${baseUrl}${path}`;
 
   return {
@@ -16,7 +16,7 @@ export function generateSiteMetadata(
       title,
       description,
       url,
-      siteName: "Kepler Forge",
+      siteName: "Arka Forge",
       type: "website",
       locale: "en_US",
     },
@@ -35,16 +35,16 @@ export async function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Kepler Forge",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://keplerforge.com",
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://keplerforge.com"}/logo.png`,
+    name: "Arka Forge",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com",
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
     description: "Premium engineering-first game-tech & simulation studio",
     sameAs: [
       // Add social media links here when available
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "contact@keplerforge.com",
+      email: "contact@arkaforge.com",
       contactType: "Customer Service",
     },
   };
@@ -65,14 +65,14 @@ export async function generateArticleSchema(
     datePublished: date,
     author: {
       "@type": "Organization",
-      name: "Kepler Forge",
+      name: "Arka Forge",
     },
     publisher: {
       "@type": "Organization",
-      name: "Kepler Forge",
+      name: "Arka Forge",
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://keplerforge.com"}/logo.png`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
       },
     },
     image: image

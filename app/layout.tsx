@@ -11,24 +11,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kepler Forge | Forging Intelligent Worlds",
-    template: "%s | Kepler Forge",
+    default: "Arka Forge | Forging Intelligent Worlds",
+    template: "%s | Arka Forge",
   },
   description: "Premium engineering-first game-tech & simulation studio. Forging intelligent worlds through cutting-edge technology.",
   keywords: ["game engine", "simulation", "XR", "spatial computing", "game technology", "simulation systems"],
-  authors: [{ name: "Kepler Forge" }],
-  creator: "Kepler Forge",
+  authors: [{ name: "Arka Forge" }],
+  creator: "Arka Forge",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://keplerforge.com",
-    siteName: "Kepler Forge",
-    title: "Kepler Forge | Forging Intelligent Worlds",
+    url: "https://arkaforge.com",
+    siteName: "Arka Forge",
+    title: "Arka Forge | Forging Intelligent Worlds",
     description: "Premium engineering-first game-tech & simulation studio.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kepler Forge | Forging Intelligent Worlds",
+    title: "Arka Forge | Forging Intelligent Worlds",
     description: "Premium engineering-first game-tech & simulation studio.",
   },
   robots: {

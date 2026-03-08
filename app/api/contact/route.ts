@@ -48,8 +48,8 @@ export async function POST(request: NextRequest) {
     // Send email via Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const toEmail = process.env.CONTACT_TO_EMAIL || "contact@keplerforge.com";
-    const fromEmail = process.env.CONTACT_FROM_EMAIL || "noreply@keplerforge.com";
+    const toEmail = process.env.CONTACT_TO_EMAIL || "contact@arkaforge.com";
+    const fromEmail = process.env.CONTACT_FROM_EMAIL || "noreply@arkaforge.com";
 
     await resend.emails.send({
       from: fromEmail,

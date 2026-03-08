@@ -3,7 +3,7 @@ import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for Kepler Forge website.",
+  description: "Privacy policy for Arka Forge website.",
 };
 
 export default function PrivacyPage() {
@@ -42,8 +42,8 @@ export default function PrivacyPage() {
         <p>
           You have the right to access, update, or delete your personal information. 
           To exercise these rights, please contact us at{" "}
-          <a href="mailto:contact@keplerforge.com" className="text-primary">
-            contact@keplerforge.com
+          <a href="mailto:contact@arkaforge.com" className="text-primary">
+            contact@arkaforge.com
           </a>
           .
         </p>
@@ -63,8 +63,8 @@ export default function PrivacyPage() {
         <h2>Contact Us</h2>
         <p>
           If you have questions about this privacy policy, please contact us at{" "}
-          <a href="mailto:contact@keplerforge.com" className="text-primary">
-            contact@keplerforge.com
+          <a href="mailto:contact@arkaforge.com" className="text-primary">
+            contact@arkaforge.com
           </a>
           .
         </p>

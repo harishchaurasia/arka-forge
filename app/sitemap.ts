@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getLabs, getWork } from "@/lib/content/loader";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://keplerforge.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

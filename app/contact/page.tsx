@@ -70,8 +70,8 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-1">Email</h3>
-                <a href="mailto:contact@keplerforge.com" className="text-sm text-primary hover:underline">
-                  contact@keplerforge.com
+                <a href="mailto:contact@arkaforge.com" className="text-sm text-primary hover:underline">
+                  contact@arkaforge.com
                 </a>
               </div>
             </div>

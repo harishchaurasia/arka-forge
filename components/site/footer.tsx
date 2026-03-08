@@ -17,7 +17,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div className="col-span-2 md:col-span-1">
-            <h3 className="text-base font-semibold tracking-tight mb-2">Kepler Forge</h3>
+            <h3 className="text-base font-semibold tracking-tight mb-2">Arka Forge</h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px]">
               Forging intelligent worlds through cutting-edge technology.
             </p>
@@ -52,7 +52,7 @@ export function Footer() {
 
         <div className="pt-6 border-t border-white/[0.04]">
           <p className="text-xs text-muted-foreground text-center">
-            &copy; {new Date().getFullYear()} Kepler Forge. All rights reserved.
+            &copy; {new Date().getFullYear()} Arka Forge. All rights reserved.
           </p>
         </div>
       </div>

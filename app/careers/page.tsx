@@ -5,7 +5,7 @@ import { Briefcase, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Careers",
-  description: "Join Kepler Forge — build cutting-edge game-tech and simulation systems.",
+  description: "Join Arka Forge — build cutting-edge game-tech and simulation systems.",
 };
 
 const openRoles = [
@@ -76,7 +76,7 @@ export default function CareersPage() {
                   </div>
                 </div>
                 <Button asChild size="sm">
-                  <a href={`mailto:careers@keplerforge.com?subject=Application: ${role.title}`}>Apply</a>
+                  <a href={`mailto:careers@arkaforge.com?subject=Application: ${role.title}`}>Apply</a>
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">{role.description}</p>
@@ -125,8 +125,8 @@ export default function CareersPage() {
 
         <p className="text-sm text-muted-foreground">
           Don&apos;t see a role that fits? Reach out to{" "}
-          <a href="mailto:careers@keplerforge.com" className="text-primary hover:underline">
-            careers@keplerforge.com
+          <a href="mailto:careers@arkaforge.com" className="text-primary hover:underline">
+            careers@arkaforge.com
           </a>
           .
         </p>

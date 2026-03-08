@@ -6,7 +6,7 @@ import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Case studies and projects from Kepler Forge.",
+  description: "Case studies and projects from Arka Forge.",
 };
 
 export default async function WorkPage() {

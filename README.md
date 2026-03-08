@@ -1,7 +1,7 @@
-# Kepler Forge — Studio Website (Next.js + React)
+# Arka Forge — Studio Website (Next.js + React)
 
 You are an expert product engineer + award-level interactive web developer.
-Build a fully functional, production-ready marketing website for a premium game-tech / simulation studio named **Kepler Forge**.
+Build a fully functional, production-ready marketing website for a premium game-tech / simulation studio named **Arka Forge**.
 
 ## Non-negotiables
 
@@ -25,7 +25,7 @@ Build a fully functional, production-ready marketing website for a premium game-
 
 ## Brand & vibe
 
-Kepler Forge = forging systems, engines, simulations.
+Arka Forge = forging systems, engines, simulations.
 Premium, engineering-driven, “deep-tech,” not a generic art studio.
 Visual metaphor: “cosmic forge” — orbital arcs + precise instrumentation + subtle heat/glow accents.
 Tone: confident, minimal, technical. No cringe gamer copy.
@@ -70,7 +70,7 @@ Home page sections (build these for real, no lorem ipsum):
 3. “Systems mindset”: short manifesto with 3 principles (performance, iteration speed, correctness)
 4. Featured Labs posts (latest 3)
 5. Featured Work (latest 2; allow “Prototype” tags)
-6. CTA band: “Build with Kepler Forge” + contact CTA
+6. CTA band: “Build with Arka Forge” + contact CTA
 
 ## Content system (MDX)
 
@@ -201,7 +201,7 @@ Do not leave TODOs for core requirements. If something is optional, implement a 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd kepler-portfolio-website
+cd arka-forge-website
 ```
 
 2. Install dependencies:
@@ -277,7 +277,7 @@ Required environment variables:
 
 Optional:
 
-- `NEXT_PUBLIC_SITE_URL`: Production site URL (defaults to https://keplerforge.com)
+- `NEXT_PUBLIC_SITE_URL`: Production site URL (defaults to https://arkaforge.com)
 - `SENTRY_DSN`: Sentry DSN for error tracking (optional)
 
 ## Content Management
@@ -401,4 +401,4 @@ After deployment:
 
 ## License
 
-All rights reserved. © 2024 Kepler Forge
+All rights reserved. © 2024 Arka Forge

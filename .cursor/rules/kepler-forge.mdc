@@ -1,11 +1,11 @@
 ---
-description: Kepler Forge project rules (persistent). Apply to all sessions.
+description: Arka Forge project rules (persistent). Apply to all sessions.
 globs:
   - "**/*"
 alwaysApply: true
 ---
 
-# Kepler Forge — Cursor Rules
+# Arka Forge — Cursor Rules
 
 You MUST follow these rules for every task in this repo. If anything conflicts, resolve in favor of these rules.
 
