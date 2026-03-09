@@ -59,7 +59,7 @@ export function CapabilitiesGrid() {
             const Icon = cap.icon;
             return (
               <motion.div
-                key={cap.href}
+                key={cap.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}

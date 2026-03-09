@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const HeroScene = dynamic(
@@ -86,15 +86,23 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.24, ease }}
-            className="flex flex-wrap justify-center md:justify-start gap-4"
+            className="inline-flex flex-col items-stretch gap-4"
           >
-            <Button asChild size="lg" className="glow px-8">
-              <Link href="/contact">
-                Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="px-8">
-              <Link href="/work">View Our Work</Link>
+            <div className="flex justify-center md:justify-start gap-3">
+              <Button asChild size="lg" variant="outline" className="px-8 flex-1 sm:flex-none">
+                <Link href="/contact">
+                  Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="px-8 flex-1 sm:flex-none">
+                <Link href="/work">View Our Work</Link>
+              </Button>
+            </div>
+            <Button asChild size="lg" className="glow py-6 text-base font-semibold w-full">
+              <a href="https://calendar.app.google/9HXdsiKfCXCPeUya9" target="_blank" rel="noopener noreferrer" className="justify-center">
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule a Meeting
+              </a>
             </Button>
           </motion.div>
         </div>
