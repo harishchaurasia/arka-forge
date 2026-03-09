@@ -172,6 +172,70 @@
   }
 }
 
+/* ═══════════════════════════════════════════════
+   SPLASH / INTRO SCREEN
+   ═══════════════════════════════════════════════ */
+
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(228 14% 5%);
+}
+
+.splash-overlay.splash-collapse {
+  animation: splash-fade-out 600ms ease-in forwards;
+}
+
+.splash-logo {
+  animation: splash-spin 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.splash-logo.splash-logo-collapse {
+  animation: splash-shrink 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes splash-spin {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1) rotate(60deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+@keyframes splash-shrink {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(90deg);
+    filter: blur(8px);
+  }
+}
+
+@keyframes splash-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 /* ── Reduced motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

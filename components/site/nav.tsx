@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -57,7 +58,7 @@ export function Nav() {
         )}
       >
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="md:hidden flex-shrink-0">
             <Button variant="ghost" size="icon" className="h-9 w-9">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
@@ -94,12 +95,18 @@ export function Nav() {
 
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 flex items-center gap-2 transition-opacity hover:opacity-90"
         >
-          Arka Forge
+          <Image
+            src="/arka-forge-logo.png"
+            alt="Arka Forge logo"
+            width={36}
+            height={36}
+            className="h-9 w-9 rounded-full object-contain"
+          />
         </Link>
 
-        <div className="h-9 w-9 md:hidden" aria-hidden />
+        <div className="h-9 w-9 md:hidden flex-shrink-0" aria-hidden />
 
         <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {

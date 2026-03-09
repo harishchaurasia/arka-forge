@@ -3,18 +3,23 @@ import { Footer } from "@/components/site/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { SmoothScroll } from "@/components/site/smooth-scroll";
 import { SkipToContent } from "@/components/site/skip-to-content";
+import { SplashScreen } from "@/components/site/splash-screen";
+
 export default function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <SmoothScroll>
-      <SkipToContent />
-      <Nav />
-      <main id="main-content" className="min-h-screen">{children}</main>
-      <Footer />
-      <Toaster />
-    </SmoothScroll>
+    <>
+      <SplashScreen />
+      <SmoothScroll>
+        <SkipToContent />
+        <Nav />
+        <main id="main-content" className="min-h-screen">{children}</main>
+        <Footer />
+        <Toaster />
+      </SmoothScroll>
+    </>
   );
 }
