@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 
-const SPIN_DURATION = 1600;
+const SPIN_DURATION = 2400;
 const COLLAPSE_DURATION = 600;
 
 export function SplashScreen() {
@@ -35,15 +35,22 @@ export function SplashScreen() {
       className={`splash-overlay ${phase === "collapse" ? "splash-collapse" : ""}`}
       aria-hidden="true"
     >
-      <div className={`splash-logo ${phase === "collapse" ? "splash-logo-collapse" : ""}`}>
-        <Image
-          src="/arka-forge-logo.png"
-          alt=""
-          width={96}
-          height={96}
-          priority
-          className="h-24 w-24 rounded-full object-contain"
-        />
+      <div className={`flex flex-col items-center gap-5 ${phase === "collapse" ? "splash-container-collapse" : ""}`}>
+        <div className={`splash-logo-img ${phase === "collapse" ? "splash-logo-collapse" : ""}`}>
+          <Image
+            src="/arka-forge-logo.png"
+            alt=""
+            width={160}
+            height={160}
+            priority
+            className="h-24 w-24 md:h-36 md:w-36 lg:h-40 lg:w-40 rounded-full object-contain"
+          />
+        </div>
+        <span
+          className={`text-lg md:text-2xl lg:text-3xl font-semibold tracking-tight text-white/90 splash-text ${phase === "collapse" ? "splash-text-collapse" : ""}`}
+        >
+          Arka Forge
+        </span>
       </div>
     </div>
   );
