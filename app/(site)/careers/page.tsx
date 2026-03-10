@@ -10,61 +10,122 @@ export const metadata: Metadata = {
 
 const openRoles = [
   {
-    title: "Systems Engineer",
+    title: "Game Developer — Unreal Engine",
     department: "Engineering",
-    location: "Remote / Hybrid",
-    description: "Design and implement large-scale simulation systems with deep expertise in systems programming and performance optimization.",
+    location: "Remote / Hybrid · India",
+    description:
+      "Own the development of simulation and training experiences in Unreal Engine. You'll build gameplay systems, integrate digital twin data, and ship polished interactive products for enterprise clients in manufacturing, energy, and defense.",
     requirements: [
-      "5+ years of systems programming experience",
-      "Expertise in C++ and systems architecture",
-      "Experience with simulation or game engine development",
-      "Strong performance optimization skills",
+      "2–3 years of professional experience with Unreal Engine 4 or 5",
+      "Strong C++ and Blueprints proficiency",
+      "Experience shipping at least one title or simulation project end-to-end",
+      "Familiarity with multiplayer networking, physics, or procedural systems is a plus",
+      "Comfort working in a small, fast-moving team with high ownership",
     ],
   },
   {
-    title: "Real-time Rendering Engineer",
+    title: "Game Developer — Unity",
     department: "Engineering",
-    location: "Remote / Hybrid",
-    description: "Build high-performance rendering pipelines with expertise in graphics programming, GPU optimization, and modern rendering techniques.",
+    location: "Remote / Hybrid · India",
+    description:
+      "Design and build interactive training modules, gamified simulations, and AR/VR experiences in Unity. You'll collaborate closely with designers and clients to translate complex real-world workflows into engaging digital products.",
     requirements: [
-      "3+ years of graphics programming experience",
-      "Expertise in Vulkan, DirectX 12, or Metal",
-      "Strong understanding of GPU architecture",
-      "Experience with shader optimization",
+      "2–3 years of professional Unity development (C#)",
+      "Solid understanding of Unity's rendering pipeline (URP or HDRP)",
+      "Experience with XR development (ARCore, ARKit, OpenXR) is a strong plus",
+      "Published or shipped at least one project (game, simulation, or enterprise app)",
+      "Strong debugging skills and a performance-first mindset",
+    ],
+  },
+  {
+    title: "Software Engineer",
+    department: "Engineering",
+    location: "Remote / Hybrid · India",
+    description:
+      "Build the backend services, data pipelines, and web platforms that power our simulation products. You'll work across the stack — from real-time APIs and cloud infrastructure to the React/Next.js frontends our clients interact with.",
+    requirements: [
+      "2–3 years of full-stack or backend software engineering experience",
+      "Proficiency in TypeScript/JavaScript and at least one backend language (Python, Go, or Rust)",
+      "Experience with REST/GraphQL APIs, databases (SQL and NoSQL), and cloud services (AWS or GCP)",
+      "Familiarity with CI/CD, containerization, and infrastructure-as-code",
+      "Bonus: experience integrating with game engines or real-time data systems",
+    ],
+  },
+  {
+    title: "Narrative Designer",
+    department: "Design",
+    location: "Remote · India",
+    description:
+      "Craft the stories, scenarios, and instructional narratives that make our training simulations immersive and effective. You'll work with game developers and subject-matter experts to design branching storylines, in-sim dialogue, and contextual tutorials that keep learners engaged.",
+    requirements: [
+      "2–3 years of experience in narrative design, instructional design, or game writing",
+      "Proven ability to write branching dialogue and scenario scripts for interactive media",
+      "Strong understanding of player motivation, learning theory, or gamification principles",
+      "Experience with tools like Twine, Ink, Articy:Draft, or similar narrative middleware",
+      "Excellent written communication and a portfolio of shipped narrative work",
+    ],
+  },
+  {
+    title: "Graphic Designer",
+    department: "Design",
+    location: "Remote · India",
+    description:
+      "Define the visual identity of our products and brand. You'll create UI/UX designs for simulation interfaces, marketing collateral, pitch decks, and web assets — ensuring everything we ship looks polished, modern, and unmistakably Arka Forge.",
+    requirements: [
+      "2–3 years of professional graphic design experience",
+      "Expert-level proficiency in Figma and Adobe Creative Suite (Photoshop, Illustrator)",
+      "Strong portfolio demonstrating UI design, branding, and visual communication",
+      "Understanding of design systems, typography, color theory, and responsive layout",
+      "Bonus: motion graphics or light video editing skills (After Effects, Premiere)",
+    ],
+  },
+  {
+    title: "3D Animator",
+    department: "Art & Animation",
+    location: "Remote · India",
+    description:
+      "Bring our simulations to life with high-quality character and mechanical animation. You'll rig and animate assets for real-time environments in Unreal and Unity — from human characters performing industrial tasks to machinery and equipment in digital twin scenarios.",
+    requirements: [
+      "2–3 years of professional 3D animation experience (Maya, Blender, or 3ds Max)",
+      "Strong understanding of rigging, skinning, and skeletal animation pipelines",
+      "Experience exporting and optimizing animations for real-time engines (Unreal or Unity)",
+      "Ability to animate both organic (characters) and mechanical (machinery, robotics) subjects",
+      "Bonus: experience with motion capture cleanup or procedural animation",
     ],
   },
 ];
 
 const perks = [
-  "Work on cutting-edge technology",
-  "Collaborate with world-class engineers",
-  "Autonomy and ownership over your work",
-  "Competitive compensation and benefits",
-  "Remote-friendly culture",
+  "Work on real-world simulation and digital twin projects",
+  "Ship products used in manufacturing, energy, and defense",
+  "Autonomy and ownership — small team, big impact",
+  "Competitive compensation",
+  "Remote-friendly, India-first culture",
+  "Learn and grow across game-tech, XR, and enterprise software",
 ];
 
 const process = [
-  "Initial screening call",
-  "Technical interview (systems design or coding)",
-  "On-site or virtual interview with the team",
-  "Offer and negotiation",
+  "Apply via email with your resume and portfolio",
+  "Introductory call with the founder",
+  "Role-specific task or interview",
+  "Offer and onboarding",
 ];
 
 export default function CareersPage() {
   return (
     <Section>
-      <div className="max-w-3xl">
+      <div className="max-w-3xl mx-auto text-center">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
           Join Us
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Careers</h1>
-        <p className="text-base text-muted-foreground mb-12 max-w-lg leading-relaxed">
-          We&apos;re looking for exceptional engineers who share our passion
-          for technical excellence.
+        <p className="text-base text-muted-foreground mb-12 mx-auto max-w-lg leading-relaxed">
+          We&apos;re building the team that will define how the world trains its workforce.
+          If you love games, simulation, and shipping real products — we want to hear from you.
         </p>
 
         {/* Open roles */}
-        <div className="space-y-5 mb-14">
+        <div className="space-y-5 mb-14 text-left">
           {openRoles.map((role) => (
             <div key={role.title} className="glass-card p-6 md:p-7">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
@@ -96,7 +157,7 @@ export default function CareersPage() {
         </div>
 
         {/* Why join + Process */}
-        <div className="grid gap-5 sm:grid-cols-2 mb-10">
+        <div className="grid gap-5 sm:grid-cols-2 mb-10 text-left">
           <div className="glass-card p-6">
             <h2 className="text-base font-semibold mb-4">Why Join?</h2>
             <ul className="space-y-2">

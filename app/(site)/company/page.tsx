@@ -28,19 +28,19 @@ const values = [
 export default function CompanyPage() {
   return (
     <Section>
-      <div className="max-w-3xl">
+      <div className="max-w-3xl mx-auto text-center">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
           About Us
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Company</h1>
-        <p className="text-base text-muted-foreground leading-relaxed mb-12 max-w-lg">
+        <p className="text-base text-muted-foreground leading-relaxed mb-12 mx-auto max-w-lg">
           Arka Forge is a game-tech studio creating infrastructure for digital twins,
           simulation, and workforce training. We help organizations train people faster,
           safer, and more effectively.
         </p>
 
         {/* Mission */}
-        <div className="glass-card p-7 mb-8">
+        <div className="glass-card p-7 mb-8 text-left">
           <h2 className="text-lg font-semibold tracking-tight mb-3">Mission</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Build simulation-based training systems using game technology. We digitize
@@ -50,7 +50,7 @@ export default function CompanyPage() {
         </div>
 
         {/* The Problem */}
-        <div className="glass-card p-7 mb-8">
+        <div className="glass-card p-7 mb-8 text-left">
           <h2 className="text-lg font-semibold tracking-tight mb-3">The Problem</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Training complex systems is slow, expensive, and risky. Industries like
@@ -64,7 +64,7 @@ export default function CompanyPage() {
         </div>
 
         {/* What We Do */}
-        <div className="glass-card p-7 mb-8">
+        <div className="glass-card p-7 mb-8 text-left">
           <h2 className="text-lg font-semibold tracking-tight mb-3">What We Deliver</h2>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2.5">
@@ -88,7 +88,7 @@ export default function CompanyPage() {
 
         {/* Values */}
         <h2 className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-5">How We Work</h2>
-        <div className="grid gap-5 sm:grid-cols-3 mb-10">
+        <div className="grid gap-5 sm:grid-cols-3 mb-10 text-left">
           {values.map((v) => {
             const Icon = v.icon;
             return (
@@ -104,7 +104,7 @@ export default function CompanyPage() {
         </div>
 
         {/* Team */}
-        <div className="glass-card p-7">
+        <div className="glass-card p-7 text-left">
           <h2 className="text-lg font-semibold tracking-tight mb-4">Team</h2>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4">
             Arka Forge is led by Harish Chaurasia, with experience in full-stack
