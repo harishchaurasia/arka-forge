@@ -8,14 +8,25 @@ import { MeshTransmissionMaterial, Environment } from "@react-three/drei";
 /* ── Shared mouse state (avoid re-renders) ───── */
 const pointer = { x: 0, y: 0 };
 
-function useMouseParallax() {
+function usePointerParallax() {
   React.useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    const update = (x: number, y: number) => {
+      pointer.x = (x / window.innerWidth) * 2 - 1;
+      pointer.y = -(y / window.innerHeight) * 2 + 1;
     };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
+    const onMouse = (e: MouseEvent) => update(e.clientX, e.clientY);
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) update(t.clientX, t.clientY);
+    };
+    window.addEventListener("mousemove", onMouse, { passive: true });
+    window.addEventListener("touchstart", onTouch, { passive: true });
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMouse);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+    };
   }, []);
 }
 
@@ -161,14 +172,14 @@ function StarField({ count = 600 }: { count?: number }) {
 /* ── Full scene with parallax ────────────────── */
 function SceneContent() {
   const orreryRef = React.useRef<THREE.Group>(null);
-  useMouseParallax();
+  usePointerParallax();
 
   useFrame(() => {
     if (!orreryRef.current) return;
     orreryRef.current.rotation.y +=
-      (pointer.x * 0.6 - orreryRef.current.rotation.y) * 0.08;
+      (pointer.x * 1.2 - orreryRef.current.rotation.y) * 0.1;
     orreryRef.current.rotation.x +=
-      (pointer.y * 0.4 - orreryRef.current.rotation.x) * 0.08;
+      (pointer.y * 0.8 - orreryRef.current.rotation.x) * 0.1;
   });
 
   return (
