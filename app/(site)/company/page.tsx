@@ -34,18 +34,18 @@ export default function CompanyPage() {
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Company</h1>
         <p className="text-base text-muted-foreground leading-relaxed mb-12 mx-auto max-w-lg">
-          Arka Forge is a game-tech studio creating infrastructure for digital twins,
-          simulation, and workforce training. We help organizations train people faster,
-          safer, and more effectively.
+          Arka Forge is a game-tech studio that builds games for learning, gamification
+          systems, and simulation environments. We help organizations train their workforce
+          faster, safer, and more effectively.
         </p>
 
         {/* Mission */}
         <div className="glass-card p-7 mb-8 text-left">
           <h2 className="text-lg font-semibold tracking-tight mb-3">Mission</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Build simulation-based training systems using game technology. We digitize
-            complex workflows, create gamified training environments, and deliver
-            performance analytics so organizations can measure readiness — not guess.
+            Build games for learning and gamification-driven training systems. We turn
+            complex workflows into interactive game experiences, layered with scoring,
+            analytics, and feedback loops — so organizations can measure readiness, not guess.
           </p>
         </div>
 
@@ -69,11 +69,15 @@ export default function CompanyPage() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Digital twins of real-world workflows
+              Games for learning — purpose-built games that teach complex skills
             </li>
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Gamified training environments with assessment controls
+              Gamification systems with scoring, leaderboards, and feedback loops
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+              Digital twins and interactive simulation environments
             </li>
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />

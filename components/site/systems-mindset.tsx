@@ -6,18 +6,18 @@ import { Gauge, Zap, CheckCircle2 } from "lucide-react";
 
 const principles = [
   {
-    title: "Measurable Outcomes",
-    description: "Up to 60% faster training cycles, fewer operational errors, and real readiness scoring — not guesswork.",
+    title: "Learn by Playing",
+    description: "Games create motivation, repetition, and feedback loops that traditional training can't match. People retain more when they're engaged.",
     icon: Gauge,
   },
   {
-    title: "Safe Practice",
-    description: "Workers learn inside simulated systems before touching real equipment. Zero downtime, zero risk.",
+    title: "Safe, Repeatable Practice",
+    description: "Workers practice inside game-based simulations before touching real equipment. Zero downtime, zero risk, unlimited repetitions.",
     icon: CheckCircle2,
   },
   {
-    title: "Scale",
-    description: "From pilot simulations to enterprise deployment. We deliver across AR/VR, web, desktop, and mobile.",
+    title: "Measurable Readiness",
+    description: "Scoring, analytics, and performance tracking built into every experience. Know who's ready — don't guess.",
     icon: Zap,
   },
 ];
@@ -40,9 +40,9 @@ export function SystemsMindset() {
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
             Philosophy
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Why Simulation</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Why Games for Learning</h2>
           <p className="text-base text-muted-foreground max-w-md mx-auto">
-            Studies show gamified simulation dramatically improves how people learn complex tasks.
+            Game-based training is proven to accelerate skill acquisition, improve retention, and reduce operational errors.
           </p>
         </motion.div>
 

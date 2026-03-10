@@ -200,7 +200,7 @@ function SceneContent() {
         <OrbitalRings />
       </group>
 
-      <Environment preset="city" />
+      <Environment files="/potsdamer_platz_1k.hdr" />
     </>
   );
 }

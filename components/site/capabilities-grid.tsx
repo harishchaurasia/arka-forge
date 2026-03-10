@@ -3,30 +3,36 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Cpu, Code, Boxes, Sparkles, ArrowUpRight } from "lucide-react";
+import { Cpu, Code, Boxes, Sparkles, Gamepad2, ArrowUpRight } from "lucide-react";
 
 const capabilities = [
   {
-    title: "Digital Twins",
-    description: "Digitize complex workflows and build interactive simulations of real-world systems.",
-    href: "/technology/simulation",
-    icon: Cpu,
+    title: "Games for Learning",
+    description: "Purpose-built games that teach complex skills through play — interactive, measurable, and engaging.",
+    href: "/technology/engine",
+    icon: Gamepad2,
   },
   {
-    title: "Gamified Training",
-    description: "Training scenarios with performance analytics and readiness scoring.",
+    title: "Gamification & Training",
+    description: "Leaderboards, scoring, branching scenarios, and performance analytics that turn training into a feedback loop.",
     href: "/technology/simulation",
     icon: Sparkles,
   },
   {
+    title: "Digital Twins",
+    description: "Digitize real-world workflows into interactive simulations workers can practice in before touching real equipment.",
+    href: "/technology/simulation",
+    icon: Cpu,
+  },
+  {
     title: "Game Development",
-    description: "Full-stack game-tech and simulation engineering for enterprise clients.",
+    description: "End-to-end game-tech — Unreal, Unity, custom engines — for enterprise simulation and training products.",
     href: "/technology/engine",
     icon: Code,
   },
   {
     title: "XR / Spatial",
-    description: "AR, VR, and mixed reality training delivered across web, desktop, and mobile.",
+    description: "AR, VR, and mixed reality experiences delivered across headsets, web, desktop, and mobile.",
     href: "/technology/xr",
     icon: Boxes,
   },
@@ -50,11 +56,11 @@ export function CapabilitiesGrid() {
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What We Deliver</h2>
           <p className="text-base text-muted-foreground max-w-md">
-            Simulation engineering and game technology for manufacturing, robotics, energy, and defense.
+            Games for learning, gamification, and simulation technology for manufacturing, robotics, energy, and defense.
           </p>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {capabilities.map((cap, i) => {
             const Icon = cap.icon;
             return (
