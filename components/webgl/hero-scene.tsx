@@ -85,7 +85,7 @@ const fireFragmentShader = `
   }
 `;
 
-const FIRE_COUNT = 450;
+const FIRE_COUNT = 300;
 
 function FireCore() {
   const matRef = React.useRef<THREE.ShaderMaterial>(null);
@@ -189,16 +189,16 @@ function OrbitalRings() {
     <group>
       <group ref={xOrbit}>
         <mesh rotation={[0, Math.PI / 2, 0]}>
-          <torusGeometry args={[2.7, 0.18, 48, 100]} />
+          <torusGeometry args={[2.7, 0.18, 24, 64]} />
           <MeshTransmissionMaterial
             color="#ffffff"
             thickness={0.2}
             roughness={0}
             transmission={1}
             ior={1.3}
-            chromaticAberration={0.03}
+            chromaticAberration={0.02}
             backside
-            samples={4}
+            samples={2}
             resolution={512}
           />
         </mesh>
@@ -206,24 +206,24 @@ function OrbitalRings() {
 
       <group ref={yOrbit}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[2.2, 0.2, 48, 100]} />
+          <torusGeometry args={[2.2, 0.2, 24, 64]} />
           <MeshTransmissionMaterial
             color="#ffffff"
             thickness={0.2}
             roughness={0}
             transmission={1}
             ior={1.3}
-            chromaticAberration={0.03}
+            chromaticAberration={0.02}
             backside
-            samples={4}
-            resolution={512}
+            samples={2}
+            resolution={256}
           />
         </mesh>
       </group>
 
       <group ref={zOrbit}>
         <mesh>
-          <torusGeometry args={[1.4, 0.2, 48, 100]} />
+          <torusGeometry args={[1.4, 0.2, 24, 64]} />
           <MeshTransmissionMaterial
             color="#1e293b"
             thickness={0.2}
@@ -232,8 +232,8 @@ function OrbitalRings() {
             ior={1.3}
             chromaticAberration={0.02}
             backside
-            samples={4}
-            resolution={512}
+            samples={2}
+            resolution={256}
           />
         </mesh>
       </group>
@@ -308,7 +308,7 @@ function SceneContent() {
       />
 
       <group ref={orreryRef}>
-        <StarField count={600} />
+        <StarField count={400} />
         <FireCore />
         <OrbitalRings />
       </group>
@@ -337,8 +337,13 @@ export function HeroScene() {
       <Canvas
         className="w-full h-full"
         camera={{ position: [0, 0, 8], fov: 50 }}
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 2]}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+        }}
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
       >
         <SceneContent />
       </Canvas>
