@@ -35,66 +35,77 @@ function usePointerParallax() {
 const fireVertexShader = `
   attribute float aSize;
   attribute float aLife;
+  attribute float aSpeed;
   uniform float uTime;
   varying float vLife;
-  varying float vDist;
+  varying float vT;
 
   void main() {
     vLife = aLife;
-    float t = fract(uTime * 0.3 + aLife);
+    float t = fract(uTime * aSpeed + aLife);
+    vT = t;
     vec3 pos = position;
-    pos.y += t * 1.2;
-    pos.x += sin(t * 6.28 + aLife * 20.0) * 0.15;
-    pos.z += cos(t * 6.28 + aLife * 15.0) * 0.15;
-    float scale = smoothstep(0.0, 0.15, t) * smoothstep(1.0, 0.4, t);
-    vDist = length(pos);
+    // tight upward rise
+    pos.y += t * 0.55;
+    // subtle horizontal turbulence, tighter at base, wider at top
+    float spread = t * 0.1;
+    pos.x += sin(t * 12.56 + aLife * 30.0) * spread;
+    pos.z += cos(t * 10.0 + aLife * 25.0) * spread;
+    // scale: quick fade in, gradual fade out
+    float scale = smoothstep(0.0, 0.08, t) * smoothstep(1.0, 0.25, t);
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-    gl_PointSize = aSize * scale * (200.0 / -mvPosition.z);
+    gl_PointSize = aSize * scale * (180.0 / -mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
   }
 `;
 
 const fireFragmentShader = `
   varying float vLife;
-  varying float vDist;
+  varying float vT;
   uniform float uTime;
 
   void main() {
     float d = length(gl_PointCoord - 0.5) * 2.0;
     if (d > 1.0) discard;
-    float alpha = smoothstep(1.0, 0.0, d);
-    float t = fract(uTime * 0.3 + vLife);
-    float fade = smoothstep(0.0, 0.15, t) * smoothstep(1.0, 0.4, t);
-    vec3 innerColor = vec3(1.0, 0.95, 0.7);
-    vec3 midColor = vec3(1.0, 0.5, 0.05);
-    vec3 outerColor = vec3(0.8, 0.1, 0.0);
-    vec3 col = mix(innerColor, midColor, smoothstep(0.0, 0.5, t));
-    col = mix(col, outerColor, smoothstep(0.4, 0.9, t));
-    alpha *= fade * 0.85;
+    // soft gaussian-ish falloff
+    float alpha = exp(-d * d * 3.0);
+    float fade = smoothstep(0.0, 0.08, vT) * smoothstep(1.0, 0.25, vT);
+    // realistic color ramp: white-hot -> yellow -> orange -> red -> dark
+    vec3 white = vec3(1.0, 0.98, 0.9);
+    vec3 yellow = vec3(1.0, 0.8, 0.2);
+    vec3 orange = vec3(1.0, 0.4, 0.05);
+    vec3 red = vec3(0.7, 0.08, 0.0);
+    vec3 col = mix(white, yellow, smoothstep(0.0, 0.2, vT));
+    col = mix(col, orange, smoothstep(0.15, 0.5, vT));
+    col = mix(col, red, smoothstep(0.45, 0.85, vT));
+    // flicker
+    float flicker = 0.85 + 0.15 * sin(uTime * 15.0 + vLife * 50.0);
+    alpha *= fade * flicker * 0.9;
     gl_FragColor = vec4(col, alpha);
   }
 `;
 
-const FIRE_COUNT = 200;
+const FIRE_COUNT = 450;
 
 function FireCore() {
-  const pointsRef = React.useRef<THREE.Points>(null);
   const matRef = React.useRef<THREE.ShaderMaterial>(null);
 
-  const { positions, sizes, lives } = React.useMemo(() => {
+  const { positions, sizes, lives, speeds } = React.useMemo(() => {
     const pos = new Float32Array(FIRE_COUNT * 3);
     const sz = new Float32Array(FIRE_COUNT);
     const lf = new Float32Array(FIRE_COUNT);
+    const sp = new Float32Array(FIRE_COUNT);
     for (let i = 0; i < FIRE_COUNT; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const r = Math.random() * 0.25;
+      const r = Math.pow(Math.random(), 0.5) * 0.16;
       pos[i * 3] = Math.cos(angle) * r;
-      pos[i * 3 + 1] = (Math.random() - 0.3) * 0.2;
+      pos[i * 3 + 1] = (Math.random() - 0.4) * 0.1;
       pos[i * 3 + 2] = Math.sin(angle) * r;
-      sz[i] = 0.3 + Math.random() * 0.5;
+      sz[i] = 0.35 + Math.random() * 0.45;
       lf[i] = Math.random();
+      sp[i] = 0.35 + Math.random() * 0.25;
     }
-    return { positions: pos, sizes: sz, lives: lf };
+    return { positions: pos, sizes: sz, lives: lf, speeds: sp };
   }, []);
 
   useFrame(({ clock }) => {
@@ -105,11 +116,12 @@ function FireCore() {
 
   return (
     <group>
-      <points ref={pointsRef}>
+      <points>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[positions, 3]} />
           <bufferAttribute attach="attributes-aSize" args={[sizes, 1]} />
           <bufferAttribute attach="attributes-aLife" args={[lives, 1]} />
+          <bufferAttribute attach="attributes-aSpeed" args={[speeds, 1]} />
         </bufferGeometry>
         <shaderMaterial
           ref={matRef}
@@ -122,24 +134,36 @@ function FireCore() {
         />
       </points>
 
-      {/* Hot white core */}
+      {/* Incandescent core */}
       <mesh>
-        <sphereGeometry args={[0.1, 24, 24]} />
+        <sphereGeometry args={[0.06, 24, 24]} />
         <meshBasicMaterial
-          color="#ffffff"
+          color="#fffaf0"
           transparent
-          opacity={0.9}
+          opacity={0.95}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
 
-      {/* Warm glow halo */}
+      {/* Inner glow */}
       <mesh>
-        <sphereGeometry args={[0.5, 24, 24]} />
+        <sphereGeometry args={[0.18, 24, 24]} />
         <meshBasicMaterial
-          color="#FF6600"
+          color="#FF8800"
           transparent
-          opacity={0.06}
+          opacity={0.12}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+
+      {/* Outer warm halo */}
+      <mesh>
+        <sphereGeometry args={[0.4, 24, 24]} />
+        <meshBasicMaterial
+          color="#FF4400"
+          transparent
+          opacity={0.04}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
