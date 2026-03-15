@@ -6,18 +6,18 @@ import { Gauge, Zap, CheckCircle2 } from "lucide-react";
 
 const principles = [
   {
-    title: "Learn by Playing",
-    description: "Games create motivation, repetition, and feedback loops that traditional training can't match. People retain more when they're engaged.",
+    title: "Mirror Reality",
+    description: "Digital replicas of real systems — factories, equipment, workflows — that behave exactly like the real thing. Every detail captured, every constraint modeled.",
     icon: Gauge,
   },
   {
-    title: "Safe, Repeatable Practice",
-    description: "Workers practice inside game-based simulations before touching real equipment. Zero downtime, zero risk, unlimited repetitions.",
+    title: "Train Before You Touch",
+    description: "Workers practice inside the digital twin before touching real equipment. Zero downtime, zero risk, unlimited repetitions.",
     icon: CheckCircle2,
   },
   {
     title: "Measurable Readiness",
-    description: "Scoring, analytics, and performance tracking built into every experience. Know who's ready — don't guess.",
+    description: "Analytics, scoring, and performance tracking built into every twin. Know who's ready — don't guess.",
     icon: Zap,
   },
 ];
@@ -40,9 +40,9 @@ export function SystemsMindset() {
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
             Philosophy
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Why Games for Learning</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Why Digital Twins</h2>
           <p className="text-base text-muted-foreground max-w-md mx-auto">
-            Game-based training is proven to accelerate skill acquisition, improve retention, and reduce operational errors.
+            Digital twins eliminate the gap between classroom training and real-world performance. Practice on the real system — without the real risk.
           </p>
         </motion.div>
 

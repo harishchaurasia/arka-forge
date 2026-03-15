@@ -19,7 +19,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-base font-semibold tracking-tight mb-2">Arka Forge</h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px]">
-              Game-tech infrastructure for digital twins, simulation, and workforce training.
+              Digital twin company — interactive replicas of real-world systems for workforce training and operations.
             </p>
           </div>
 

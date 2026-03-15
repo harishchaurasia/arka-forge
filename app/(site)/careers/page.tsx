@@ -5,7 +5,7 @@ import { Briefcase, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Careers",
-  description: "Join Arka Forge — build digital twins, gamified training, and simulation systems.",
+  description: "Join Arka Forge — build digital twins, simulation systems, and workforce training products.",
 };
 
 const openRoles = [
@@ -96,12 +96,12 @@ const openRoles = [
 ];
 
 const perks = [
-  "Work on real-world simulation and digital twin projects",
-  "Ship products used in manufacturing, energy, and defense",
+  "Build digital twins used by real organizations in real industries",
+  "Ship products for manufacturing, energy, robotics, and defense",
   "Autonomy and ownership — small team, big impact",
   "Competitive compensation",
   "Remote-friendly, India-first culture",
-  "Learn and grow across game-tech, XR, and enterprise software",
+  "Learn and grow across simulation, game-tech, XR, and enterprise software",
 ];
 
 const process = [
@@ -120,8 +120,8 @@ export default function CareersPage() {
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Careers</h1>
         <p className="text-base text-muted-foreground mb-12 mx-auto max-w-lg leading-relaxed">
-          We&apos;re building the team that will define how the world trains its workforce.
-          If you love games, simulation, and shipping real products — we want to hear from you.
+          We&apos;re building the team behind the next generation of digital twins.
+          If you love simulation, game-tech, and shipping real products — we want to hear from you.
         </p>
 
         {/* Open roles */}

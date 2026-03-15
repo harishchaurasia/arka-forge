@@ -1,35 +1,29 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
-import { Cpu, Code, Boxes, Gamepad2, ArrowUpRight } from "lucide-react";
+import { Cpu, Code, Boxes, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Technology",
-  description: "Games for learning, gamification, digital twins, and simulation technology at Arka Forge.",
+  description: "Digital twins, simulation, and workforce training technology at Arka Forge.",
 };
 
 const technologies = [
   {
-    title: "Games for Learning & Gamification",
-    description: "Purpose-built games and gamified experiences that teach complex skills through play — with scoring, analytics, and feedback loops baked in.",
-    href: "/technology/engine",
-    icon: Gamepad2,
-  },
-  {
-    title: "Simulation & Digital Twins",
-    description: "Digitize real-world workflows into interactive simulations. Workers practice inside digital twins before touching real equipment.",
+    title: "Digital Twins",
+    description: "Interactive replicas of real-world systems — factories, equipment, workflows — that mirror operational reality in real time.",
     href: "/technology/simulation",
     icon: Cpu,
   },
   {
-    title: "Game Development Services",
-    description: "End-to-end game-tech — Unreal, Unity, custom engines — for enterprise simulation and training products.",
+    title: "Simulation Development",
+    description: "End-to-end simulation engineering — Unreal, Unity, custom engines — with gamification, analytics, and multi-platform delivery.",
     href: "/technology/engine",
     icon: Code,
   },
   {
     title: "XR & Spatial",
-    description: "AR, VR, and mixed reality training delivered across headsets, web, desktop, and mobile.",
+    description: "Digital twins delivered in AR, VR, and mixed reality — across headsets, web, desktop, and mobile.",
     href: "/technology/xr",
     icon: Boxes,
   },
@@ -44,11 +38,11 @@ export default function TechnologyPage() {
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Technology</h1>
         <p className="text-base text-muted-foreground max-w-xl">
-          Games for learning, gamification, digital twins, and game development for manufacturing, robotics, energy, and defense.
+          Digital twin engineering, simulation development, and XR delivery for manufacturing, robotics, energy, and defense.
         </p>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 md:grid-cols-3">
         {technologies.map((tech) => {
           const Icon = tech.icon;
           return (

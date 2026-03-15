@@ -4,7 +4,7 @@ import { Target, Layers, Zap, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Company",
-  description: "Arka Forge — Game-tech studio building digital twins and gamified simulation for workforce training.",
+  description: "Arka Forge — Digital twin company building interactive replicas of real-world systems for workforce training and operations.",
 };
 
 const values = [
@@ -15,8 +15,8 @@ const values = [
   },
   {
     icon: Layers,
-    title: "Simulation + Game Design",
-    description: "Most training platforms lack both. We combine simulation engineering with narrative game design for engaging, measurable learning.",
+    title: "Digital Twin Engineering",
+    description: "We combine simulation engineering with game-tech to build digital twins that are interactive, measurable, and true to reality.",
   },
   {
     icon: Zap,
@@ -34,18 +34,18 @@ export default function CompanyPage() {
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Company</h1>
         <p className="text-base text-muted-foreground leading-relaxed mb-12 mx-auto max-w-lg">
-          Arka Forge is a game-tech studio that builds games for learning, gamification
-          systems, and simulation environments. We help organizations train their workforce
-          faster, safer, and more effectively.
+          Arka Forge is a digital twin company. We build interactive replicas of real-world
+          systems that let organizations train workers, test scenarios, and optimize operations
+          — before touching real equipment.
         </p>
 
         {/* Mission */}
         <div className="glass-card p-7 mb-8 text-left">
           <h2 className="text-lg font-semibold tracking-tight mb-3">Mission</h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Build games for learning and gamification-driven training systems. We turn
-            complex workflows into interactive game experiences, layered with scoring,
-            analytics, and feedback loops — so organizations can measure readiness, not guess.
+            Build digital twins that mirror real-world systems. We digitize complex
+            workflows into interactive simulation environments — layered with gamification,
+            analytics, and scoring — so organizations can measure workforce readiness, not guess.
           </p>
         </div>
 
@@ -69,15 +69,15 @@ export default function CompanyPage() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Games for learning — purpose-built games that teach complex skills
+              Digital twins of real-world systems — factories, equipment, workflows
             </li>
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Gamification systems with scoring, leaderboards, and feedback loops
+              Simulation-based training environments for workforce readiness
             </li>
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Digital twins and interactive simulation environments
+              Gamification layer — scoring, leaderboards, branching scenarios
             </li>
             <li className="flex items-start gap-2.5">
               <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
@@ -114,12 +114,12 @@ export default function CompanyPage() {
             Arka Forge is led by Harish Chaurasia, with experience in full-stack
             engineering, AI/ML, simulation systems (ASU × Los Alamos National Lab),
             and game design. We operate a service-based model today and work directly
-            with organizations to digitize workflows and build training simulations.
+            with organizations to build digital twins and training simulations.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Our long-term goal is the Arka Forge Simulation Engine — a platform that
-            enables enterprises to create and manage digital twin training environments
-            at scale, without rebuilding from scratch each time.
+            Our long-term goal is the Arka Forge Digital Twin Platform — infrastructure
+            that enables enterprises to create, manage, and deploy digital twins at scale,
+            without rebuilding from scratch each time.
           </p>
         </div>
       </div>

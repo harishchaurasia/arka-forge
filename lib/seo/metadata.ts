@@ -38,7 +38,7 @@ export function generateOrganizationSchema() {
     name: "Arka Forge",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com",
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
-    description: "Game-tech studio building digital twins and gamified simulation for workforce training",
+    description: "Digital twin company building interactive replicas of real-world systems for workforce training and operations",
     sameAs: [
       // Add social media links here when available
     ],

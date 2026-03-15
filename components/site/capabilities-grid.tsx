@@ -3,36 +3,30 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Cpu, Code, Boxes, Sparkles, Gamepad2, ArrowUpRight } from "lucide-react";
+import { Cpu, Code, Boxes, Sparkles, ArrowUpRight } from "lucide-react";
 
 const capabilities = [
   {
-    title: "Games for Learning",
-    description: "Purpose-built games that teach complex skills through play — interactive, measurable, and engaging.",
-    href: "/technology/engine",
-    icon: Gamepad2,
-  },
-  {
-    title: "Gamification & Training",
-    description: "Leaderboards, scoring, branching scenarios, and performance analytics that turn training into a feedback loop.",
-    href: "/technology/simulation",
-    icon: Sparkles,
-  },
-  {
     title: "Digital Twins",
-    description: "Digitize real-world workflows into interactive simulations workers can practice in before touching real equipment.",
+    description: "Interactive replicas of real-world systems — factories, equipment, workflows — that mirror operational reality in real time.",
     href: "/technology/simulation",
     icon: Cpu,
   },
   {
-    title: "Game Development",
-    description: "End-to-end game-tech — Unreal, Unity, custom engines — for enterprise simulation and training products.",
+    title: "Simulation & Training",
+    description: "Workers practice inside digital twins before touching real equipment. Faster onboarding, zero risk, unlimited repetitions.",
+    href: "/technology/simulation",
+    icon: Sparkles,
+  },
+  {
+    title: "Gamification",
+    description: "Scoring, leaderboards, branching scenarios, and performance analytics layered onto digital twins to drive engagement and measure readiness.",
     href: "/technology/engine",
     icon: Code,
   },
   {
     title: "XR / Spatial",
-    description: "AR, VR, and mixed reality experiences delivered across headsets, web, desktop, and mobile.",
+    description: "Digital twins delivered in AR, VR, and mixed reality — across headsets, web, desktop, and mobile.",
     href: "/technology/xr",
     icon: Boxes,
   },
@@ -56,11 +50,11 @@ export function CapabilitiesGrid() {
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What We Deliver</h2>
           <p className="text-base text-muted-foreground max-w-md">
-            Games for learning, gamification, and simulation technology for manufacturing, robotics, energy, and defense.
+            Digital twins, simulation, and gamified training for manufacturing, robotics, energy, and defense.
           </p>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {capabilities.map((cap, i) => {
             const Icon = cap.icon;
             return (

@@ -29,7 +29,7 @@ export function CTABand() {
             Build with <span className="gradient-text">Arka Forge</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
-            Need to digitize workflows, build training simulations, or deploy game-tech at scale? We work with organizations across manufacturing, robotics, energy, and defense.
+            Need digital twins of your systems, simulation-based training, or workforce readiness analytics? We work with organizations across manufacturing, robotics, energy, and defense.
           </p>
           <Button asChild size="lg" className="glow px-8">
             <Link href="/contact">

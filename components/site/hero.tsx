@@ -56,7 +56,7 @@ export function Hero() {
             transition={{ duration: 0.6, ease }}
           >
             <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill">
-              Games for Learning · Simulation · Gamification
+              Digital Twins · Simulation · Workforce Training
             </span>
           </motion.div>
 
@@ -77,9 +77,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We build games for learning — interactive simulations, gamified training,
-            and digital twins that help organizations upskill their workforce faster,
-            safer, and at scale. Delivered across AR/VR, desktop, and web.
+            We build digital twins of real-world systems — interactive replicas that
+            let organizations train, test, and optimize before touching real equipment.
+            Delivered across AR/VR, desktop, and web.
           </motion.p>
 
           <motion.div
