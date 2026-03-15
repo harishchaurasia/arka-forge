@@ -30,27 +30,116 @@ function usePointerParallax() {
   }, []);
 }
 
-/* ── Saffron Sun (origin) ────────────────────── */
-function GlassSun() {
+/* ── Fire Core (origin) ──────────────────────── */
+
+const fireVertexShader = `
+  attribute float aSize;
+  attribute float aLife;
+  uniform float uTime;
+  varying float vLife;
+  varying float vDist;
+
+  void main() {
+    vLife = aLife;
+    float t = fract(uTime * 0.3 + aLife);
+    vec3 pos = position;
+    pos.y += t * 1.2;
+    pos.x += sin(t * 6.28 + aLife * 20.0) * 0.15;
+    pos.z += cos(t * 6.28 + aLife * 15.0) * 0.15;
+    float scale = smoothstep(0.0, 0.15, t) * smoothstep(1.0, 0.4, t);
+    vDist = length(pos);
+    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+    gl_PointSize = aSize * scale * (200.0 / -mvPosition.z);
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+
+const fireFragmentShader = `
+  varying float vLife;
+  varying float vDist;
+  uniform float uTime;
+
+  void main() {
+    float d = length(gl_PointCoord - 0.5) * 2.0;
+    if (d > 1.0) discard;
+    float alpha = smoothstep(1.0, 0.0, d);
+    float t = fract(uTime * 0.3 + vLife);
+    float fade = smoothstep(0.0, 0.15, t) * smoothstep(1.0, 0.4, t);
+    vec3 innerColor = vec3(1.0, 0.95, 0.7);
+    vec3 midColor = vec3(1.0, 0.5, 0.05);
+    vec3 outerColor = vec3(0.8, 0.1, 0.0);
+    vec3 col = mix(innerColor, midColor, smoothstep(0.0, 0.5, t));
+    col = mix(col, outerColor, smoothstep(0.4, 0.9, t));
+    alpha *= fade * 0.85;
+    gl_FragColor = vec4(col, alpha);
+  }
+`;
+
+const FIRE_COUNT = 200;
+
+function FireCore() {
+  const pointsRef = React.useRef<THREE.Points>(null);
+  const matRef = React.useRef<THREE.ShaderMaterial>(null);
+
+  const { positions, sizes, lives } = React.useMemo(() => {
+    const pos = new Float32Array(FIRE_COUNT * 3);
+    const sz = new Float32Array(FIRE_COUNT);
+    const lf = new Float32Array(FIRE_COUNT);
+    for (let i = 0; i < FIRE_COUNT; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const r = Math.random() * 0.25;
+      pos[i * 3] = Math.cos(angle) * r;
+      pos[i * 3 + 1] = (Math.random() - 0.3) * 0.2;
+      pos[i * 3 + 2] = Math.sin(angle) * r;
+      sz[i] = 0.3 + Math.random() * 0.5;
+      lf[i] = Math.random();
+    }
+    return { positions: pos, sizes: sz, lives: lf };
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (matRef.current) {
+      matRef.current.uniforms.uTime.value = clock.elapsedTime;
+    }
+  });
+
   return (
     <group>
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+          <bufferAttribute attach="attributes-aSize" args={[sizes, 1]} />
+          <bufferAttribute attach="attributes-aLife" args={[lives, 1]} />
+        </bufferGeometry>
+        <shaderMaterial
+          ref={matRef}
+          vertexShader={fireVertexShader}
+          fragmentShader={fireFragmentShader}
+          uniforms={{ uTime: { value: 0 } }}
+          transparent
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </points>
+
+      {/* Hot white core */}
       <mesh>
-        <sphereGeometry args={[0.15, 32, 32]} />
-        <meshStandardMaterial
-          color="#FF9933"
-          emissive="#FF7700"
-          emissiveIntensity={3}
-          roughness={0.2}
-          metalness={0.1}
+        <sphereGeometry args={[0.1, 24, 24]} />
+        <meshBasicMaterial
+          color="#ffffff"
+          transparent
+          opacity={0.9}
+          blending={THREE.AdditiveBlending}
         />
       </mesh>
 
+      {/* Warm glow halo */}
       <mesh>
-        <sphereGeometry args={[0.4, 24, 24]} />
+        <sphereGeometry args={[0.5, 24, 24]} />
         <meshBasicMaterial
-          color="#FF9933"
+          color="#FF6600"
           transparent
-          opacity={0.08}
+          opacity={0.06}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
@@ -196,7 +285,7 @@ function SceneContent() {
 
       <group ref={orreryRef}>
         <StarField count={600} />
-        <GlassSun />
+        <FireCore />
         <OrbitalRings />
       </group>
 
