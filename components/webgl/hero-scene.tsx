@@ -319,7 +319,9 @@ function SceneContent() {
 }
 
 export function HeroScene() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const [ready, setReady] = React.useState(false);
+  const [visible, setVisible] = React.useState(true);
 
   React.useEffect(() => {
     const canvas = document.createElement("canvas");
@@ -330,10 +332,21 @@ export function HeroScene() {
     setReady(!!gl);
   }, []);
 
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   if (!ready) return null;
 
   return (
-    <div className="absolute inset-0 w-full h-full">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full">
       <Canvas
         className="w-full h-full"
         camera={{ position: [0, 0, 8], fov: 50 }}
@@ -343,6 +356,7 @@ export function HeroScene() {
           powerPreference: "high-performance",
         }}
         dpr={[1, 1.5]}
+        frameloop={visible ? "always" : "never"}
         performance={{ min: 0.5 }}
       >
         <SceneContent />
