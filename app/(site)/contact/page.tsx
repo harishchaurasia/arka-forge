@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { Mail, Clock } from "lucide-react";
+import { Mail, Clock, Linkedin, Instagram } from "lucide-react";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -82,6 +82,28 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-sm font-semibold mb-1">Response Time</h3>
                 <p className="text-sm text-muted-foreground">Typically within 1-2 business days</p>
+              </div>
+            </div>
+            <div className="glass-card p-6 flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
+                <Linkedin className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold mb-1">LinkedIn</h3>
+                <a href="https://www.linkedin.com/company/arkaforge" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                  Arka Forge on LinkedIn
+                </a>
+              </div>
+            </div>
+            <div className="glass-card p-6 flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
+                <Instagram className="h-4 w-4 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold mb-1">Instagram</h3>
+                <a href="https://instagram.com/ARKA.FORGE" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                  @ARKA.FORGE
+                </a>
               </div>
             </div>
           </div>

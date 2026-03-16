@@ -40,7 +40,8 @@ export function generateOrganizationSchema() {
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
     description: "Digital twin company building interactive replicas of real-world systems for workforce training and operations",
     sameAs: [
-      // Add social media links here when available
+      "https://www.linkedin.com/company/arkaforge",
+      "https://instagram.com/ARKA.FORGE",
     ],
     contactPoint: {
       "@type": "ContactPoint",
