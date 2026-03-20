@@ -14,7 +14,7 @@ const footerLinks = {
 
 const socials = [
   { href: "https://www.linkedin.com/company/arkaforge", label: "LinkedIn", icon: Linkedin },
-  { href: "https://instagram.com/ARKA.FORGE", label: "Instagram", icon: Instagram },
+  { href: "https://instagram.com/arka.forge", label: "Instagram", icon: Instagram },
   { href: "mailto:contact@arkaforge.com", label: "Email", icon: Mail },
 ];
 

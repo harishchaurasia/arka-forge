@@ -61,10 +61,10 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-[1fr,1.4fr] items-start">
+        <div className="grid gap-8 md:grid-cols-[1fr,1.4fr] items-stretch">
           {/* Left — info cards */}
-          <div className="space-y-4">
-            <div className="glass-card p-6 flex items-start gap-4">
+          <div className="grid h-full min-h-0 grid-rows-4 gap-4">
+            <div className="glass-card h-full p-6 flex items-start gap-4">
               <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
                 <Mail className="h-4 w-4 text-primary" />
               </div>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-            <div className="glass-card p-6 flex items-start gap-4">
+            <div className="glass-card h-full p-6 flex items-start gap-4">
               <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
                 <Clock className="h-4 w-4 text-primary" />
               </div>
@@ -84,7 +84,7 @@ export default function ContactPage() {
                 <p className="text-sm text-muted-foreground">Typically within 1-2 business days</p>
               </div>
             </div>
-            <div className="glass-card p-6 flex items-start gap-4">
+            <div className="glass-card h-full p-6 flex items-start gap-4">
               <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
                 <Linkedin className="h-4 w-4 text-primary" />
               </div>
@@ -95,14 +95,14 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-            <div className="glass-card p-6 flex items-start gap-4">
+            <div className="glass-card h-full flex items-start gap-4 p-6">
               <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
                 <Instagram className="h-4 w-4 text-primary" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-1">Instagram</h3>
-                <a href="https://instagram.com/ARKA.FORGE" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
-                  @ARKA.FORGE
+                <a href="https://instagram.com/arka.forge" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                  @arka.forge
                 </a>
               </div>
             </div>

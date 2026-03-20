@@ -41,7 +41,7 @@ export function generateOrganizationSchema() {
     description: "Digital twin company building interactive replicas of real-world systems for workforce training and operations",
     sameAs: [
       "https://www.linkedin.com/company/arkaforge",
-      "https://instagram.com/ARKA.FORGE",
+      "https://instagram.com/arka.forge",
     ],
     contactPoint: {
       "@type": "ContactPoint",

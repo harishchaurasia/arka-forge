@@ -21,7 +21,8 @@ const navItems = [
 const SCROLL_THRESHOLD = 80;
 
 export function Nav() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [desktopOpen, setDesktopOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const pathname = usePathname();
 
   const [atTop, setAtTop] = React.useState(true);
@@ -42,33 +43,72 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  React.useEffect(() => {
+    // Close menus on navigation.
+    setDesktopOpen(false);
+    setMobileOpen(false);
+  }, [pathname]);
+
   return (
     <nav
       className={cn(
         "fixed left-1/2 z-50 w-full max-w-6xl -translate-x-1/2 px-4 transition-all duration-300",
         atTop ? "top-4" : "top-3",
-        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:blur-3xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(82,179,255,0.12),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(124,58,237,0.10),transparent_35%)]"
+        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:blur-3xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(82,179,255,0.12),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(124,58,237,0.10),transparent_35%)]",
       )}
     >
       <div
         className={cn(
-          "relative mx-auto flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-background/65 px-5 shadow-[0_10px_60px_-30px_rgba(80,140,255,0.7)]",
-          "backdrop-blur-2xl ring-1 ring-white/5"
+          "relative mx-auto flex h-16 items-center justify-between rounded-2xl border border-white/10 bg-background/25 px-5 shadow-[0_10px_60px_-28px_rgba(80,140,255,0.7)]",
+          "backdrop-blur-2xl ring-1 ring-white/5",
         )}
       >
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden flex-shrink-0">
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent
-            side="left"
-            className="w-72 border-r border-white/10 bg-background/60 backdrop-blur-2xl shadow-[0_20px_70px_-30px_rgba(0,0,0,0.7)] [&>button]:left-4 [&>button]:right-auto"
+        <div className="flex w-full items-center">
+          {/* Mobile-only left spacer to visually center the logo. */}
+          <div className="h-9 w-9 md:hidden flex-shrink-0" aria-hidden />
+
+          {/* Left / center: logo area */}
+          <div
+            className={cn(
+              "flex-1 flex justify-center",
+              desktopOpen ? "md:justify-start" : "",
+            )}
           >
-            <nav className="flex flex-col gap-1 mt-10 w-full">
-              {navItems.map((item) => {
+            <Link
+              href="/"
+              className="flex items-center gap-2 transition-opacity hover:opacity-90"
+              aria-label="Arka Forge Home"
+              onClick={() => {
+                setDesktopOpen(false);
+                setMobileOpen(false);
+              }}
+            >
+              <div className="nav-logo-rotate">
+                <Image
+                  src="/arka-forge-logo.png"
+                  alt="Arka Forge logo"
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 rounded-full object-contain"
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* Sliding drawer: opens from behind the right hamburger */}
+          <div
+            id="site-navigation-drawer"
+            aria-hidden={!desktopOpen}
+            className={cn(
+              "hidden md:block h-full overflow-hidden border-l border-white/10 bg-background/78 backdrop-blur-2xl shadow-[0_20px_70px_-30px_rgba(0,0,0,0.55)] origin-right transition-[width,opacity,transform] duration-500 ease-out",
+              "md:absolute md:top-0 md:right-0 md:h-full md:border-none md:bg-transparent md:backdrop-blur-0 md:shadow-none",
+              desktopOpen
+                ? "w-[20vw] max-w-xs opacity-100 translate-x-0 md:w-[72vw] md:max-w-[860px] md:scale-x-100"
+                : "w-0 opacity-0 translate-x-0 pointer-events-none md:w-[72vw] md:max-w-[860px] md:scale-x-0"
+            )}
+          >
+            <nav className="py-4 flex flex-row flex-nowrap items-center justify-start gap-2 w-full px-2 overflow-x-auto scrollbar-thin">
+              {navItems.map((item, idx) => {
                 const active =
                   pathname === item.href ||
                   (item.href !== "/" && pathname.startsWith(item.href + "/"));
@@ -76,61 +116,85 @@ export function Nav() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setDesktopOpen(false)}
                     className={cn(
-                      "w-full text-left px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                      "flex-none whitespace-nowrap text-left px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 will-change-transform",
+                      desktopOpen
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-2",
                       active
                         ? "text-primary bg-primary/[0.08]"
-                        : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
+                        : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]",
                     )}
+                    style={{
+                      transitionDelay: desktopOpen ? `${idx * 60}ms` : "0ms",
+                    }}
                   >
                     {item.label}
                   </Link>
                 );
               })}
             </nav>
-          </SheetContent>
-        </Sheet>
+          </div>
 
-        <Link
-          href="/"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 flex items-center gap-2 transition-opacity hover:opacity-90"
-        >
-          <Image
-            src="/arka-forge-logo.png"
-            alt="Arka Forge logo"
-            width={36}
-            height={36}
-            className="h-9 w-9 rounded-full object-contain"
-          />
-        </Link>
-
-        <div className="h-9 w-9 md:hidden flex-shrink-0" aria-hidden />
-
-        <div className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => {
-            const active =
-              pathname === item.href ||
-              (item.href !== "/" && pathname.startsWith(item.href + "/"));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "px-3.5 py-1.5 text-[13px] font-medium rounded-lg transition-all duration-200",
-                  active
-                    ? "text-primary bg-primary/[0.08] shadow-[inset_0_0.5px_0_0_rgba(77,154,245,0.2)]"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05] hover:-translate-y-[1px]"
-                )}
+          {/* Right side: mobile sheet + desktop drawer toggle */}
+          <div className="flex-shrink-0 z-[1] flex items-center gap-2">
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+              <SheetTrigger asChild className="md:hidden flex-shrink-0">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9"
+                  aria-expanded={mobileOpen}
+                  aria-controls="mobile-navigation-drawer"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="w-72 border-r border-white/10 bg-background/60 backdrop-blur-2xl shadow-[0_20px_70px_-30px_rgba(0,0,0,0.7)] [&>button]:left-4 [&>button]:right-auto"
               >
-                {item.label}
-              </Link>
-            );
-          })}
+                <nav className="flex flex-col gap-1 mt-10 w-full">
+                  {navItems.map((item) => {
+                    const active =
+                      pathname === item.href ||
+                      (item.href !== "/" && pathname.startsWith(item.href + "/"));
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={cn(
+                          "w-full text-left px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200",
+                          active
+                            ? "text-primary bg-primary/[0.08]"
+                            : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </SheetContent>
+            </Sheet>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hidden md:inline-flex h-9 w-9"
+              onClick={() => setDesktopOpen((v) => !v)}
+              aria-expanded={desktopOpen}
+              aria-controls="site-navigation-drawer"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </div>
         </div>
-
       </div>
-
     </nav>
   );
 }

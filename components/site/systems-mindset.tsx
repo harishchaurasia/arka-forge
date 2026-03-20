@@ -27,7 +27,7 @@ const ease = [0.25, 0.1, 0.25, 1];
 export function SystemsMindset() {
   return (
     <section className="py-28 md:py-36 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] via-white/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.001] via-white/[0.002] to-transparent pointer-events-none" />
 
       <div className="relative mx-auto max-w-6xl px-5">
         <motion.div

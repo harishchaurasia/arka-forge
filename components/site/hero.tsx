@@ -8,8 +8,11 @@ import { ArrowRight, Calendar } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const HeroScene = dynamic(
-  () => import("@/components/webgl/hero-scene").then((m) => ({ default: m.HeroScene })),
-  { ssr: false, loading: () => null }
+  () =>
+    import("@/components/webgl/hero-scene").then((m) => ({
+      default: m.HeroScene,
+    })),
+  { ssr: false, loading: () => null },
 );
 
 const ease = [0.25, 0.1, 0.25, 1];
@@ -19,13 +22,13 @@ export function Hero() {
   React.useEffect(() => setMounted(true), []);
 
   return (
-    <section className="relative min-h-[88vh] flex items-start md:items-center overflow-hidden pt-20 pb-16 md:pt-16 md:pb-0">
+    <section className="relative min-h-[88vh] flex items-start md:items-center pt-24 pb-16 md:pt-24 md:pb-0">
       {/* Background ambient glow */}
-      <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] rounded-full bg-primary/[0.07] blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-accent/[0.05] blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] rounded-full bg-primary/[0.03] blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-accent/[0.02] blur-[120px] pointer-events-none" />
 
       {/* WebGL scene — right side, large and visible on desktop */}
-      <div className="absolute right-[-5%] top-[-5%] bottom-[-5%] w-[65%] pointer-events-none opacity-40 md:opacity-50 hidden md:block">
+      <div className="absolute right-[-5%] top-[-5%] bottom-[-5%] w-[65%] pointer-events-none opacity-16 md:opacity-18 hidden md:block">
         {mounted && (
           <React.Suspense fallback={null}>
             <HeroScene />
@@ -66,9 +69,8 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.08, ease }}
             className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]"
           >
-            Forging{" "}<br className="hidden sm:block" />
-            Intelligent{" "}
-            <span className="gradient-text">Worlds</span>
+            Forging <br className="hidden sm:block" />
+            Intelligent <span className="gradient-text">Worlds</span>
           </motion.h1>
 
           <motion.p
@@ -77,9 +79,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We build digital twins of real-world systems — interactive replicas that
-            let organizations train, test, and optimize before touching real equipment.
-            Delivered across AR/VR, desktop, and web.
+            We build digital twins of real-world systems — interactive replicas
+            that let organizations train, test, and optimize before touching
+            real equipment. Delivered across AR/VR, desktop, and web.
           </motion.p>
 
           <motion.div
@@ -89,17 +91,36 @@ export function Hero() {
             className="inline-flex flex-col items-stretch gap-4"
           >
             <div className="flex justify-center md:justify-start gap-3">
-              <Button asChild size="lg" variant="outline" className="px-8 flex-1 sm:flex-none">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="px-8 flex-1 sm:flex-none"
+              >
                 <Link href="/contact">
                   Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="px-8 flex-1 sm:flex-none">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="px-8 flex-1 sm:flex-none"
+              >
                 <Link href="/work">View Our Work</Link>
               </Button>
             </div>
-            <Button asChild size="lg" className="glow py-6 text-base font-semibold w-full">
-              <a href="https://calendar.app.google/9HXdsiKfCXCPeUya9" target="_blank" rel="noopener noreferrer" className="justify-center">
+            <Button
+              asChild
+              size="lg"
+              className="glow py-6 text-base font-semibold w-full"
+            >
+              <a
+                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="justify-center"
+              >
                 <Calendar className="mr-2 h-5 w-5" />
                 Schedule a Meeting
               </a>
@@ -108,8 +129,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }
