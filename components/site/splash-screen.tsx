@@ -47,7 +47,7 @@ export function SplashScreen() {
           />
         </div>
         <span
-          className={`text-lg md:text-2xl lg:text-3xl font-semibold tracking-tight text-white/90 splash-text ${phase === "collapse" ? "splash-text-collapse" : ""}`}
+          className={`text-lg md:text-2xl lg:text-3xl font-semibold tracking-tight text-primary splash-text ${phase === "collapse" ? "splash-text-collapse" : ""}`}
         >
           Arka Forge
         </span>
