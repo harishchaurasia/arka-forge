@@ -11,15 +11,10 @@ const ease = [0.25, 0.1, 0.25, 1];
 
 const placeholders = [
   {
-    title: "Project Showcase Coming Soon",
-    description: "Real-time simulation platform built for demanding enterprise applications. Full case study in progress.",
-    tags: ["simulation", "enterprise"],
-    client: null as string | null,
-  },
-  {
-    title: "Case Study Coming Soon",
-    description: "Custom engine and tooling pipeline developed for a AAA-quality interactive experience.",
-    tags: ["engine", "tooling"],
+    title: "Building Digital Twins for Manufacturing",
+    description:
+      "We're actively scoping and building digital twin systems for real manufacturing workflows. Case studies coming as projects ship.",
+    tags: ["manufacturing", "in progress"],
     client: null as string | null,
   },
 ];
@@ -58,13 +53,23 @@ export function FeaturedWorkClient({ work }: { work: WorkPost[] }) {
             <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
               Portfolio
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Work</h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+              Work
+            </h2>
             <p className="text-base text-muted-foreground max-w-md">
-              Projects and case studies showcasing our technical capabilities.
+              We&apos;re actively building digital twins for real organizations.
+              Case studies coming as projects ship.
             </p>
           </div>
-          <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex gap-1.5">
-            <Link href="/work">View All <ArrowRight className="h-3.5 w-3.5" /></Link>
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="hidden sm:inline-flex gap-1.5"
+          >
+            <Link href="/work">
+              View All <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </Button>
         </motion.div>
 
@@ -91,18 +96,27 @@ export function FeaturedWorkClient({ work }: { work: WorkPost[] }) {
                     {item.description}
                   </p>
                   {item.client && (
-                    <p className="text-xs font-medium text-primary mb-4">{item.client}</p>
+                    <p className="text-xs font-medium text-primary mb-4">
+                      {item.client}
+                    </p>
                   )}
                   <div className="flex flex-wrap gap-1.5">
                     {item.tags.map((tag) => (
-                      <span key={tag} className="text-[11px] px-2.5 py-1 rounded-full glass-pill text-primary/80 font-medium">
+                      <span
+                        key={tag}
+                        className="text-[11px] px-2.5 py-1 rounded-full glass-pill text-primary/80 font-medium"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
                   {item.date && (
                     <time className="block mt-4 text-xs text-muted-foreground">
-                      {new Date(item.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                      {new Date(item.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
                     </time>
                   )}
                 </article>

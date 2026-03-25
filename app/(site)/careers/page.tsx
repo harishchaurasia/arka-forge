@@ -5,7 +5,8 @@ import { Briefcase, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Careers",
-  description: "Join Arka Forge — build digital twins, simulation systems, and workforce training products.",
+  description:
+    "Join Arka Forge — build digital twins, simulation systems, and workforce training products.",
 };
 
 const openRoles = [
@@ -118,10 +119,14 @@ export default function CareersPage() {
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
           Join Us
         </span>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Careers</h1>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+          Careers
+        </h1>
         <p className="text-base text-muted-foreground mb-12 mx-auto max-w-lg leading-relaxed">
-          We&apos;re building the team behind the next generation of digital twins.
-          If you love simulation, game-tech, and shipping real products — we want to hear from you.
+          We&apos;re a brand new studio (founded March 2024) building digital
+          twins and simulation systems for manufacturing, robotics, energy, and
+          defense. We&apos;re hiring engineers and designers to help us ship
+          real products for real organizations.
         </p>
 
         {/* Open roles */}
@@ -132,20 +137,37 @@ export default function CareersPage() {
                 <div>
                   <h2 className="text-lg font-semibold mb-1">{role.title}</h2>
                   <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{role.department}</span>
-                    <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{role.location}</span>
+                    <span className="flex items-center gap-1">
+                      <Briefcase className="h-3.5 w-3.5" />
+                      {role.department}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {role.location}
+                    </span>
                   </div>
                 </div>
                 <Button asChild size="sm">
-                  <a href={`mailto:careers@arkaforge.com?subject=Application: ${role.title}`}>Apply</a>
+                  <a
+                    href={`mailto:careers@arkaforge.com?subject=Application: ${role.title}`}
+                  >
+                    Apply
+                  </a>
                 </Button>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{role.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                {role.description}
+              </p>
               <div>
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Requirements</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                  Requirements
+                </h4>
                 <ul className="space-y-1.5">
                   {role.requirements.map((req, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                    >
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
                       {req}
                     </li>
@@ -162,7 +184,10 @@ export default function CareersPage() {
             <h2 className="text-base font-semibold mb-4">Why Join?</h2>
             <ul className="space-y-2">
               {perks.map((perk) => (
-                <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <li
+                  key={perk}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
                   {perk}
                 </li>
@@ -173,7 +198,10 @@ export default function CareersPage() {
             <h2 className="text-base font-semibold mb-4">Process</h2>
             <ol className="space-y-2">
               {process.map((step, i) => (
-                <li key={step} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                <li
+                  key={step}
+                  className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                >
                   <span className="flex-shrink-0 w-5 h-5 rounded-full glass-pill text-[11px] font-semibold text-primary flex items-center justify-center">
                     {i + 1}
                   </span>
@@ -186,7 +214,10 @@ export default function CareersPage() {
 
         <p className="text-sm text-muted-foreground">
           Don&apos;t see a role that fits? Reach out to{" "}
-          <a href="mailto:careers@arkaforge.com" className="text-primary hover:underline">
+          <a
+            href="mailto:careers@arkaforge.com"
+            className="text-primary hover:underline"
+          >
             careers@arkaforge.com
           </a>
           .

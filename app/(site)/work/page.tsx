@@ -1,12 +1,19 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { getWork } from "@/lib/content/loader";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Case studies and simulation projects from Arka Forge — digital twins, gamified training, and game-tech.",
+  description:
+    "Case studies and simulation projects from Arka Forge — digital twins, gamified training, and game-tech.",
 };
 
 export default async function WorkPage() {
@@ -17,7 +24,8 @@ export default async function WorkPage() {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Work</h1>
         <p className="text-xl text-muted-foreground">
-          Case studies and projects showcasing our technical capabilities.
+          We&apos;re actively building digital twins for real organizations.
+          Case studies coming as projects ship.
         </p>
       </div>
 
@@ -27,7 +35,9 @@ export default async function WorkPage() {
             <Card className="h-full transition-all hover:border-primary/50 hover:shadow-lg">
               <CardHeader>
                 <CardTitle>{item.frontmatter.title}</CardTitle>
-                <CardDescription>{item.frontmatter.description}</CardDescription>
+                <CardDescription>
+                  {item.frontmatter.description}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {item.frontmatter.client && (
@@ -60,7 +70,9 @@ export default async function WorkPage() {
 
       {work.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No work items yet. Check back soon!</p>
+          <p className="text-muted-foreground">
+            No work items yet. Check back soon!
+          </p>
         </div>
       )}
     </Section>

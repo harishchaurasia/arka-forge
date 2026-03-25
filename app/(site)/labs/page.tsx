@@ -1,12 +1,19 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { getLabs } from "@/lib/content/loader";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Labs",
-  description: "Research, experiments, and technical deep-dives from Arka Forge.",
+  description:
+    "Research, experiments, and technical deep-dives from Arka Forge.",
 };
 
 export default async function LabsPage() {
@@ -17,7 +24,8 @@ export default async function LabsPage() {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Labs</h1>
         <p className="text-xl text-muted-foreground">
-          Research, experiments, and technical deep-dives from our team.
+          Technical research and deep-dives on digital twins, simulation, and
+          game-tech. Coming soon.
         </p>
       </div>
 
@@ -55,7 +63,9 @@ export default async function LabsPage() {
 
       {labs.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No labs posts yet. Check back soon!</p>
+          <p className="text-muted-foreground">
+            No labs posts yet. Check back soon!
+          </p>
         </div>
       )}
     </Section>
