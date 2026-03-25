@@ -58,7 +58,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
           >
-            <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill">
+            <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill font-display">
               Digital Twins · Simulation · Workforce Training
             </span>
           </motion.div>
@@ -67,7 +67,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] font-display"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] font-sans"
           >
             Forging <br className="hidden sm:block" />
             Intelligent <span className="gradient-text">Worlds</span>
@@ -95,7 +95,7 @@ export function Hero() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="px-8 flex-1 sm:flex-none"
+                className="px-8 flex-1 sm:flex-none font-display"
               >
                 <Link href="/contact">
                   Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -105,7 +105,7 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="px-8 flex-1 sm:flex-none"
+                className="px-8 flex-1 sm:flex-none font-display"
               >
                 <Link href="/work">View Our Work</Link>
               </Button>

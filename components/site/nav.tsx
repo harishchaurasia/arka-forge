@@ -99,6 +99,9 @@ export function Nav() {
                   className="h-9 w-9 rounded-full object-contain"
                 />
               </div>
+              <span className="hidden md:inline pt-1 text-2xl font-bold text-primary font-display leading-none">
+                Arka Forge
+              </span>
             </Link>
           </div>
 
