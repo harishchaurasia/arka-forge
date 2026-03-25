@@ -309,8 +309,10 @@ function SceneContent() {
 
       <group ref={orreryRef}>
         <StarField count={400} />
-        <FireCore />
-        <OrbitalRings />
+        <group position={[0, -0.5, 0]}>
+          <FireCore />
+          <OrbitalRings />
+        </group>
       </group>
 
       <Environment files="/potsdamer_platz_1k.hdr" />
@@ -337,7 +339,7 @@ export function HeroScene() {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0 }
+      { threshold: 0 },
     );
     observer.observe(el);
     return () => observer.disconnect();

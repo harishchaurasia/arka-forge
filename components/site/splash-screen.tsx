@@ -7,7 +7,9 @@ const SPIN_DURATION = 2400;
 const COLLAPSE_DURATION = 600;
 
 export function SplashScreen() {
-  const [phase, setPhase] = React.useState<"spin" | "collapse" | "done">("spin");
+  const [phase, setPhase] = React.useState<"spin" | "collapse" | "done">(
+    "spin",
+  );
 
   React.useEffect(() => {
     const spinTimer = setTimeout(() => setPhase("collapse"), SPIN_DURATION);
@@ -35,8 +37,12 @@ export function SplashScreen() {
       className={`splash-overlay ${phase === "collapse" ? "splash-collapse" : ""}`}
       aria-hidden="true"
     >
-      <div className={`flex flex-col items-center gap-5 ${phase === "collapse" ? "splash-container-collapse" : ""}`}>
-        <div className={`splash-logo-img ${phase === "collapse" ? "splash-logo-collapse" : ""}`}>
+      <div
+        className={`flex flex-col items-center gap-5 ${phase === "collapse" ? "splash-container-collapse" : ""}`}
+      >
+        <div
+          className={`splash-logo-img ${phase === "collapse" ? "splash-logo-collapse" : ""}`}
+        >
           <Image
             src="/arka-forge-logo.png"
             alt=""
@@ -47,7 +53,7 @@ export function SplashScreen() {
           />
         </div>
         <span
-          className={`text-lg md:text-2xl lg:text-3xl font-semibold tracking-tight text-primary splash-text ${phase === "collapse" ? "splash-text-collapse" : ""}`}
+          className={`text-lg md:text-2xl lg:text-3xl font-semibold tracking-tight text-primary splash-text font-display ${phase === "collapse" ? "splash-text-collapse" : ""}`}
         >
           Arka Forge
         </span>
