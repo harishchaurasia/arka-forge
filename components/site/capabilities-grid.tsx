@@ -1,34 +1,40 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Cpu, Code, Boxes, Sparkles, ArrowUpRight } from "lucide-react";
+import { GitMerge, Cpu, BarChart2, Sliders } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const capabilities = [
+interface AdvancedCapabilityItem {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+const capabilities: AdvancedCapabilityItem[] = [
   {
     title: "Digital Twins",
-    description: "Interactive replicas of real-world systems — factories, equipment, workflows — that mirror operational reality in real time.",
-    href: "/technology/simulation",
+    description:
+      "Accurate, interactive replicas of real systems — factories, equipment, workflows — that behave like the real thing.",
+    icon: GitMerge,
+  },
+  {
+    title: "Intelligent Environments",
+    description:
+      "Simulation environments that respond dynamically to learner behavior, operational inputs, and real-world data.",
     icon: Cpu,
   },
   {
-    title: "Simulation & Training",
-    description: "Workers practice inside digital twins before touching real equipment. Faster onboarding, zero risk, unlimited repetitions.",
-    href: "/technology/simulation",
-    icon: Sparkles,
+    title: "Performance Analytics",
+    description:
+      "Built-in scoring, tracking, and analytics that measure readiness and surface training gaps.",
+    icon: BarChart2,
   },
   {
-    title: "Gamification",
-    description: "Scoring, leaderboards, branching scenarios, and performance analytics layered onto digital twins to drive engagement and measure readiness.",
-    href: "/technology/engine",
-    icon: Code,
-  },
-  {
-    title: "XR / Spatial",
-    description: "Digital twins delivered in AR, VR, and mixed reality — across headsets, web, desktop, and mobile.",
-    href: "/technology/xr",
-    icon: Boxes,
+    title: "Adaptive Systems",
+    description:
+      "Training that adjusts difficulty, scenarios, and feedback based on individual learner performance.",
+    icon: Sliders,
   },
 ];
 
@@ -46,15 +52,18 @@ export function CapabilitiesGrid() {
           className="mb-14"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-            Capabilities
+            Advanced Capabilities
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What We Deliver</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            When You Need More Fidelity
+          </h2>
           <p className="text-base text-muted-foreground max-w-md">
-            Digital twins, simulation, and gamified training for manufacturing, robotics, energy, and defense.
+            For organizations where simulation accuracy, operational realism,
+            and intelligent environments matter — we go deeper.
           </p>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2">
           {capabilities.map((cap, i) => {
             const Icon = cap.icon;
             return (
@@ -65,18 +74,17 @@ export function CapabilitiesGrid() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease }}
               >
-                <Link href={cap.href} className="group block h-full">
-                  <div className="h-full glass-card p-6 transition-all duration-300 hover:-translate-y-1.5">
-                    <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl glass-icon">
-                      <Icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="text-[15px] font-semibold mb-2 group-hover:text-primary transition-colors flex items-center gap-1.5">
-                      {cap.title}
-                      <ArrowUpRight className="h-3.5 w-3.5 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover:opacity-60 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{cap.description}</p>
+                <div className="h-full glass-card p-6">
+                  <div className="mb-5 inline-flex items-center justify-center w-12 h-12 rounded-xl glass-icon">
+                    <Icon className="h-5 w-5 text-primary" />
                   </div>
-                </Link>
+                  <h3 className="text-[15px] font-semibold mb-2">
+                    {cap.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {cap.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

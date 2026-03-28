@@ -59,7 +59,7 @@ export function Hero() {
             transition={{ duration: 0.6, ease }}
           >
             <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill font-display">
-              Digital Twins · Simulation · Workforce Training
+              Games for Learning · Digital Twins · Simulation
             </span>
           </motion.div>
 
@@ -69,8 +69,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.08, ease }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] font-sans"
           >
-            Forging <br className="hidden sm:block" />
-            Intelligent <span className="gradient-text">Worlds</span>
+            Train & Learn in
+            <br />
+            <span className="gradient-text"> Digital Game Worlds</span>
           </motion.h1>
 
           <motion.p
@@ -79,9 +80,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We build digital twins of real-world systems — interactive replicas
-            that let organizations train, test, and optimize before touching
-            real equipment. Delivered across AR/VR, desktop, and web.
+            We build end-to-end game-based learning experiences, simulations,
+            and digital twins that help organizations train better, learn
+            faster, and test ideas before real-world deployment.
           </motion.p>
 
           <motion.div
@@ -90,26 +91,6 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.24, ease }}
             className="inline-flex flex-col items-stretch gap-4"
           >
-            <div className="flex justify-center md:justify-start gap-3">
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="px-8 flex-1 sm:flex-none font-display"
-              >
-                <Link href="/contact">
-                  Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="px-8 flex-1 sm:flex-none font-display"
-              >
-                <Link href="/work">View Our Work</Link>
-              </Button>
-            </div>
             <Button
               asChild
               size="lg"
@@ -125,6 +106,26 @@ export function Hero() {
                 Schedule a Meeting
               </a>
             </Button>
+            <div className="flex justify-center md:justify-start gap-3">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="px-8 flex-1 sm:flex-none font-display"
+              >
+                <Link href="/work">
+                  See Our Work <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="px-8 flex-1 sm:flex-none font-display"
+              >
+                <Link href="/contact">Get in Touch</Link>
+              </Button>
+            </div>
           </motion.div>
         </div>
       </div>

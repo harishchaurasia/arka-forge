@@ -23,19 +23,33 @@ export function CTABand() {
           className="glass-card p-12 md:p-20 text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
-            Let&apos;s Build Together
+            Let&apos;s Talk
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
-            Build with <span className="gradient-text">Arka Forge</span>
+            Ready to Build{" "}
+            <span className="gradient-text">Something Real?</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
-            Need digital twins of your systems, simulation-based training, or workforce readiness analytics? We work with organizations across manufacturing, robotics, energy, and defense.
+            If you&apos;re looking to transform training, onboarding, or
+            operational readiness — we&apos;d like to hear about it. Tell us
+            what you&apos;re working on.
           </p>
-          <Button asChild size="lg" className="glow px-8">
-            <Link href="/contact">
-              Get in Touch <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" className="glow px-8">
+              <Link href="/contact">
+                Start a Conversation <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="px-8">
+              <a
+                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schedule a Meeting
+              </a>
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>

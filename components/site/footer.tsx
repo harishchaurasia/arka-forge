@@ -7,14 +7,20 @@ const footerLinks = {
     { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
-  legal: [
-    { href: "/legal/privacy", label: "Privacy Policy" },
-  ],
+  legal: [{ href: "/legal/privacy", label: "Privacy Policy" }],
 };
 
 const socials = [
-  { href: "https://www.linkedin.com/company/arkaforge", label: "LinkedIn", icon: Linkedin },
-  { href: "https://instagram.com/arka.forge", label: "Instagram", icon: Instagram },
+  {
+    href: "https://www.linkedin.com/company/arkaforge",
+    label: "LinkedIn",
+    icon: Linkedin,
+  },
+  {
+    href: "https://instagram.com/arka.forge",
+    label: "Instagram",
+    icon: Instagram,
+  },
   { href: "mailto:contact@arkaforge.com", label: "Email", icon: Mail },
 ];
 
@@ -24,9 +30,12 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div className="col-span-2 md:col-span-1">
-            <h3 className="text-base font-semibold tracking-tight mb-2">Arka Forge</h3>
+            <h3 className="text-base font-semibold tracking-tight mb-2">
+              Arka Forge
+            </h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px] mb-4">
-              Digital twin company — interactive replicas of real-world systems for workforce training and operations.
+              Simulation-based training and game-based learning experiences for
+              real-world readiness.
             </p>
             <div className="flex gap-3">
               {socials.map((s) => {
@@ -36,7 +45,11 @@ export function Footer() {
                     key={s.label}
                     href={s.href}
                     target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                    rel={s.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    rel={
+                      s.href.startsWith("mailto")
+                        ? undefined
+                        : "noopener noreferrer"
+                    }
                     className="flex items-center justify-center w-8 h-8 rounded-lg glass-pill text-muted-foreground hover:text-primary transition-colors"
                     aria-label={s.label}
                   >
@@ -48,11 +61,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Company</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              Company
+            </h4>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -61,11 +79,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Legal</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              Legal
+            </h4>
             <ul className="space-y-2.5">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -75,7 +98,10 @@ export function Footer() {
         </div>
 
         <div className="pt-6 border-t border-white/[0.04]">
-          <p className="text-xs text-muted-foreground text-center" suppressHydrationWarning>
+          <p
+            className="text-xs text-muted-foreground text-center"
+            suppressHydrationWarning
+          >
             &copy; {new Date().getFullYear()} Arka Forge. All rights reserved.
           </p>
         </div>
