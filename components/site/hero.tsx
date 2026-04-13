@@ -59,7 +59,7 @@ export function Hero() {
             transition={{ duration: 0.6, ease }}
           >
             <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill font-display">
-              Game Technology · Simulation · Training
+              Digital Twins · Game Based Learning · Workforce Training
             </span>
           </motion.div>
 
@@ -80,25 +80,32 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We use game technology to build simulation-based training systems
-            and digital twins — for industries where the cost of under-prepared
-            people is measured in downtime, safety incidents, and wasted years.
+            We build simulation-based training systems and digital twins -
+            interactive environments where people practice real procedures
+            before touching real equipment. Delivered across desktop, VR/AR, and
+            web.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.24, ease }}
-            className="inline-flex flex-col items-stretch gap-4"
+            className="inline-flex flex-col md:flex-row md:items-center items-stretch gap-4"
           >
             <Button
               asChild
               size="lg"
               className="glow py-6 text-base font-semibold w-full"
             >
-              <Link href="/work" className="justify-center">
-                See Our Work <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              <a
+                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="justify-center"
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule a Discovery Call
+              </a>
             </Button>
             <div className="flex justify-center md:justify-start gap-3">
               <Button
@@ -107,14 +114,9 @@ export function Hero() {
                 variant="outline"
                 className="px-8 flex-1 sm:flex-none font-display"
               >
-                <a
-                  href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Schedule a Discovery Call
-                </a>
+                <Link href="/work">
+                  See Our Work <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </motion.div>

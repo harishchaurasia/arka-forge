@@ -29,18 +29,16 @@ export function CTABand() {
             Build with <span className="gradient-text">Arka Forge</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-            Need simulation-based training, a digital twin of your systems, or
-            an interactive learning environment for your workforce? We work with
-            organizations in manufacturing, energy, defense, and research —
-            where the gap between training and reality carries real cost.
+            Simulation-based training, game-based learning, or a digital twin of
+            your systems - we want to hear about it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="glow px-8">
+            <Button asChild size="lg" variant="outline" className="glow px-8">
               <Link href="/contact">
                 Get In Touch <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="px-8">
+            <Button asChild size="lg" className="glow px-8">
               <a
                 href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
                 target="_blank"
