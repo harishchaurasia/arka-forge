@@ -48,39 +48,32 @@ export default async function WorkPostPage({ params }: Props) {
     <Section>
       <article className="max-w-3xl mx-auto">
         <BackLink href="/work" label="Back to Work" />
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">{work.frontmatter.title}</h1>
-          <p className="text-xl text-muted-foreground mb-4">
+        <header className="mb-12">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+            Work
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            {work.frontmatter.title}
+          </h1>
+          <p className="text-base text-muted-foreground leading-relaxed mb-6 max-w-2xl">
             {work.frontmatter.description}
           </p>
           {work.frontmatter.client && (
-            <p className="text-lg text-muted-foreground mb-4">
-              Client: {work.frontmatter.client}
+            <p className="text-xs text-foreground/60 mb-6">
+              {work.frontmatter.client}
             </p>
           )}
-          {work.frontmatter.metrics && (
-            <div className="mb-4 p-4 rounded-lg bg-muted">
-              <h3 className="font-semibold mb-2">Key Metrics</h3>
-              <ul className="space-y-1">
-                {Object.entries(work.frontmatter.metrics).map(([key, value]) => (
-                  <li key={key} className="text-sm">
-                    <span className="font-medium">{key}:</span> {String(value)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-6">
             {work.frontmatter.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-sm px-3 py-1 rounded-full bg-muted text-muted-foreground"
+                className="text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-primary/30 text-primary/90 bg-primary/[0.05]"
               >
                 {tag}
               </span>
             ))}
           </div>
-          <time className="text-sm text-muted-foreground">
+          <time className="text-xs text-muted-foreground">
             {new Date(work.frontmatter.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",

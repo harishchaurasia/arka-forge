@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const HeroScene = dynamic(
@@ -103,8 +103,8 @@ export function Hero() {
                 rel="noopener noreferrer"
                 className="justify-center"
               >
-                <Calendar className="mr-2 h-5 w-5" />
-                Schedule a Discovery Call
+                <Phone className="h-4 w-4" />
+                Schedule a Call
               </a>
             </Button>
             <div className="flex justify-center md:justify-start gap-3">

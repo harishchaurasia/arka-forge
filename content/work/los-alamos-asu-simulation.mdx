@@ -1,11 +1,17 @@
 ---
 title: "Nuclear Glovebox Training Simulator"
-description: "A game-modified digital twin for workforce training at Los Alamos National Laboratory — replacing passive instruction with interactive, performance-tracked simulation for high-consequence nuclear operations."
+description: "A game-modified digital twin for workforce training at Los Alamos National Laboratory - replacing passive instruction with interactive, performance-tracked simulation for high-consequence nuclear operations."
 date: "2024-01-15"
-tags: ["simulation", "digital-twin", "game-development", "workforce-training", "unreal-engine"]
+tags:
+  [
+    "simulation",
+    "digital-twin",
+    "game-development",
+    "workforce-training",
+    "unreal-engine",
+  ]
 published: true
-client: "Los Alamos National Laboratory × ASU School of Manufacturing Systems and Networks"
-hero: "/images/work/los-alamos-hero.jpg"
+client: "Founder-led research - Los Alamos National Laboratory x ASU School of Manufacturing Systems and Networks"
 metrics:
   domain: "Nuclear Safety & Workforce Training"
   technology: "Unreal Engine 5, Custom Game Logic, Real-time Analytics"
@@ -15,32 +21,32 @@ metrics:
 
 ## The Problem
 
-Nuclear glovebox operations are among the most precision-critical procedures in any workforce. Operators must execute specific task sequences in exact order, under physical constraints, with zero tolerance for error. The cost of mistakes — in rework, contamination risk, and safety exposure — is severe.
+Nuclear glovebox operations are among the most precision-critical procedures in any workforce. Operators must execute specific task sequences in exact order, under physical constraints, with zero tolerance for error. The cost of mistakes - in rework, contamination risk, and safety exposure - is severe.
 
 Traditional training for these environments relied on written procedures, walkthroughs, and supervised practice on actual equipment. This approach has three fundamental failures: it doesn't scale, it creates risk during the learning phase itself, and it provides no measurable signal on where trainees are actually struggling.
 
 Los Alamos National Laboratory, in partnership with the ASU School of Manufacturing Systems and Networks, needed a better answer.
 
-## What We Built
+## What Was Built
 
-A game-modified digital twin of the nuclear glovebox environment — a fully interactive, first-person simulation where trainees practice real operational sequences inside a faithful virtual replica of the physical workspace.
+A first-person simulation of the nuclear glovebox environment - trainees practice real operational sequences inside a faithful virtual replica of the physical workspace.
 
 This was not a video or a clickthrough tutorial. It was a real-time interactive system with physics, spatial fidelity, and built-in assessment logic.
 
 ### Environment
 
-The virtual environment was modeled to accurately reflect the real glovebox workspace — spatial layout, equipment positioning, and operational constraints all faithfully represented. Trainees navigate and interact in first person, experiencing the same physical logic they would encounter in the real environment.
+The virtual environment was modeled to accurately reflect the real glovebox workspace - spatial layout, equipment positioning, and operational constraints all faithfully represented. Trainees navigate and interact in first person, experiencing the same physical logic they would encounter in the real environment.
 
 ### Task Sequence Logic
 
-The simulation tracks not just *what* a trainee does, but *when* and *in what order*. Each step in the glovebox procedure is encoded as a game event. The system detects:
+The simulation tracks not just _what_ a trainee does, but _when_ and _in what order_. Each step in the glovebox procedure is encoded as a game event. The system detects:
 
 - Correct task completion
 - Incorrect or skipped steps
 - Sequence violations
 - Hesitation patterns and time-on-task metrics
 
-This turns every training session into a structured data event — not a subjective supervisor impression.
+This turns every training session into a structured data event - not a subjective supervisor impression.
 
 ### Performance Assessment Layer
 
@@ -54,18 +60,18 @@ A scoring system with weighted task completion, sequence accuracy, and time effi
 
 Everything in this simulation was built from the ground up:
 
-- **3D environment construction** — modeled, lit, and optimized for real-time rendering
-- **Custom game logic** — task sequence systems, interaction mechanics, event detection
-- **UI design and implementation** — assessment overlays, scoring displays, session reports
-- **Performance tracking architecture** — event logging, sequence validation, metric aggregation
-- **Full systems programming** — end-to-end, from environment to data output
+- **3D environment construction** - modeled, lit, and optimized for real-time rendering
+- **Custom game logic** - task sequence systems, interaction mechanics, event detection
+- **UI design and implementation** - assessment overlays, scoring displays, session reports
+- **Performance tracking architecture** - event logging, sequence validation, metric aggregation
+- **Full systems programming** - end-to-end, from environment to data output
 
 ## Why This Matters
 
-This project is a direct proof of the Arka Forge thesis: game technology is the most underutilized tool in high-stakes workforce training. The same systems that power real-time 3D games — physics, interaction, event logic, rendering, UI — are exactly the systems needed to build training environments that actually work.
+This project is a direct proof of the Arka Forge thesis: game technology is the most underutilized tool in high-stakes workforce training. The same systems that power real-time 3D games - physics, interaction, event logic, rendering, UI - are exactly the systems needed to build training environments that actually work.
 
-A passive video cannot tell you that a trainee is consistently skipping step 7. A manual cannot tell you that someone takes three times longer on task 4 than their peers. A simulator built with game technology can do both — and do it at scale, without supervision, without using real equipment, and without risk.
+A passive video cannot tell you that a trainee is consistently skipping step 7. A manual cannot tell you that someone takes three times longer on task 4 than their peers. A simulator built with game technology can do both - and do it at scale, without supervision, without using real equipment, and without risk.
 
 ---
 
-*This project was developed by Arka Forge founder Harish in his individual capacity as a researcher and developer, in collaboration with the ASU School of Manufacturing Systems and Networks. It represents the direct technical foundation for Arka Forge's simulation and digital twin capabilities.*
+_This project was developed by Arka Forge founder Harish in his individual capacity as a researcher and developer, in collaboration with the ASU School of Manufacturing Systems and Networks. It represents the direct technical foundation for Arka Forge's simulation and digital twin capabilities._

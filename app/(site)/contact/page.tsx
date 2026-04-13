@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { Mail, Clock, Linkedin, Instagram } from "lucide-react";
+import { Mail, Clock, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import { BackLink } from "@/components/site/back-link";
 
 export default function ContactPage() {
@@ -36,12 +36,12 @@ export default function ContactPage() {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Failed to send message");
 
-      toast({ title: "Message sent!", description: "We'll get back to you soon." });
+      toast({ title: "Sent.", description: "We'll be in touch within 1-2 business days." });
       reset();
     } catch (error) {
       toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message.",
+        title: "Something went wrong.",
+        description: error instanceof Error ? error.message : "Try again, or email contact@arkaforge.com directly.",
         variant: "destructive",
       });
     } finally {
@@ -92,8 +92,9 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-1">LinkedIn</h3>
-                <a href="https://www.linkedin.com/company/arkaforge" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                <a href="https://www.linkedin.com/company/arkaforge" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
                   Arka Forge on LinkedIn
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </div>
             </div>
@@ -103,8 +104,9 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-1">Instagram</h3>
-                <a href="https://instagram.com/arka.forge" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                <a href="https://instagram.com/arka.forge" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
                   @arka.forge
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </div>
             </div>
@@ -135,14 +137,14 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <Label htmlFor="subject" className="text-xs font-medium text-muted-foreground mb-1.5 block">Subject *</Label>
-                  <Input id="subject" placeholder="Project inquiry" {...register("subject")} aria-invalid={errors.subject ? "true" : "false"} />
+                  <Input id="subject" placeholder="What's this about?" {...register("subject")} aria-invalid={errors.subject ? "true" : "false"} />
                   {errors.subject && <p className="mt-1 text-xs text-destructive">{errors.subject.message}</p>}
                 </div>
               </div>
 
               <div>
                 <Label htmlFor="message" className="text-xs font-medium text-muted-foreground mb-1.5 block">Message *</Label>
-                <Textarea id="message" rows={6} placeholder="Tell us about your project..." {...register("message")} aria-invalid={errors.message ? "true" : "false"} />
+                <Textarea id="message" rows={6} placeholder="Describe what you're working on or trying to solve." {...register("message")} aria-invalid={errors.message ? "true" : "false"} />
                 {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>}
               </div>
 

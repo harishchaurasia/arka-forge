@@ -113,7 +113,7 @@ export default function CompanyPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Schedule a Discovery Call
+                Schedule a Call
               </a>
             </Button>
           </div>
