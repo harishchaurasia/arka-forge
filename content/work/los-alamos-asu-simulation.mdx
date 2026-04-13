@@ -1,20 +1,71 @@
 ---
-title: "Digital Twins & Simulation Development"
-description: "Games and simulation development for Los Alamos National Laboratory, in partnership with ASU School of Manufacturing Systems and Networks."
+title: "Nuclear Glovebox Training Simulator"
+description: "A game-modified digital twin for workforce training at Los Alamos National Laboratory — replacing passive instruction with interactive, performance-tracked simulation for high-consequence nuclear operations."
 date: "2024-01-15"
-tags: ["simulation", "game development", "digital twins", "manufacturing"]
+tags: ["simulation", "digital-twin", "game-development", "workforce-training", "unreal-engine"]
 published: true
-client: "Los Alamos National Laboratory × ASU"
+client: "Los Alamos National Laboratory × ASU School of Manufacturing Systems and Networks"
+hero: "/images/work/los-alamos-hero.jpg"
+metrics:
+  domain: "Nuclear Safety & Workforce Training"
+  technology: "Unreal Engine 5, Custom Game Logic, Real-time Analytics"
+  scope: "Environment Design, Systems Programming, UI/UX, Performance Tracking"
+  type: "Simulation-Based Training / Digital Twin"
 ---
 
-# Games & Simulation Developer
+## The Problem
 
-This work was completed by Harish Chaurasia (Founder) in his individual capacity — prior to founding Arka Forge — for Los Alamos National Laboratory, in partnership with Arizona State University&apos;s School of Manufacturing Systems and Networks.
+Nuclear glovebox operations are among the most precision-critical procedures in any workforce. Operators must execute specific task sequences in exact order, under physical constraints, with zero tolerance for error. The cost of mistakes — in rework, contamination risk, and safety exposure — is severe.
 
-## Role
+Traditional training for these environments relied on written procedures, walkthroughs, and supervised practice on actual equipment. This approach has three fundamental failures: it doesn't scale, it creates risk during the learning phase itself, and it provides no measurable signal on where trainees are actually struggling.
 
-Games and simulation developer, building interactive environments and simulation infrastructure for complex systems. Simulation engineering and game technology applied to manufacturing workflows, training environments, and system digitization.
+Los Alamos National Laboratory, in partnership with the ASU School of Manufacturing Systems and Networks, needed a better answer.
 
-## Impact
+## What We Built
 
-This project demonstrated the potential of digital twins and gamified simulation for real-world training and optimization challenges in advanced manufacturing. It informed the technical foundation and vision for Arka Forge.
+A game-modified digital twin of the nuclear glovebox environment — a fully interactive, first-person simulation where trainees practice real operational sequences inside a faithful virtual replica of the physical workspace.
+
+This was not a video or a clickthrough tutorial. It was a real-time interactive system with physics, spatial fidelity, and built-in assessment logic.
+
+### Environment
+
+The virtual environment was modeled to accurately reflect the real glovebox workspace — spatial layout, equipment positioning, and operational constraints all faithfully represented. Trainees navigate and interact in first person, experiencing the same physical logic they would encounter in the real environment.
+
+### Task Sequence Logic
+
+The simulation tracks not just *what* a trainee does, but *when* and *in what order*. Each step in the glovebox procedure is encoded as a game event. The system detects:
+
+- Correct task completion
+- Incorrect or skipped steps
+- Sequence violations
+- Hesitation patterns and time-on-task metrics
+
+This turns every training session into a structured data event — not a subjective supervisor impression.
+
+### Performance Assessment Layer
+
+The UI was built to surface performance data in real time and post-session. Trainers can see exactly which steps trainees are missing, which sequences they're reversing, and where they're spending disproportionate time. This moves training assessment from "supervisor felt they were ready" to "here is the objective performance record."
+
+### Scoring and Readiness Tracking
+
+A scoring system with weighted task completion, sequence accuracy, and time efficiency gives trainees a clear signal of readiness and gives program managers a measurable onboarding benchmark.
+
+## Technical Scope
+
+Everything in this simulation was built from the ground up:
+
+- **3D environment construction** — modeled, lit, and optimized for real-time rendering
+- **Custom game logic** — task sequence systems, interaction mechanics, event detection
+- **UI design and implementation** — assessment overlays, scoring displays, session reports
+- **Performance tracking architecture** — event logging, sequence validation, metric aggregation
+- **Full systems programming** — end-to-end, from environment to data output
+
+## Why This Matters
+
+This project is a direct proof of the Arka Forge thesis: game technology is the most underutilized tool in high-stakes workforce training. The same systems that power real-time 3D games — physics, interaction, event logic, rendering, UI — are exactly the systems needed to build training environments that actually work.
+
+A passive video cannot tell you that a trainee is consistently skipping step 7. A manual cannot tell you that someone takes three times longer on task 4 than their peers. A simulator built with game technology can do both — and do it at scale, without supervision, without using real equipment, and without risk.
+
+---
+
+*This project was developed by Arka Forge founder Harish in his individual capacity as a researcher and developer, in collaboration with the ASU School of Manufacturing Systems and Networks. It represents the direct technical foundation for Arka Forge's simulation and digital twin capabilities.*

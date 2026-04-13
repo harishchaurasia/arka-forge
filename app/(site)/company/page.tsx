@@ -1,146 +1,169 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/section";
-import { Target, Layers, Zap, Shield } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Company",
+  title: "Company — Arka Forge",
   description:
-    "Arka Forge — Digital twin company building interactive replicas of real-world systems for workforce training and operations.",
+    "Arka Forge is a game technology studio building simulation-based training systems and digital twins. Founded at the intersection of game development, applied simulation, and real-world systems.",
 };
 
 const values = [
   {
-    icon: Target,
-    title: "Engineering-First",
+    title: "Problems Before Technology",
     description:
-      "We prioritize technical excellence. Every decision is made with performance, correctness, and maintainability in mind.",
+      "We don't lead with a stack or a platform. We start with what's actually broken and work backward to the right system.",
   },
   {
-    icon: Layers,
-    title: "Digital Twin Engineering",
+    title: "Interactivity Is the Point",
     description:
-      "We combine simulation engineering with game-tech to build digital twins that are interactive, measurable, and true to reality.",
+      "The difference between watching a simulation and being inside one is the same difference between reading about surgery and performing it. We build the second kind.",
   },
   {
-    icon: Zap,
-    title: "India-First Model",
+    title: "Quality Is Non-Negotiable",
     description:
-      "World-class engineering at competitive global pricing. A win-win for enterprise clients and skilled talent.",
+      "We're building a premium studio, not a dev shop. Every system we ship has to work, look right, and perform — because our clients' credibility is tied to it, and so is ours.",
   },
 ];
 
 export default function CompanyPage() {
   return (
     <Section>
-      <div className="max-w-3xl mx-auto text-center">
-        <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-          About Us
-        </span>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
-          Company
-        </h1>
-        <p className="text-base text-muted-foreground leading-relaxed mb-12 mx-auto max-w-lg">
-          Arka Forge is a digital twin company. We build interactive replicas of
-          real-world systems that let organizations train workers, test
-          scenarios, and optimize operations — before touching real equipment.
-        </p>
-
-        {/* Mission */}
-        <div className="glass-card p-7 mb-8 text-left">
-          <h2 className="text-lg font-semibold tracking-tight mb-3">Mission</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Build digital twins that mirror real-world systems. We digitize
-            complex workflows into interactive simulation environments — layered
-            with gamification, analytics, and scoring — so organizations can
-            measure workforce readiness, not guess.
-          </p>
+      <div className="max-w-4xl mx-auto">
+        {/* Masthead */}
+        <div className="text-center mb-20">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
+            About Arka Forge
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-8">
+            Built on a simple belief:
+            <br />
+            <span className="gradient-text">
+              training should be interactive, not passive.
+            </span>
+          </h1>
+          <div className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto space-y-4">
+            <p>
+              Arka Forge is a game technology studio that uses the systems
+              behind real-time 3D games to build training environments and
+              digital twins for organizations that operate in the physical
+              world.
+            </p>
+            <p>
+              We&apos;re not a generic software agency. We&apos;re not an XR
+              production house. We build systems designed to close the gap
+              between how people train and how they actually work.
+            </p>
+          </div>
         </div>
 
-        {/* The Problem */}
-        <div className="glass-card p-7 mb-8 text-left">
-          <h2 className="text-lg font-semibold tracking-tight mb-3">
-            The Problem
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Training complex systems is slow, expensive, and risky. Industries
-            like manufacturing, robotics, and energy rely on real equipment,
-            shadow learning, and manuals — which leads to high costs,
-            operational errors, and safety risks.
-          </p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Most organizations cannot build these simulations themselves.
-            That&apos;s where we come in.
-          </p>
+        {/* Origin */}
+        <div className="mb-20">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
+            Origin
+          </span>
+          <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
+            <p>
+              Arka Forge was founded by Harish, a computer science graduate
+              researcher at Arizona State University with a background spanning
+              game development, AR/VR systems, full-stack engineering, and
+              applied simulation.
+            </p>
+            <p>
+              The company&apos;s capabilities are grounded in direct experience:
+              Harish led the design and development of a game-modified digital
+              twin for nuclear glovebox workforce training at Los Alamos
+              National Laboratory, in partnership with ASU&apos;s School of
+              Manufacturing Systems and Networks.
+            </p>
+            <p>
+              That project — interactive environment, custom game logic, task
+              sequence tracking, real-time performance assessment — is the
+              working proof of what Arka Forge builds and how it builds it.
+            </p>
+            <p>
+              The company operates with a distributed model: client
+              relationships and business development based in the United
+              States, with production capabilities in India. This isn&apos;t an
+              outsourcing play — it&apos;s a structural advantage that lets us
+              maintain high quality and fast iteration without the overhead of
+              a U.S.-only studio.
+            </p>
+          </div>
         </div>
 
-        {/* What We Do */}
-        <div className="glass-card p-7 mb-8 text-left">
-          <h2 className="text-lg font-semibold tracking-tight mb-3">
-            What We Deliver
-          </h2>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2.5">
-              <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Digital twins of real-world systems — factories, equipment,
-              workflows
-            </li>
-            <li className="flex items-start gap-2.5">
-              <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Simulation-based training environments for workforce readiness
-            </li>
-            <li className="flex items-start gap-2.5">
-              <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Gamification layer — scoring, leaderboards, branching scenarios
-            </li>
-            <li className="flex items-start gap-2.5">
-              <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Delivered across AR/VR, desktop, web, and mobile
-            </li>
-            <li className="flex items-start gap-2.5">
-              <Shield className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-              Performance analytics and readiness scoring
-            </li>
-          </ul>
+        {/* Direction */}
+        <div className="mb-20">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
+            Direction
+          </span>
+          <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
+            <p>We&apos;re building in phases, and we&apos;re transparent about where we are.</p>
+            <p>
+              Right now, we&apos;re focused on custom simulation-based training
+              and game-based learning systems for enterprise and research
+              clients. These are the projects where our capabilities are most
+              directly applicable and where the value is clearest.
+            </p>
+            <p>
+              As we grow — in team, in technical depth, and in client
+              relationships — we&apos;re moving toward full-scale digital twin
+              systems: real-time connected environments that mirror operational
+              reality and enable ongoing scenario simulation, performance
+              analytics, and predictive modeling.
+            </p>
+            <p>
+              Longer term, the same technical pipelines that power our client
+              work will feed into original interactive products. But that&apos;s
+              later. Right now, we&apos;re here to build serious systems for
+              serious problems.
+            </p>
+          </div>
         </div>
 
         {/* Values */}
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-5">
-          How We Work
-        </h2>
-        <div className="grid gap-5 sm:grid-cols-3 mb-10 text-left">
-          {values.map((v) => {
-            const Icon = v.icon;
-            return (
-              <div key={v.title} className="glass-card p-6">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg glass-icon mb-4">
-                  <Icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-sm font-semibold mb-2">{v.title}</h3>
+        <div className="mb-20">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-5 block">
+            How We Work
+          </span>
+          <div className="grid gap-5 md:grid-cols-3">
+            {values.map((v) => (
+              <div key={v.title} className="glass-card p-7">
+                <h3 className="text-base font-semibold mb-3 tracking-tight">
+                  {v.title}
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {v.description}
                 </p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
-        {/* Team */}
-        <div className="glass-card p-7 text-left">
-          <h2 className="text-lg font-semibold tracking-tight mb-4">Team</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-            Arka Forge was founded by Harish Chaurasia in March 2024. We're a
-            small, focused team building digital twins and simulation systems
-            for real organizations.
+        {/* CTA */}
+        <div className="glass-card p-10 md:p-14 text-center">
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-8">
+            We&apos;re selective about the projects we take on. If you have a
+            real training or simulation problem, we want to hear about it.
           </p>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            We're actively hiring engineers, designers, and simulation
-            specialists. If you're interested in building digital twins and
-            training simulations,{" "}
-            <a href="/careers" className="text-primary hover:underline">
-              we're hiring
-            </a>
-            .
-          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" className="glow px-8">
+              <Link href="/contact">
+                Get In Touch <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="px-8">
+              <a
+                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schedule a Discovery Call
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </Section>

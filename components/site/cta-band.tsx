@@ -26,18 +26,18 @@ export function CTABand() {
             Let&apos;s Talk
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
-            Ready to Build{" "}
-            <span className="gradient-text">Something Real?</span>
+            Build with <span className="gradient-text">Arka Forge</span>
           </h2>
-          <p className="text-base text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
-            If you&apos;re looking to transform training, onboarding, or
-            operational readiness — we&apos;d like to hear about it. Tell us
-            what you&apos;re working on.
+          <p className="text-base text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
+            Need simulation-based training, a digital twin of your systems, or
+            an interactive learning environment for your workforce? We work with
+            organizations in manufacturing, energy, defense, and research —
+            where the gap between training and reality carries real cost.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="glow px-8">
               <Link href="/contact">
-                Start a Conversation <ArrowRight className="ml-1.5 h-4 w-4" />
+                Get In Touch <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="px-8">
@@ -46,7 +46,7 @@ export function CTABand() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Schedule a Meeting
+                Schedule a Discovery Call
               </a>
             </Button>
           </div>

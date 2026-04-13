@@ -1,0 +1,11 @@
+# Build outputs and dependencies
+node_modules/**
+target/**
+build/**
+dist/**
+.venv/**
+
+# IDE and generated files
+.idea/**
+.vscode/**
+*.generated.*

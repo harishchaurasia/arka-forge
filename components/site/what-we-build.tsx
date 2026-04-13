@@ -1,8 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
-import { Monitor, Layers, Gamepad2, Building2 } from "lucide-react";
+import { Boxes, Cpu, Gamepad2, GitMerge } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface WhatWeBuildItem {
@@ -13,28 +12,28 @@ interface WhatWeBuildItem {
 
 const items: WhatWeBuildItem[] = [
   {
-    title: "Interactive Training Experiences",
+    title: "Simulation & Training",
     description:
-      "Scenario-driven simulations where learners make decisions, face consequences, and build real competency.",
-    icon: Monitor,
+      "Workers practice inside digital environments before touching real equipment. Faster onboarding, zero risk, unlimited repetitions.",
+    icon: Cpu,
   },
   {
-    title: "Simulation Environments",
+    title: "Game-Based Learning",
     description:
-      "Faithful digital replicas of real systems, equipment, and workflows — built for practice, not just observation.",
-    icon: Layers,
-  },
-  {
-    title: "Game-Based Learning Products",
-    description:
-      "Structured learning delivered through game mechanics: scoring, branching, feedback loops, and measurable outcomes.",
+      "Scoring, branching scenarios, and performance analytics layered onto training to drive engagement and measure readiness.",
     icon: Gamepad2,
   },
   {
-    title: "Immersive Operational Learning Systems",
+    title: "Digital Twins",
     description:
-      "High-fidelity environments for operational readiness, safety training, and systems familiarization.",
-    icon: Building2,
+      "Interactive replicas of real systems and workflows that behave like the real thing. Train and test before the stakes are real.",
+    icon: GitMerge,
+  },
+  {
+    title: "XR & Spatial",
+    description:
+      "Training delivered in VR, AR, and mixed reality — across headsets, desktop, web, and mobile.",
+    icon: Boxes,
   },
 ];
 
@@ -51,21 +50,21 @@ export function WhatWeBuild() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease }}
-          className="text-center mb-14"
+          className="mb-14"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-            What We Build
+            Capabilities
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Interactive Experiences for Real-World Training
+            What We Deliver
           </h2>
-          <p className="text-base text-muted-foreground max-w-md mx-auto">
-            We design and build training products that put people inside the
-            system — not just in front of a slide deck.
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+            Simulation, game-based learning, and digital twins for
+            manufacturing, energy, defense, and research.
           </p>
         </motion.div>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           {items.map((item, i) => {
             const Icon = item.icon;
             return (

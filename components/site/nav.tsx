@@ -10,11 +10,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/technology", label: "Technology" },
+  { href: "/technology", label: "Capabilities" },
   { href: "/work", label: "Work" },
   { href: "/company", label: "Company" },
-  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];
 

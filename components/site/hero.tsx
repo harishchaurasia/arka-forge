@@ -59,7 +59,7 @@ export function Hero() {
             transition={{ duration: 0.6, ease }}
           >
             <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill font-display">
-              Games for Learning · Digital Twins · Simulation
+              Game Technology · Simulation · Training
             </span>
           </motion.div>
 
@@ -69,9 +69,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.08, ease }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] font-sans"
           >
-            Train & Learn in
+            Forging
             <br />
-            <span className="gradient-text"> Digital Game Worlds</span>
+            <span className="gradient-text">Intelligent Worlds</span>
           </motion.h1>
 
           <motion.p
@@ -80,9 +80,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We build end-to-end game-based learning experiences, simulations,
-            and digital twins that help organizations train better, learn
-            faster, and test ideas before real-world deployment.
+            We use game technology to build simulation-based training systems
+            and digital twins — for industries where the cost of under-prepared
+            people is measured in downtime, safety incidents, and wasted years.
           </motion.p>
 
           <motion.div
@@ -96,15 +96,9 @@ export function Hero() {
               size="lg"
               className="glow py-6 text-base font-semibold w-full"
             >
-              <a
-                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="justify-center"
-              >
-                <Calendar className="mr-2 h-5 w-5" />
-                Schedule a Meeting
-              </a>
+              <Link href="/work" className="justify-center">
+                See Our Work <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
             <div className="flex justify-center md:justify-start gap-3">
               <Button
@@ -113,17 +107,14 @@ export function Hero() {
                 variant="outline"
                 className="px-8 flex-1 sm:flex-none font-display"
               >
-                <Link href="/work">
-                  See Our Work <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="px-8 flex-1 sm:flex-none font-display"
-              >
-                <Link href="/contact">Get in Touch</Link>
+                <a
+                  href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Schedule a Discovery Call
+                </a>
               </Button>
             </div>
           </motion.div>

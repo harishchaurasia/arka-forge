@@ -4,7 +4,6 @@ import { Linkedin, Instagram, Mail } from "lucide-react";
 const footerLinks = {
   company: [
     { href: "/company", label: "About" },
-    { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
   legal: [{ href: "/legal/privacy", label: "Privacy Policy" }],
@@ -33,9 +32,10 @@ export function Footer() {
             <h3 className="text-base font-semibold tracking-tight mb-2">
               Arka Forge
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-[240px] mb-4">
-              Simulation-based training and game-based learning experiences for
-              real-world readiness.
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mb-4">
+              Simulation-based training and digital twins — built with game
+              technology, for organizations where the gap between training and
+              reality carries real cost.
             </p>
             <div className="flex gap-3">
               {socials.map((s) => {
