@@ -4,6 +4,7 @@ import { getLab, getLabs } from "@/lib/content/loader";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -46,6 +47,7 @@ export default async function LabPage({ params }: Props) {
   return (
     <Section>
       <article className="max-w-3xl mx-auto">
+        <BackLink href="/labs" label="Back to Labs" />
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-4">{lab.frontmatter.title}</h1>
           <p className="text-xl text-muted-foreground mb-4">

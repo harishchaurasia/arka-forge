@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -10,6 +11,7 @@ export default function PrivacyPage() {
   return (
     <Section>
       <div className="max-w-3xl mx-auto prose prose-invert">
+        <BackLink href="/" label="Back to Home" />
         <h1 className="text-4xl md:text-5xl font-bold mb-6">Privacy Policy</h1>
         
         <p className="text-muted-foreground mb-6">Last updated: March 7, 2026</p>

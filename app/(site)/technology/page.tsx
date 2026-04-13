@@ -1,29 +1,40 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
-import { Cpu, Code, Boxes, ArrowUpRight } from "lucide-react";
+import { Cpu, Code, Boxes, Gamepad2, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Technology",
-  description: "Digital twins, simulation, and workforce training technology at Arka Forge.",
+  title: "Our Capabilities - Arka Forge",
+  description:
+    "Simulation-based training, game-based learning, and digital twin systems — built with game technology for high-stakes industries.",
 };
 
 const technologies = [
   {
+    title: "Game-Based Learning",
+    description:
+      "Game design applied to serious training objectives - branching scenarios, scoring, feedback loops, and measurable skill progression.",
+    href: "/technology/learning",
+    icon: Gamepad2,
+  },
+  {
     title: "Digital Twins",
-    description: "Interactive replicas of real-world systems — factories, equipment, workflows — that mirror operational reality in real time.",
-    href: "/technology/simulation",
+    description:
+      "Interactive replicas of real-world systems - factories, equipment, workflows - that mirror operational reality in real time.",
+    href: "/technology/digitaltwins",
     icon: Cpu,
   },
   {
     title: "Simulation Development",
-    description: "End-to-end simulation engineering — Unreal, Unity, custom engines — with gamification, analytics, and multi-platform delivery.",
-    href: "/technology/engine",
+    description:
+      "End-to-end simulation engineering - Unreal, Unity, custom engines - with gamification, analytics, and multi-platform delivery.",
+    href: "/technology/simulation",
     icon: Code,
   },
   {
     title: "XR & Spatial",
-    description: "Digital twins delivered in AR, VR, and mixed reality — across headsets, web, desktop, and mobile.",
+    description:
+      "Digital twins delivered in AR, VR, and mixed reality - across headsets, web, desktop, and mobile.",
     href: "/technology/xr",
     icon: Boxes,
   },
@@ -36,13 +47,16 @@ export default function TechnologyPage() {
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
           Capabilities
         </span>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Technology</h1>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+          Technology
+        </h1>
         <p className="text-base text-muted-foreground max-w-xl">
-          Digital twin engineering, simulation development, and XR delivery for manufacturing, robotics, energy, and defense.
+          Simulation, game-based learning, and digital twins for Enterprise
+          Workforce, Robotics, Manufacturing, Energy, Defense, and Research.
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-4">
         {technologies.map((tech) => {
           const Icon = tech.icon;
           return (
@@ -55,7 +69,9 @@ export default function TechnologyPage() {
                   {tech.title}
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-60 transition-opacity" />
                 </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">{tech.description}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {tech.description}
+                </p>
               </div>
             </Link>
           );

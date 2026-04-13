@@ -3,18 +3,18 @@ import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
-  title: "Simulation & Training",
+  title: "Digital Twins",
   description:
-    "Workers practice real procedures inside digital environments before touching real equipment.",
+    "Interactive replicas of real systems and workflows - for training, testing, and operational readiness.",
 };
 
-export default function SimulationPage() {
+export default function DigitalTwinsPage() {
   return (
     <Section>
       <div className="max-w-3xl">
         <BackLink href="/technology" label="Back to Capabilities" />
         <span
-          className="text-xs font-semibold uppercase 
+          className="text-xs font-semibold uppercase
         tracking-widest text-primary/70 mb-3 block"
         >
           Capabilities
@@ -23,12 +23,11 @@ export default function SimulationPage() {
           className="text-3xl md:text-4xl font-bold 
         tracking-tight mb-4"
         >
-          Simulation & Training
+          Digital Twins
         </h1>
         <p className="text-base text-muted-foreground mb-12">
-          Interactive environments where people practice real procedures before
-          touching real equipment. Faster onboarding, zero risk, measurable
-          readiness.
+          Interactive replicas of real systems and workflows that behave like
+          the real thing. Train and test before the stakes are real.
         </p>
         <div
           className="space-y-10 text-sm 
@@ -39,17 +38,17 @@ export default function SimulationPage() {
               className="text-base font-semibold 
             text-foreground mb-3"
             >
-              How It Works
+              What It Is
             </h2>
             <p>
-              A training simulation mirrors a real system, workflow, or
-              procedure. Users navigate, interact, and make decisions in real
-              time - with physics, constraints, and consequences that reflect
-              the real world.
+              A digital twin is a virtual replica of a physical system - a piece
+              of equipment, a facility, a workflow. It mirrors real-world
+              behavior: physics, constraints, procedures, and failure modes.
             </p>
             <p className="mt-3">
-              Unlike a video or a manual, a simulation responds. It tracks what
-              users do, when they do it, and whether they do it correctly.
+              Organizations use them to train workers, test scenarios, and
+              validate procedures before committing to the physical world. No
+              downtime, no risk, no guessing.
             </p>
           </div>
 
@@ -62,11 +61,11 @@ export default function SimulationPage() {
             </h2>
             <ul className="space-y-2">
               <li>
-                - Interactive 3D environments modeled from real systems and
+                - Interactive 3D replicas of real equipment, facilities, and
                 workflows
               </li>
               <li>- Task sequence tracking and error detection</li>
-              <li>- Scoring, performance analytics, and readiness reporting</li>
+              <li>- Scoring, analytics, and readiness reporting</li>
               <li>- Delivery across desktop, VR/AR, and web</li>
             </ul>
           </div>
@@ -80,25 +79,25 @@ export default function SimulationPage() {
             </h2>
             <ul className="space-y-2">
               <li>
-                - Manufacturing - assembly procedures, equipment operation,
-                safety protocols
+                - Energy - operator training for high-consequence infrastructure
               </li>
               <li>
-                - Energy - operator training for high-consequence infrastructure
+                - Manufacturing - equipment operation and safety protocols
               </li>
               <li>
                 - Research and defense - procedure validation and
                 familiarization
               </li>
               <li>
-                - Corporate - technical onboarding and compliance training
+                - Any organization where practicing on real equipment carries
+                real risk
               </li>
             </ul>
           </div>
 
-          <p>
-            Every simulation is scoped for production deployment, not a demo. If
-            you have a real system to train on, we can build it.
+          <p className="text-sm text-muted-foreground">
+            Every twin is scoped for production deployment, not a demo. If you
+            have a real system, we can build it.
           </p>
         </div>
       </div>

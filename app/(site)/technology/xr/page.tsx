@@ -1,66 +1,92 @@
 import { Metadata } from "next";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
   title: "XR & Spatial",
-  description: "AR, VR, and mixed reality training — web, desktop, and mobile delivery.",
+  description:
+    "Training simulations delivered in VR, AR, and mixed reality - across headsets, desktop, and web.",
 };
 
 export default function XRPage() {
   return (
     <Section>
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">XR & Spatial</h1>
-        
-        <div className="prose prose-invert max-w-none mb-8">
-          <p className="text-xl text-muted-foreground mb-6">
-            Training simulations delivered across AR, VR, web, desktop, and mobile.
-            We build for Meta Quest, Apple Vision Pro, WebXR, and custom platforms.
-          </p>
+      <div className="max-w-3xl">
+        <BackLink href="/technology" label="Back to Capabilities" />
+        <span
+          className="text-xs font-semibold uppercase
+        tracking-widest text-primary/70 mb-3 block"
+        >
+          Capabilities
+        </span>
+        <h1
+          className="text-3xl md:text-4xl font-bold 
+        tracking-tight mb-4"
+        >
+          XR & Spatial
+        </h1>
+        <p className="text-base text-muted-foreground mb-12">
+          The same simulation, delivered where it needs to be. VR for full
+          immersion. AR for in-context guidance. Desktop and web for
+          accessibility.
+        </p>
+        <div
+          className="space-y-10 text-sm 
+        text-muted-foreground leading-relaxed"
+        >
+          <div>
+            <h2
+              className="text-base font-semibold 
+            text-foreground mb-3"
+            >
+              Platform Support
+            </h2>
+            <ul className="space-y-2">
+              <li>- Meta Quest 2, 3, and Pro</li>
+              <li>- WebXR - browser-based, no headset required</li>
+              <li>- Desktop - Windows and macOS</li>
+              <li>- Mobile - iOS and Android</li>
+            </ul>
+          </div>
 
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Spatial Tracking</h2>
-          <p>
-            Our XR systems use advanced tracking technologies:
-          </p>
-          <ul>
-            <li>SLAM (Simultaneous Localization and Mapping)</li>
-            <li>Hand tracking via computer vision</li>
-            <li>Eye tracking for foveated rendering</li>
-            <li>6DOF controller support</li>
-          </ul>
+          <div>
+            <h2
+              className="text-base font-semibold 
+            text-foreground mb-3"
+            >
+              Interaction Design
+            </h2>
+            <p>
+              Every XR system requires a different interaction model. We design
+              for the task, not the hardware:
+            </p>
+            <ul className="space-y-2 mt-3">
+              <li>- Hand tracking and direct manipulation</li>
+              <li>- Controller-based interaction</li>
+              <li>- Gaze-based selection</li>
+              <li>- Spatial UI anchored to real-world surfaces</li>
+            </ul>
+          </div>
 
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Interaction Patterns</h2>
-          <p>
-            We design intuitive interaction systems:
-          </p>
-          <ul>
-            <li>Direct manipulation via hand tracking</li>
-            <li>Gaze-based selection</li>
-            <li>Spatial UI in 3D space</li>
-            <li>Natural gesture recognition</li>
-          </ul>
+          <div>
+            <h2
+              className="text-base font-semibold 
+            text-foreground mb-3"
+            >
+              Performance
+            </h2>
+            <p>
+              VR requires 90 FPS minimum. We build for it from the start -
+              optimized rendering, LOD systems, and real-time profiling
+              throughout production. Not bolted on at the end.
+            </p>
+          </div>
 
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Platform Support</h2>
           <p>
-            Our XR framework supports:
+            Platform recommendation is part of our scoping process. If you're
+            not sure which delivery format fits your use case, that's what
+            discovery calls are for.
           </p>
-          <ul>
-            <li>Meta Quest series</li>
-            <li>Apple Vision Pro</li>
-            <li>WebXR for browser-based experiences</li>
-            <li>Custom hardware platforms</li>
-          </ul>
-
-          <h2 className="text-3xl font-semibold mt-8 mb-4">Performance</h2>
-          <p>
-            XR has strict performance requirements:
-          </p>
-          <ul>
-            <li>90 FPS minimum for VR (120 FPS for some headsets)</li>
-            <li>Low latency to prevent motion sickness</li>
-            <li>Foveated rendering for efficiency</li>
-            <li>Optimized rendering pipelines</li>
-          </ul>
         </div>
       </div>
     </Section>

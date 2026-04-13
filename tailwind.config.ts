@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["Corpa", "system-ui", "sans-serif"],
+        display: ["Nourd", "system-ui", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",
