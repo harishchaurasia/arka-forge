@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ const values = [
 export default function CompanyPage() {
   return (
     <Section>
+      <BackLink href="/" label="Back to Home" />
       <div className="max-w-4xl mx-auto">
         {/* Masthead */}
         <div className="text-center mb-20">

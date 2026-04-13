@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
   title: "Labs",
@@ -21,6 +22,7 @@ export default async function LabsPage() {
 
   return (
     <Section>
+      <BackLink href="/" label="Back to Home" />
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Labs</h1>
         <p className="text-xl text-muted-foreground">

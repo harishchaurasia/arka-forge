@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 import { Cpu, Code, Boxes, Gamepad2, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ const technologies = [
 export default function TechnologyPage() {
   return (
     <Section>
+      <BackLink href="/" label="Back to Home" />
       <div className="mb-12">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
           Capabilities

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 import { Briefcase, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -115,6 +116,7 @@ const process = [
 export default function CareersPage() {
   return (
     <Section>
+      <BackLink href="/" label="Back to Home" />
       <div className="max-w-3xl mx-auto text-center">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
           Join Us

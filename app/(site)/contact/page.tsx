@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { Mail, Clock, Linkedin, Instagram } from "lucide-react";
+import { BackLink } from "@/components/site/back-link";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -51,6 +52,7 @@ export default function ContactPage() {
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5">
+        <BackLink href="/" label="Back to Home" />
         <div className="mb-12">
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
             Get in Touch
