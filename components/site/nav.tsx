@@ -128,7 +128,7 @@ export function Nav() {
 
         {/* Desktop layout: absolute-positioned logo + centered nav items + hamburger */}
         <div className="relative hidden md:block w-full h-full">
-          {/* Logo — centered when closed, slides to the left when open */}
+          {/* Logo - centered when closed, slides to the left when open */}
           <Link
             href="/"
             aria-label="Arka Forge Home"
@@ -159,7 +159,7 @@ export function Nav() {
             </span>
           </Link>
 
-          {/* Centered nav items — fade in when open */}
+          {/* Centered nav items - fade in when open */}
           <div
             id="site-navigation-drawer"
             aria-hidden={!desktopOpen}
@@ -199,7 +199,7 @@ export function Nav() {
             </div>
           </div>
 
-          {/* Hamburger — fixed at the right */}
+          {/* Hamburger - fixed at the right */}
           <Button
             variant="ghost"
             size="icon"

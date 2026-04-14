@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
+
 import {
   Gamepad2,
   TrendingUp,
@@ -9,7 +11,6 @@ import {
   Globe2,
   Layers3,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 interface WhyItem {
   title: string;
@@ -33,7 +34,7 @@ const items: WhyItem[] = [
   {
     title: "Premium Execution, Efficient Delivery",
     description:
-      "High-quality output with India-based production efficiency — without compromising on craft.",
+      "High-quality output with India-based production efficiency - without compromising on craft.",
     icon: BadgeDollarSign,
   },
   {
@@ -45,7 +46,7 @@ const items: WhyItem[] = [
   {
     title: "Digital Twin Depth When You Need It",
     description:
-      "For high-fidelity requirements, we go deeper — intelligent environments, operational analytics, and system-accurate simulation.",
+      "For high-fidelity requirements, we go deeper - intelligent environments, operational analytics, and system-accurate simulation.",
     icon: Layers3,
   },
 ];
@@ -75,19 +76,19 @@ export function SystemsMindset() {
             A Different Kind of Training Partner
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            We bring game-tech thinking to real-world training problems — with
+            We bring game-tech thinking to real-world training problems - with
             the execution quality and delivery efficiency to back it up.
           </p>
         </motion.div>
 
-        {/* Row 1 — 3 columns */}
+        {/* Row 1 - 3 columns */}
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 mb-5">
           {firstRow.map((item, i) => (
             <WhyCard key={item.title} item={item} index={i} />
           ))}
         </div>
 
-        {/* Row 2 — 2 columns, centered */}
+        {/* Row 2 - 2 columns, centered */}
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-2 md:max-w-2xl md:mx-auto">
           {secondRow.map((item, i) => (
             <WhyCard key={item.title} item={item} index={firstRow.length + i} />

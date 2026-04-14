@@ -44,8 +44,8 @@ export function CTABand() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Phone className="h-4 w-4" />
                 Schedule a Call
+                <Phone className="h-4 w-4" />
               </a>
             </Button>
           </div>

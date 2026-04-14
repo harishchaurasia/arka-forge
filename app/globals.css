@@ -121,7 +121,7 @@
       0 4px 24px -1px rgba(0, 0, 0, 0.3);
   }
 
-  /* ── Cards — the main glass panel ─────────── */
+  /* ── Cards - the main glass panel ─────────── */
   .glass-card {
     position: relative;
     background: linear-gradient(
@@ -338,7 +338,7 @@
 }
 
 /* ═══════════════════════════════════════════════
-   NAV LOGO — slow continuous rotation
+   NAV LOGO - slow continuous rotation
    ═══════════════════════════════════════════════ */
 
 /* ── Reduced motion ───────────────────────────── */

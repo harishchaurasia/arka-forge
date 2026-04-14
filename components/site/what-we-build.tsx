@@ -32,7 +32,7 @@ const items: WhatWeBuildItem[] = [
   {
     title: "XR & Spatial",
     description:
-      "Training delivered in VR, AR, and mixed reality — across headsets, desktop, web, and mobile.",
+      "Training delivered in VR, AR, and mixed reality - across headsets, desktop, web, and mobile.",
     icon: Boxes,
   },
 ];

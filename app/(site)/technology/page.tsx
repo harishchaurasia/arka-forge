@@ -7,7 +7,7 @@ import { Cpu, Code, Boxes, Gamepad2, ArrowUpRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Our Capabilities - Arka Forge",
   description:
-    "Simulation-based training, game-based learning, and digital twin systems — built with game technology for high-stakes industries.",
+    "Simulation-based training, game-based learning, and digital twin systems - built with game technology for high-stakes industries.",
 };
 
 const technologies = [

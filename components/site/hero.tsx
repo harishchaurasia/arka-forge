@@ -27,7 +27,7 @@ export function Hero() {
       <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] rounded-full bg-primary/[0.03] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-accent/[0.02] blur-[120px] pointer-events-none" />
 
-      {/* WebGL scene — right side, large and visible on desktop */}
+      {/* WebGL scene - right side, large and visible on desktop */}
       <div className="absolute right-[-5%] top-[-5%] bottom-[-5%] w-[65%] pointer-events-none opacity-16 md:opacity-18 hidden md:block">
         {mounted && (
           <React.Suspense fallback={null}>
@@ -36,7 +36,7 @@ export function Hero() {
         )}
       </div>
 
-      {/* Content — centered on mobile */}
+      {/* Content - centered on mobile */}
       <div className="relative z-10 mx-auto w-full max-w-6xl px-5">
         <div className="max-w-2xl text-center md:text-left flex flex-col items-center md:items-start gap-6">
           <motion.div
@@ -103,8 +103,8 @@ export function Hero() {
                 rel="noopener noreferrer"
                 className="justify-center"
               >
-                <Phone className="h-4 w-4" />
                 Schedule a Call
+                <Phone className="h-4 w-4" />
               </a>
             </Button>
             <div className="flex justify-center md:justify-start gap-3">

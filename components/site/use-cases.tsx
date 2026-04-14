@@ -33,7 +33,7 @@ const items: UseCaseItem[] = [
   {
     label: "Safety & Compliance",
     description:
-      "Train for hazardous scenarios, emergency procedures, and compliance requirements — without real-world risk.",
+      "Train for hazardous scenarios, emergency procedures, and compliance requirements - without real-world risk.",
     icon: ShieldAlert,
   },
   {
@@ -78,7 +78,7 @@ export function UseCases() {
             Built for Organizations That Train for Real
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            From workforce onboarding to high-stakes operational readiness — if
+            From workforce onboarding to high-stakes operational readiness - if
             your training needs to reflect reality, we can build it.
           </p>
         </motion.div>

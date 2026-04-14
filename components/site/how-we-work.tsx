@@ -32,7 +32,7 @@ const steps: HowWeWorkStep[] = [
     step: 4,
     title: "Deploy and Refine",
     description:
-      "We ship, measure, and iterate — using performance data to improve training outcomes over time.",
+      "We ship, measure, and iterate - using performance data to improve training outcomes over time.",
   },
 ];
 

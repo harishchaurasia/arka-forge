@@ -16,21 +16,21 @@ const services: ServiceItem[] = [
   {
     title: "Simulation-Based Training",
     description:
-      "We model your real systems, workflows, and environments — then build training simulations that let people practice inside them. Faster onboarding, fewer errors, measurable readiness.",
+      "We model your real systems, workflows, and environments - then build training simulations that let people practice inside them. Faster onboarding, fewer errors, measurable readiness.",
     detailTag: "Systems · Workflows · Equipment",
     icon: Cpu,
   },
   {
     title: "Game-Based Learning Experiences",
     description:
-      "We apply game design — branching scenarios, scoring, feedback loops, and progression — to serious learning objectives. More engaging than e-learning. More effective than passive instruction.",
+      "We apply game design - branching scenarios, scoring, feedback loops, and progression - to serious learning objectives. More engaging than e-learning. More effective than passive instruction.",
     detailTag: "Scenarios · Mechanics · Analytics",
     icon: Gamepad2,
   },
   {
     title: "Immersive Training Environments",
     description:
-      "For organizations that need the highest fidelity — we build immersive environments that mirror operational reality. This includes digital twin-level simulation where system accuracy, performance analytics, and intelligent environments matter.",
+      "For organizations that need the highest fidelity - we build immersive environments that mirror operational reality. This includes digital twin-level simulation where system accuracy, performance analytics, and intelligent environments matter.",
     detailTag:
       "Digital Twins · Operational Fidelity · Intelligent Environments",
     icon: Globe,

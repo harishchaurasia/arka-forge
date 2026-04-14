@@ -15,7 +15,7 @@ const capabilities: AdvancedCapabilityItem[] = [
   {
     title: "Digital Twins",
     description:
-      "Accurate, interactive replicas of real systems — factories, equipment, workflows — that behave like the real thing.",
+      "Accurate, interactive replicas of real systems - factories, equipment, workflows - that behave like the real thing.",
     icon: GitMerge,
   },
   {
@@ -59,7 +59,7 @@ export function CapabilitiesGrid() {
           </h2>
           <p className="text-base text-muted-foreground max-w-md">
             For organizations where simulation accuracy, operational realism,
-            and intelligent environments matter — we go deeper.
+            and intelligent environments matter - we go deeper.
           </p>
         </motion.div>
 

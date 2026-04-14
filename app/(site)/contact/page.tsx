@@ -64,7 +64,7 @@ export default function ContactPage() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-[1fr,1.4fr] items-stretch">
-          {/* Left — info cards */}
+          {/* Left - info cards */}
           <div className="grid h-full min-h-0 grid-rows-4 gap-4">
             <div className="glass-card h-full p-6 flex items-start gap-4">
               <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
@@ -112,7 +112,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right — form */}
+          {/* Right - form */}
           <div className="glass-card p-6 md:p-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <input type="text" {...register("honeypot")} className="hidden" tabIndex={-1} autoComplete="off" />

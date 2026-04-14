@@ -7,12 +7,12 @@ import { Briefcase, MapPin } from "lucide-react";
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join Arka Forge — build digital twins, simulation systems, and workforce training products.",
+    "Join Arka Forge - build digital twins, simulation systems, and workforce training products.",
 };
 
 const openRoles = [
   {
-    title: "Game Developer — Unreal Engine",
+    title: "Game Developer - Unreal Engine",
     department: "Engineering",
     location: "Remote / Hybrid · India",
     description:
@@ -26,7 +26,7 @@ const openRoles = [
     ],
   },
   {
-    title: "Game Developer — Unity",
+    title: "Game Developer - Unity",
     department: "Engineering",
     location: "Remote / Hybrid · India",
     description:
@@ -44,7 +44,7 @@ const openRoles = [
     department: "Engineering",
     location: "Remote / Hybrid · India",
     description:
-      "Build the backend services, data pipelines, and web platforms that power our simulation products. You'll work across the stack — from real-time APIs and cloud infrastructure to the React/Next.js frontends our clients interact with.",
+      "Build the backend services, data pipelines, and web platforms that power our simulation products. You'll work across the stack - from real-time APIs and cloud infrastructure to the React/Next.js frontends our clients interact with.",
     requirements: [
       "2–3 years of full-stack or backend software engineering experience",
       "Proficiency in TypeScript/JavaScript and at least one backend language (Python, Go, or Rust)",
@@ -72,7 +72,7 @@ const openRoles = [
     department: "Design",
     location: "Remote · India",
     description:
-      "Define the visual identity of our products and brand. You'll create UI/UX designs for simulation interfaces, marketing collateral, pitch decks, and web assets — ensuring everything we ship looks polished, modern, and unmistakably Arka Forge.",
+      "Define the visual identity of our products and brand. You'll create UI/UX designs for simulation interfaces, marketing collateral, pitch decks, and web assets - ensuring everything we ship looks polished, modern, and unmistakably Arka Forge.",
     requirements: [
       "2–3 years of professional graphic design experience",
       "Expert-level proficiency in Figma and Adobe Creative Suite (Photoshop, Illustrator)",
@@ -86,7 +86,7 @@ const openRoles = [
     department: "Art & Animation",
     location: "Remote · India",
     description:
-      "Bring our simulations to life with high-quality character and mechanical animation. You'll rig and animate assets for real-time environments in Unreal and Unity — from human characters performing industrial tasks to machinery and equipment in digital twin scenarios.",
+      "Bring our simulations to life with high-quality character and mechanical animation. You'll rig and animate assets for real-time environments in Unreal and Unity - from human characters performing industrial tasks to machinery and equipment in digital twin scenarios.",
     requirements: [
       "2–3 years of professional 3D animation experience (Maya, Blender, or 3ds Max)",
       "Strong understanding of rigging, skinning, and skeletal animation pipelines",
@@ -100,7 +100,7 @@ const openRoles = [
 const perks = [
   "Build digital twins used by real organizations in real industries",
   "Ship products for manufacturing, energy, robotics, and defense",
-  "Autonomy and ownership — small team, big impact",
+  "Autonomy and ownership - small team, big impact",
   "Competitive compensation",
   "Remote-friendly, India-first culture",
   "Learn and grow across simulation, game-tech, XR, and enterprise software",
