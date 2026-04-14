@@ -9,11 +9,12 @@ import {
   Globe2,
   Layers3,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface WhyItem {
   title: string;
   description: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
 }
 
 const items: WhyItem[] = [
