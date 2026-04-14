@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { getWork } from "@/lib/content/loader";
 import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
   title: "Our Work - Arka Forge",
@@ -12,6 +13,7 @@ export default async function WorkPage() {
   const work = await getWork();
   return (
     <Section>
+      <BackLink href="/" label="Back to Home" />
       <div className="mb-12">
         <span
           className="text-xs font-semibold uppercase

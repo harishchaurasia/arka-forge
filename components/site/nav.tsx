@@ -13,6 +13,7 @@ const navItems = [
   { href: "/technology", label: "Services" },
   { href: "/work", label: "Work" },
   { href: "/company", label: "Company" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -71,7 +72,7 @@ export function Nav() {
               className="flex items-center gap-2 transition-opacity hover:opacity-90"
               aria-label="Arka Forge Home"
             >
-              <div className="nav-logo-rotate">
+              <div className="flex items-center justify-center">
                 <Image
                   src="/arka-forge-logo.png"
                   alt="Arka Forge logo"
@@ -144,7 +145,7 @@ export function Nav() {
             }}
             onClick={() => setDesktopOpen(false)}
           >
-            <div className="nav-logo-rotate">
+            <div className="flex items-center justify-center">
               <Image
                 src="/arka-forge-logo.png"
                 alt="Arka Forge logo"

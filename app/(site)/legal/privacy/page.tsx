@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Section } from "@/components/site/section";
-import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -10,66 +9,120 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <Section>
-      <div className="max-w-3xl mx-auto prose prose-invert">
-        <BackLink href="/" label="Back to Home" />
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Privacy Policy</h1>
-        
-        <p className="text-muted-foreground mb-6">Last updated: March 7, 2026</p>
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center">
+          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+            Legal
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Privacy Policy
+          </h1>
+          <p className="text-xs text-muted-foreground mb-12">
+            Last updated: April 2026
+          </p>
+        </div>
 
-        <h2>Information We Collect</h2>
-        <p>
-          We collect information that you provide directly to us, such as when you:
-        </p>
-        <ul>
-          <li>Fill out our contact form</li>
-          <li>Subscribe to our newsletter</li>
-          <li>Interact with our website</li>
-        </ul>
+        <div className="space-y-10 text-sm text-muted-foreground leading-relaxed">
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              Overview
+            </h2>
+            <p>
+              Arka Forge operates arkaforge.com. We take privacy seriously and
+              collect only what we need to respond to inquiries and improve the
+              site. We do not sell, rent, or share your data with third
+              parties.
+            </p>
+          </div>
 
-        <h2>How We Use Your Information</h2>
-        <p>We use the information we collect to:</p>
-        <ul>
-          <li>Respond to your inquiries</li>
-          <li>Send you updates about our services</li>
-          <li>Improve our website and services</li>
-        </ul>
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              What We Collect
+            </h2>
+            <p>
+              When you use our contact or careers form, we collect your name,
+              email address, and any information you choose to include in your
+              message. We do not collect any data automatically beyond standard
+              web analytics (page views, referral source) via Vercel Analytics.
+            </p>
+          </div>
 
-        <h2>Data Protection</h2>
-        <p>
-          We implement appropriate technical and organizational measures to protect your 
-          personal information against unauthorized access, alteration, disclosure, or destruction.
-        </p>
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              How We Use It
+            </h2>
+            <p>
+              We use your information solely to respond to your inquiry. We do
+              not add you to mailing lists or contact you for any purpose
+              unrelated to your original message.
+            </p>
+          </div>
 
-        <h2>Your Rights</h2>
-        <p>
-          You have the right to access, update, or delete your personal information. 
-          To exercise these rights, please contact us at{" "}
-          <a href="mailto:contact@arkaforge.com" className="text-primary">
-            contact@arkaforge.com
-          </a>
-          .
-        </p>
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              Data Storage
+            </h2>
+            <p>
+              Form submissions are processed via Resend and delivered to our
+              team inbox. We do not store form data in any database beyond
+              standard email retention.
+            </p>
+          </div>
 
-        <h2>Cookies</h2>
-        <p>
-          We use cookies to improve your experience on our website. You can control 
-          cookies through your browser settings.
-        </p>
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              Cookies
+            </h2>
+            <p>
+              We do not use tracking cookies. Vercel Analytics uses
+              privacy-friendly, cookieless analytics.
+            </p>
+          </div>
 
-        <h2>Changes to This Policy</h2>
-        <p>
-          We may update this privacy policy from time to time. We will notify you of 
-          any changes by posting the new policy on this page.
-        </p>
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              Your Rights
+            </h2>
+            <p>
+              You can request access to, correction of, or deletion of any
+              personal information we hold about you by emailing us at{" "}
+              <a
+                href="mailto:contact@arkaforge.com"
+                className="text-primary hover:underline"
+              >
+                contact@arkaforge.com
+              </a>
+              . We will respond within 5 business days.
+            </p>
+          </div>
 
-        <h2>Contact Us</h2>
-        <p>
-          If you have questions about this privacy policy, please contact us at{" "}
-          <a href="mailto:contact@arkaforge.com" className="text-primary">
-            contact@arkaforge.com
-          </a>
-          .
-        </p>
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              Changes
+            </h2>
+            <p>
+              If we make material changes to this policy, we will update the
+              date at the top of this page. Continued use of the site after
+              changes constitutes acceptance.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-base font-semibold text-foreground mb-3">
+              Contact
+            </h2>
+            <p>
+              Questions about this policy? Email us at{" "}
+              <a
+                href="mailto:contact@arkaforge.com"
+                className="text-primary hover:underline"
+              >
+                contact@arkaforge.com
+              </a>
+              .
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
   );

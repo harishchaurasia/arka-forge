@@ -245,6 +245,10 @@
 
 .splash-logo-img {
   animation: splash-spin 2.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .splash-logo-img.splash-logo-collapse {
@@ -258,15 +262,15 @@
 @keyframes splash-spin {
   0% {
     opacity: 0;
-    transform: scale(0.6) rotate(0deg);
+    transform: translateZ(0) scale(0.6) rotate(0deg);
   }
   12% {
     opacity: 1;
-    transform: scale(1) rotate(45deg);
+    transform: translateZ(0) scale(1) rotate(45deg);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotate(360deg);
+    transform: translateZ(0) scale(1) rotate(360deg);
   }
 }
 
@@ -336,28 +340,6 @@
 /* ═══════════════════════════════════════════════
    NAV LOGO — slow continuous rotation
    ═══════════════════════════════════════════════ */
-
-@keyframes nav-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.nav-logo-rotate {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: center center;
-  will-change: transform;
-  animation: nav-logo-spin 22s linear infinite;
-  /* GPU acceleration for Windows compatibility */
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
 
 /* ── Reduced motion ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

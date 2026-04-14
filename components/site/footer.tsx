@@ -33,9 +33,8 @@ export function Footer() {
               Arka Forge
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mb-4">
-              Simulation-based training and digital twins — built with game
-              technology, for organizations where the gap between training and
-              reality carries real cost.
+              Game technology studio - simulation-based training, digital twins,
+              and interactive systems for high-stakes industries.
             </p>
             <div className="flex gap-3">
               {socials.map((s) => {
