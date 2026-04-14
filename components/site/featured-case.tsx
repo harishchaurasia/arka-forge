@@ -53,7 +53,7 @@ export function FeaturedCase() {
           <p className="text-sm text-muted-foreground leading-relaxed mb-4 max-w-2xl">
             Game-modified simulation for nuclear glovebox workforce training at
             Los Alamos National Laboratory, in partnership with ASU School of
-            Manufacturing Systems and Networks. Built by Arka Forge founder
+            Manufacturing Systems and Networks. Built by ArkaForge founder
             Harish in his capacity as a graduate researcher at ASU.
           </p>
           <p className="text-sm text-foreground/80 mb-4">

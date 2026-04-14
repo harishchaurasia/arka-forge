@@ -70,7 +70,7 @@ export function SystemsMindset() {
           className="text-center mb-14"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-            Why Arka Forge
+            Why ArkaForge
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             A Different Kind of Training Partner

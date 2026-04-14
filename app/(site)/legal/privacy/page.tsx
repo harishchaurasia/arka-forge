@@ -3,7 +3,7 @@ import { Section } from "@/components/site/section";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for Arka Forge website.",
+  description: "Privacy policy for ArkaForge website.",
 };
 
 export default function PrivacyPage() {
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
               Overview
             </h2>
             <p>
-              Arka Forge operates arkaforge.com. We take privacy seriously and
+              ArkaForge operates arkaforge.com. We take privacy seriously and
               collect only what we need to respond to inquiries and improve the
               site. We do not sell, rent, or share your data with third
               parties.

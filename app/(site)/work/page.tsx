@@ -5,8 +5,8 @@ import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
 
 export const metadata: Metadata = {
-  title: "Our Work - Arka Forge",
-  description: "Simulation projects and training systems from Arka Forge.",
+  title: "Our Work - ArkaForge",
+  description: "Simulation projects and training systems from ArkaForge.",
 };
 
 export default async function WorkPage() {

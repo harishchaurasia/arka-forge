@@ -6,9 +6,9 @@ import { BackLink } from "@/components/site/back-link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Company - Arka Forge",
+  title: "Company - ArkaForge",
   description:
-    "Arka Forge is a game technology studio building simulation-based training systems and digital twins. Founded at the intersection of game development, applied simulation, and real-world systems.",
+    "ArkaForge is a game technology studio building simulation-based training systems and digital twins. Founded at the intersection of game development, applied simulation, and real-world systems.",
 };
 
 const values = [
@@ -37,14 +37,14 @@ export default function CompanyPage() {
         {/* Masthead */}
         <div className="text-center mb-20">
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
-            About Arka Forge
+            About ArkaForge
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] mb-8">
             We build systems that close the gap between training and reality.
           </h1>
           <div className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto space-y-4">
             <p>
-              Arka Forge is a game technology studio. We use the systems behind
+              ArkaForge is a game technology studio. We use the systems behind
               real-time 3D games to build simulation-based training environments
               and digital twins for organizations that operate in the physical
               world.
@@ -59,13 +59,13 @@ export default function CompanyPage() {
           </span>
           <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
             <p>
-              Arka Forge was founded by Harish, a Techie, Computer Science
+              ArkaForge was founded by Harish, a Techie, Computer Science
               Graduate, with a strong background in AI/ML, LLMs, Agentic AI,
               Game Development, AR/VR Systems, Full-Stack Engineering, and
               Applied Simulation.
             </p>
             <p>
-              Before founding Arka Forge, Harish worked on the design and
+              Before founding ArkaForge, Harish worked on the design and
               development of a nuclear glovebox training simulator at Los Alamos
               National Laboratory - as a researcher at ASU&apos;s School of
               Manufacturing Systems and Networks. Interactive environment,

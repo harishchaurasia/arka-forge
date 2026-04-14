@@ -26,7 +26,7 @@ export function CTABand() {
             Let&apos;s Talk
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
-            Build with <span className="gradient-text">Arka Forge</span>
+            Build with <span className="gradient-text">ArkaForge</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
             Simulation-based training, game-based learning, or a digital twin of

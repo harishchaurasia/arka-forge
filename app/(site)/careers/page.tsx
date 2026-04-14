@@ -4,9 +4,9 @@ import { BackLink } from "@/components/site/back-link";
 import { CareersForm } from "@/components/site/careers-form";
 
 export const metadata: Metadata = {
-  title: "Careers - Arka Forge",
+  title: "Careers - ArkaForge",
   description:
-    "Work with Arka Forge - game technology, simulation, and digital twins.",
+    "Work with ArkaForge - game technology, simulation, and digital twins.",
 };
 
 export default function CareersPage() {

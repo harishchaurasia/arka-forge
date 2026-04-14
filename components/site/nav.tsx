@@ -70,12 +70,12 @@ export function Nav() {
             <Link
               href="/"
               className="flex items-center gap-2 transition-opacity hover:opacity-90"
-              aria-label="Arka Forge Home"
+              aria-label="ArkaForge Home"
             >
               <div className="flex items-center justify-center">
                 <Image
                   src="/arka-forge-logo.png"
-                  alt="Arka Forge logo"
+                  alt="ArkaForge logo"
                   width={36}
                   height={36}
                   className="h-9 w-9 rounded-full object-contain"
@@ -131,7 +131,7 @@ export function Nav() {
           {/* Logo - centered when closed, slides to the left when open */}
           <Link
             href="/"
-            aria-label="Arka Forge Home"
+            aria-label="ArkaForge Home"
             className={cn(
               "absolute top-1/2 flex items-center gap-2 transition-[left,transform] hover:opacity-90",
             )}
@@ -148,14 +148,14 @@ export function Nav() {
             <div className="flex items-center justify-center">
               <Image
                 src="/arka-forge-logo.png"
-                alt="Arka Forge logo"
+                alt="ArkaForge logo"
                 width={36}
                 height={36}
                 className="h-9 w-9 rounded-full object-contain"
               />
             </div>
             <span className="pt-1 text-2xl font-bold text-primary font-display leading-none">
-              Arka Forge
+              ArkaForge
             </span>
           </Link>
 

@@ -5,7 +5,7 @@ import { BackLink } from "@/components/site/back-link";
 import { Cpu, Code, Boxes, Gamepad2, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Our Capabilities - Arka Forge",
+  title: "Our Capabilities - ArkaForge",
   description:
     "Simulation-based training, game-based learning, and digital twin systems - built with game technology for high-stakes industries.",
 };

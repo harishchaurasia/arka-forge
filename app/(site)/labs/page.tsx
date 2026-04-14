@@ -14,7 +14,7 @@ import { BackLink } from "@/components/site/back-link";
 export const metadata: Metadata = {
   title: "Labs",
   description:
-    "Research, experiments, and technical deep-dives from Arka Forge.",
+    "Research, experiments, and technical deep-dives from ArkaForge.",
 };
 
 export default async function LabsPage() {

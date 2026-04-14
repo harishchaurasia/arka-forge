@@ -16,7 +16,7 @@ export function generateSiteMetadata(
       title,
       description,
       url,
-      siteName: "Arka Forge",
+      siteName: "ArkaForge",
       type: "website",
       locale: "en_US",
     },
@@ -35,7 +35,7 @@ export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Arka Forge",
+    name: "ArkaForge",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com",
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
     description: "Digital twin company building interactive replicas of real-world systems for workforce training and operations",
@@ -66,11 +66,11 @@ export async function generateArticleSchema(
     datePublished: date,
     author: {
       "@type": "Organization",
-      name: "Arka Forge",
+      name: "ArkaForge",
     },
     publisher: {
       "@type": "Organization",
-      name: "Arka Forge",
+      name: "ArkaForge",
       logo: {
         "@type": "ImageObject",
         url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,

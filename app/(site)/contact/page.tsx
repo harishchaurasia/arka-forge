@@ -93,7 +93,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-sm font-semibold mb-1">LinkedIn</h3>
                 <a href="https://www.linkedin.com/company/arkaforge" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-                  Arka Forge on LinkedIn
+                  ArkaForge on LinkedIn
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </div>

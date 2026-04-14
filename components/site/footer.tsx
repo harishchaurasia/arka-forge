@@ -30,7 +30,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-base font-semibold tracking-tight mb-2">
-              Arka Forge
+              ArkaForge
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mb-4">
               Game technology studio - simulation-based training, digital twins,
@@ -101,7 +101,7 @@ export function Footer() {
             className="text-xs text-muted-foreground text-center"
             suppressHydrationWarning
           >
-            &copy; {new Date().getFullYear()} Arka Forge. All rights reserved.
+            &copy; {new Date().getFullYear()} ArkaForge. All rights reserved.
           </p>
         </div>
       </div>

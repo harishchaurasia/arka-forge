@@ -28,7 +28,7 @@ export function VisionSection() {
             </span>
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
-            Today, Arka Forge is focused on winning and delivering high-value
+            Today, ArkaForge is focused on winning and delivering high-value
             simulation and learning work. Over time, we&apos;re building toward
             deeper digital twin systems, intelligent environments, and broader
             interactive products that close the gap between training and

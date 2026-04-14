@@ -64,7 +64,7 @@ export function SplashScreen() {
             phase === "collapse" ? "splash-text-collapse" : ""
           }`}
         >
-          Arka Forge
+          ArkaForge
         </span>
       </div>
     </div>

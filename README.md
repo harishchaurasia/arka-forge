@@ -1,7 +1,7 @@
-# Arka Forge — Studio Website (Next.js + React)
+# ArkaForge — Studio Website (Next.js + React)
 
 You are an expert product engineer + award-level interactive web developer.
-Build a fully functional, production-ready marketing website for a premium game-tech / simulation studio named **Arka Forge**.
+Build a fully functional, production-ready marketing website for a premium game-tech / simulation studio named **ArkaForge**.
 
 ## Non-negotiables
 
@@ -25,7 +25,7 @@ Build a fully functional, production-ready marketing website for a premium game-
 
 ## Brand & vibe
 
-Arka Forge = forging systems, engines, simulations.
+ArkaForge = forging systems, engines, simulations.
 Premium, engineering-driven, “deep-tech,” not a generic art studio.
 Visual metaphor: “cosmic forge” — orbital arcs + precise instrumentation + subtle heat/glow accents.
 Tone: confident, minimal, technical. No cringe gamer copy.
@@ -70,7 +70,7 @@ Home page sections (build these for real, no lorem ipsum):
 3. “Systems mindset”: short manifesto with 3 principles (performance, iteration speed, correctness)
 4. Featured Labs posts (latest 3)
 5. Featured Work (latest 2; allow “Prototype” tags)
-6. CTA band: “Build with Arka Forge” + contact CTA
+6. CTA band: “Build with ArkaForge” + contact CTA
 
 ## Content system (MDX)
 
@@ -401,4 +401,4 @@ After deployment:
 
 ## License
 
-All rights reserved. © 2024 Arka Forge
+All rights reserved. © 2024 ArkaForge

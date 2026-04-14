@@ -7,7 +7,7 @@ import { Briefcase, MapPin } from "lucide-react";
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join Arka Forge - build digital twins, simulation systems, and workforce training products.",
+    "Join ArkaForge - build digital twins, simulation systems, and workforce training products.",
 };
 
 const openRoles = [
@@ -72,7 +72,7 @@ const openRoles = [
     department: "Design",
     location: "Remote · India",
     description:
-      "Define the visual identity of our products and brand. You'll create UI/UX designs for simulation interfaces, marketing collateral, pitch decks, and web assets - ensuring everything we ship looks polished, modern, and unmistakably Arka Forge.",
+      "Define the visual identity of our products and brand. You'll create UI/UX designs for simulation interfaces, marketing collateral, pitch decks, and web assets - ensuring everything we ship looks polished, modern, and unmistakably ArkaForge.",
     requirements: [
       "2–3 years of professional graphic design experience",
       "Expert-level proficiency in Figma and Adobe Creative Suite (Photoshop, Illustrator)",
@@ -151,7 +151,7 @@ export default function CareersPage() {
                 </div>
                 <Button asChild size="sm">
                   <a
-                    href={`mailto:careers@arkaforge.com?subject=Application - ${role.title} - Arka Forge`}
+                    href={`mailto:careers@arkaforge.com?subject=Application - ${role.title} - ArkaForge`}
                   >
                     Apply
                   </a>
