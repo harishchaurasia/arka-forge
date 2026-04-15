@@ -199,7 +199,7 @@ function OrbitalRings() {
             chromaticAberration={0.02}
             backside
             samples={2}
-            resolution={512}
+            resolution={256}
           />
         </mesh>
       </group>

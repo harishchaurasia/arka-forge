@@ -10,10 +10,16 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.97]",
+        solid:
+          "bg-foreground text-background hover:bg-foreground/90 active:scale-[0.98] shadow-none",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-white/[0.1] bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/[0.16] text-foreground shadow-[inset_0_0.5px_0_0_rgba(255,255,255,0.06)]",
+        glass:
+          "border border-white/[0.16] bg-white/[0.06] text-foreground backdrop-blur-md hover:bg-white/[0.1] hover:border-white/[0.24] shadow-none",
+        "glass-subtle":
+          "border border-white/[0.1] bg-white/[0.03] text-foreground/90 backdrop-blur-sm hover:bg-white/[0.06] hover:text-foreground shadow-none",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:

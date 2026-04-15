@@ -58,7 +58,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
           >
-            <span className="inline-block mb-2 px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary/90 rounded-full glass-pill font-display">
+            <span className="inline-block mb-2 px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
               Digital Twins · Game Based Learning · Workforce Training
             </span>
           </motion.div>

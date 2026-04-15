@@ -33,7 +33,12 @@ export function CTABand() {
             your systems - we want to hear about it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="outline" className="glow px-8">
+            <Button
+              asChild
+              size="lg"
+              variant="glass-subtle"
+              className="glow px-8"
+            >
               <Link href="/contact">
                 Get In Touch <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
