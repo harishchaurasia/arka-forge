@@ -260,9 +260,25 @@ export default function Galaxy({
 
     const mesh = new Mesh(gl, { geometry, program });
     let animateId;
+    let isTabVisible = document.visibilityState === 'visible';
+    let isInView = true;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInView = entry?.isIntersecting ?? true;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(ctn);
+
+    function handleVisibilityChange() {
+      isTabVisible = document.visibilityState === 'visible';
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     function update(t) {
       animateId = requestAnimationFrame(update);
+      if (!isTabVisible || !isInView) return;
       if (!disableAnimation) {
         program.uniforms.uTime.value = t * 0.001;
         program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
@@ -303,6 +319,8 @@ export default function Galaxy({
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);

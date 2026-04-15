@@ -173,10 +173,14 @@ function FireCore() {
 }
 
 /* ── Orbital Glass Rings (X / Y / Z axes) ───── */
-function OrbitalRings() {
+function OrbitalRings({ lowPower }: { lowPower: boolean }) {
   const xOrbit = React.useRef<THREE.Group>(null);
   const yOrbit = React.useRef<THREE.Group>(null);
   const zOrbit = React.useRef<THREE.Group>(null);
+  const radialSegments = lowPower ? 16 : 24;
+  const tubularSegments = lowPower ? 40 : 64;
+  const samples = lowPower ? 1 : 2;
+  const resolution = lowPower ? 128 : 256;
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
@@ -189,7 +193,7 @@ function OrbitalRings() {
     <group>
       <group ref={xOrbit}>
         <mesh rotation={[0, Math.PI / 2, 0]}>
-          <torusGeometry args={[2.7, 0.18, 24, 64]} />
+          <torusGeometry args={[2.7, 0.18, radialSegments, tubularSegments]} />
           <MeshTransmissionMaterial
             color="#ffffff"
             thickness={0.2}
@@ -198,15 +202,15 @@ function OrbitalRings() {
             ior={1.3}
             chromaticAberration={0.02}
             backside
-            samples={2}
-            resolution={256}
+            samples={samples}
+            resolution={resolution}
           />
         </mesh>
       </group>
 
       <group ref={yOrbit}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[2.2, 0.2, 24, 64]} />
+          <torusGeometry args={[2.2, 0.2, radialSegments, tubularSegments]} />
           <MeshTransmissionMaterial
             color="#ffffff"
             thickness={0.2}
@@ -215,15 +219,15 @@ function OrbitalRings() {
             ior={1.3}
             chromaticAberration={0.02}
             backside
-            samples={2}
-            resolution={256}
+            samples={samples}
+            resolution={resolution}
           />
         </mesh>
       </group>
 
       <group ref={zOrbit}>
         <mesh>
-          <torusGeometry args={[1.4, 0.2, 24, 64]} />
+          <torusGeometry args={[1.4, 0.2, radialSegments, tubularSegments]} />
           <MeshTransmissionMaterial
             color="#1e293b"
             thickness={0.2}
@@ -232,8 +236,8 @@ function OrbitalRings() {
             ior={1.3}
             chromaticAberration={0.02}
             backside
-            samples={2}
-            resolution={256}
+            samples={samples}
+            resolution={resolution}
           />
         </mesh>
       </group>
@@ -283,7 +287,7 @@ function StarField({ count = 600 }: { count?: number }) {
 }
 
 /* ── Full scene with parallax ────────────────── */
-function SceneContent() {
+function SceneContent({ lowPower }: { lowPower: boolean }) {
   const orreryRef = React.useRef<THREE.Group>(null);
   usePointerParallax();
 
@@ -308,14 +312,14 @@ function SceneContent() {
       />
 
       <group ref={orreryRef}>
-        <StarField count={400} />
+        <StarField count={lowPower ? 160 : 400} />
         <group position={[0, -0.5, 0]}>
           <FireCore />
-          <OrbitalRings />
+          <OrbitalRings lowPower={lowPower} />
         </group>
       </group>
 
-      <Environment files="/potsdamer_platz_1k.hdr" />
+      {!lowPower && <Environment files="/potsdamer_platz_1k.hdr" />}
     </>
   );
 }
@@ -324,6 +328,8 @@ export function HeroScene() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [ready, setReady] = React.useState(false);
   const [visible, setVisible] = React.useState(true);
+  const [tabVisible, setTabVisible] = React.useState(true);
+  const [lowPower, setLowPower] = React.useState(false);
 
   React.useEffect(() => {
     const canvas = document.createElement("canvas");
@@ -345,7 +351,30 @@ export function HeroScene() {
     return () => observer.disconnect();
   }, []);
 
+  React.useEffect(() => {
+    const onVisibilityChange = () => {
+      setTabVisible(document.visibilityState === "visible");
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    onVisibilityChange();
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
+  React.useEffect(() => {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const isSmallViewport = window.innerWidth < 1024;
+    const lowConcurrency = (navigator.hardwareConcurrency ?? 8) <= 4;
+    const lowMemory =
+      "deviceMemory" in navigator &&
+      Number((navigator as Navigator & { deviceMemory?: number }).deviceMemory) <= 4;
+    setLowPower(reducedMotion || isSmallViewport || lowConcurrency || lowMemory);
+  }, []);
+
   if (!ready) return null;
+
+  const active = visible && tabVisible;
 
   return (
     <div ref={containerRef} className="absolute inset-0 w-full h-full">
@@ -355,13 +384,13 @@ export function HeroScene() {
         gl={{
           antialias: false,
           alpha: true,
-          powerPreference: "high-performance",
+          powerPreference: lowPower ? "default" : "high-performance",
         }}
-        dpr={[1, 1.5]}
-        frameloop={visible ? "always" : "never"}
+        dpr={lowPower ? [0.8, 1.1] : [1, 1.5]}
+        frameloop={active ? "always" : "never"}
         performance={{ min: 0.5 }}
       >
-        <SceneContent />
+        <SceneContent lowPower={lowPower} />
       </Canvas>
     </div>
   );

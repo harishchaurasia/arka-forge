@@ -9,6 +9,7 @@ export function SplashScreen() {
   const [phase, setPhase] = React.useState<"spin" | "collapse" | "done">(
     "spin",
   );
+
   React.useEffect(() => {
     const spinTimer = setTimeout(
       () => setPhase("collapse"),
