@@ -199,10 +199,10 @@ function OrbitalRings({ lowPower }: { lowPower: boolean }) {
   const xOrbit = React.useRef<THREE.Group>(null);
   const yOrbit = React.useRef<THREE.Group>(null);
   const zOrbit = React.useRef<THREE.Group>(null);
-  const radialSegments = lowPower ? 16 : 24;
-  const tubularSegments = lowPower ? 40 : 64;
-  const samples = lowPower ? 1 : 2;
-  const resolution = lowPower ? 128 : 256;
+  const radialSegments = lowPower ? 20 : 24;
+  const tubularSegments = lowPower ? 56 : 64;
+  const samples = 2;
+  const resolution = 256;
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
@@ -403,7 +403,7 @@ export function HeroScene() {
           alpha: true,
           powerPreference: lowPower ? "default" : "high-performance",
         }}
-        dpr={lowPower ? [0.8, 1.1] : [1, 1.5]}
+        dpr={[1, 1.5]}
         frameloop={active ? "always" : "never"}
         performance={{ min: 0.5 }}
       >
