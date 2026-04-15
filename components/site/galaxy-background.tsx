@@ -3,17 +3,32 @@
 import * as React from "react";
 import Galaxy from "@/components/Galaxy";
 
+type NetworkInformation = {
+  effectiveType?: string;
+};
+
+function isConstrainedClient() {
+  const params = new URLSearchParams(window.location.search);
+  const forcedConstrained = params.get("constrained") === "1";
+  if (forcedConstrained) return true;
+
+  const lowConcurrency = (navigator.hardwareConcurrency ?? 8) <= 4;
+  const lowMemory =
+    "deviceMemory" in navigator &&
+    Number((navigator as Navigator & { deviceMemory?: number }).deviceMemory) <= 4;
+  const connection = (navigator as Navigator & { connection?: NetworkInformation })
+    .connection;
+  const slowNetwork =
+    connection?.effectiveType === "slow-2g" || connection?.effectiveType === "2g";
+
+  return lowConcurrency || lowMemory || slowNetwork;
+}
+
 export function GalaxyBackground() {
   const [enabled, setEnabled] = React.useState(false);
 
   React.useEffect(() => {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const isSmallViewport = window.innerWidth < 1024;
-    const lowConcurrency = (navigator.hardwareConcurrency ?? 8) <= 4;
-
-    setEnabled(!reducedMotion && !isSmallViewport && !lowConcurrency);
+    setEnabled(!isConstrainedClient());
   }, []);
 
   if (!enabled) return null;

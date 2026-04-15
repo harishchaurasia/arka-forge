@@ -5,6 +5,28 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { MeshTransmissionMaterial, Environment } from "@react-three/drei";
 
+type NetworkInformation = {
+  effectiveType?: string;
+};
+
+function getClientRenderMode() {
+  const params = new URLSearchParams(window.location.search);
+  const forcedConstrained = params.get("constrained") === "1";
+  const lowConcurrency = (navigator.hardwareConcurrency ?? 8) <= 4;
+  const lowMemory =
+    "deviceMemory" in navigator &&
+    Number((navigator as Navigator & { deviceMemory?: number }).deviceMemory) <= 4;
+  const connection = (navigator as Navigator & { connection?: NetworkInformation })
+    .connection;
+  const slowNetwork =
+    connection?.effectiveType === "slow-2g" || connection?.effectiveType === "2g";
+
+  return {
+    constrained: forcedConstrained || lowConcurrency || lowMemory || slowNetwork,
+    forceDisableWebgl: forcedConstrained,
+  };
+}
+
 /* ── Shared mouse state (avoid re-renders) ───── */
 const pointer = { x: 0, y: 0 };
 
@@ -229,10 +251,10 @@ function OrbitalRings({ lowPower }: { lowPower: boolean }) {
         <mesh>
           <torusGeometry args={[1.4, 0.2, radialSegments, tubularSegments]} />
           <MeshTransmissionMaterial
-            color="#1e293b"
+            color="#ffffff"
             thickness={0.2}
             roughness={0}
-            transmission={0.95}
+            transmission={1}
             ior={1.3}
             chromaticAberration={0.02}
             backside
@@ -319,7 +341,7 @@ function SceneContent({ lowPower }: { lowPower: boolean }) {
         </group>
       </group>
 
-      {!lowPower && <Environment files="/potsdamer_platz_1k.hdr" />}
+      <Environment files="/potsdamer_platz_1k.hdr" />
     </>
   );
 }
@@ -330,6 +352,7 @@ export function HeroScene() {
   const [visible, setVisible] = React.useState(true);
   const [tabVisible, setTabVisible] = React.useState(true);
   const [lowPower, setLowPower] = React.useState(false);
+  const [disableWebgl, setDisableWebgl] = React.useState(false);
 
   React.useEffect(() => {
     const canvas = document.createElement("canvas");
@@ -361,18 +384,12 @@ export function HeroScene() {
   }, []);
 
   React.useEffect(() => {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const isSmallViewport = window.innerWidth < 1024;
-    const lowConcurrency = (navigator.hardwareConcurrency ?? 8) <= 4;
-    const lowMemory =
-      "deviceMemory" in navigator &&
-      Number((navigator as Navigator & { deviceMemory?: number }).deviceMemory) <= 4;
-    setLowPower(reducedMotion || isSmallViewport || lowConcurrency || lowMemory);
+    const mode = getClientRenderMode();
+    setLowPower(mode.constrained);
+    setDisableWebgl(mode.forceDisableWebgl);
   }, []);
 
-  if (!ready) return null;
+  if (!ready || disableWebgl) return null;
 
   const active = visible && tabVisible;
 
