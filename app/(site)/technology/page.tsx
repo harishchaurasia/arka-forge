@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
-import { Cpu, Code, Boxes, Gamepad2, ArrowUpRight } from "lucide-react";
+import { Cpu, Code, Boxes, Gamepad2, Joystick, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Our Capabilities - ArkaForge",
@@ -11,6 +11,13 @@ export const metadata: Metadata = {
 };
 
 const technologies = [
+  {
+    title: "Game Development",
+    description:
+      "Full-cycle game and interactive experience development for studios and publishers - Unreal Engine 5, Unity, art, systems, and end-to-end delivery.",
+    href: "/technology/gamedev",
+    icon: Joystick,
+  },
   {
     title: "Game-Based Learning",
     description:
@@ -53,12 +60,12 @@ export default function TechnologyPage() {
           Technology
         </h1>
         <p className="text-base text-muted-foreground max-w-xl">
-          Simulation, game-based learning, and digital twins for Enterprise
-          Workforce, Robotics, Manufacturing, Energy, Defense, and Research.
+          Game development, simulation, game-based learning, and digital twins
+          for studios, publishers, manufacturing, energy, defense, and research.
         </p>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {technologies.map((tech) => {
           const Icon = tech.icon;
           return (

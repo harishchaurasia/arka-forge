@@ -39,15 +39,17 @@ export default function CompanyPage() {
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
             About ArkaForge
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] mb-8">
-            We build systems that close the gap between training and reality.
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+            Built at the intersection of games, simulation, and real-world
+            systems.
           </h1>
           <div className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto space-y-4">
             <p>
-              ArkaForge is a game technology studio. We use the systems behind
-              real-time 3D games to build simulation-based training environments
-              and digital twins for organizations that operate in the physical
-              world.
+              Arka Forge is a game technology studio. We co-develop games for
+              studios and publishers, build simulation-based training systems
+              for high-stakes industries, and create digital twins for
+              organizations that need to understand their systems before
+              operating them.
             </p>
           </div>
         </div>
@@ -72,6 +74,12 @@ export default function CompanyPage() {
               custom game logic, task sequence tracking, real-time performance
               assessment. That work is the technical foundation this company is
               built on.
+            </p>
+            <p>
+              Arka Forge also partners with game studios and publishers as a
+              co-development partner - bringing full-cycle Unreal Engine 5 and
+              Unity development capability to teams that need high-quality
+              execution without growing their own headcount.
             </p>
           </div>
         </div>

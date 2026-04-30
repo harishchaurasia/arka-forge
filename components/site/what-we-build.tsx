@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Boxes, Cpu, Gamepad2, GitMerge } from "lucide-react";
+import { Cpu, Gamepad2, GitMerge, Joystick } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface WhatWeBuildItem {
@@ -12,9 +12,15 @@ interface WhatWeBuildItem {
 
 const items: WhatWeBuildItem[] = [
   {
+    title: "Game Development",
+    description:
+      "Full-cycle game and interactive experience development for studios and publishers who need a high-quality execution partner. Unreal Engine 5, Unity, art, systems, and delivery.",
+    icon: Joystick,
+  },
+  {
     title: "Simulation & Training",
     description:
-      "Workers practice inside digital environments before touching real equipment. Faster onboarding, zero risk, unlimited repetitions.",
+      "Workers practice inside digital environments - desktop, web, mobile, and VR/AR - before touching real equipment. Faster onboarding, zero risk, unlimited repetitions.",
     icon: Cpu,
   },
   {
@@ -28,12 +34,6 @@ const items: WhatWeBuildItem[] = [
     description:
       "Interactive replicas of real systems and workflows that behave like the real thing. Train and test before the stakes are real.",
     icon: GitMerge,
-  },
-  {
-    title: "XR & Spatial",
-    description:
-      "Training delivered in VR, AR, and mixed reality - across headsets, desktop, web, and mobile.",
-    icon: Boxes,
   },
 ];
 
@@ -59,8 +59,9 @@ export function WhatWeBuild() {
             What We Deliver
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
-            Simulation, game-based learning, and digital twins for
-            manufacturing, energy, defense, and research.
+            Game development, simulation, game-based learning, and digital twins
+            - built with game technology for studios, publishers, and
+            high-stakes industries.
           </p>
         </motion.div>
 

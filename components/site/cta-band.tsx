@@ -29,8 +29,9 @@ export function CTABand() {
             Build with <span className="gradient-text">ArkaForge</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-            Simulation-based training, game-based learning, or a digital twin of
-            your systems - we want to hear about it.
+            Simulation-based training, game-based learning, a digital twin of
+            your systems, or a co-development partner for your next title - if
+            the problem is real, we want to hear about it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button

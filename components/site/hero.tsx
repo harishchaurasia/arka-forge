@@ -84,7 +84,8 @@ export function Hero() {
               className="hidden md:block"
             >
               <span className="inline-block mb-2 px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
-                Digital Twins · Game Based Learning · Workforce Training
+                Game Dev · Digital Twins · Game-Based Learning · Workforce
+                Training
               </span>
             </motion.div>
           )}
@@ -109,7 +110,7 @@ export function Hero() {
             className={hideHeroVisual ? "" : "md:hidden"}
           >
             <span className="inline-block px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
-              Digital Twins · Game Based Learning · Workforce Training
+              Game Dev · Simulation · Digital Twins · Workforce Training
             </span>
           </motion.div>
 
@@ -119,8 +120,8 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We build simulation-based training systems and digital twins -
-            interactive environments where people practice real procedures
+            We build games, simulation-based training systems, and digital twins
+            - interactive environments where people practice real procedures
             before touching real equipment. Delivered across desktop, VR/AR, and
             web.
           </motion.p>
