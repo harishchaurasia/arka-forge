@@ -20,7 +20,7 @@ export default function GameDevPage() {
         <p className="text-base text-muted-foreground mb-12">
           Full-cycle game and interactive experience development for studios
           and publishers who need a high-quality execution partner. We
-          co-develop - you own the IP.
+          co-develop as a partner, or build and own original titles.
         </p>
         <div className="space-y-10 text-sm text-muted-foreground leading-relaxed">
           <div>
