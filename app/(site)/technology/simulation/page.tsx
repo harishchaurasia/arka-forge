@@ -12,23 +12,17 @@ export default function SimulationPage() {
   return (
     <Section>
       <div className="max-w-3xl">
-        <BackLink href="/technology" label="Back to Capabilities" />
-        <span
-          className="text-xs font-semibold uppercase 
-        tracking-widest text-primary/70 mb-3 block"
-        >
-          Capabilities
+        <BackLink href="/technology/digitaltwins" label="Back to Digital Twins" />
+        <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+          A Capability Under Digital Twins
         </span>
-        <h1
-          className="text-3xl md:text-4xl font-bold 
-        tracking-tight mb-4"
-        >
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
           Simulation & Training
         </h1>
         <p className="text-base text-muted-foreground mb-12">
           Interactive environments where people practice real procedures before
-          touching real equipment. Faster onboarding, zero risk, measurable
-          readiness.
+          touching real equipment. The training surface that sits on top of a
+          digital twin - faster onboarding, zero risk, measurable readiness.
         </p>
         <div
           className="space-y-10 text-sm 

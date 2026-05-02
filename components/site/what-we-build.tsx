@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cpu, Gamepad2, GitMerge, Joystick } from "lucide-react";
+import { Cpu, Gamepad2, Joystick, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface WhatWeBuildItem {
@@ -12,28 +12,28 @@ interface WhatWeBuildItem {
 
 const items: WhatWeBuildItem[] = [
   {
-    title: "Game Development",
+    title: "Features & Systems",
     description:
-      "Full-cycle game and interactive experience development for studios and publishers who need a high-quality execution partner. Unreal Engine 5, Unity, art, systems, and delivery.",
-    icon: Joystick,
-  },
-  {
-    title: "Simulation & Training",
-    description:
-      "Workers practice inside digital environments - desktop, web, mobile, and VR/AR - before touching real equipment. Faster onboarding, zero risk, unlimited repetitions.",
+      "Embed into your UE5 or Unity pipeline as a senior co-dev partner. Combat, AI, netcode, tools, UI - scoped sprints that ship to your quality bar.",
     icon: Cpu,
   },
   {
-    title: "Game-Based Learning",
+    title: "Prototypes & Vertical Slices",
     description:
-      "Scoring, branching scenarios, and performance analytics layered onto training to drive engagement and measure readiness.",
-    icon: Gamepad2,
+      "Fixed-bid playable builds that take a pitch deck to a demo. For studios validating ideas, indies pitching publishers, or non-game teams entering interactive.",
+    icon: Joystick,
   },
   {
-    title: "Digital Twins",
+    title: "AI & Agentic Systems",
     description:
-      "Interactive replicas of real systems and workflows that behave like the real thing. Train and test before the stakes are real.",
-    icon: GitMerge,
+      "LLM-driven NPCs, agentic behaviors, generative content pipelines. Built by an AI/ML engineer - this is where ArkaForge is most defensible.",
+    icon: Sparkles,
+  },
+  {
+    title: "Serious Games & Gamification",
+    description:
+      "Game design applied to non-game products - scoring, branching scenarios, progression. The bridge between entertainment and operational training.",
+    icon: Gamepad2,
   },
 ];
 
@@ -53,15 +53,15 @@ export function WhatWeBuild() {
           className="mb-14"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-            Capabilities
+            Game Co-Development
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            What We Deliver
+            End-to-End UE5 &amp; Unity
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
-            Game development, simulation, game-based learning, and digital twins
-            - built with game technology for studios, publishers, and
-            high-stakes industries.
+            Concept to ship, or any slice of it. We embed into your pipeline as
+            a senior co-development partner - features, systems, AI, prototypes,
+            serious games. Scoped to fit your roadmap.
           </p>
         </motion.div>
 

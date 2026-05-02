@@ -12,16 +12,17 @@ export default function LearningPage() {
   return (
     <Section>
       <div className="max-w-3xl">
-        <BackLink href="/technology" label="Back to Capabilities" />
+        <BackLink href="/technology/gamedev" label="Back to Game Co-Development" />
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-          Capabilities
+          A Capability Under Game Co-Development
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
           Game-Based Learning
         </h1>
         <p className="text-base text-muted-foreground mb-12">
           Game design applied to serious learning objectives. Not gamification
-          as decoration. As methodology.
+          as decoration - as methodology. One of the four shapes of game
+          co-development we ship.
         </p>
 
         <div className="space-y-10 text-sm text-muted-foreground leading-relaxed">

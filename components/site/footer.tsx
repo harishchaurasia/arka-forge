@@ -33,9 +33,8 @@ export function Footer() {
               ArkaForge
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mb-4">
-              Game technology studio - simulation-based training, digital
-              twins, game-based learning, and co-development for studios and
-              publishers.
+              Game co-development studio - end-to-end UE5 and Unity for studios
+              and publishers, plus digital twins for high-stakes operators.
             </p>
             <div className="flex gap-3">
               {socials.map((s) => {

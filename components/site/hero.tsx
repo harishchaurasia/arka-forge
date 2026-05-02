@@ -84,8 +84,7 @@ export function Hero() {
               className="hidden md:block"
             >
               <span className="inline-block mb-2 px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
-                Game Dev · Digital Twins · Game-Based Learning · Workforce
-                Training
+                Game Co-Dev · UE5 / Unity · AI Systems · Digital Twins
               </span>
             </motion.div>
           )}
@@ -110,7 +109,7 @@ export function Hero() {
             className={hideHeroVisual ? "" : "md:hidden"}
           >
             <span className="inline-block px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
-              Game Dev · Simulation · Digital Twins · Workforce Training
+              Game Co-Dev · UE5 / Unity · AI Systems · Digital Twins
             </span>
           </motion.div>
 
@@ -120,10 +119,10 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.16, ease }}
             className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
           >
-            We build games, simulation-based training systems, and digital twins
-            - interactive environments where people practice real procedures
-            before touching real equipment. Delivered across desktop, VR/AR, and
-            web.
+            Game co-development studio. End-to-end UE5 and Unity development
+            for studios and publishers - features, systems, AI, vertical slices,
+            serious games. Built by engineers who also ship digital twins for
+            high-stakes industries.
           </motion.p>
 
           <motion.div

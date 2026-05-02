@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Company - ArkaForge",
   description:
-    "ArkaForge is a game technology studio building simulation-based training systems and digital twins. Founded at the intersection of game development, applied simulation, and real-world systems.",
+    "ArkaForge is a game co-development studio with serious technical depth - end-to-end UE5 and Unity for studios and publishers, plus digital twins for high-stakes industries.",
 };
 
 const values = [
@@ -40,16 +40,15 @@ export default function CompanyPage() {
             About ArkaForge
           </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            Built at the intersection of games, simulation, and real-world
-            systems.
+            A game co-development studio with serious technical depth.
           </h1>
           <div className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto space-y-4">
             <p>
-              Arka Forge is a game technology studio. We co-develop games for
-              studios and publishers, build simulation-based training systems
-              for high-stakes industries, and create digital twins for
-              organizations that need to understand their systems before
-              operating them.
+              ArkaForge is a game co-development studio. We embed into studios
+              and publishers as a senior UE5 and Unity partner - features,
+              systems, AI, prototypes, and serious games. The same engine
+              depth, applied to digital twins, is what we ship for high-stakes
+              operators in nuclear, manufacturing, energy, and defense.
             </p>
           </div>
         </div>
