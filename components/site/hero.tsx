@@ -109,7 +109,7 @@ export function Hero() {
             className={hideHeroVisual ? "" : "md:hidden"}
           >
             <span className="inline-block px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
-              Game Co-Dev · UE5 / Unity · AI Systems · Digital Twins
+              Game Engineering &amp; Technology Studio
             </span>
           </motion.div>
 
