@@ -1,14 +1,5 @@
 import { z } from "zod";
 
-export const labFrontmatterSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  date: z.string(),
-  tags: z.array(z.string()).default([]),
-  published: z.boolean().default(true),
-  hero: z.string().optional(),
-});
-
 export const workFrontmatterSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -20,5 +11,4 @@ export const workFrontmatterSchema = z.object({
   metrics: z.record(z.string(), z.union([z.string(), z.number()])).optional(),
 });
 
-export type LabFrontmatter = z.infer<typeof labFrontmatterSchema>;
 export type WorkFrontmatter = z.infer<typeof workFrontmatterSchema>;

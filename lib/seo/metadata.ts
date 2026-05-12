@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { getLabs, getWork } from "@/lib/content/loader";
 
 export function generateSiteMetadata(
   title: string,
