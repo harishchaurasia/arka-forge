@@ -88,10 +88,17 @@ export default function InteractiveProductsPage() {
             </h2>
             <ul className="space-y-2">
               <li>- Companies whose product would land harder as an experience</li>
+              <li>- Manufacturers, energy, and industrial operators who need operator training, safety simulations, or operational visualization</li>
               <li>- Teams replacing passive e-learning with something interactive</li>
               <li>- Technical onboarding for complex systems and procedures</li>
               <li>- Anyone who needs users to do, not just read</li>
             </ul>
+            <p className="mt-4">
+              The industrial work is also where ArkaForge is headed long-term —
+              simulation and digital twins for high-consequence operations. An
+              interactive training module today is the start of that
+              conversation.
+            </p>
           </div>
 
           <div>

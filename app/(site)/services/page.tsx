@@ -67,14 +67,15 @@ export default function ServicesPage() {
 
       <div className="mt-10 glass-card p-8 md:p-10 max-w-3xl">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
-          How deep it goes
+          Where this is headed
         </span>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">
           We built a performance-tracked nuclear glovebox training simulator —
           interactive environment, custom task-sequence logic, real-time error
           detection and readiness scoring — as graduate research connected to Los
-          Alamos National Laboratory. That&apos;s the engineering floor we build
-          from.
+          Alamos National Laboratory. That work is the seed of where ArkaForge is
+          built to go: industrial simulation and digital twins, engineered with
+          the same depth as a game. It&apos;s the floor we build from.
         </p>
         <Link
           href="/work/los-alamos-asu-simulation"
