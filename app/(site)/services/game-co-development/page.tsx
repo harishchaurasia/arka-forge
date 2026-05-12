@@ -114,11 +114,12 @@ export default function GameCoDevelopmentPage() {
             </h2>
             <p>
               We embed into your pipeline — your tools, your processes, your
-              standards — with real daily overlap with US and EU working hours
-              and a named project lead as your single point of contact. ArkaForge
-              is founder-led and assembles a project-fit team from a curated
-              network of senior engineers, artists, and designers; the team is
-              scoped to the project, not the other way around.
+              standards. ArkaForge is led from the US, so your project lead and
+              single point of contact works your hours; the engineering team
+              behind them keeps building around the clock. We assemble a
+              project-fit team from a curated network of senior engineers,
+              artists, and designers — the team is scoped to the project, not the
+              other way around.
             </p>
           </div>
 

@@ -20,7 +20,7 @@ const values = [
   {
     title: "Distance is a non-issue",
     description:
-      "Real daily overlap with US and EU hours, a named lead, your pipeline and standards. We run the studio so geography never costs you anything.",
+      "Led from the US — your project lead works your hours. A named lead, your pipeline, your standards. We run the studio so geography never costs you anything.",
   },
   {
     title: "Craft over throughput",
@@ -60,9 +60,10 @@ export default function CompanyPage() {
           </span>
           <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
             <p>
-              ArkaForge was founded by Harish — a computer science graduate with
-              a background spanning AI/ML, LLMs and agentic AI, game development,
-              AR/VR systems, full-stack engineering, and applied simulation.
+              ArkaForge was founded by Harish — a US-based computer science
+              graduate with a background spanning AI/ML, LLMs and agentic AI,
+              game development, AR/VR systems, full-stack engineering, and applied
+              simulation. He leads engineering and works directly with clients.
             </p>
             <p>
               Before founding ArkaForge, Harish worked on the design and

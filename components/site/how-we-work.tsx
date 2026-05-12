@@ -8,15 +8,15 @@ const ease = [0.25, 0.1, 0.25, 1];
 
 const points: { title: string; body: string; icon: LucideIcon }[] = [
   {
-    title: "Real overlap, every day",
+    title: "Your lead is in your timezone",
     body:
-      "{{OVERLAP_HOURS}}+ hours of daily overlap with US and EU working hours — not “we'll get to it tomorrow.” Stand-ups, reviews, and turnaround on your clock.",
+      "ArkaForge is led from the US — your project lead and main point of contact works your hours. No 12-hour lag on a decision; the team behind them keeps building while you sleep.",
     icon: Clock,
   },
   {
     title: "One point of contact",
     body:
-      "A named project lead owns the relationship and the delivery. You're working with a team, not managing a pool.",
+      "A named project lead — US-based — owns the relationship and the delivery. You're working with a team, not managing a pool.",
     icon: UserCheck,
   },
   {
@@ -52,9 +52,9 @@ export function HowWeWork() {
             Built to work with teams in the US, UK, and EU
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed">
-            We're a distributed studio, and we run it so distance is a non-issue
-            — because for the studios that hire co-dev partners, it's the first
-            thing they worry about.
+            We're a distributed studio, led from the US, and we run it so
+            distance is a non-issue — because for the studios that hire co-dev
+            partners, it's the first thing they worry about.
           </p>
         </motion.div>
 
