@@ -84,7 +84,7 @@ export function Hero() {
               className="hidden md:block"
             >
               <span className="inline-block mb-2 px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
-                Game Co-Dev · UE5 / Unity · AI Systems · Digital Twins
+                Game Engineering &amp; Technology Studio
               </span>
             </motion.div>
           )}
@@ -117,12 +117,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.16, ease }}
-            className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md md:max-w-lg"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg md:max-w-xl"
           >
-            Game co-development studio. End-to-end UE5 and Unity development
-            for studios and publishers - features, systems, AI, vertical slices,
-            serious games. Built by engineers who also ship digital twins for
-            high-stakes industries.
+            A game engineering &amp; technology studio. We co-develop games with
+            studios and publishers — UE5 and Unity, features, systems, AI,
+            prototypes, vertical slices — and build interactive products for
+            teams outside games. The engine depth is the same depth behind a
+            performance-tracked nuclear training simulator.
           </motion.p>
 
           <motion.div

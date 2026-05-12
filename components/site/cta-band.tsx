@@ -23,14 +23,15 @@ export function CTABand() {
           className="glass-card p-12 md:p-20 text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
-            Let&apos;s Talk
+            Let&apos;s talk
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
-            Build with <span className="gradient-text">ArkaForge</span>
+            Tell us what you&apos;re <span className="gradient-text">building</span>
           </h2>
           <p className="text-base text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-            End-to-end game co-development, or a digital twin of your
-            operation. If the problem is real, we want to hear about it.
+            A game in production and not enough hands. A pitch that needs a
+            vertical slice. A product that should be an experience. If it runs on
+            a game engine — or should — we want to hear about it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="glow px-8">
