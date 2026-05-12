@@ -36,8 +36,9 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
     name: "ArkaForge",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com",
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
-    description: "Game co-development studio building games, AI-driven interactive systems, and digital twins for studios, publishers, and high-stakes industries.",
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/arka-forge-logo.png`,
+    description:
+      "ArkaForge is a game engineering & technology studio — game co-development for studios and publishers (UE5/Unity, features, systems, AI, prototypes, vertical slices) and interactive products for teams outside games.",
     sameAs: [
       "https://www.linkedin.com/company/arkaforge",
       "https://instagram.com/arka.forge",
@@ -72,7 +73,7 @@ export async function generateArticleSchema(
       name: "ArkaForge",
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/logo.png`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/arka-forge-logo.png`,
       },
     },
     image: image
