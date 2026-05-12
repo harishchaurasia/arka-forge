@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-12
 **Status:** Design approved (pending founder review of this doc)
-**Scope:** Surgical reposition + visual refresh of the existing Next.js site (Approach "A+B"). Keep the framework and component kit; change the message, the information architecture, the visual grade, the hero, and build out real proof.
+**Scope:** Surgical reposition + visual refresh of the existing Next.js site (Approach "A+B"). Keep the framework and component kit; change the message, the information architecture, the visual grade, the hero, and build out real proof. Repositions the site as a **game engineering & technology studio** (game co-dev as the spear, interactive products as the cash engine, simulation / digital-twin work as the credibility spike).
 
 ---
 
@@ -26,7 +26,7 @@ ArkaForge today: solo founder (strong AI/ML + game-dev + AR/VR + applied-simulat
 
 **Positioning ladder (the whole site hangs on this):**
 
-- **Identity:** ArkaForge is a **real-time interactive studio** — it builds the software people *operate*, not watch, on game engines (UE5/Unity) and AI.
+- **Identity:** ArkaForge is a **game engineering & technology studio** — it builds the software people *operate*, not watch, on game engines (UE5/Unity) and AI. ("Game engineering & technology studio" is the identity line; the homepage subhead must still spell out the plain "what we do" — see §3.1. Do **not** use the vaguer "real-time interactive studio" phrasing.)
 - **The spear (homepage leads with this):** **game co-development** for studios & publishers — features & systems, AI/agentic systems, prototypes & vertical slices. Where the warm pipeline is; large, structurally growing market; deal sizes ladder from ~$8–40k feature sprints to six-figure vertical slices.
 - **The cash-flow engine (faster, smaller deals):** **interactive products** for non-game companies — gamified products, training simulations, configurators, interactive 3D/data experiences. This is the gamified-website work, framed as a studio capability ("we build interactive product experiences"), not "I gamify websites." $5–50k, short cycles.
 - **The credibility spike (proof, not a headline product — yet):** the **simulation / digital-twin work**. The Los Alamos performance-tracked nuclear glovebox trainer is the line that makes a serious buyer take ArkaForge seriously. Featured heavily *as proof of depth* — **not** a co-equal pillar, **not** a "we sell nuclear digital twins" claim (can't deliver that cold; claiming it makes us look either too small or not credible to the actual buyers). It's "yes, we go this deep."
@@ -40,7 +40,7 @@ ArkaForge today: solo founder (strong AI/ML + game-dev + AR/VR + applied-simulat
 
 These are hard rules for all copy:
 
-1. **Say what we do, plainly, above the fold.** A first-time visitor must be able to answer "what does this company do" in one sentence: *a real-time interactive studio — game co-development for studios & publishers, interactive products for everyone else.* No hedging across six things.
+1. **Say what we do, plainly, above the fold.** A first-time visitor must be able to answer "what does this company do" in one sentence: *a game engineering & technology studio — game co-development for studios & publishers, interactive products for everyone else, with the engine depth behind a nuclear training simulator.* No hedging across six things. The subhead is the plain statement; the identity line ("game engineering & technology studio") is the umbrella.
 2. **Never claim shipped commercial game titles we don't have.** Co-dev capability is described via skills, engagement models, and the engine work we *can* show (the sim) — not a fake portfolio.
 3. **Never claim active digital-twin / enterprise clients.** The Los Alamos work is described accurately: a nuclear glovebox training simulator built by the founder as a graduate researcher at ASU's School of Manufacturing Systems & Networks, in connection with Los Alamos National Laboratory. It's framed as the technical foundation the company is built on — true and strong — not as an ArkaForge client engagement.
 4. **Never "I." Always "we / the team / ArkaForge."** The studio is founder-led + a curated network of contract engineers/developers/designers — stated honestly, framed as a deliberate operating model (it's how many real co-dev studios run), never apologetically. No individual names/bios for now.
