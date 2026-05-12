@@ -38,10 +38,10 @@ const items: Item[] = [
     icon: Boxes,
   },
   {
-    eyebrow: "Where this is headed",
-    title: "Industrial simulation & digital twins",
+    eyebrow: "How deep it goes",
+    title: "The deep end",
     body:
-      "We built a performance-tracked nuclear glovebox training simulator — interactive environment, custom task-sequence logic, real-time error detection and readiness scoring — as graduate research connected to Los Alamos National Laboratory. That work is the seed of where ArkaForge is built to go: industrial simulation and digital twins, with the same engine depth behind every game.",
+      "We built a performance-tracked nuclear glovebox training simulator — interactive environment, custom task-sequence logic, real-time error detection and readiness scoring — as graduate research connected to Los Alamos National Laboratory. That's the engineering floor, not the ceiling.",
     href: "/work/los-alamos-asu-simulation",
     cta: "See the case study",
     icon: FlaskConical,
