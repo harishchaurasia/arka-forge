@@ -59,7 +59,9 @@ export default function ContactPage() {
           </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Contact</h1>
           <p className="text-base text-muted-foreground max-w-md">
-            Have a project in mind? Let&apos;s discuss how we can help.
+            A game that needs more hands, a pitch that needs a vertical slice, or
+            a product that should be an experience — tell us what you&apos;re
+            building.
           </p>
         </div>
 
