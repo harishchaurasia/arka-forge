@@ -122,7 +122,7 @@ export function Hero() {
             A game engineering &amp; technology studio. We co-develop games with
             studios and publishers — UE5 and Unity, features, systems, AI,
             prototypes, vertical slices — and build interactive products for
-            teams outside games. The engine depth is the same depth behind a
+            teams outside games. Founder-led, by the engineer behind a
             performance-tracked nuclear training simulator.
           </motion.p>
 

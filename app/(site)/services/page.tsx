@@ -70,11 +70,11 @@ export default function ServicesPage() {
           How deep it goes
         </span>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">
-          We built a performance-tracked nuclear glovebox training simulator —
-          interactive environment, custom task-sequence logic, real-time error
-          detection and readiness scoring — as graduate research connected to Los
-          Alamos National Laboratory. That&apos;s the engineering floor we build
-          from — not the ceiling.
+          ArkaForge&apos;s founder built a performance-tracked nuclear glovebox
+          training simulator — interactive environment, custom task-sequence
+          logic, real-time error detection and readiness scoring — as a graduate
+          researcher connected to Los Alamos National Laboratory. That&apos;s the
+          engineering this studio is built on.
         </p>
         <Link
           href="/work/los-alamos-asu-simulation"

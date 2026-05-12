@@ -41,7 +41,7 @@ const items: Item[] = [
     eyebrow: "How deep it goes",
     title: "The deep end",
     body:
-      "We built a performance-tracked nuclear glovebox training simulator — interactive environment, custom task-sequence logic, real-time error detection and readiness scoring — as graduate research connected to Los Alamos National Laboratory. That's the engineering floor, not the ceiling.",
+      "ArkaForge's founder built a performance-tracked nuclear glovebox training simulator — interactive environment, custom task-sequence logic, real-time error detection and readiness scoring — as a graduate researcher connected to Los Alamos National Laboratory. That's the engineering this studio is built on.",
     href: "/work/los-alamos-asu-simulation",
     cta: "See the case study",
     icon: FlaskConical,
