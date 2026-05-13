@@ -24,7 +24,7 @@ function getClientRenderMode() {
   };
 }
 
-/* ── Mouse ───────────────────────────────────── */
+/* ── Mouse parallax ────────────────────────────── */
 const pointer = { x: 0, y: 0 };
 
 function usePointerParallax() {
@@ -49,462 +49,403 @@ function usePointerParallax() {
   }, []);
 }
 
-/* ── Planet geometry with terrain displacement ─ */
-function buildPlanetGeo(detail: number) {
-  const geo = new THREE.SphereGeometry(1.9, detail, detail);
-  const pos = geo.attributes.position as THREE.BufferAttribute;
-  const count = pos.count;
-
-  const elevations = new Float32Array(count);
-  const scatterOffsets = new Float32Array(count * 3);
-
-  for (let i = 0; i < count; i++) {
-    const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
-    const len = Math.sqrt(x * x + y * y + z * z);
-    const nx = x / len, ny = y / len, nz = z / len;
-
-    // Multi-octave trig noise — gives convincing continent/ocean shapes
-    const n1 = Math.sin(nx * 3.4 + ny * 2.1) * Math.cos(nz * 4.2 - nx * 1.7);
-    const n2 = Math.sin(ny * 6.5 - nz * 5.1) * Math.cos(nx * 5.8 + nz * 3.1);
-    const n3 = Math.sin(nz * 10.1 + nx * 8.4) * Math.cos(ny * 9.2 - nz * 7.3);
-    const n4 = Math.sin(nx * 15.8 - ny * 13.0) * Math.cos(nz * 14.7 + nx * 11.3);
-    const n5 = Math.cos(ny * 22.4 + nz * 18.9) * Math.sin(nx * 20.1 - ny * 17.6);
-
-    const raw = n1 * 0.38 + n2 * 0.26 + n3 * 0.17 + n4 * 0.11 + n5 * 0.06;
-    const e = Math.max(0, Math.min(1, (raw + 0.98) / 1.96));
-    elevations[i] = e;
-
-    // Displace: oceans are flat basins, land rises
-    const sealevel = 0.44;
-    const r = e < sealevel
-      ? 1.9 * 0.955                                    // ocean floor — slightly inset
-      : 1.9 * 0.955 + (e - sealevel) * 0.75;         // terrain heights
-
-    pos.setXYZ(i, nx * r, ny * r, nz * r);
-
-    // Scatter offsets: random shell around the planet, points converge in
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    const sr = 2.2 + Math.random() * 2.8;
-    scatterOffsets[i * 3]     = sr * Math.sin(phi) * Math.cos(theta) - nx * r;
-    scatterOffsets[i * 3 + 1] = sr * Math.sin(phi) * Math.sin(theta) - ny * r;
-    scatterOffsets[i * 3 + 2] = sr * Math.cos(phi) - nz * r;
-  }
-
-  geo.setAttribute("aElevation",     new THREE.BufferAttribute(elevations,     1));
-  geo.setAttribute("aScatterOffset", new THREE.BufferAttribute(scatterOffsets, 3));
-  geo.computeVertexNormals();
-  return geo;
+/* ── Deterministic PRNG so the greeble layout is stable ─ */
+function mulberry32(seed: number) {
+  let a = seed;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
-/* ── Shaders ─────────────────────────────────── */
+/* ── HDR colors (>1.0) so emissives bloom ───────── */
+const WING_RED   = new THREE.Color(3.6, 0.45, 0.20);
+const WING_CYAN  = new THREE.Color(0.25, 1.8, 2.8);
+const COCKPIT_C  = new THREE.Color(0.6, 1.6, 2.4);
 
-// Stage 0 — point cloud scatter / gather
-const pointsVert = `
-  attribute float aElevation;
-  attribute vec3  aScatterOffset;
-  uniform   float uGather;
+/* ── Running lights shader (hull dots) ──────────── */
+const lightsVert = /* glsl */ `
+  attribute float aPhase;
+  attribute float aRate;
+  attribute float aSize;
+  attribute vec3  aColor;
   uniform   float uTime;
-  uniform   float uOpacity;
-  varying   float vElev;
-  varying   float vOpacity;
+  varying   vec3  vColor;
+  varying   float vAlpha;
 
   void main() {
-    vElev   = aElevation;
-    vOpacity = uOpacity;
-    vec3 pos = position + aScatterOffset * (1.0 - uGather);
-    // subtle orbital drift while scattered
-    float drift = (1.0 - uGather) * 0.06;
-    pos.x += sin(uTime * 0.9 + aElevation * 23.0) * drift;
-    pos.y += cos(uTime * 0.7 + aElevation * 17.0) * drift;
-    vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-    gl_PointSize = mix(2.8, 1.6, uGather) * (220.0 / -mv.z);
+    float pulse = 0.55 + 0.45 * sin(uTime * aRate + aPhase);
+    vAlpha = pulse;
+    vColor = aColor;
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = (1.8 + pulse * 2.4) * aSize * (44.0 / -mv.z);
     gl_Position  = projectionMatrix * mv;
   }
 `;
 
-const pointsFrag = `
-  varying float vElev;
-  varying float vOpacity;
-
+const lightsFrag = /* glsl */ `
+  varying vec3  vColor;
+  varying float vAlpha;
   void main() {
     float d = length(gl_PointCoord - 0.5) * 2.0;
     if (d > 1.0) discard;
-    float a = exp(-d * d * 2.8) * vOpacity;
-    // Ocean verts = cyan-blue, land = hot orange — topology visible before the world forms
-    vec3 col = mix(vec3(0.3, 0.65, 1.0), vec3(1.0, 0.50, 0.08), vElev);
-    gl_FragColor = vec4(col, a);
+    float a = exp(-d * d * 2.6) * vAlpha;
+    // Push into HDR so bloom catches it
+    gl_FragColor = vec4(vColor * (1.0 + vAlpha * 0.8), a);
   }
 `;
 
-// Stage 3 — full lit planet: biomes + ocean specularity + atmospheric rim
-const terrainVert = `
-  attribute float aElevation;
-  varying   vec3  vNormal;
-  varying   vec3  vViewPos;
-  varying   float vElev;
-
+/* ── Engine exhaust shader (hot disk) ───────────── */
+const exhaustVert = /* glsl */ `
+  varying vec2 vUv;
   void main() {
-    vElev   = aElevation;
-    vNormal = normalize(normalMatrix * normal);
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    vViewPos = -mv.xyz;
-    gl_Position = projectionMatrix * mv;
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+const exhaustFrag = /* glsl */ `
+  uniform float uTime;
+  uniform float uSeed;
+  varying vec2  vUv;
+  void main() {
+    vec2 p = vUv - 0.5;
+    float d = length(p) * 2.0;
+    if (d > 1.0) discard;
+    float core  = pow(1.0 - d, 3.4);
+    float outer = pow(1.0 - d, 1.3);
+    float flick = 0.85 + 0.15 * sin(uTime * 13.0 + uSeed * 17.3);
+    // HDR — core is hot white-blue, edge orange
+    vec3 col = mix(
+      vec3(1.0, 0.45, 0.10),
+      vec3(2.6, 2.0, 1.4),
+      core
+    );
+    float alpha = (outer * 0.55 + core * 1.2) * flick;
+    gl_FragColor = vec4(col, alpha);
   }
 `;
 
-const terrainFrag = `
-  uniform float uOpacity;
-  uniform vec3  uLightDir;
-  varying vec3  vNormal;
-  varying vec3  vViewPos;
-  varying float vElev;
+/* ── Ship — procedural sci-fi vessel ─────────────── */
+function Ship({ lowPower }: { lowPower: boolean }) {
+  const groupRef = React.useRef<THREE.Group>(null);
+  const lightsMatRef = React.useRef<THREE.ShaderMaterial>(null);
+  const exhaust1Ref = React.useRef<THREE.ShaderMaterial>(null);
+  const exhaust2Ref = React.useRef<THREE.ShaderMaterial>(null);
+  const exhaust3Ref = React.useRef<THREE.ShaderMaterial>(null);
 
-  void main() {
-    float e = vElev;
+  /* Greebles: small panel boxes scattered along the hull */
+  const greebleInstance = React.useMemo(() => {
+    const count = lowPower ? 44 : 90;
+    const rng = mulberry32(0xc0ffee);
+    const geo = new THREE.BoxGeometry(1, 1, 1);
+    const mat = new THREE.MeshStandardMaterial({
+      color: "#2a3239",
+      roughness: 0.55,
+      metalness: 0.85,
+    });
+    const mesh = new THREE.InstancedMesh(geo, mat, count);
+    const m4 = new THREE.Matrix4();
+    const q = new THREE.Quaternion();
 
-    // Biome gradient
-    vec3 c;
-    if      (e < 0.26) c = mix(vec3(0.01,0.05,0.17), vec3(0.03,0.13,0.34), e/0.26);
-    else if (e < 0.40) c = mix(vec3(0.03,0.13,0.34), vec3(0.05,0.27,0.52), (e-0.26)/0.14);
-    else if (e < 0.44) c = mix(vec3(0.05,0.27,0.52), vec3(0.68,0.60,0.38), (e-0.40)/0.04);
-    else if (e < 0.52) c = mix(vec3(0.68,0.60,0.38), vec3(0.18,0.34,0.10), (e-0.44)/0.08);
-    else if (e < 0.64) c = mix(vec3(0.18,0.34,0.10), vec3(0.22,0.27,0.13), (e-0.52)/0.12);
-    else if (e < 0.74) c = mix(vec3(0.22,0.27,0.13), vec3(0.42,0.34,0.22), (e-0.64)/0.10);
-    else if (e < 0.84) c = mix(vec3(0.42,0.34,0.22), vec3(0.54,0.48,0.42), (e-0.74)/0.10);
-    else               c = mix(vec3(0.54,0.48,0.42), vec3(0.88,0.91,0.96), (e-0.84)/0.16);
+    for (let i = 0; i < count; i++) {
+      const u = rng();
+      const x = (u - 0.5) * 3.6 - 0.15; // mostly along the fuselage
+      const taper = Math.max(0.42, Math.cos((Math.abs(x) / 2.4) * 0.85));
+      const side = Math.floor(rng() * 6);
+      const w = 0.07 + rng() * 0.18;
+      const h = 0.04 + rng() * 0.14;
+      const d = 0.07 + rng() * 0.18;
+      const hullR = 0.42 * taper;
+      let y = 0,
+        z = 0;
 
-    vec3 n = normalize(vNormal);
-    vec3 l = normalize(uLightDir);
-    vec3 v = normalize(vViewPos);
+      if (side < 2) {
+        y =  hullR + h * 0.46;
+        z = (rng() - 0.5) * 0.58 * taper;
+      } else if (side < 4) {
+        y = -hullR - h * 0.46;
+        z = (rng() - 0.5) * 0.58 * taper;
+      } else if (side === 4) {
+        z = -hullR - d * 0.46;
+        y = (rng() - 0.5) * 0.48 * taper;
+      } else {
+        z =  hullR + d * 0.46;
+        y = (rng() - 0.5) * 0.48 * taper;
+      }
 
-    float diff = max(dot(n, l), 0.0);
-    float amb  = 0.18;
+      m4.compose(
+        new THREE.Vector3(x, y, z),
+        q.setFromEuler(new THREE.Euler(0, rng() * 0.18 - 0.09, 0)),
+        new THREE.Vector3(w, h, d),
+      );
+      mesh.setMatrixAt(i, m4);
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+    return mesh;
+  }, [lowPower]);
 
-    // Ocean specularity
-    float spec = 0.0;
-    if (e < 0.44) {
-      vec3 h = normalize(l + v);
-      spec = pow(max(dot(n, h), 0.0), 100.0) * 0.95 * smoothstep(0.44, 0.36, e);
+  /* Running lights — points along hull + wings */
+  const lightsGeom = React.useMemo(() => {
+    const hullCount = lowPower ? 18 : 32;
+    const wingCount = 6; // 3 per wing, leading edge
+    const count = hullCount + wingCount;
+    const positions = new Float32Array(count * 3);
+    const phases = new Float32Array(count);
+    const rates = new Float32Array(count);
+    const sizes = new Float32Array(count);
+    const colors = new Float32Array(count * 3);
+    const rng = mulberry32(0xbadf00d);
+
+    // Hull running lights
+    for (let i = 0; i < hullCount; i++) {
+      const u = (i + rng() * 0.5) / hullCount;
+      const x = (u - 0.5) * 4.2 - 0.15;
+      const taper = Math.max(0.45, Math.cos((Math.abs(x) / 2.3) * 0.85));
+      const r = 0.50 * taper;
+      const edge = i % 4;
+      let y = 0,
+        z = 0;
+      switch (edge) {
+        case 0: y =  r * 0.96; z = -r * 0.32; break;
+        case 1: y = -r * 0.96; z = -r * 0.32; break;
+        case 2: y =  r * 0.96; z =  r * 0.32; break;
+        case 3: y = -r * 0.96; z =  r * 0.32; break;
+      }
+      positions[i * 3]     = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
+      phases[i] = rng() * Math.PI * 2;
+      rates[i] = 1.2 + rng() * 1.6;
+      sizes[i] = 1.0;
+
+      const c = rng();
+      if (c < 0.60) {
+        // cool cyan — most common
+        colors[i * 3]     = 0.40;
+        colors[i * 3 + 1] = 0.82;
+        colors[i * 3 + 2] = 1.0;
+      } else if (c < 0.92) {
+        // warm amber
+        colors[i * 3]     = 1.0;
+        colors[i * 3 + 1] = 0.55;
+        colors[i * 3 + 2] = 0.12;
+      } else {
+        // red beacon
+        colors[i * 3]     = 1.0;
+        colors[i * 3 + 1] = 0.18;
+        colors[i * 3 + 2] = 0.10;
+      }
     }
 
-    // Atmospheric rim glow
-    float rim = pow(1.0 - max(dot(n, v), 0.0), 3.2) * 0.50;
+    // Wing running lights — 3 per wing along the leading edge
+    for (let w = 0; w < 2; w++) {
+      const zSign = w === 0 ? 1 : -1;
+      for (let j = 0; j < 3; j++) {
+        const i = hullCount + w * 3 + j;
+        const t = (j + 0.5) / 3; // 0..1 across wing span
+        positions[i * 3]     = -0.85 + (1 - t) * 0.4; // sweep back
+        positions[i * 3 + 1] = -0.05;
+        positions[i * 3 + 2] = zSign * (0.65 + t * 0.80);
+        phases[i] = rng() * Math.PI * 2;
+        rates[i] = 1.4;
+        sizes[i] = 1.15;
+        colors[i * 3]     = 0.40;
+        colors[i * 3 + 1] = 0.82;
+        colors[i * 3 + 2] = 1.0;
+      }
+    }
 
-    vec3 finalCol = c * (amb + diff * 0.82) + vec3(spec) + vec3(0.25, 0.55, 1.0) * rim;
-    gl_FragColor = vec4(finalCol, uOpacity);
-  }
-`;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("aPhase",   new THREE.BufferAttribute(phases, 1));
+    geo.setAttribute("aRate",    new THREE.BufferAttribute(rates, 1));
+    geo.setAttribute("aSize",    new THREE.BufferAttribute(sizes, 1));
+    geo.setAttribute("aColor",   new THREE.BufferAttribute(colors, 3));
+    return geo;
+  }, [lowPower]);
 
-// Atmosphere shell
-const atmVert = `
-  varying vec3 vNormal;
-  varying vec3 vViewPos;
-  void main() {
-    vNormal  = normalize(normalMatrix * normal);
-    vec4 mv  = modelViewMatrix * vec4(position, 1.0);
-    vViewPos = -mv.xyz;
-    gl_Position = projectionMatrix * mv;
-  }
-`;
-const atmFrag = `
-  uniform float uOpacity;
-  varying vec3 vNormal;
-  varying vec3 vViewPos;
-  void main() {
-    float rim = pow(1.0 - max(dot(normalize(vNormal), normalize(vViewPos)), 0.0), 2.2);
-    float a   = rim * 0.70 * uOpacity;
-    gl_FragColor = vec4(0.25, 0.52, 1.0, a);
-  }
-`;
-
-/* ── Build sequence — the planet being forged ── */
-const CYCLE = 20;
-//  0 – 3.5   points (gather)
-//  2.5– 7    wireframe
-//  6  – 11   flat shaded
-//  10 – 20   lit planet (11.5 hold, 15 dissolve begins, 20 loop)
-
-function Planet({ lowPower }: { lowPower: boolean }) {
-  const groupRef = React.useRef<THREE.Group>(null);
-  const tRef     = React.useRef(0);
-
-  const pointsMatRef  = React.useRef<THREE.ShaderMaterial>(null);
-  const edgesMatRef   = React.useRef<THREE.LineBasicMaterial>(null);
-  const flatMatRef    = React.useRef<THREE.MeshStandardMaterial>(null);
-  const terrainMatRef = React.useRef<THREE.ShaderMaterial>(null);
-  const atmMatRef     = React.useRef<THREE.ShaderMaterial>(null);
-
-  const pointsMeshRef  = React.useRef<THREE.Points>(null);
-  const edgesMeshRef   = React.useRef<THREE.LineSegments>(null);
-  const flatMeshRef    = React.useRef<THREE.Mesh>(null);
-  const terrainMeshRef = React.useRef<THREE.Mesh>(null);
-  const atmMeshRef     = React.useRef<THREE.Mesh>(null);
-
-  const detail  = lowPower ? 36 : 52;
-  const geo     = React.useMemo(() => buildPlanetGeo(detail), [detail]);
-  const edgesGeo = React.useMemo(() => new THREE.EdgesGeometry(geo), [geo]);
-  const atmGeo  = React.useMemo(() => new THREE.SphereGeometry(2.08, 32, 32), []);
-
-  const lightDir = React.useMemo(() => new THREE.Vector3(2.5, 1.5, 3.0).normalize(), []);
-
-  const pointsUniforms = React.useMemo(() => ({
-    uGather:  { value: 0 },
-    uTime:    { value: 0 },
-    uOpacity: { value: 0 },
-  }), []);
-
-  const terrainUniforms = React.useMemo(() => ({
-    uOpacity:  { value: 0 },
-    uLightDir: { value: lightDir },
-  }), [lightDir]);
-
-  const atmUniforms = React.useMemo(() => ({
-    uOpacity: { value: 0 },
-  }), []);
+  const lightsUniforms = React.useMemo(
+    () => ({ uTime: { value: 0 } }),
+    [],
+  );
+  const exhaustU1 = React.useMemo(
+    () => ({ uTime: { value: 0 }, uSeed: { value: 0.31 } }),
+    [],
+  );
+  const exhaustU2 = React.useMemo(
+    () => ({ uTime: { value: 0 }, uSeed: { value: 0.67 } }),
+    [],
+  );
+  const exhaustU3 = React.useMemo(
+    () => ({ uTime: { value: 0 }, uSeed: { value: 0.92 } }),
+    [],
+  );
 
   useFrame(({ clock }, delta) => {
-    tRef.current = (tRef.current + delta) % CYCLE;
-    const t = tRef.current;
-
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.18;
-      groupRef.current.rotation.x  = Math.sin(clock.elapsedTime * 0.06) * 0.10;
+      groupRef.current.rotation.y += delta * 0.085;
+      groupRef.current.position.y = Math.sin(clock.elapsedTime * 0.42) * 0.06;
     }
-
-    const c = (v: number) => Math.max(0, Math.min(1, v));
-    const e = (x: number) => x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2, 2)/2;
-
-    // Points
-    let pO = 0, gather = 1;
-    if      (t < 1.2) { pO = e(c(t/1.2));               gather = e(c(t/1.2)); }
-    else if (t < 2.5) { pO = 1;                          gather = 1; }
-    else if (t < 3.5) { pO = e(c(1-(t-2.5)));           gather = 1; }
-    else if (t >= 15) { pO = e(c((t-15)/4.0));           gather = e(c(1-(t-15)/5.0)); }
-
-    // Wireframe
-    let wO = 0;
-    if (t >= 2.5 && t < 7) {
-      if      (t < 4)   wO = e(c((t-2.5)/1.5));
-      else if (t < 6)   wO = 1;
-      else              wO = e(c(1-(t-6)));
+    if (lightsMatRef.current) {
+      lightsMatRef.current.uniforms.uTime.value = clock.elapsedTime;
     }
-
-    // Flat shaded
-    let fO = 0;
-    if (t >= 6 && t < 11) {
-      if      (t < 7.5) fO = e(c((t-6)/1.5));
-      else if (t < 10)  fO = 1;
-      else              fO = e(c(1-(t-10)));
-    }
-
-    // Lit planet + atmosphere
-    let lO = 0;
-    if (t >= 10) {
-      if      (t < 11.5) lO = e(c((t-10)/1.5));
-      else if (t < 15)   lO = 1;
-      else               lO = e(c(1-(t-15)/5.0));
-    }
-
-    // Apply uniforms directly — no setState, no re-renders
-    if (pointsMatRef.current) {
-      pointsMatRef.current.uniforms.uOpacity.value = pO;
-      pointsMatRef.current.uniforms.uGather.value  = gather;
-      pointsMatRef.current.uniforms.uTime.value    = clock.elapsedTime;
-      if (pointsMeshRef.current) pointsMeshRef.current.visible = pO > 0.01;
-    }
-    if (edgesMatRef.current) {
-      edgesMatRef.current.opacity = wO;
-      if (edgesMeshRef.current) edgesMeshRef.current.visible = wO > 0.01;
-    }
-    if (flatMatRef.current) {
-      flatMatRef.current.opacity = fO;
-      if (flatMeshRef.current) flatMeshRef.current.visible = fO > 0.01;
-    }
-    if (terrainMatRef.current) {
-      terrainMatRef.current.uniforms.uOpacity.value = lO;
-      if (terrainMeshRef.current) terrainMeshRef.current.visible = lO > 0.01;
-    }
-    if (atmMatRef.current) {
-      atmMatRef.current.uniforms.uOpacity.value = lO * 0.85;
-      if (atmMeshRef.current) atmMeshRef.current.visible = lO > 0.01;
-    }
+    if (exhaust1Ref.current) exhaust1Ref.current.uniforms.uTime.value = clock.elapsedTime;
+    if (exhaust2Ref.current) exhaust2Ref.current.uniforms.uTime.value = clock.elapsedTime;
+    if (exhaust3Ref.current) exhaust3Ref.current.uniforms.uTime.value = clock.elapsedTime;
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, 0]}>
+    <group
+      ref={groupRef}
+      rotation={[0.18, -0.55, 0.05]}
+      position={[0.15, 0.15, 0]}
+      scale={0.66}
+    >
+      {/* Engine block (rear) */}
+      <mesh position={[-1.95, 0, 0]}>
+        <boxGeometry args={[0.95, 0.80, 1.10]} />
+        <meshStandardMaterial color="#1a2028" roughness={0.50} metalness={0.86} />
+      </mesh>
 
-      {/* Stage 0 — point cloud: topology visible before world forms */}
-      <points ref={pointsMeshRef} geometry={geo}>
+      {/* Main fuselage cylinder — axis along X */}
+      <mesh rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.42, 0.42, 3.2, 14]} />
+        <meshStandardMaterial color="#1c232c" roughness={0.48} metalness={0.88} />
+      </mesh>
+
+      {/* Nose cone */}
+      <mesh rotation={[0, 0, -Math.PI / 2]} position={[1.95, 0, 0]}>
+        <coneGeometry args={[0.42, 1.10, 14]} />
+        <meshStandardMaterial color="#1c232c" roughness={0.48} metalness={0.88} />
+      </mesh>
+
+      {/* Dorsal plating */}
+      <mesh position={[-0.20, 0.45, 0]}>
+        <boxGeometry args={[2.85, 0.10, 0.78]} />
+        <meshStandardMaterial color="#252c34" roughness={0.55} metalness={0.85} />
+      </mesh>
+      {/* Ventral plating */}
+      <mesh position={[-0.20, -0.45, 0]}>
+        <boxGeometry args={[2.80, 0.08, 0.62]} />
+        <meshStandardMaterial color="#252c34" roughness={0.55} metalness={0.85} />
+      </mesh>
+
+      {/* Bridge tower — two stacked boxes, forward of mid */}
+      <mesh position={[0.50, 0.62, 0]}>
+        <boxGeometry args={[0.72, 0.28, 0.55]} />
+        <meshStandardMaterial color="#1f262e" roughness={0.50} metalness={0.86} />
+      </mesh>
+      <mesh position={[0.55, 0.84, 0]}>
+        <boxGeometry args={[0.36, 0.18, 0.40]} />
+        <meshStandardMaterial color="#181c22" roughness={0.50} metalness={0.86} />
+      </mesh>
+      {/* Cockpit canopy strip — emissive cyan */}
+      <mesh position={[0.78, 0.84, 0]}>
+        <boxGeometry args={[0.10, 0.08, 0.30]} />
+        <meshBasicMaterial color={COCKPIT_C} toneMapped={false} />
+      </mesh>
+
+      {/* Wings — port and starboard, swept */}
+      <mesh position={[-0.55, -0.05, 1.10]} rotation={[0, 0.22, 0]}>
+        <boxGeometry args={[1.50, 0.06, 0.90]} />
+        <meshStandardMaterial color="#222931" roughness={0.55} metalness={0.85} />
+      </mesh>
+      <mesh position={[-0.55, -0.05, -1.10]} rotation={[0, -0.22, 0]}>
+        <boxGeometry args={[1.50, 0.06, 0.90]} />
+        <meshStandardMaterial color="#222931" roughness={0.55} metalness={0.85} />
+      </mesh>
+
+      {/* Wing-tip beacons (HDR) */}
+      <mesh position={[-0.78, -0.05, 1.52]}>
+        <sphereGeometry args={[0.028, 10, 10]} />
+        <meshBasicMaterial color={WING_RED} toneMapped={false} />
+      </mesh>
+      <mesh position={[-0.78, -0.05, -1.52]}>
+        <sphereGeometry args={[0.028, 10, 10]} />
+        <meshBasicMaterial color={WING_CYAN} toneMapped={false} />
+      </mesh>
+
+      {/* Engine nozzle rings — black metal cylinders surrounding the exhausts */}
+      <mesh position={[-2.45, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.24, 0.21, 0.20, 14, 1, true]} />
+        <meshStandardMaterial color="#13181e" roughness={0.40} metalness={0.92} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh position={[-2.43, 0.28, 0.36]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.16, 0.14, 0.16, 12, 1, true]} />
+        <meshStandardMaterial color="#13181e" roughness={0.40} metalness={0.92} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh position={[-2.43, 0.28, -0.36]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.16, 0.14, 0.16, 12, 1, true]} />
+        <meshStandardMaterial color="#13181e" roughness={0.40} metalness={0.92} side={THREE.DoubleSide} />
+      </mesh>
+
+      {/* Greebles — instanced panel boxes */}
+      <primitive object={greebleInstance} />
+
+      {/* Running lights */}
+      <points geometry={lightsGeom}>
         <shaderMaterial
-          ref={pointsMatRef}
-          vertexShader={pointsVert}
-          fragmentShader={pointsFrag}
-          uniforms={pointsUniforms}
+          ref={lightsMatRef}
+          vertexShader={lightsVert}
+          fragmentShader={lightsFrag}
+          uniforms={lightsUniforms}
           transparent
           depthWrite={false}
+          toneMapped={false}
           blending={THREE.AdditiveBlending}
         />
       </points>
 
-      {/* Stage 1 — wireframe: the mesh topology */}
-      <lineSegments ref={edgesMeshRef} geometry={edgesGeo}>
-        <lineBasicMaterial
-          ref={edgesMatRef}
-          color="#ff7030"
-          transparent
-          opacity={0}
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </lineSegments>
-
-      {/* Stage 2 — flat shaded: chunky, geometric, unmistakably game */}
-      <mesh ref={flatMeshRef} geometry={geo}>
-        <meshStandardMaterial
-          ref={flatMatRef}
-          color="#1a3820"
-          flatShading
-          transparent
-          opacity={0}
-          roughness={0.92}
-          metalness={0.02}
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Stage 3 — lit planet: biomes, ocean specularity, atmosphere rim */}
-      <mesh ref={terrainMeshRef} geometry={geo}>
+      {/* Engine exhausts — additive disks behind the nozzles */}
+      <mesh position={[-2.56, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[0.46, 0.46]} />
         <shaderMaterial
-          ref={terrainMatRef}
-          vertexShader={terrainVert}
-          fragmentShader={terrainFrag}
-          uniforms={terrainUniforms}
+          ref={exhaust1Ref}
+          vertexShader={exhaustVert}
+          fragmentShader={exhaustFrag}
+          uniforms={exhaustU1}
           transparent
           depthWrite={false}
-        />
-      </mesh>
-
-      {/* Atmosphere shell (lit stage only) */}
-      <mesh ref={atmMeshRef} geometry={atmGeo}>
-        <shaderMaterial
-          ref={atmMatRef}
-          vertexShader={atmVert}
-          fragmentShader={atmFrag}
-          uniforms={atmUniforms}
-          transparent
-          depthWrite={false}
+          toneMapped={false}
           blending={THREE.AdditiveBlending}
-          side={THREE.BackSide}
+          side={THREE.DoubleSide}
         />
       </mesh>
-    </group>
-  );
-}
-
-/* ── Forge fire — energy rising toward the world */
-
-const fireVert = `
-  attribute float aSize;
-  attribute float aLife;
-  attribute float aSpeed;
-  uniform   float uTime;
-  varying   float vLife;
-  varying   float vT;
-  void main() {
-    vLife = aLife;
-    float t = fract(uTime * aSpeed + aLife);
-    vT = t;
-    vec3 pos = position;
-    pos.y += t * 1.6;
-    float spread = t * 0.16;
-    pos.x += sin(t * 12.56 + aLife * 30.0) * spread;
-    pos.z += cos(t * 10.00 + aLife * 25.0) * spread;
-    float scale = smoothstep(0.0, 0.08, t) * smoothstep(1.0, 0.25, t);
-    vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-    gl_PointSize = aSize * scale * (200.0 / -mv.z);
-    gl_Position  = projectionMatrix * mv;
-  }
-`;
-
-const fireFrag = `
-  varying float vLife;
-  varying float vT;
-  uniform float uTime;
-  void main() {
-    float d = length(gl_PointCoord - 0.5) * 2.0;
-    if (d > 1.0) discard;
-    float alpha  = exp(-d * d * 3.0);
-    float fade   = smoothstep(0.0, 0.08, vT) * smoothstep(1.0, 0.25, vT);
-    vec3 white   = vec3(1.0, 0.98, 0.9);
-    vec3 yellow  = vec3(1.0, 0.80, 0.2);
-    vec3 orange  = vec3(1.0, 0.40, 0.05);
-    vec3 red     = vec3(0.7, 0.08, 0.0);
-    vec3 col     = mix(white,  yellow, smoothstep(0.00, 0.20, vT));
-    col          = mix(col,    orange, smoothstep(0.15, 0.50, vT));
-    col          = mix(col,    red,    smoothstep(0.45, 0.85, vT));
-    float flicker = 0.85 + 0.15 * sin(uTime * 15.0 + vLife * 50.0);
-    alpha *= fade * flicker * 0.92;
-    gl_FragColor  = vec4(col, alpha);
-  }
-`;
-
-const FIRE_COUNT = 380;
-
-function ForgeFlame() {
-  const matRef = React.useRef<THREE.ShaderMaterial>(null);
-
-  const { positions, sizes, lives, speeds } = React.useMemo(() => {
-    const pos = new Float32Array(FIRE_COUNT * 3);
-    const sz  = new Float32Array(FIRE_COUNT);
-    const lf  = new Float32Array(FIRE_COUNT);
-    const sp  = new Float32Array(FIRE_COUNT);
-    for (let i = 0; i < FIRE_COUNT; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const r = Math.pow(Math.random(), 0.5) * 0.2;
-      pos[i*3]   = Math.cos(angle) * r;
-      pos[i*3+1] = (Math.random() - 0.4) * 0.12;
-      pos[i*3+2] = Math.sin(angle) * r;
-      sz[i] = 0.4 + Math.random() * 0.5;
-      lf[i] = Math.random();
-      sp[i] = 0.28 + Math.random() * 0.30;
-    }
-    return { positions: pos, sizes: sz, lives: lf, speeds: sp };
-  }, []);
-
-  useFrame(({ clock }) => {
-    if (matRef.current) matRef.current.uniforms.uTime.value = clock.elapsedTime;
-  });
-
-  return (
-    <group>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-          <bufferAttribute attach="attributes-aSize"    args={[sizes,     1]} />
-          <bufferAttribute attach="attributes-aLife"    args={[lives,     1]} />
-          <bufferAttribute attach="attributes-aSpeed"   args={[speeds,    1]} />
-        </bufferGeometry>
+      <mesh position={[-2.54, 0.28, 0.36]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[0.30, 0.30]} />
         <shaderMaterial
-          ref={matRef}
-          vertexShader={fireVert}
-          fragmentShader={fireFrag}
-          uniforms={{ uTime: { value: 0 } }}
+          ref={exhaust2Ref}
+          vertexShader={exhaustVert}
+          fragmentShader={exhaustFrag}
+          uniforms={exhaustU2}
           transparent
           depthWrite={false}
+          toneMapped={false}
           blending={THREE.AdditiveBlending}
+          side={THREE.DoubleSide}
         />
-      </points>
-      {/* White-hot core */}
-      <mesh>
-        <sphereGeometry args={[0.07, 16, 16]} />
-        <meshBasicMaterial color="#fffaf0" transparent opacity={0.95} blending={THREE.AdditiveBlending} />
       </mesh>
-      {/* Outer halo */}
-      <mesh>
-        <sphereGeometry args={[0.55, 16, 16]} />
-        <meshBasicMaterial color="#FF4400" transparent opacity={0.032} depthWrite={false} blending={THREE.AdditiveBlending} />
+      <mesh position={[-2.54, 0.28, -0.36]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[0.30, 0.30]} />
+        <shaderMaterial
+          ref={exhaust3Ref}
+          vertexShader={exhaustVert}
+          fragmentShader={exhaustFrag}
+          uniforms={exhaustU3}
+          transparent
+          depthWrite={false}
+          toneMapped={false}
+          blending={THREE.AdditiveBlending}
+          side={THREE.DoubleSide}
+        />
       </mesh>
+
+      {/* Engine glow point lights — illuminate hull from behind */}
+      <pointLight position={[-2.80, 0,    0]} color="#ff7026" intensity={1.6} distance={4.0} decay={2} />
+      <pointLight position={[-2.80, 0.28, 0]} color="#ff9040" intensity={0.7} distance={2.2} decay={2} />
     </group>
   );
 }
@@ -515,12 +456,12 @@ function Stars({ count }: { count: number }) {
   const positions = React.useMemo(() => {
     const p = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const r = 10 + Math.random() * 20;
+      const r = 12 + Math.random() * 24;
       const t = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      p[i*3]   = r * Math.sin(phi) * Math.cos(t);
-      p[i*3+1] = r * Math.sin(phi) * Math.sin(t);
-      p[i*3+2] = r * Math.cos(phi);
+      p[i * 3]     = r * Math.sin(phi) * Math.cos(t);
+      p[i * 3 + 1] = r * Math.sin(phi) * Math.sin(t);
+      p[i * 3 + 2] = r * Math.cos(phi);
     }
     return p;
   }, [count]);
@@ -536,10 +477,10 @@ function Stars({ count }: { count: number }) {
       </bufferGeometry>
       <pointsMaterial
         color="#9bbfff"
-        size={0.03}
+        size={0.025}
         sizeAttenuation
         transparent
-        opacity={0.4}
+        opacity={0.45}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />
@@ -554,38 +495,35 @@ function SceneContent({ lowPower }: { lowPower: boolean }) {
 
   useFrame(() => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y += (pointer.x * 0.7 - groupRef.current.rotation.y) * 0.05;
-    groupRef.current.rotation.x += (pointer.y * 0.45 - groupRef.current.rotation.x) * 0.05;
+    groupRef.current.rotation.y += (pointer.x * 0.40 - groupRef.current.rotation.y) * 0.04;
+    groupRef.current.rotation.x += (pointer.y * 0.25 - groupRef.current.rotation.x) * 0.04;
   });
 
   return (
     <>
-      {/* Warm light from the forge below */}
-      <pointLight position={[0, -2.2, 0]} color="#ff7700" intensity={4} distance={14} decay={2} />
-      {/* Cold key light — engine monitor side */}
-      <pointLight position={[-5, 4, 5]}   color="#4488ff" intensity={1.2} distance={24} decay={2} />
-      {/* Soft fill */}
-      <directionalLight position={[3, 5, 3]} intensity={0.8} />
-      <ambientLight intensity={0.15} />
+      {/* Warm fill — like dock lights from below-right */}
+      <pointLight position={[2, -3, 2]}  color="#ff8a3a" intensity={1.1} distance={14} decay={2} />
+      {/* Cool key light — engine-bay overhead */}
+      <pointLight position={[-5, 5, 4]}  color="#5aa0ff" intensity={1.3} distance={22} decay={2} />
+      {/* Soft directional for hull definition */}
+      <directionalLight position={[3, 4, 6]} intensity={0.55} />
+      {/* Faint rim from behind */}
+      <pointLight position={[-2, 2, -6]} color="#3a5a9a" intensity={0.6} distance={20} decay={2} />
+      <ambientLight intensity={0.12} />
 
       <group ref={groupRef}>
-        <Stars count={lowPower ? 150 : 350} />
-        {/* Fire: base of planet */}
-        <group position={[0, -2.2, 0]}>
-          <ForgeFlame />
-        </group>
-        {/* The world being forged */}
-        <Planet lowPower={lowPower} />
+        <Stars count={lowPower ? 160 : 360} />
+        <Ship lowPower={lowPower} />
       </group>
 
-      {/* Bloom — makes the fire and ocean highlights actually glow */}
+      {/* Tight, intentional bloom — only hot things glow */}
       {!lowPower && (
         <EffectComposer>
           <Bloom
-            intensity={1.4}
-            kernelSize={KernelSize.LARGE}
-            luminanceThreshold={0.3}
-            luminanceSmoothing={0.6}
+            intensity={0.85}
+            kernelSize={KernelSize.MEDIUM}
+            luminanceThreshold={0.55}
+            luminanceSmoothing={0.30}
           />
         </EffectComposer>
       )}
@@ -595,23 +533,28 @@ function SceneContent({ lowPower }: { lowPower: boolean }) {
 
 /* ── Canvas + detection ──────────────────────── */
 export function HeroScene() {
-  const containerRef    = React.useRef<HTMLDivElement>(null);
-  const [ready,        setReady]        = React.useState(false);
-  const [visible,      setVisible]      = React.useState(true);
-  const [tabVisible,   setTabVisible]   = React.useState(true);
-  const [lowPower,     setLowPower]     = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [ready, setReady] = React.useState(false);
+  const [visible, setVisible] = React.useState(true);
+  const [tabVisible, setTabVisible] = React.useState(true);
+  const [lowPower, setLowPower] = React.useState(false);
   const [disableWebgl, setDisableWebgl] = React.useState(false);
 
   React.useEffect(() => {
     const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    const gl =
+      canvas.getContext("webgl2") ||
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl");
     setReady(!!gl);
   }, []);
 
   React.useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0 });
+    const obs = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), {
+      threshold: 0,
+    });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -635,8 +578,12 @@ export function HeroScene() {
     <div ref={containerRef} className="absolute inset-0 w-full h-full">
       <Canvas
         className="w-full h-full"
-        camera={{ position: [0, 0.5, 8], fov: 48 }}
-        gl={{ antialias: !lowPower, alpha: true, powerPreference: lowPower ? "default" : "high-performance" }}
+        camera={{ position: [0, 0.6, 8], fov: 46 }}
+        gl={{
+          antialias: !lowPower,
+          alpha: true,
+          powerPreference: lowPower ? "default" : "high-performance",
+        }}
         dpr={[1, lowPower ? 1 : 1.5]}
         frameloop={visible && tabVisible ? "always" : "never"}
         performance={{ min: 0.5 }}
