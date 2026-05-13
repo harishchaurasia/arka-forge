@@ -83,7 +83,7 @@ export function Hero() {
               transition={{ duration: 0.6, ease }}
               className="hidden md:block"
             >
-              <span className="inline-block mb-2 px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
+              <span className="inline-block mb-2 px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-mono">
                 Game Engineering &amp; Technology Studio
               </span>
             </motion.div>
@@ -108,7 +108,7 @@ export function Hero() {
             transition={{ duration: 0.6, ease }}
             className={hideHeroVisual ? "" : "md:hidden"}
           >
-            <span className="inline-block px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-display">
+            <span className="inline-block px-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.16em] uppercase text-primary/90 rounded-full glass-pill font-mono">
               Game Engineering &amp; Technology Studio
             </span>
           </motion.div>

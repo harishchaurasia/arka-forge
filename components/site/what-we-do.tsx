@@ -85,13 +85,13 @@ export function WhatWeDo() {
                 <Link href={item.href} className="group block h-full">
                   <div
                     className={`h-full glass-card p-8 transition-all duration-300 hover:-translate-y-1.5 ${
-                      item.primary ? "ring-1 ring-primary/20" : ""
+                      item.primary ? "ring-1 ring-primary/20 panel-brackets" : ""
                     }`}
                   >
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl glass-icon mb-5 group-hover:scale-105 transition-transform duration-300">
                       <Icon className="h-5 w-5 text-primary" />
                     </div>
-                    <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground block mb-1.5">
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground/80 block mb-1.5">
                       {item.eyebrow}
                     </span>
                     <h3 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors flex items-center gap-1.5">

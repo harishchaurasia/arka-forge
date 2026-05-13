@@ -36,6 +36,8 @@ const points: { title: string; body: string; icon: LucideIcon }[] = [
 export function HowWeWork() {
   return (
     <section className="py-28 md:py-36 relative">
+      {/* Faint grid — suggests a technical/operational environment */}
+      <div aria-hidden="true" className="absolute inset-0 grid-texture opacity-[0.55] pointer-events-none" />
       <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[140px] pointer-events-none" />
       <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
