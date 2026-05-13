@@ -62,9 +62,9 @@ function mulberry32(seed: number) {
 }
 
 /* ── HDR colors (>1.0) so emissives bloom ───────── */
-const WING_RED   = new THREE.Color(3.6, 0.45, 0.20);
-const WING_CYAN  = new THREE.Color(0.25, 1.8, 2.8);
-const COCKPIT_C  = new THREE.Color(0.6, 1.6, 2.4);
+const WING_RED  = new THREE.Color(3.6, 0.45, 0.20);
+const WING_CYAN = new THREE.Color(0.25, 1.8, 2.8);
+const COCKPIT_C = new THREE.Color(0.6, 1.6, 2.4);
 
 /* ── Running lights shader (hull dots) ──────────── */
 const lightsVert = /* glsl */ `
@@ -93,7 +93,6 @@ const lightsFrag = /* glsl */ `
     float d = length(gl_PointCoord - 0.5) * 2.0;
     if (d > 1.0) discard;
     float a = exp(-d * d * 2.6) * vAlpha;
-    // Push into HDR so bloom catches it
     gl_FragColor = vec4(vColor * (1.0 + vAlpha * 0.8), a);
   }
 `;
@@ -109,6 +108,7 @@ const exhaustVert = /* glsl */ `
 const exhaustFrag = /* glsl */ `
   uniform float uTime;
   uniform float uSeed;
+  uniform float uBoost;
   varying vec2  vUv;
   void main() {
     vec2 p = vUv - 0.5;
@@ -117,26 +117,70 @@ const exhaustFrag = /* glsl */ `
     float core  = pow(1.0 - d, 3.4);
     float outer = pow(1.0 - d, 1.3);
     float flick = 0.85 + 0.15 * sin(uTime * 13.0 + uSeed * 17.3);
-    // HDR — core is hot white-blue, edge orange
     vec3 col = mix(
       vec3(1.0, 0.45, 0.10),
       vec3(2.6, 2.0, 1.4),
       core
     );
-    float alpha = (outer * 0.55 + core * 1.2) * flick;
-    gl_FragColor = vec4(col, alpha);
+    float alpha = (outer * 0.55 + core * 1.2) * flick * uBoost;
+    gl_FragColor = vec4(col * uBoost, alpha);
   }
 `;
 
-/* ── Ship — procedural sci-fi vessel ─────────────── */
-function Ship({ lowPower }: { lowPower: boolean }) {
+/* ── Flight choreography ─────────────────────── */
+const FLY_DURATION = 6.8;
+const DISPLAY_EULER = new THREE.Euler(0.18, -0.55, 0.05);
+
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+function smoothstep(a: number, b: number, t: number) {
+  const x = Math.max(0, Math.min(1, (t - a) / (b - a)));
+  return x * x * (3 - 2 * x);
+}
+
+// Orient an object so its local +X faces `forward`, with `upHint` as the up direction.
+function alignForwardQuat(
+  forward: THREE.Vector3,
+  upHint: THREE.Vector3,
+  scratchRight: THREE.Vector3,
+  scratchUp: THREE.Vector3,
+  scratchMat: THREE.Matrix4,
+  out: THREE.Quaternion,
+) {
+  const f = forward;
+  // If forward is too parallel to upHint, fall back to a different up
+  let upH = upHint;
+  if (Math.abs(f.dot(upH)) > 0.97) {
+    upH = new THREE.Vector3(0, 0, 1);
+  }
+  scratchRight.crossVectors(f, upH).normalize();
+  scratchUp.crossVectors(scratchRight, f).normalize();
+  scratchMat.makeBasis(f, scratchUp, scratchRight);
+  out.setFromRotationMatrix(scratchMat);
+  return out;
+}
+
+/* ── Ship — procedural sci-fi vessel + flyby ──── */
+function Ship({
+  lowPower,
+  replayTrigger,
+}: {
+  lowPower: boolean;
+  replayTrigger: number;
+}) {
   const groupRef = React.useRef<THREE.Group>(null);
+  const flightStartRef = React.useRef(-1);
+  const inFlightRef = React.useRef(true);
+
   const lightsMatRef = React.useRef<THREE.ShaderMaterial>(null);
   const exhaust1Ref = React.useRef<THREE.ShaderMaterial>(null);
   const exhaust2Ref = React.useRef<THREE.ShaderMaterial>(null);
   const exhaust3Ref = React.useRef<THREE.ShaderMaterial>(null);
+  const engineLight1Ref = React.useRef<THREE.PointLight>(null);
+  const engineLight2Ref = React.useRef<THREE.PointLight>(null);
 
-  /* Greebles: small panel boxes scattered along the hull */
+  /* Greebles: instanced panel boxes */
   const greebleInstance = React.useMemo(() => {
     const count = lowPower ? 44 : 90;
     const rng = mulberry32(0xc0ffee);
@@ -152,7 +196,7 @@ function Ship({ lowPower }: { lowPower: boolean }) {
 
     for (let i = 0; i < count; i++) {
       const u = rng();
-      const x = (u - 0.5) * 3.6 - 0.15; // mostly along the fuselage
+      const x = (u - 0.5) * 3.6 - 0.15;
       const taper = Math.max(0.42, Math.cos((Math.abs(x) / 2.4) * 0.85));
       const side = Math.floor(rng() * 6);
       const w = 0.07 + rng() * 0.18;
@@ -187,10 +231,10 @@ function Ship({ lowPower }: { lowPower: boolean }) {
     return mesh;
   }, [lowPower]);
 
-  /* Running lights — points along hull + wings */
+  /* Running lights */
   const lightsGeom = React.useMemo(() => {
     const hullCount = lowPower ? 18 : 32;
-    const wingCount = 6; // 3 per wing, leading edge
+    const wingCount = 6;
     const count = hullCount + wingCount;
     const positions = new Float32Array(count * 3);
     const phases = new Float32Array(count);
@@ -199,12 +243,11 @@ function Ship({ lowPower }: { lowPower: boolean }) {
     const colors = new Float32Array(count * 3);
     const rng = mulberry32(0xbadf00d);
 
-    // Hull running lights
     for (let i = 0; i < hullCount; i++) {
       const u = (i + rng() * 0.5) / hullCount;
       const x = (u - 0.5) * 4.2 - 0.15;
       const taper = Math.max(0.45, Math.cos((Math.abs(x) / 2.3) * 0.85));
-      const r = 0.50 * taper;
+      const r = 0.5 * taper;
       const edge = i % 4;
       let y = 0,
         z = 0;
@@ -222,37 +265,33 @@ function Ship({ lowPower }: { lowPower: boolean }) {
       sizes[i] = 1.0;
 
       const c = rng();
-      if (c < 0.60) {
-        // cool cyan — most common
-        colors[i * 3]     = 0.40;
+      if (c < 0.6) {
+        colors[i * 3]     = 0.4;
         colors[i * 3 + 1] = 0.82;
         colors[i * 3 + 2] = 1.0;
       } else if (c < 0.92) {
-        // warm amber
         colors[i * 3]     = 1.0;
         colors[i * 3 + 1] = 0.55;
         colors[i * 3 + 2] = 0.12;
       } else {
-        // red beacon
         colors[i * 3]     = 1.0;
         colors[i * 3 + 1] = 0.18;
-        colors[i * 3 + 2] = 0.10;
+        colors[i * 3 + 2] = 0.1;
       }
     }
 
-    // Wing running lights — 3 per wing along the leading edge
     for (let w = 0; w < 2; w++) {
       const zSign = w === 0 ? 1 : -1;
       for (let j = 0; j < 3; j++) {
         const i = hullCount + w * 3 + j;
-        const t = (j + 0.5) / 3; // 0..1 across wing span
-        positions[i * 3]     = -0.85 + (1 - t) * 0.4; // sweep back
+        const t = (j + 0.5) / 3;
+        positions[i * 3]     = -0.85 + (1 - t) * 0.4;
         positions[i * 3 + 1] = -0.05;
-        positions[i * 3 + 2] = zSign * (0.65 + t * 0.80);
+        positions[i * 3 + 2] = zSign * (0.65 + t * 0.8);
         phases[i] = rng() * Math.PI * 2;
         rates[i] = 1.4;
         sizes[i] = 1.15;
-        colors[i * 3]     = 0.40;
+        colors[i * 3]     = 0.4;
         colors[i * 3 + 1] = 0.82;
         colors[i * 3 + 2] = 1.0;
       }
@@ -267,47 +306,152 @@ function Ship({ lowPower }: { lowPower: boolean }) {
     return geo;
   }, [lowPower]);
 
-  const lightsUniforms = React.useMemo(
-    () => ({ uTime: { value: 0 } }),
-    [],
-  );
+  const lightsUniforms = React.useMemo(() => ({ uTime: { value: 0 } }), []);
   const exhaustU1 = React.useMemo(
-    () => ({ uTime: { value: 0 }, uSeed: { value: 0.31 } }),
+    () => ({ uTime: { value: 0 }, uSeed: { value: 0.31 }, uBoost: { value: 1 } }),
     [],
   );
   const exhaustU2 = React.useMemo(
-    () => ({ uTime: { value: 0 }, uSeed: { value: 0.67 } }),
+    () => ({ uTime: { value: 0 }, uSeed: { value: 0.67 }, uBoost: { value: 1 } }),
     [],
   );
   const exhaustU3 = React.useMemo(
-    () => ({ uTime: { value: 0 }, uSeed: { value: 0.92 } }),
+    () => ({ uTime: { value: 0 }, uSeed: { value: 0.92 }, uBoost: { value: 1 } }),
     [],
   );
 
+  /* Flight path — Catmull-Rom curve through control points.
+     Coords are in world space; ship enters off-screen lower-left,
+     swoops past the camera, arcs up and around behind the upper-right,
+     comes back down and settles at the display pose. */
+  const curve = React.useMemo(
+    () =>
+      new THREE.CatmullRomCurve3(
+        [
+          new THREE.Vector3(-11, -3.2, -5),
+          new THREE.Vector3(-4, -2.4, 1.5),
+          new THREE.Vector3(1.5, -1.2, 4),
+          new THREE.Vector3(5, 0.6, 2.5),
+          new THREE.Vector3(4.5, 2.4, -1.5),
+          new THREE.Vector3(0.5, 3.2, -3),
+          new THREE.Vector3(-2.5, 2.6, -1),
+          new THREE.Vector3(-2.2, 1.0, 0.8),
+          new THREE.Vector3(0.15, 0.15, 0),
+        ],
+        false,
+        "catmullrom",
+        0.5,
+      ),
+    [],
+  );
+
+  const displayQuat = React.useMemo(
+    () => new THREE.Quaternion().setFromEuler(DISPLAY_EULER),
+    [],
+  );
+
+  // Scratch objects — reused across frames to avoid GC pressure
+  const scratch = React.useMemo(
+    () => ({
+      pos: new THREE.Vector3(),
+      tan: new THREE.Vector3(),
+      tan2: new THREE.Vector3(),
+      right: new THREE.Vector3(),
+      up: new THREE.Vector3(),
+      mat: new THREE.Matrix4(),
+      flightQuat: new THREE.Quaternion(),
+      bankQuat: new THREE.Quaternion(),
+      finalQuat: new THREE.Quaternion(),
+      axis: new THREE.Vector3(),
+    }),
+    [],
+  );
+
+  // Re-trigger flight when replayTrigger changes
+  React.useEffect(() => {
+    inFlightRef.current = true;
+    flightStartRef.current = -1;
+  }, [replayTrigger]);
+
   useFrame(({ clock }, delta) => {
-    if (groupRef.current) {
+    if (!groupRef.current) return;
+    const t = clock.elapsedTime;
+
+    if (inFlightRef.current) {
+      if (flightStartRef.current < 0) flightStartRef.current = t;
+      const elapsed = t - flightStartRef.current;
+      const rawT = Math.min(1, elapsed / FLY_DURATION);
+      const tPath = easeOutCubic(rawT);
+
+      // Position along curve
+      curve.getPoint(tPath, scratch.pos);
+      groupRef.current.position.copy(scratch.pos);
+
+      // Orientation from tangent + banking from turn rate
+      curve.getTangent(tPath, scratch.tan);
+      const tNext = Math.min(0.998, tPath + 0.015);
+      curve.getTangent(tNext, scratch.tan2);
+      const turnSign =
+        scratch.tan.x * scratch.tan2.z - scratch.tan.z * scratch.tan2.x;
+      const bank = Math.max(-0.55, Math.min(0.55, turnSign * 28));
+
+      alignForwardQuat(
+        scratch.tan,
+        new THREE.Vector3(0, 1, 0),
+        scratch.right,
+        scratch.up,
+        scratch.mat,
+        scratch.flightQuat,
+      );
+      scratch.axis.copy(scratch.tan).normalize();
+      scratch.bankQuat.setFromAxisAngle(scratch.axis, bank);
+      scratch.finalQuat.copy(scratch.bankQuat).multiply(scratch.flightQuat);
+
+      // Settle: blend to display pose in the last 15%
+      const settleT = smoothstep(0.85, 1.0, rawT);
+      scratch.finalQuat.slerp(displayQuat, settleT);
+      groupRef.current.quaternion.copy(scratch.finalQuat);
+
+      // Engine boost during flight, falling to nominal as it settles
+      const boost = 1.0 + (1 - settleT) * 0.95;
+      exhaustU1.uBoost.value = boost;
+      exhaustU2.uBoost.value = boost;
+      exhaustU3.uBoost.value = boost;
+      if (engineLight1Ref.current) engineLight1Ref.current.intensity = 1.6 * boost;
+      if (engineLight2Ref.current) engineLight2Ref.current.intensity = 0.7 * boost;
+
+      if (rawT >= 1) {
+        inFlightRef.current = false;
+        flightStartRef.current = -1;
+      }
+    } else {
+      // Display mode — turntable + bob
       groupRef.current.rotation.y += delta * 0.085;
-      groupRef.current.position.y = Math.sin(clock.elapsedTime * 0.42) * 0.06;
+      groupRef.current.position.set(
+        0.15,
+        0.15 + Math.sin(t * 0.42) * 0.06,
+        0,
+      );
+      exhaustU1.uBoost.value = 1.0;
+      exhaustU2.uBoost.value = 1.0;
+      exhaustU3.uBoost.value = 1.0;
+      if (engineLight1Ref.current) engineLight1Ref.current.intensity = 1.6;
+      if (engineLight2Ref.current) engineLight2Ref.current.intensity = 0.7;
     }
-    if (lightsMatRef.current) {
-      lightsMatRef.current.uniforms.uTime.value = clock.elapsedTime;
-    }
-    if (exhaust1Ref.current) exhaust1Ref.current.uniforms.uTime.value = clock.elapsedTime;
-    if (exhaust2Ref.current) exhaust2Ref.current.uniforms.uTime.value = clock.elapsedTime;
-    if (exhaust3Ref.current) exhaust3Ref.current.uniforms.uTime.value = clock.elapsedTime;
+
+    // Shader uniforms
+    if (lightsMatRef.current) lightsMatRef.current.uniforms.uTime.value = t;
+    if (exhaust1Ref.current)  exhaust1Ref.current.uniforms.uTime.value  = t;
+    if (exhaust2Ref.current)  exhaust2Ref.current.uniforms.uTime.value  = t;
+    if (exhaust3Ref.current)  exhaust3Ref.current.uniforms.uTime.value  = t;
   });
 
   return (
-    <group
-      ref={groupRef}
-      rotation={[0.18, -0.55, 0.05]}
-      position={[0.15, 0.15, 0]}
-      scale={0.66}
-    >
+    <group ref={groupRef} scale={0.66}>
       {/* Engine block (rear) */}
       <mesh position={[-1.95, 0, 0]}>
-        <boxGeometry args={[0.95, 0.80, 1.10]} />
-        <meshStandardMaterial color="#1a2028" roughness={0.50} metalness={0.86} />
+        <boxGeometry args={[0.95, 0.8, 1.1]} />
+        <meshStandardMaterial color="#1a2028" roughness={0.5} metalness={0.86} />
       </mesh>
 
       {/* Main fuselage cylinder — axis along X */}
@@ -318,43 +462,43 @@ function Ship({ lowPower }: { lowPower: boolean }) {
 
       {/* Nose cone */}
       <mesh rotation={[0, 0, -Math.PI / 2]} position={[1.95, 0, 0]}>
-        <coneGeometry args={[0.42, 1.10, 14]} />
+        <coneGeometry args={[0.42, 1.1, 14]} />
         <meshStandardMaterial color="#1c232c" roughness={0.48} metalness={0.88} />
       </mesh>
 
       {/* Dorsal plating */}
-      <mesh position={[-0.20, 0.45, 0]}>
-        <boxGeometry args={[2.85, 0.10, 0.78]} />
+      <mesh position={[-0.2, 0.45, 0]}>
+        <boxGeometry args={[2.85, 0.1, 0.78]} />
         <meshStandardMaterial color="#252c34" roughness={0.55} metalness={0.85} />
       </mesh>
       {/* Ventral plating */}
-      <mesh position={[-0.20, -0.45, 0]}>
-        <boxGeometry args={[2.80, 0.08, 0.62]} />
+      <mesh position={[-0.2, -0.45, 0]}>
+        <boxGeometry args={[2.8, 0.08, 0.62]} />
         <meshStandardMaterial color="#252c34" roughness={0.55} metalness={0.85} />
       </mesh>
 
-      {/* Bridge tower — two stacked boxes, forward of mid */}
-      <mesh position={[0.50, 0.62, 0]}>
+      {/* Bridge tower */}
+      <mesh position={[0.5, 0.62, 0]}>
         <boxGeometry args={[0.72, 0.28, 0.55]} />
-        <meshStandardMaterial color="#1f262e" roughness={0.50} metalness={0.86} />
+        <meshStandardMaterial color="#1f262e" roughness={0.5} metalness={0.86} />
       </mesh>
       <mesh position={[0.55, 0.84, 0]}>
-        <boxGeometry args={[0.36, 0.18, 0.40]} />
-        <meshStandardMaterial color="#181c22" roughness={0.50} metalness={0.86} />
+        <boxGeometry args={[0.36, 0.18, 0.4]} />
+        <meshStandardMaterial color="#181c22" roughness={0.5} metalness={0.86} />
       </mesh>
       {/* Cockpit canopy strip — emissive cyan */}
       <mesh position={[0.78, 0.84, 0]}>
-        <boxGeometry args={[0.10, 0.08, 0.30]} />
+        <boxGeometry args={[0.1, 0.08, 0.3]} />
         <meshBasicMaterial color={COCKPIT_C} toneMapped={false} />
       </mesh>
 
       {/* Wings — port and starboard, swept */}
-      <mesh position={[-0.55, -0.05, 1.10]} rotation={[0, 0.22, 0]}>
-        <boxGeometry args={[1.50, 0.06, 0.90]} />
+      <mesh position={[-0.55, -0.05, 1.1]} rotation={[0, 0.22, 0]}>
+        <boxGeometry args={[1.5, 0.06, 0.9]} />
         <meshStandardMaterial color="#222931" roughness={0.55} metalness={0.85} />
       </mesh>
-      <mesh position={[-0.55, -0.05, -1.10]} rotation={[0, -0.22, 0]}>
-        <boxGeometry args={[1.50, 0.06, 0.90]} />
+      <mesh position={[-0.55, -0.05, -1.1]} rotation={[0, -0.22, 0]}>
+        <boxGeometry args={[1.5, 0.06, 0.9]} />
         <meshStandardMaterial color="#222931" roughness={0.55} metalness={0.85} />
       </mesh>
 
@@ -368,21 +512,21 @@ function Ship({ lowPower }: { lowPower: boolean }) {
         <meshBasicMaterial color={WING_CYAN} toneMapped={false} />
       </mesh>
 
-      {/* Engine nozzle rings — black metal cylinders surrounding the exhausts */}
+      {/* Engine nozzle rings */}
       <mesh position={[-2.45, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.24, 0.21, 0.20, 14, 1, true]} />
-        <meshStandardMaterial color="#13181e" roughness={0.40} metalness={0.92} side={THREE.DoubleSide} />
+        <cylinderGeometry args={[0.24, 0.21, 0.2, 14, 1, true]} />
+        <meshStandardMaterial color="#13181e" roughness={0.4} metalness={0.92} side={THREE.DoubleSide} />
       </mesh>
       <mesh position={[-2.43, 0.28, 0.36]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.16, 0.14, 0.16, 12, 1, true]} />
-        <meshStandardMaterial color="#13181e" roughness={0.40} metalness={0.92} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#13181e" roughness={0.4} metalness={0.92} side={THREE.DoubleSide} />
       </mesh>
       <mesh position={[-2.43, 0.28, -0.36]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.16, 0.14, 0.16, 12, 1, true]} />
-        <meshStandardMaterial color="#13181e" roughness={0.40} metalness={0.92} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#13181e" roughness={0.4} metalness={0.92} side={THREE.DoubleSide} />
       </mesh>
 
-      {/* Greebles — instanced panel boxes */}
+      {/* Greebles */}
       <primitive object={greebleInstance} />
 
       {/* Running lights */}
@@ -399,7 +543,7 @@ function Ship({ lowPower }: { lowPower: boolean }) {
         />
       </points>
 
-      {/* Engine exhausts — additive disks behind the nozzles */}
+      {/* Engine exhausts */}
       <mesh position={[-2.56, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
         <planeGeometry args={[0.46, 0.46]} />
         <shaderMaterial
@@ -415,7 +559,7 @@ function Ship({ lowPower }: { lowPower: boolean }) {
         />
       </mesh>
       <mesh position={[-2.54, 0.28, 0.36]} rotation={[0, Math.PI / 2, 0]}>
-        <planeGeometry args={[0.30, 0.30]} />
+        <planeGeometry args={[0.3, 0.3]} />
         <shaderMaterial
           ref={exhaust2Ref}
           vertexShader={exhaustVert}
@@ -429,7 +573,7 @@ function Ship({ lowPower }: { lowPower: boolean }) {
         />
       </mesh>
       <mesh position={[-2.54, 0.28, -0.36]} rotation={[0, Math.PI / 2, 0]}>
-        <planeGeometry args={[0.30, 0.30]} />
+        <planeGeometry args={[0.3, 0.3]} />
         <shaderMaterial
           ref={exhaust3Ref}
           vertexShader={exhaustVert}
@@ -443,9 +587,9 @@ function Ship({ lowPower }: { lowPower: boolean }) {
         />
       </mesh>
 
-      {/* Engine glow point lights — illuminate hull from behind */}
-      <pointLight position={[-2.80, 0,    0]} color="#ff7026" intensity={1.6} distance={4.0} decay={2} />
-      <pointLight position={[-2.80, 0.28, 0]} color="#ff9040" intensity={0.7} distance={2.2} decay={2} />
+      {/* Engine glow point lights */}
+      <pointLight ref={engineLight1Ref} position={[-2.8, 0, 0]}    color="#ff7026" intensity={1.6} distance={4.0} decay={2} />
+      <pointLight ref={engineLight2Ref} position={[-2.8, 0.28, 0]} color="#ff9040" intensity={0.7} distance={2.2} decay={2} />
     </group>
   );
 }
@@ -491,39 +635,55 @@ function Stars({ count }: { count: number }) {
 /* ── Scene ───────────────────────────────────── */
 function SceneContent({ lowPower }: { lowPower: boolean }) {
   const groupRef = React.useRef<THREE.Group>(null);
+  const [replayTrigger, setReplayTrigger] = React.useState(0);
   usePointerParallax();
 
   useFrame(() => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y += (pointer.x * 0.40 - groupRef.current.rotation.y) * 0.04;
-    groupRef.current.rotation.x += (pointer.y * 0.25 - groupRef.current.rotation.x) * 0.04;
+    groupRef.current.rotation.y += (pointer.x * 0.25 - groupRef.current.rotation.y) * 0.04;
+    groupRef.current.rotation.x += (pointer.y * 0.18 - groupRef.current.rotation.x) * 0.04;
   });
+
+  const replay = React.useCallback(() => {
+    setReplayTrigger((k) => k + 1);
+  }, []);
 
   return (
     <>
-      {/* Warm fill — like dock lights from below-right */}
       <pointLight position={[2, -3, 2]}  color="#ff8a3a" intensity={1.1} distance={14} decay={2} />
-      {/* Cool key light — engine-bay overhead */}
       <pointLight position={[-5, 5, 4]}  color="#5aa0ff" intensity={1.3} distance={22} decay={2} />
-      {/* Soft directional for hull definition */}
       <directionalLight position={[3, 4, 6]} intensity={0.55} />
-      {/* Faint rim from behind */}
       <pointLight position={[-2, 2, -6]} color="#3a5a9a" intensity={0.6} distance={20} decay={2} />
       <ambientLight intensity={0.12} />
 
       <group ref={groupRef}>
         <Stars count={lowPower ? 160 : 360} />
-        <Ship lowPower={lowPower} />
+        {/* Wrapper makes the ship clickable — bubbles up from any child mesh */}
+        <group
+          onPointerDown={(e) => {
+            e.stopPropagation();
+            replay();
+          }}
+          onPointerOver={(e) => {
+            e.stopPropagation();
+            document.body.style.cursor = "pointer";
+          }}
+          onPointerOut={(e) => {
+            e.stopPropagation();
+            document.body.style.cursor = "";
+          }}
+        >
+          <Ship lowPower={lowPower} replayTrigger={replayTrigger} />
+        </group>
       </group>
 
-      {/* Tight, intentional bloom — only hot things glow */}
       {!lowPower && (
         <EffectComposer>
           <Bloom
             intensity={0.85}
             kernelSize={KernelSize.MEDIUM}
             luminanceThreshold={0.55}
-            luminanceSmoothing={0.30}
+            luminanceSmoothing={0.3}
           />
         </EffectComposer>
       )}
@@ -572,10 +732,17 @@ export function HeroScene() {
     setDisableWebgl(mode.forceDisableWebgl);
   }, []);
 
+  // Restore cursor when component unmounts (defensive)
+  React.useEffect(() => {
+    return () => {
+      document.body.style.cursor = "";
+    };
+  }, []);
+
   if (!ready || disableWebgl) return null;
 
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-auto">
       <Canvas
         className="w-full h-full"
         camera={{ position: [0, 0.6, 8], fov: 46 }}
