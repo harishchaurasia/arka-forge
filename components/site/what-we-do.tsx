@@ -53,10 +53,10 @@ export function WhatWeDo() {
     <section className="py-28 md:py-36 relative" id="what-we-do">
       <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease }}
+          transition={{ duration: 0.5, ease }}
           className="mb-14"
         >
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
@@ -77,10 +77,10 @@ export function WhatWeDo() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                transition={{ duration: 0.45, delay: i * 0.07, ease }}
               >
                 <Link href={item.href} className="group block h-full">
                   <div

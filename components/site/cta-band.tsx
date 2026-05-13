@@ -16,10 +16,10 @@ export function CTABand() {
 
       <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease }}
+          transition={{ duration: 0.6, ease }}
           className="glass-card p-12 md:p-20 text-center"
         >
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-4 block">

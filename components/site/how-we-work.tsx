@@ -40,13 +40,7 @@ export function HowWeWork() {
       <div aria-hidden="true" className="absolute inset-0 grid-texture opacity-[0.55] pointer-events-none" />
       <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[140px] pointer-events-none" />
       <div className="relative mx-auto max-w-6xl px-5">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease }}
-          className="mb-14 max-w-2xl"
-        >
+        <div className="mb-14 max-w-2xl">
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
             How we work
           </span>
@@ -58,7 +52,7 @@ export function HowWeWork() {
             distance is a non-issue — because for the studios that hire co-dev
             partners, it's the first thing they worry about.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           {points.map((p, i) => {
@@ -66,10 +60,10 @@ export function HowWeWork() {
             return (
               <motion.div
                 key={p.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease }}
               >
                 <div className="h-full glass-card p-7 flex items-start gap-4">
                   <div className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl glass-icon">
