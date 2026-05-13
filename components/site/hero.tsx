@@ -40,14 +40,26 @@ export function Hero() {
       <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] rounded-full bg-primary/[0.03] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-accent/[0.02] blur-[120px] pointer-events-none" />
 
-      {/* WebGL scene - right side, large and visible on desktop */}
+      {/* WebGL scene — foreground right, visible and dramatic */}
       {!hideHeroVisual && (
-        <div className="absolute right-[-5%] top-[-5%] bottom-[-5%] w-[65%] pointer-events-none opacity-16 md:opacity-18 hidden md:block">
+        <div className="absolute right-[-5%] top-[-5%] bottom-[-5%] w-[65%] pointer-events-none hidden md:block" style={{ opacity: 0.78 }}>
+          {/* Left-edge fade so the scene doesn't bleed into the headline text */}
+          <div className="absolute inset-y-0 left-0 w-[35%] z-10 pointer-events-none"
+               style={{ background: "linear-gradient(to right, hsl(224 16% 4%), transparent)" }} />
           {mounted && (
             <React.Suspense fallback={null}>
               <HeroScene />
             </React.Suspense>
           )}
+          {/* Mono HUD readout — engine-viewport chrome */}
+          <div className="absolute bottom-8 right-8 z-20 text-right pointer-events-none select-none hidden lg:block">
+            <span className="font-mono text-[9px] tracking-wider text-white/20 block leading-relaxed">
+              real-time · r3f · webgl
+            </span>
+            <span className="font-mono text-[9px] tracking-wider text-primary/25 block leading-relaxed">
+              build sequence active
+            </span>
+          </div>
         </div>
       )}
 
@@ -65,7 +77,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease }}
-              className="relative h-52 w-52 sm:h-64 sm:w-64 md:hidden"
+              className="relative h-64 w-64 sm:h-72 sm:w-72 md:hidden"
             >
               <div className="absolute inset-0 rounded-full bg-primary/[0.08] blur-2xl" />
               {mounted && (
