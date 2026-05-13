@@ -16,8 +16,7 @@ export default async function WorkPage() {
       <BackLink href="/" label="Back to Home" />
       <div className="mb-12">
         <span
-          className="text-xs font-semibold uppercase
-        tracking-widest text-primary/70 mb-3 block"
+          className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block"
         >
           Portfolio
         </span>

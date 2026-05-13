@@ -49,7 +49,7 @@ export default async function WorkPostPage({ params }: Props) {
       <article className="max-w-3xl mx-auto">
         <BackLink href="/work" label="Back to Work" />
         <header className="mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
             Work
           </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">

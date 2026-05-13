@@ -11,7 +11,7 @@ export default function PrivacyPage() {
     <Section>
       <div className="max-w-3xl mx-auto">
         <div className="text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
             Legal
           </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">

@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         display: ["Nourd", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       colors: {
         background: "hsl(var(--background))",

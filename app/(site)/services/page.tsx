@@ -30,7 +30,7 @@ export default function ServicesPage() {
     <Section>
       <BackLink href="/" label="Back to Home" />
       <div className="mb-12 max-w-2xl">
-        <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+        <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
           What we do
         </span>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
@@ -66,7 +66,7 @@ export default function ServicesPage() {
       </div>
 
       <div className="mt-10 glass-card p-8 md:p-10 max-w-3xl">
-        <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+        <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
           How deep it goes
         </span>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">

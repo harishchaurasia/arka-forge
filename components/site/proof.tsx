@@ -11,7 +11,7 @@ export async function Proof() {
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
               Selected work
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">

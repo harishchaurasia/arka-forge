@@ -36,7 +36,7 @@ export default function CompanyPage() {
       <div className="max-w-4xl mx-auto">
         {/* Masthead */}
         <div className="text-center mb-20">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-4 block">
             About ArkaForge
           </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
@@ -55,7 +55,7 @@ export default function CompanyPage() {
 
         {/* Origin */}
         <div className="mb-20">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-4 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-4 block">
             Origin
           </span>
           <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
@@ -86,7 +86,7 @@ export default function CompanyPage() {
 
         {/* Values */}
         <div className="mb-20">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-5 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-5 block">
             How we work
           </span>
           <div className="grid gap-5 md:grid-cols-3">

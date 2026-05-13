@@ -45,7 +45,7 @@ export function HowWeWork() {
           transition={{ duration: 0.6, ease }}
           className="mb-14 max-w-2xl"
         >
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
             How we work
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">

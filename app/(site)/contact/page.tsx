@@ -54,7 +54,7 @@ export default function ContactPage() {
       <div className="mx-auto max-w-6xl px-5">
         <BackLink href="/" label="Back to Home" />
         <div className="mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 block">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
             Get in Touch
           </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Contact</h1>
