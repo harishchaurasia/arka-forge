@@ -40,12 +40,17 @@ export function Hero() {
       <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] rounded-full bg-primary/[0.03] blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-accent/[0.02] blur-[120px] pointer-events-none" />
 
-      {/* WebGL scene — foreground right, visible and dramatic */}
+      {/* WebGL scene — spans the full hero so the ship can fly behind the headline */}
       {!hideHeroVisual && (
-        <div className="absolute right-[-5%] top-[-5%] bottom-[-5%] w-[65%] pointer-events-none hidden md:block" style={{ opacity: 0.78 }}>
-          {/* Left-edge fade so the scene doesn't bleed into the headline text */}
-          <div className="absolute inset-y-0 left-0 w-[35%] z-10 pointer-events-none"
-               style={{ background: "linear-gradient(to right, hsl(224 16% 4%), transparent)" }} />
+        <div className="absolute inset-y-[-5%] inset-x-0 pointer-events-none hidden md:block" style={{ opacity: 0.78 }}>
+          {/* Headline-area scrim: soft falloff so ship is visible-but-dim behind the text */}
+          <div
+            className="absolute inset-y-0 left-0 w-[58%] z-10 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to right, hsl(224 16% 4% / 0.82) 0%, hsl(224 16% 4% / 0.55) 45%, hsl(224 16% 4% / 0.20) 78%, transparent 100%)",
+            }}
+          />
           {mounted && (
             <React.Suspense fallback={null}>
               <HeroScene />
@@ -57,7 +62,7 @@ export function Hero() {
               real-time · r3f · webgl
             </span>
             <span className="font-mono text-[9px] tracking-wider text-primary/25 block leading-relaxed">
-              build sequence active
+              vessel preview · idle
             </span>
           </div>
         </div>

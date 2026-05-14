@@ -161,7 +161,13 @@ function alignForwardQuat(
   return out;
 }
 
-/* ── Ship — procedural sci-fi vessel + flyby ──── */
+/* ── Ship — procedural sci-fi vessel + flyby ────
+   FUTURE: swap the procedural geometry below for a loaded GLTF asset.
+   The animation logic (flight path, banking, settle-to-display) is
+   driven via groupRef and is geometry-agnostic — replace just the
+   mesh tree inside the return, keep the rest. Materials and HDR
+   emissives (cockpit, wing-tips, exhausts) should remain on the
+   asset so bloom still catches them. */
 function Ship({
   lowPower,
   replayTrigger,
@@ -321,22 +327,26 @@ function Ship({
   );
 
   /* Flight path — Catmull-Rom curve through control points.
-     Coords are in world space; ship enters off-screen lower-left,
-     swoops past the camera, arcs up and around behind the upper-right,
-     comes back down and settles at the display pose. */
+     Coords are in world space. With the canvas now spanning the full
+     hero width, the sweep extends across both sides: enters off-screen
+     lower-left, swoops past the camera, arcs up-right, then crosses
+     back over the headline area at the top (visible-but-dim behind
+     the text scrim), descends along the left, and settles right of
+     center where the headline ends. */
   const curve = React.useMemo(
     () =>
       new THREE.CatmullRomCurve3(
         [
-          new THREE.Vector3(-11, -3.2, -5),
-          new THREE.Vector3(-4, -2.4, 1.5),
-          new THREE.Vector3(1.5, -1.2, 4),
-          new THREE.Vector3(5, 0.6, 2.5),
-          new THREE.Vector3(4.5, 2.4, -1.5),
-          new THREE.Vector3(0.5, 3.2, -3),
-          new THREE.Vector3(-2.5, 2.6, -1),
-          new THREE.Vector3(-2.2, 1.0, 0.8),
-          new THREE.Vector3(0.15, 0.15, 0),
+          new THREE.Vector3(-16, -3.6, -5),
+          new THREE.Vector3(-7, -2.6, 1),
+          new THREE.Vector3(-1.5, -1.4, 4),
+          new THREE.Vector3(4, -0.2, 3.5),
+          new THREE.Vector3(7, 1.4, 0.5),
+          new THREE.Vector3(4, 3.0, -2),
+          new THREE.Vector3(-2, 3.4, -2.5),
+          new THREE.Vector3(-6, 2.6, -1),
+          new THREE.Vector3(-4, 1.0, 0.8),
+          new THREE.Vector3(2.6, 0.15, 0),
         ],
         false,
         "catmullrom",
@@ -425,10 +435,10 @@ function Ship({
         flightStartRef.current = -1;
       }
     } else {
-      // Display mode — turntable + bob
+      // Display mode — turntable + bob, parked right of the headline area
       groupRef.current.rotation.y += delta * 0.085;
       groupRef.current.position.set(
-        0.15,
+        2.6,
         0.15 + Math.sin(t * 0.42) * 0.06,
         0,
       );
