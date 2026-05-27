@@ -1,67 +1,106 @@
 import Link from "next/link";
 import { getWork } from "@/lib/content/loader";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { MediaFrame } from "@/components/site/media-frame";
 
 export async function Proof() {
-  const work = (await getWork()).slice(0, 2);
+  const work = await getWork();
   if (work.length === 0) return null;
 
+  // Glovebox is the flagship — feature it; fall back to the first item.
+  const featured = work.find((w) => w.slug.includes("los-alamos")) ?? work[0];
+  const rest = work.filter((w) => w.slug !== featured.slug).slice(0, 2);
+
   return (
-    <section className="py-28 md:py-36 relative" id="work">
-      <div className="relative mx-auto max-w-6xl px-5">
+    <section
+      id="work"
+      className="relative py-20 text-foreground md:py-32"
+    >
+      <div className="mx-auto max-w-6xl px-5">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
-              Selected work
+            <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+              // selected work
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Proof
+            <h2 className="font-grotesk text-3xl font-bold tracking-tight md:text-4xl">
+              Proof, not promises.
             </h2>
           </div>
           <Link
             href="/work"
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-primary sm:block"
           >
             All work →
           </Link>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
-          {work.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/work/${item.slug}`}
-              className="group block"
-            >
-              <div className="h-full glass-card p-7 transition-all duration-300 hover:-translate-y-1.5">
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                  {item.frontmatter.title}
-                </h3>
-                {item.frontmatter.client && (
-                  <p className="text-xs text-foreground/60 mb-3">
-                    {item.frontmatter.client}
-                  </p>
-                )}
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {item.frontmatter.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {item.frontmatter.tags.slice(0, 4).map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-primary/30 text-primary/90 bg-primary/[0.05]"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <span className="text-sm font-semibold text-primary inline-flex items-center gap-1.5">
-                  Read the case study <ArrowRight className="h-4 w-4" />
-                </span>
+        {/* Featured case study — the flagship, with media */}
+        <Link href={`/work/${featured.slug}`} className="group block">
+          <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-1 sm:p-6 md:grid md:grid-cols-2 md:items-center md:gap-8 md:p-8">
+            <MediaFrame
+              label={`${featured.frontmatter.title} · selected views`}
+              note="UE5 · real-time"
+              aspect="16/9"
+              dims="1600 × 900"
+              className="min-w-0"
+            />
+            <div className="min-w-0">
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                Flagship · {featured.frontmatter.client ?? "Case study"}
+              </span>
+              <h3 className="mt-2 font-grotesk text-xl font-semibold transition-colors group-hover:text-primary sm:text-2xl">
+                {featured.frontmatter.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {featured.frontmatter.description}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {featured.frontmatter.tags.slice(0, 4).map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+                  >
+                    {t}
+                  </span>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                Read the case study <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        {/* Remaining case studies */}
+        {rest.length > 0 && (
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
+            {rest.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/work/${item.slug}`}
+                className="group block"
+              >
+                <div className="flex h-full flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1">
+                  <MediaFrame
+                    label={item.frontmatter.title}
+                    aspect="16/9"
+                    dims="1600 × 900"
+                    className="mb-5"
+                  />
+                  <h3 className="font-grotesk text-lg font-semibold transition-colors group-hover:text-primary">
+                    {item.frontmatter.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {item.frontmatter.description}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    Read the case study <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

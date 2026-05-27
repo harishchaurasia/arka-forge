@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { getWorkPost, getWork } from "@/lib/content/loader";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
-import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
+import { MediaFrame } from "@/components/site/media-frame";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -12,18 +12,13 @@ type Props = {
 
 export async function generateStaticParams() {
   const work = await getWork();
-  return work.map((item) => ({
-    slug: item.slug,
-  }));
+  return work.map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const work = await getWorkPost(slug);
-
-  if (!work) {
-    return {};
-  }
+  if (!work) return {};
 
   return {
     title: work.frontmatter.title,
@@ -39,53 +34,120 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function WorkPostPage({ params }: Props) {
   const { slug } = await params;
   const work = await getWorkPost(slug);
+  if (!work) notFound();
 
-  if (!work) {
-    notFound();
-  }
+  const fm = work.frontmatter as {
+    title: string;
+    description: string;
+    client?: string;
+    tags: string[];
+    date: string;
+    metrics?: Record<string, string>;
+  };
+
+  const specRows = fm.metrics
+    ? (
+        [
+          ["Domain", fm.metrics.domain],
+          ["Technology", fm.metrics.technology],
+          ["Scope", fm.metrics.scope],
+          ["Type", fm.metrics.type],
+        ] as [string, string | undefined][]
+      ).filter((row): row is [string, string] => Boolean(row[1]))
+    : [];
 
   return (
-    <Section>
-      <article className="max-w-3xl mx-auto">
+    <section className="relative bg-background py-28 text-foreground md:py-36">
+      <div className="mx-auto max-w-4xl px-5">
         <BackLink href="/work" label="Back to Work" />
-        <header className="mb-12">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
-            Work
+
+        {/* Editorial header */}
+        <header className="mb-10 mt-8">
+          <span className="mb-4 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+            // case study
           </span>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            {work.frontmatter.title}
+          <h1 className="font-grotesk text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
+            {fm.title}
           </h1>
-          <p className="text-base text-muted-foreground leading-relaxed mb-6 max-w-2xl">
-            {work.frontmatter.description}
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {fm.description}
           </p>
-          {work.frontmatter.client && (
-            <p className="text-xs text-foreground/60 mb-6">
-              {work.frontmatter.client}
+          {fm.client && (
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground/70">
+              {fm.client}
             </p>
           )}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {work.frontmatter.tags.map((tag) => (
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {fm.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs uppercase tracking-wider px-3 py-1 rounded-full border border-primary/30 text-primary/90 bg-primary/[0.05]"
+                className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
               >
                 {tag}
               </span>
             ))}
           </div>
-          <time className="text-xs text-muted-foreground">
-            {new Date(work.frontmatter.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
         </header>
 
-        <div className="prose prose-invert max-w-none">
+        {/* Cover media — placeholder until real capture is in hand */}
+        <MediaFrame
+          label={`${fm.title} · selected views`}
+          note="UE5 · real-time"
+          aspect="16/9"
+          dims="1920 × 1080"
+          className="mb-12"
+        />
+
+        {/* Spec sheet from frontmatter metrics */}
+        {specRows.length > 0 && (
+          <dl className="mb-12 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card/50">
+            {specRows.map(([k, v]) => (
+              <div
+                key={k}
+                className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+              >
+                <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70 sm:shrink-0">
+                  {k}
+                </dt>
+                <dd className="text-sm text-foreground sm:text-right">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        {/* Body — prose follows the theme tokens */}
+        <div className="prose max-w-none prose-headings:font-grotesk prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-primary prose-hr:border-border prose-em:text-muted-foreground/80">
           <MDXRemote source={work.content} components={mdxComponents} />
         </div>
-      </article>
-    </Section>
+
+        {/* Gallery — placeholders for screenshots / the clip */}
+        <div className="mt-14">
+          <span className="mb-5 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+            // selected views
+          </span>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <MediaFrame
+              label="In-engine — environment"
+              note="screenshot"
+              aspect="16/9"
+              dims="1600 × 900"
+            />
+            <MediaFrame
+              label="Assessment overlay — scoring"
+              note="screenshot"
+              aspect="16/9"
+              dims="1600 × 900"
+            />
+            <MediaFrame
+              label="Task sequence — walkthrough"
+              note="clip · 1080p"
+              aspect="16/9"
+              dims="1920 × 1080"
+              className="sm:col-span-2"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

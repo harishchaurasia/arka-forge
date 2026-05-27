@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
-import { ArrowRight } from "lucide-react";
+import { Layers, Cpu, Rocket, Gamepad2, ArrowRight } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Game Co-Development - ArkaForge",
@@ -10,26 +11,30 @@ export const metadata: Metadata = {
     "Embed ArkaForge into your UE5 or Unity pipeline as a senior co-development partner — features, systems, AI, prototypes, and vertical slices.",
 };
 
-const shapes = [
+const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Features & systems engineering",
     description:
       "Combat, AI, netcode, tools, UI, content pipelines. Scoped sprints that ship into your codebase at your quality bar — the fastest way to add senior UE5 or Unity capacity without growing headcount.",
+    icon: Layers,
   },
   {
     title: "AI & agentic systems",
     description:
-      "LLM-driven NPCs, agentic behaviours, generative content pipelines, in-game AI tooling — built by an AI/ML engineer who has been shipping agentic systems since before the category had a name.",
+      "LLM-driven NPCs, agentic behaviours, generative content pipelines, in-game AI tooling — built by an AI/ML engineer who's been shipping agentic systems since before the category had a name.",
+    icon: Cpu,
   },
   {
     title: "Prototypes & vertical slices",
     description:
       "Fixed-bid playable builds. Take a pitch deck to a demo a publisher will sit through. For studios validating ideas, indies pitching, or non-game teams entering interactive.",
+    icon: Rocket,
   },
   {
     title: "Serious games & gamification",
     description:
       "Game design applied to non-game products — branching scenarios, scoring, progression, performance analytics. Where game design crosses into product; the bridge into our Interactive Products work.",
+    icon: Gamepad2,
   },
 ];
 
@@ -54,102 +59,183 @@ const engagements = [
 export default function GameCoDevelopmentPage() {
   return (
     <Section>
-      <div className="max-w-3xl">
+      <div className="mx-auto max-w-3xl">
         <BackLink href="/services" label="Back to Services" />
-        <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
-          Game co-development
-        </span>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-          End-to-end UE5 &amp; Unity co-development
-        </h1>
-        <p className="text-base text-muted-foreground mb-12 leading-relaxed">
-          We embed into your pipeline as a senior co-development partner. You
-          bring the vision; we bring engineering, AI, and delivery — scoped to
-          your roadmap. Co-develop as a partner, or commission an original title.
-        </p>
 
-        <div className="space-y-10 text-sm text-muted-foreground leading-relaxed">
-          <div>
-            <h2 className="text-base font-semibold text-foreground mb-4">
-              What we build
-            </h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {shapes.map((s) => (
-                <div key={s.title} className="glass-card p-5">
-                  <h3 className="text-sm font-semibold text-foreground mb-2">
+        {/* Centered header */}
+        <div className="mt-8 text-center">
+          <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
+            Game co-development
+          </span>
+          <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+            End-to-end UE5 &amp; Unity co-development
+          </h1>
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
+            We embed into your pipeline as a senior co-development partner. You
+            bring the vision; we bring engineering, AI, and delivery — scoped to
+            your roadmap. Outsource the build burden, or commission an original
+            title.
+          </p>
+          <div className="mt-10 flex justify-center">
+            <CoDevSchematic />
+          </div>
+        </div>
+
+        {/* What we build */}
+        <div className="mt-16">
+          <h2 className="text-center text-xl font-semibold tracking-tight">
+            What we build
+          </h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {shapes.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.title} className="glass-card p-6 text-center">
+                  <div className="glass-icon mx-auto mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="mb-2 text-sm font-semibold text-foreground">
                     {s.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     {s.description}
                   </p>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
+        </div>
 
-          <div>
-            <h2 className="text-base font-semibold text-foreground mb-2">
-              Engagement models
-            </h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              Pricing below is indicative — every engagement is scoped on a call.
-            </p>
-            <div className="grid gap-4 md:grid-cols-3">
-              {engagements.map((e) => (
-                <div key={e.title} className="glass-card p-5">
-                  <h3 className="text-sm font-semibold text-foreground mb-2">
-                    {e.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {e.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+        {/* Engagement models */}
+        <div className="mt-14">
+          <h2 className="text-center text-xl font-semibold tracking-tight">
+            Engagement models
+          </h2>
+          <p className="mx-auto mt-2 max-w-xl text-center text-sm text-muted-foreground">
+            Pricing below is indicative — every engagement is scoped on a call.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            {engagements.map((e) => (
+              <div key={e.title} className="glass-card p-6 text-center">
+                <h3 className="mb-2 text-sm font-semibold text-foreground">
+                  {e.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {e.description}
+                </p>
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div>
-            <h2 className="text-base font-semibold text-foreground mb-3">
-              How we work
-            </h2>
-            <p>
-              We embed into your pipeline — your tools, your processes, your
-              standards. ArkaForge is led from the US, so your project lead and
-              single point of contact works your hours; the engineering team
-              behind them keeps building around the clock. We assemble a
-              project-fit team from a curated network of senior engineers,
-              artists, and designers — the team is scoped to the project, not the
-              other way around.
-            </p>
-          </div>
+        {/* How we work */}
+        <div className="mt-14 text-center">
+          <h2 className="text-xl font-semibold tracking-tight">How we work</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            We embed into your pipeline — your tools, your processes, your
+            standards. ArkaForge is led from the US, so your project lead and
+            single point of contact works your hours; the engineering team behind
+            them keeps building around the clock. We assemble a project-fit team
+            from a curated network of senior engineers, artists, and designers —
+            the team is scoped to the project, not the other way around.
+          </p>
+        </div>
 
-          <div>
-            <h2 className="text-base font-semibold text-foreground mb-3">
-              Who it&apos;s for
-            </h2>
-            <ul className="space-y-2">
-              <li>- Studios that need additional UE5 or Unity capacity on a deadline</li>
-              <li>- Publishers managing multiple titles who need a reliable co-dev partner</li>
-              <li>- Teams shipping a vertical slice or prototype to pitch</li>
-              <li>- Companies building interactive experiences outside traditional games</li>
-            </ul>
-          </div>
+        {/* Who it's for */}
+        <div className="mt-14 text-center">
+          <h2 className="text-xl font-semibold tracking-tight">Who it&apos;s for</h2>
+          <ul className="mx-auto mt-4 max-w-xl space-y-2 text-sm text-muted-foreground">
+            <li>Studios that need additional UE5 or Unity capacity on a deadline</li>
+            <li>Publishers managing multiple titles who need a reliable co-dev partner</li>
+            <li>Teams shipping a vertical slice or prototype to pitch</li>
+            <li>Companies building interactive experiences outside traditional games</li>
+          </ul>
+        </div>
 
-          <p>
+        {/* CTA */}
+        <div className="mt-14 text-center">
+          <p className="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground">
             Every engagement starts with a scoping call. We define the work, the
             timeline, and the delivery standard before anything begins.
           </p>
-
           <Link
             href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
           >
             Schedule a scoping call <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
     </Section>
+  );
+}
+
+// "Two streams merge into one build" — a co-development schematic.
+function CoDevSchematic() {
+  return (
+    <svg
+      viewBox="0 0 280 140"
+      className="h-auto w-full max-w-sm"
+      fill="none"
+      aria-hidden
+    >
+      {/* Your team — neutral stream */}
+      <path
+        d="M28 38 H150 C184 38 184 70 214 70"
+        className="stroke-muted-foreground/50"
+        strokeWidth="1.5"
+      />
+      <circle cx="28" cy="38" r="5" className="fill-muted-foreground" />
+      <text
+        x="40"
+        y="32"
+        className="fill-muted-foreground font-mono"
+        fontSize="9"
+        letterSpacing="1"
+      >
+        YOUR TEAM
+      </text>
+
+      {/* ArkaForge — accent stream */}
+      <path
+        d="M28 102 H150 C184 102 184 70 214 70"
+        className="stroke-primary"
+        strokeWidth="1.5"
+      />
+      <circle cx="28" cy="102" r="5" className="fill-primary" />
+      <text
+        x="40"
+        y="118"
+        className="fill-primary font-mono"
+        fontSize="9"
+        letterSpacing="1"
+      >
+        ARKAFORGE
+      </text>
+
+      {/* The merged build */}
+      <rect
+        x="214"
+        y="52"
+        width="50"
+        height="36"
+        rx="8"
+        className="fill-card stroke-primary"
+        strokeWidth="1.5"
+      />
+      <path d="M232 62 L246 70 L232 78 Z" className="fill-primary" />
+      <text
+        x="239"
+        y="104"
+        textAnchor="middle"
+        className="fill-muted-foreground font-mono"
+        fontSize="9"
+        letterSpacing="1"
+      >
+        BUILD
+      </text>
+    </svg>
   );
 }

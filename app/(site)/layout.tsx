@@ -1,4 +1,5 @@
 import { Nav } from "@/components/site/nav";
+import { ThemeProvider } from "@/components/site/theme-provider";
 import { Footer } from "@/components/site/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { SmoothScroll } from "@/components/site/smooth-scroll";
@@ -11,7 +12,7 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <ThemeProvider>
       <GalaxyBackground />
       <SmoothScroll>
         <SkipToContent />
@@ -22,6 +23,6 @@ export default function SiteLayout({
         <Footer />
         <Toaster />
       </SmoothScroll>
-    </>
+    </ThemeProvider>
   );
 }

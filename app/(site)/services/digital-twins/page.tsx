@@ -1,0 +1,218 @@
+import { Metadata } from "next";
+import Link from "next/link";
+import { Section } from "@/components/site/section";
+import { BackLink } from "@/components/site/back-link";
+import { ListChecks, Box, Gauge, BarChart3, ArrowRight } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Digital Twins - ArkaForge",
+  description:
+    "Immersive digital twins of real-world procedures, built in game engines for high-stakes training — interactive environments, task-sequence logic, real-time error detection, and readiness scoring.",
+};
+
+const shapes: { title: string; description: string; icon: LucideIcon }[] = [
+  {
+    title: "Procedure & task-sequence simulation",
+    description:
+      "Real operational sequences encoded as game events — correct completion, skipped or out-of-order steps, hesitation and time-on-task all detected. Training becomes a structured data event.",
+    icon: ListChecks,
+  },
+  {
+    title: "Faithful interactive environments",
+    description:
+      "First-person, physically faithful replicas of the real workspace — spatial layout, equipment, and constraints modeled so trainees meet the same logic they will on the job.",
+    icon: Box,
+  },
+  {
+    title: "Performance & readiness scoring",
+    description:
+      "Weighted task completion, sequence accuracy, and time efficiency surfaced in real time and post-session — a measurable readiness benchmark for trainees and managers.",
+    icon: Gauge,
+  },
+  {
+    title: "Assessment & analytics layer",
+    description:
+      "Event logging, sequence validation, and metric aggregation, with UI that shows exactly which steps trainees miss. Objective records, not subjective sign-off.",
+    icon: BarChart3,
+  },
+];
+
+const engagements = [
+  {
+    title: "Pilot / proof-of-concept",
+    description:
+      "A single procedure built end-to-end as a working training sim — environment, task logic, scoring. The fastest way to prove the model on your highest-stakes task.",
+  },
+  {
+    title: "Full training build",
+    description:
+      "A complete digital twin of a workspace and its procedures, with the assessment and analytics layer. Fixed milestones, fixed deliverables.",
+  },
+  {
+    title: "Program partnership",
+    description:
+      "Ongoing capacity to expand a simulation program across procedures, sites, and trainee cohorts as it scales.",
+  },
+];
+
+export default function DigitalTwinsPage() {
+  return (
+    <Section>
+      <div className="mx-auto max-w-3xl">
+        <BackLink href="/services" label="Back to Services" />
+
+        {/* Centered header */}
+        <div className="mt-8 text-center">
+          <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
+            Digital twins
+          </span>
+          <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+            Game-engine digital twins for high-stakes training
+          </h1>
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
+            We turn real-world procedures into interactive, performance-tracked
+            training simulations — the real-time 3D systems that power games,
+            applied where the cost of error is severe. Immersive training twins,
+            not industrial IoT dashboards.
+          </p>
+          <div className="mt-10 flex justify-center">
+            <TwinSchematic />
+          </div>
+        </div>
+
+        {/* What we build */}
+        <div className="mt-16">
+          <h2 className="text-center text-xl font-semibold tracking-tight">
+            What we build
+          </h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {shapes.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.title} className="glass-card p-6 text-center">
+                  <div className="glass-icon mx-auto mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="mb-2 text-sm font-semibold text-foreground">
+                    {s.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {s.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Proof */}
+        <div className="mt-14 text-center">
+          <h2 className="text-xl font-semibold tracking-tight">Proof</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            ArkaForge&apos;s founder built a performance-tracked nuclear glovebox
+            training simulator — interactive environment, custom task-sequence
+            logic, real-time error detection and readiness scoring — as a
+            graduate researcher connected to Los Alamos National Laboratory.
+            It&apos;s the direct technical foundation for this work.
+          </p>
+          <Link
+            href="/work/los-alamos-asu-simulation"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
+          >
+            See the case study <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        {/* Engagement models */}
+        <div className="mt-14">
+          <h2 className="text-center text-xl font-semibold tracking-tight">
+            Engagement models
+          </h2>
+          <p className="mx-auto mt-2 max-w-xl text-center text-sm text-muted-foreground">
+            Every engagement is scoped on a call.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            {engagements.map((e) => (
+              <div key={e.title} className="glass-card p-6 text-center">
+                <h3 className="mb-2 text-sm font-semibold text-foreground">
+                  {e.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {e.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Who it's for */}
+        <div className="mt-14 text-center">
+          <h2 className="text-xl font-semibold tracking-tight">
+            Who it&apos;s for
+          </h2>
+          <ul className="mx-auto mt-4 max-w-xl space-y-2 text-sm text-muted-foreground">
+            <li>Workforce-training programs for high-consequence, procedure-driven operations</li>
+            <li>Teams where on-equipment training carries cost, risk, or scheduling constraints</li>
+            <li>Programs that need objective, measurable readiness signals — not impressions</li>
+            <li>Research and industrial groups exploring simulation-based training</li>
+          </ul>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-14 text-center">
+          <p className="mx-auto max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Every engagement starts with a scoping call. We define the procedure,
+            the milestones, and the delivery standard before anything begins.
+          </p>
+          <Link
+            href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+          >
+            Schedule a scoping call <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+// A physical object and its glowing digital reflection — the "twin" idea.
+function TwinSchematic() {
+  return (
+    <svg
+      viewBox="0 0 200 224"
+      className="h-auto w-full max-w-[180px]"
+      fill="none"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      {/* Physical — neutral iso object */}
+      <g className="stroke-muted-foreground/60" strokeWidth="1.5">
+        <path d="M100 22 L140 45 L100 68 L60 45 Z" />
+        <path d="M60 45 L60 90 L100 113 L100 68 Z" />
+        <path d="M140 45 L140 90 L100 113 L100 68 Z" />
+      </g>
+
+      {/* Mirror line */}
+      <line
+        x1="34"
+        y1="119"
+        x2="166"
+        y2="119"
+        className="stroke-border"
+        strokeWidth="1"
+        strokeDasharray="2 5"
+      />
+
+      {/* Digital twin — same object, mirrored, accent + fading */}
+      <g transform="translate(0 238) scale(1 -1)" opacity="0.5" strokeWidth="1.5">
+        <path d="M100 22 L140 45 L100 68 L60 45 Z" className="stroke-primary" />
+        <path d="M60 45 L60 90 L100 113 L100 68 Z" className="stroke-primary" />
+        <path d="M140 45 L140 90 L100 113 L100 68 Z" className="fill-primary/10 stroke-primary" />
+      </g>
+    </svg>
+  );
+}

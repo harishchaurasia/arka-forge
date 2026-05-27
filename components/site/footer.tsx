@@ -25,7 +25,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] glass-surface">
+    <footer className="border-t border-border glass-surface">
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10">
           <div className="col-span-2 md:col-span-1">
@@ -33,9 +33,9 @@ export function Footer() {
               ArkaForge
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mb-4">
-              Game engineering &amp; technology studio — game co-development for
-              studios and publishers, plus interactive products for teams outside
-              games.
+              Video games engineering &amp; technology studio — game
+              co-development for studios and publishers, digital twins for
+              high-stakes training, and interactive products beyond games.
             </p>
             <div className="flex gap-3">
               {socials.map((s) => {
@@ -97,7 +97,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-white/[0.04]">
+        <div className="pt-6 border-t border-border/60">
           <p
             className="text-xs text-muted-foreground text-center"
             suppressHydrationWarning

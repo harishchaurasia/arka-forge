@@ -38,7 +38,16 @@ export function generateOrganizationSchema() {
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com",
     logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://arkaforge.com"}/arka-forge-logo.png`,
     description:
-      "ArkaForge is a game engineering & technology studio — game co-development for studios and publishers (UE5/Unity, features, systems, AI, prototypes, vertical slices) and interactive products for teams outside games.",
+      "ArkaForge is a video games engineering & technology studio — game co-development for studios and publishers (UE5/Unity, features, systems, AI, prototypes, vertical slices) and game-engine digital twins for high-stakes training, plus interactive products for teams outside games.",
+    knowsAbout: [
+      "Game co-development",
+      "Unreal Engine 5",
+      "Unity",
+      "Digital twins",
+      "Simulation-based training",
+      "AI in games",
+      "Interactive products",
+    ],
     sameAs: [
       "https://www.linkedin.com/company/arkaforge",
       "https://instagram.com/arka.forge",

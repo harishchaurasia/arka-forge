@@ -1,61 +1,51 @@
-"use client";
-
-import * as React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
-
-const ease = [0.25, 0.1, 0.25, 1];
 
 export function CTABand() {
   return (
-    <section className="py-28 md:py-36 relative overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.06] blur-[140px] pointer-events-none" />
+    <section className="relative overflow-hidden py-24 text-foreground md:py-32">
+      {/* Ambient molten glow — echoes the hero */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.06] blur-[150px]"
+      />
 
       <div className="relative mx-auto max-w-6xl px-5">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease }}
-          className="glass-card p-12 md:p-20 text-center"
-        >
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-4 block">
-            Let&apos;s talk
+        <div className="mb-12 flex items-center justify-between border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
+          <span>// let&apos;s talk</span>
+          <span className="hidden items-center gap-1.5 text-primary sm:flex">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+            open for partners
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
-            Tell us what you&apos;re <span className="gradient-text">building</span>
-          </h2>
-          <p className="text-base text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed">
-            A game in production and not enough hands. A pitch that needs a
-            vertical slice. A product that should be an experience. If it runs on
-            a game engine — or should — we want to hear about it.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="glow px-8">
-              <a
-                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Schedule a Call
-                <Phone className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="glass-subtle"
-              className="glow px-8"
-            >
-              <Link href="/contact">
-                Get In Touch <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </motion.div>
+        </div>
+
+        <h2 className="max-w-3xl text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em]">
+          Tell us what you&apos;re building.
+        </h2>
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          A game in production and not enough hands. A pitch that needs a
+          vertical slice. A real-world procedure that should be a digital twin.
+          If it runs on a game engine — or should — we want to hear about it.
+        </p>
+
+        <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <a
+            href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+          >
+            Schedule a call
+            <Phone className="h-4 w-4" />
+          </a>
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-foreground"
+          >
+            Get in touch
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </section>
   );

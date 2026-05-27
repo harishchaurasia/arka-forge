@@ -35,14 +35,14 @@ export function GalaxyBackground() {
 
   return (
     <div
-      className="fixed inset-0 -z-10 pointer-events-none opacity-[0.65]"
+      className="fixed inset-0 -z-10 pointer-events-none opacity-[0.5]"
       aria-hidden="true"
     >
       <div className="w-full h-full">
         <Galaxy
           mouseRepulsion={false}
           mouseInteraction={false}
-          density={0.8}
+          density={0.4}
           glowIntensity={0.1}
           saturation={0}
           hueShift={140}

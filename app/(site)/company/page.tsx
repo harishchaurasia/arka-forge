@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Company - ArkaForge",
   description:
-    "ArkaForge is a game engineering & technology studio — game co-development for studios and publishers, plus interactive products and the simulation depth behind a nuclear training simulator.",
+    "ArkaForge is a video games engineering & technology studio — game co-development for studios and publishers, plus interactive products and the simulation depth behind a nuclear training simulator.",
 };
 
 const values = [
@@ -62,8 +62,9 @@ export default function CompanyPage() {
             <p>
               ArkaForge was founded by Harish — a US-based computer science
               graduate with a background spanning AI/ML, LLMs and agentic AI,
-              game development, AR/VR systems, full-stack engineering, and applied
-              simulation. He leads engineering and works directly with clients.
+              game development, AR/VR systems, full-stack engineering, and
+              applied simulation. He leads engineering and works directly with
+              clients.
             </p>
             <p>
               Before founding ArkaForge, Harish worked on the design and

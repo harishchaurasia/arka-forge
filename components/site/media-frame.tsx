@@ -10,12 +10,13 @@ const ASPECT_MAP: Record<string, string> = {
 };
 
 interface MediaFrameProps {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   label?: string;
   aspect?: "16/9" | "4/3" | "3/2" | "1/1" | "21/9";
   redacted?: boolean;
   note?: string;
+  dims?: string;
   className?: string;
 }
 
@@ -26,6 +27,7 @@ export function MediaFrame({
   aspect = "16/9",
   redacted = false,
   note,
+  dims,
   className,
 }: MediaFrameProps) {
   const paddingTop = ASPECT_MAP[aspect] ?? ASPECT_MAP["16/9"];
@@ -42,15 +44,35 @@ export function MediaFrame({
 
         {/* Media container — letterbox via padding-top trick */}
         <div className="relative w-full overflow-hidden" style={{ paddingTop }}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-cover"
-            style={{
-              filter: "saturate(0.82) contrast(1.04) brightness(0.97)",
-            }}
-          />
+          {src ? (
+            <Image
+              src={src}
+              alt={alt ?? label ?? ""}
+              fill
+              className="object-cover"
+              style={{
+                filter: "saturate(0.82) contrast(1.04) brightness(0.97)",
+              }}
+            />
+          ) : (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-1.5"
+              style={{
+                background:
+                  "repeating-linear-gradient(135deg, hsl(224 16% 6%) 0, hsl(224 16% 6%) 10px, hsl(224 16% 8%) 10px, hsl(224 16% 8%) 20px)",
+              }}
+            >
+              <span className="font-mono text-2xs uppercase tracking-[0.3em] text-white/35">
+                Placeholder
+              </span>
+              {dims && (
+                <span className="font-mono text-2xs tracking-wider text-white/25">
+                  {dims}
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Vignette overlay */}
           <div

@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         display: ["Nourd", "system-ui", "sans-serif"],
+        grotesk: ["var(--font-grotesk)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       colors: {

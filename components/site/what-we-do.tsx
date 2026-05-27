@@ -2,77 +2,80 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Boxes, Layers, FlaskConical } from "lucide-react";
+import { ArrowUpRight, Boxes, Layers, Gauge } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const ease = [0.25, 0.1, 0.25, 1];
 
-interface Item {
+interface Pillar {
   eyebrow: string;
   title: string;
   body: string;
   href: string;
   cta: string;
   icon: LucideIcon;
-  primary?: boolean;
 }
 
-const items: Item[] = [
+// The two co-equal pillars the studio leads with.
+const pillars: Pillar[] = [
   {
     eyebrow: "For studios & publishers",
     title: "Game co-development",
-    body:
-      "Embed us into your UE5 or Unity pipeline as a senior co-dev partner. Features, systems, AI and agentic NPCs, netcode, tools, UI — plus prototypes and vertical slices that take a pitch deck to a build a publisher will sit through. Scoped to your roadmap, shipped to your quality bar.",
+    body: "Embed us in your UE5 or Unity pipeline as a senior co-dev partner — features, systems, AI and agentic NPCs, netcode, tools, UI, plus prototypes and vertical slices that turn a pitch into a build a publisher will sit through. Scoped to your roadmap, shipped to your bar.",
     href: "/services/game-co-development",
     cta: "How co-dev works",
     icon: Layers,
-    primary: true,
   },
   {
-    eyebrow: "For teams outside games",
-    title: "Interactive products",
-    body:
-      "Game-engine craft applied beyond games — gamified products and onboarding, training simulations, configurators, interactive 3D and data experiences. For teams that need something people use, not a page they skim.",
-    href: "/services/interactive-products",
-    cta: "What we build",
-    icon: Boxes,
-  },
-  {
-    eyebrow: "How deep it goes",
-    title: "The deep end",
-    body:
-      "ArkaForge's founder built a performance-tracked nuclear glovebox training simulator — interactive environment, custom task-sequence logic, real-time error detection and readiness scoring — as a graduate researcher connected to Los Alamos National Laboratory. That's the engineering this studio is built on.",
+    eyebrow: "For high-stakes, hands-on work",
+    title: "Digital twins",
+    body: "Immersive digital twins of real procedures, built in a game engine for high-stakes training — interactive environments, task-sequence logic, real-time error detection and readiness scoring. The depth behind a performance-tracked nuclear glovebox trainer.",
     href: "/work/los-alamos-asu-simulation",
-    cta: "See the case study",
-    icon: FlaskConical,
+    cta: "See the proof",
+    icon: Gauge,
   },
 ];
 
+// Supporting line — the cash-flow on-ramp, deliberately ranked below the pillars.
+const supporting = {
+  eyebrow: "Also",
+  title: "Interactive products",
+  body: "Game-engine craft beyond games — gamified products and onboarding, configurators, interactive 3D and data experiences. Things people use, not pages they skim.",
+  href: "/services/interactive-products",
+  cta: "What we build",
+  icon: Boxes,
+};
+
 export function WhatWeDo() {
   return (
-    <section className="py-28 md:py-36 relative" id="what-we-do">
+    <section
+      id="what-we-do"
+      className="relative bg-background py-24 text-foreground md:py-32"
+    >
       <div className="relative mx-auto max-w-6xl px-5">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease }}
-          className="mb-14"
+          className="mb-12 max-w-2xl"
         >
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block">
+          <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
             What we do
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            One engine room, two ways to hire it
+          <h2 className="mb-4 font-grotesk text-3xl font-bold tracking-tight md:text-4xl">
+            One engine room. Two specialties.
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
-            Co-develop a game with us, or commission an interactive product. Same
-            engineers, same engines, same bar.
+          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Game co-development for studios and publishers, and digital twins
+            for high-stakes training, built in the same engines — plus
+            interactive products for teams outside games.
           </p>
         </motion.div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {items.map((item, i) => {
+        {/* Two primary pillars */}
+        <div className="grid gap-5 md:grid-cols-2">
+          {pillars.map((item, i) => {
             const Icon = item.icon;
             return (
               <motion.div
@@ -80,28 +83,24 @@ export function WhatWeDo() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, delay: i * 0.07, ease }}
+                transition={{ duration: 0.45, delay: i * 0.08, ease }}
               >
                 <Link href={item.href} className="group block h-full">
-                  <div
-                    className={`h-full glass-card p-8 transition-all duration-300 hover:-translate-y-1.5 ${
-                      item.primary ? "ring-1 ring-primary/20 panel-brackets" : ""
-                    }`}
-                  >
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl glass-icon mb-5 group-hover:scale-105 transition-transform duration-300">
-                      <Icon className="h-5 w-5 text-primary" />
+                  <div className="panel-brackets h-full rounded-xl border border-border bg-card p-8 ring-1 ring-primary/15 transition-all duration-300 hover:-translate-y-1.5 hover:ring-primary/30">
+                    <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-primary transition-transform duration-300 group-hover:scale-105">
+                      <Icon className="h-5 w-5" />
                     </div>
-                    <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground/80 block mb-1.5">
+                    <span className="mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                       {item.eyebrow}
                     </span>
-                    <h3 className="text-lg font-semibold mb-3 group-hover:text-primary transition-colors flex items-center gap-1.5">
+                    <h3 className="mb-3 flex items-center gap-1.5 text-xl font-semibold transition-colors group-hover:text-primary">
                       {item.title}
-                      <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-60 transition-opacity" />
+                      <ArrowUpRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-60" />
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                    <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
                       {item.body}
                     </p>
-                    <span className="text-sm font-semibold text-primary inline-flex items-center gap-1.5">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                       {item.cta} <ArrowUpRight className="h-3.5 w-3.5" />
                     </span>
                   </div>
@@ -110,6 +109,37 @@ export function WhatWeDo() {
             );
           })}
         </div>
+
+        {/* Supporting third — interactive products */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, delay: 0.16, ease }}
+          className="mt-5"
+        >
+          <Link href={supporting.href} className="group block">
+            <div className="flex items-center gap-5 rounded-xl border border-border bg-card/60 p-6 transition-colors duration-300 hover:bg-card">
+              <div className="hidden h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground sm:inline-flex">
+                <supporting.icon className="h-5 w-5" />
+              </div>
+              <div className="flex-1">
+                <span className="mb-1 block font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground/80">
+                  {supporting.eyebrow}
+                </span>
+                <h3 className="text-base font-semibold transition-colors group-hover:text-primary">
+                  {supporting.title}
+                </h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  {supporting.body}
+                </p>
+              </div>
+              <span className="hidden flex-shrink-0 items-center gap-1.5 self-center whitespace-nowrap text-sm font-semibold text-primary sm:inline-flex">
+                {supporting.cta} <ArrowUpRight className="h-3.5 w-3.5" />
+              </span>
+            </div>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { Hero } from "@/components/site/hero";
-import { WhatWeDo } from "@/components/site/what-we-do";
+import { GameCoDev } from "@/components/site/home-game-codev";
+import { DigitalTwins } from "@/components/site/home-digital-twins";
 import { Proof } from "@/components/site/proof";
 import { HowWeWork } from "@/components/site/how-we-work";
 import { TheStudio } from "@/components/site/the-studio";
@@ -9,7 +10,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <WhatWeDo />
+      <GameCoDev />
+      <DigitalTwins />
       <Proof />
       <HowWeWork />
       <TheStudio />
