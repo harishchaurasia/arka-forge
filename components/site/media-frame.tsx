@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { YouTubePlayer } from "./youtube-player";
 
 const ASPECT_MAP: Record<string, string> = {
   "16/9": "56.25%",
@@ -11,6 +12,13 @@ const ASPECT_MAP: Record<string, string> = {
 
 interface MediaFrameProps {
   src?: string;
+  videoSrc?: string;
+  ytId?: string;
+  poster?: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
   alt?: string;
   label?: string;
   aspect?: "16/9" | "4/3" | "3/2" | "1/1" | "21/9";
@@ -22,6 +30,13 @@ interface MediaFrameProps {
 
 export function MediaFrame({
   src,
+  videoSrc,
+  ytId,
+  poster,
+  autoplay = true,
+  loop = true,
+  muted = true,
+  controls = false,
   alt,
   label,
   aspect = "16/9",
@@ -42,13 +57,32 @@ export function MediaFrame({
       {/* Outer dark frame */}
       <div className="relative bg-[hsl(224,16%,3%)] border border-white/[0.08] rounded-sm overflow-hidden">
 
-        {/* Media container — letterbox via padding-top trick */}
+        {/* Media container - letterbox via padding-top trick */}
         <div className="relative w-full overflow-hidden" style={{ paddingTop }}>
-          {src ? (
+          {ytId ? (
+            <YouTubePlayer id={ytId} label={label} />
+          ) : videoSrc ? (
+            <video
+              src={videoSrc}
+              poster={poster}
+              autoPlay={autoplay}
+              loop={loop}
+              muted={muted}
+              playsInline
+              controls={controls}
+              preload={poster ? "metadata" : "auto"}
+              aria-label={alt ?? label ?? undefined}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{
+                filter: "saturate(0.82) contrast(1.04) brightness(0.97)",
+              }}
+            />
+          ) : src ? (
             <Image
               src={src}
               alt={alt ?? label ?? ""}
               fill
+              sizes="(min-width: 1024px) 900px, (min-width: 640px) 80vw, 100vw"
               className="object-cover"
               style={{
                 filter: "saturate(0.82) contrast(1.04) brightness(0.97)",
@@ -94,7 +128,7 @@ export function MediaFrame({
             }}
           />
 
-          {/* Bottom-edge grade — creates space the label bar sits against */}
+          {/* Bottom-edge grade - creates space the label bar sits against */}
           <div
             aria-hidden="true"
             className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
@@ -141,7 +175,7 @@ export function MediaFrame({
         )}
       </div>
 
-      {/* Corner brackets — sit on the outer border edge */}
+      {/* Corner brackets - sit on the outer border edge */}
       <CornerBrackets />
 
       {/* Screen-reader caption */}

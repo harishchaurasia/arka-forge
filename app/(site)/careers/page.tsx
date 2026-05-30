@@ -6,7 +6,7 @@ import { CareersForm } from "@/components/site/careers-form";
 export const metadata: Metadata = {
   title: "Careers - ArkaForge",
   description:
-    "Work with ArkaForge — game co-development and interactive products. We're always interested in senior game engineers, developers, and designers.",
+    "Work with ArkaForge - game co-development and interactive products. We're always interested in senior game engineers, developers, and designers.",
 };
 
 export default function CareersPage() {
@@ -22,7 +22,7 @@ export default function CareersPage() {
             Careers
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed mb-12 mx-auto">
-            ArkaForge is a game engineering &amp; technology studio — game
+            ArkaForge is a game engineering &amp; technology studio - game
             co-development for studios and publishers, plus interactive products
             for teams outside games. We work with a curated network of senior
             game engineers, developers, and designers, and we&apos;re always

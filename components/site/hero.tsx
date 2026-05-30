@@ -67,7 +67,7 @@ export function Hero() {
       {/* Top meta hairline */}
       <div className="mx-auto w-full max-w-6xl px-5 pt-28 md:pt-32">
         <div className="flex items-center justify-between border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
-          <span>ArkaForge — Video Games Engineering Studio</span>
+          <span>ArkaForge - Video Games Engineering Studio</span>
           <span className="hidden sm:block">US-fronted · UE5 / Unity</span>
         </div>
       </div>
@@ -118,9 +118,9 @@ export function Hero() {
             </span>
           </h1>
 
-          {/* Persistent subhead — always names both offers, co-dev first */}
+          {/* Persistent subhead - always names both offers, co-dev first */}
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            A video games engineering studio —{" "}
+            A video games engineering studio -{" "}
             <span className="text-foreground">game co-development</span> for
             studios and publishers, and{" "}
             <span className="text-foreground">digital twins</span> for
@@ -189,8 +189,8 @@ export function Hero() {
       {/* Bottom meta hairline */}
       <div className="mx-auto w-full max-w-6xl px-5 pb-6">
         <div className="flex items-center justify-between border-t border-border pt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60">
-          <span>Forging intelligent worlds</span>
-          <span className="tabular-nums">01 — 02</span>
+          <span>Game engineering &amp; digital twins</span>
+          <span className="tabular-nums">01 - 02</span>
         </div>
       </div>
     </section>

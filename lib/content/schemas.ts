@@ -7,6 +7,9 @@ export const workFrontmatterSchema = z.object({
   tags: z.array(z.string()).default([]),
   published: z.boolean().default(true),
   hero: z.string().optional(),
+  gallery: z
+    .array(z.object({ src: z.string(), label: z.string().optional() }))
+    .optional(),
   client: z.string().optional(),
   metrics: z.record(z.string(), z.union([z.string(), z.number()])).optional(),
 });

@@ -33,7 +33,7 @@ export function Footer() {
               ArkaForge
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mb-4">
-              Video games engineering &amp; technology studio — game
+              Video games engineering &amp; technology studio - game
               co-development for studios and publishers, digital twins for
               high-stakes training, and interactive products beyond games.
             </p>

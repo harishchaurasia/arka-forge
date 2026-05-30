@@ -2,26 +2,27 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
+import { Reveal } from "@/components/site/reveal";
 import { Trophy, MonitorPlay, Box, LineChart, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Interactive Products - ArkaForge",
   description:
-    "Game-engine craft outside games — gamified products, training simulations, configurators, and interactive 3D/data experiences.",
+    "Game-engine craft outside games - gamified products, training simulations, configurators, and interactive 3D/data experiences.",
 };
 
 const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Gamified products & onboarding",
     description:
-      "Progression, scoring, branching, feedback loops built into the product itself — designed as methodology, not decoration.",
+      "Progression, scoring, branching, feedback loops built into the product itself - designed as methodology, not decoration.",
     icon: Trophy,
   },
   {
     title: "Training simulations",
     description:
-      "Interactive 3D environments modelled from real systems and workflows — task tracking, error detection, readiness reporting. Desktop, web, and VR.",
+      "Interactive 3D environments modelled from real systems and workflows - task tracking, error detection, readiness reporting. Desktop, web, and VR.",
     icon: MonitorPlay,
   },
   {
@@ -45,7 +46,7 @@ export default function InteractiveProductsPage() {
         <BackLink href="/services" label="Back to Services" />
 
         {/* Centered header */}
-        <div className="mt-8 text-center">
+        <Reveal className="mt-8 text-center">
           <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
             Interactive products
           </span>
@@ -54,12 +55,12 @@ export default function InteractiveProductsPage() {
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
             The same engineering that ships a game feature, pointed at a product.
-            Things people operate — not pages they skim.
+            Things people operate - not pages they skim.
           </p>
           <div className="mt-10 flex justify-center">
             <ProductSchematic />
           </div>
-        </div>
+        </Reveal>
 
         {/* What we build */}
         <div className="mt-16">
@@ -67,10 +68,10 @@ export default function InteractiveProductsPage() {
             What we build
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {shapes.map((s) => {
+            {shapes.map((s, i) => {
               const Icon = s.icon;
               return (
-                <div key={s.title} className="glass-card p-6 text-center">
+                <Reveal key={s.title} delay={i * 0.06} className="glass-card p-6 text-center">
                   <div className="glass-icon mx-auto mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
@@ -80,7 +81,7 @@ export default function InteractiveProductsPage() {
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {s.description}
                   </p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -116,8 +117,8 @@ export default function InteractiveProductsPage() {
         <div className="mt-14 text-center">
           <h2 className="text-xl font-semibold tracking-tight">How we engage</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Fixed-scope builds on shorter cycles than co-dev — typically a defined
-            deliverable in weeks, not quarters. Indicative range: $5k–$50k
+            Fixed-scope builds on shorter cycles than co-dev - typically a defined
+            deliverable in weeks, not quarters. Indicative range: $5k-$50k
             depending on scope. Every engagement starts with a scoping call.
           </p>
           <Link

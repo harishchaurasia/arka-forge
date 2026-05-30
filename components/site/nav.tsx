@@ -102,7 +102,7 @@ export function Nav() {
           </span>
         </Link>
 
-        {/* Desktop nav — links + theme toggle */}
+        {/* Desktop nav - links + theme toggle */}
         <div className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
             <Link
@@ -122,7 +122,7 @@ export function Nav() {
           <ThemeToggle className="ml-1" />
         </div>
 
-        {/* Mobile — theme toggle + hamburger → X + drawer */}
+        {/* Mobile - theme toggle + hamburger → X + drawer */}
         <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle />
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>

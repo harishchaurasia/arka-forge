@@ -2,12 +2,13 @@ import Link from "next/link";
 import { getWork } from "@/lib/content/loader";
 import { ArrowUpRight } from "lucide-react";
 import { MediaFrame } from "@/components/site/media-frame";
+import { Reveal } from "@/components/site/reveal";
 
 export async function Proof() {
   const work = await getWork();
   if (work.length === 0) return null;
 
-  // Glovebox is the flagship — feature it; fall back to the first item.
+  // Glovebox is the flagship - feature it; fall back to the first item.
   const featured = work.find((w) => w.slug.includes("los-alamos")) ?? work[0];
   const rest = work.filter((w) => w.slug !== featured.slug).slice(0, 2);
 
@@ -17,7 +18,7 @@ export async function Proof() {
       className="relative py-20 text-foreground md:py-32"
     >
       <div className="mx-auto max-w-6xl px-5">
-        <div className="mb-10 flex items-end justify-between">
+        <Reveal className="mb-10 flex items-end justify-between">
           <div>
             <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
               // selected work
@@ -32,12 +33,15 @@ export async function Proof() {
           >
             All work →
           </Link>
-        </div>
+        </Reveal>
 
-        {/* Featured case study — the flagship, with media */}
+        {/* Featured case study - the flagship, with media */}
+        <Reveal>
         <Link href={`/work/${featured.slug}`} className="group block">
           <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-1 sm:p-6 md:grid md:grid-cols-2 md:items-center md:gap-8 md:p-8">
             <MediaFrame
+              src={featured.frontmatter.hero}
+              alt={`In-engine view of ${featured.frontmatter.title}`}
               label={`${featured.frontmatter.title} · selected views`}
               note="UE5 · real-time"
               aspect="16/9"
@@ -70,13 +74,14 @@ export async function Proof() {
             </div>
           </div>
         </Link>
+        </Reveal>
 
         {/* Remaining case studies */}
         {rest.length > 0 && (
           <div className="mt-5 grid gap-5 md:grid-cols-2">
-            {rest.map((item) => (
+            {rest.map((item, i) => (
+              <Reveal key={item.slug} delay={i * 0.08}>
               <Link
-                key={item.slug}
                 href={`/work/${item.slug}`}
                 className="group block"
               >
@@ -98,6 +103,7 @@ export async function Proof() {
                   </span>
                 </div>
               </Link>
+              </Reveal>
             ))}
           </div>
         )}

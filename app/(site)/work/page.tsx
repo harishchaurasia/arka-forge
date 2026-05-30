@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getWork } from "@/lib/content/loader";
 import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
+import { Reveal } from "@/components/site/reveal";
 
 export const metadata: Metadata = {
   title: "Our Work - ArkaForge",
@@ -14,7 +15,7 @@ export default async function WorkPage() {
   return (
     <Section>
       <BackLink href="/" label="Back to Home" />
-      <div className="mb-12">
+      <Reveal className="mb-12">
         <span
           className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block"
         >
@@ -26,11 +27,11 @@ export default async function WorkPage() {
         >
           Work
         </h1>
-      </div>
+      </Reveal>
       <div className="grid gap-5 md:grid-cols-2">
-        {work.map((item) => (
+        {work.map((item, i) => (
+          <Reveal key={item.slug} delay={i * 0.08}>
           <Link
-            key={item.slug}
             href={`/work/${item.slug}`}
             className="group block"
           >
@@ -77,6 +78,7 @@ export default async function WorkPage() {
               </time>
             </div>
           </Link>
+          </Reveal>
         ))}
       </div>
     </Section>

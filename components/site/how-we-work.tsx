@@ -1,26 +1,28 @@
-import { Clock, UserCheck, GitBranch, ClipboardCheck } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { Reveal } from "@/components/site/reveal";
 
-const points: { title: string; body: string; icon: LucideIcon }[] = [
+type ProcessIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
+const points: { title: string; body: string; icon: ProcessIcon }[] = [
   {
-    title: "Your lead is in your timezone",
-    body: "ArkaForge is led from the US — your project lead and main point of contact works your hours. No 12-hour lag on a decision; the team behind them keeps building while you sleep.",
-    icon: Clock,
+    title: "Align around the system",
+    body: "We map the environment, users, data sources, platform constraints, and business outcome the digital twin or experience needs to represent.",
+    icon: AlignIcon,
   },
   {
-    title: "One point of contact",
-    body: "A named project lead — US-based — owns the relationship and the delivery. You're working with a team, not managing a pool.",
-    icon: UserCheck,
+    title: "Set one clear owner",
+    body: "A senior lead translates requirements into priorities, coordinates the production team, and keeps feedback, risks, and decisions moving.",
+    icon: OwnerIcon,
   },
   {
-    title: "Your pipeline, your standards",
-    body: "Your repo, your engine version, your tools, your review process, your quality bar. We adapt to how you build — not the other way around.",
-    icon: GitBranch,
+    title: "Build in your stack",
+    body: "Our team works directly in your engine, repository, tools, and review process so the output becomes part of your product, not a detached handoff.",
+    icon: PipelineIcon,
   },
   {
-    title: "Scoped before it starts",
-    body: "Every engagement opens with a scoping call: the work, the milestones, the delivery bar — defined before anyone writes a line.",
-    icon: ClipboardCheck,
+    title: "Deliver against milestones",
+    body: "Milestones are tied to fidelity, performance, acceptance criteria, and documentation, giving your team a clear path from prototype to production.",
+    icon: ScopeIcon,
   },
 ];
 
@@ -28,40 +30,142 @@ export function HowWeWork() {
   return (
     <section className="relative py-24 text-foreground md:py-32">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="mb-12 max-w-2xl">
+        <Reveal className="mb-12 max-w-2xl">
           <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
             // how we work
           </span>
           <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Built to work with teams in the US, UK &amp; EU.
+            Production-grade delivery for digital twins and co-development.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            We&apos;re a distributed studio, led from the US, and we run it so
-            distance is a non-issue — because for the studios that hire co-dev
-            partners, it&apos;s the first thing they worry about.
+            We work like an extension of your studio, turning complex
+            real-world systems into interactive, maintainable experiences while
+            fitting into the way your team already builds.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
-          {points.map((p, i) => {
-            const Icon = p.icon;
+        <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
+          {points.map((point, index) => {
+            const Icon = point.icon;
             return (
-              <div key={p.title} className="bg-card p-7">
-                <div className="mb-3 flex items-center gap-3">
-                  <span className="font-mono text-xs text-primary">
-                    0{i + 1}
+              <Reveal
+                key={point.title}
+                delay={index * 0.08}
+                className="glass-card panel-brackets p-6 md:p-7"
+              >
+                <div className="mb-5 flex items-center justify-between gap-4">
+                  <span className="rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1 font-mono text-[11px] font-medium text-primary">
+                    0{index + 1}
                   </span>
-                  <Icon className="h-4 w-4 text-muted-foreground" />
+                  <span className="glass-icon flex h-10 w-10 items-center justify-center rounded-lg">
+                    <Icon className="h-5 w-5" />
+                  </span>
                 </div>
-                <h3 className="text-base font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {p.body}
+                <h3 className="text-lg font-semibold tracking-tight">
+                  {point.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {point.body}
                 </p>
-              </div>
+              </Reveal>
             );
           })}
         </div>
       </div>
     </section>
+  );
+}
+
+function AlignIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="3.5" />
+      <path d="M12 1.5v3" />
+      <path d="M12 19.5v3" />
+      <path d="M1.5 12h3" />
+      <path d="M19.5 12h3" />
+    </svg>
+  );
+}
+
+function OwnerIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="8" r="3" />
+      <path d="M7 19a5 5 0 0 1 10 0" />
+      <path d="M4.5 12.5h3" />
+      <path d="M16.5 12.5h3" />
+      <path d="M6 10.5v4" />
+      <path d="M18 10.5v4" />
+      <path d="M9.8 15.7 12 18l3.8-4" />
+    </svg>
+  );
+}
+
+function PipelineIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M4 7h5" />
+      <path d="M15 7h5" />
+      <path d="M9 7c3 0 3 5 6 5" />
+      <path d="M9 17c3 0 3-5 6-5" />
+      <path d="M4 17h5" />
+      <path d="M15 17h5" />
+      <rect x="3" y="5" width="3" height="4" rx="1" />
+      <rect x="18" y="5" width="3" height="4" rx="1" />
+      <rect x="3" y="15" width="3" height="4" rx="1" />
+      <rect x="18" y="15" width="3" height="4" rx="1" />
+    </svg>
+  );
+}
+
+function ScopeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <rect x="6" y="4" width="12" height="16" rx="2" />
+      <path d="M9 4.5h6" />
+      <path d="M9 10h6" />
+      <path d="M9 14h3" />
+      <path d="m13.5 16 1.6 1.6L18 14.5" />
+      <path d="M4 8h2" />
+      <path d="M18 8h2" />
+    </svg>
   );
 }

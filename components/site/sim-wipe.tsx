@@ -3,7 +3,7 @@
 import * as React from "react";
 
 // Before/after "viewport wipe": a procedure schematic on the left, the same
-// scene running in-engine on the right. Lightweight — SVG + clip-path + a
+// scene running in-engine on the right. Lightweight - SVG + clip-path + a
 // transparent range input for drag/keyboard. Real glovebox capture replaces
 // <RenderArt /> once assets are in hand.
 export function SimWipe() {
@@ -20,18 +20,18 @@ export function SimWipe() {
             We turn real procedures into digital twins you train in.
           </h2>
           <p className="mt-3 max-w-xl text-muted-foreground">
-            Drag the divider — a procedure goes from schematic to a running,
+            Drag the divider - a procedure goes from schematic to a running,
             performance-tracked training build.
           </p>
         </div>
 
         <div className="panel-brackets relative aspect-[16/9] w-full select-none overflow-hidden rounded-xl border border-border">
-          {/* BEFORE — blueprint (base layer) */}
+          {/* BEFORE - blueprint (base layer) */}
           <div className="absolute inset-0 bg-card">
             <BlueprintArt />
           </div>
 
-          {/* AFTER — in-engine render, revealed to the right of the divider */}
+          {/* AFTER - in-engine render, revealed to the right of the divider */}
           <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${split}%)` }}>
             <RenderArt />
           </div>
@@ -54,7 +54,7 @@ export function SimWipe() {
             In-engine
           </span>
 
-          {/* Range input — captures drag + keyboard, transparent over the panel */}
+          {/* Range input - captures drag + keyboard, transparent over the panel */}
           <input
             type="range"
             min={0}

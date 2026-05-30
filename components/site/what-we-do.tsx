@@ -21,7 +21,7 @@ const pillars: Pillar[] = [
   {
     eyebrow: "For studios & publishers",
     title: "Game co-development",
-    body: "Embed us in your UE5 or Unity pipeline as a senior co-dev partner — features, systems, AI and agentic NPCs, netcode, tools, UI, plus prototypes and vertical slices that turn a pitch into a build a publisher will sit through. Scoped to your roadmap, shipped to your bar.",
+    body: "Embed us in your UE5 or Unity pipeline as a senior co-dev partner - features, systems, AI and agentic NPCs, netcode, tools, UI, plus prototypes and vertical slices that turn a pitch into a build a publisher will sit through. Scoped to your roadmap, shipped to your bar.",
     href: "/services/game-co-development",
     cta: "How co-dev works",
     icon: Layers,
@@ -29,18 +29,18 @@ const pillars: Pillar[] = [
   {
     eyebrow: "For high-stakes, hands-on work",
     title: "Digital twins",
-    body: "Immersive digital twins of real procedures, built in a game engine for high-stakes training — interactive environments, task-sequence logic, real-time error detection and readiness scoring. The depth behind a performance-tracked nuclear glovebox trainer.",
+    body: "Immersive digital twins of real procedures, built in a game engine for high-stakes training - interactive environments, task-sequence logic, real-time error detection and readiness scoring. The depth behind a performance-tracked nuclear glovebox trainer.",
     href: "/work/los-alamos-asu-simulation",
     cta: "See the proof",
     icon: Gauge,
   },
 ];
 
-// Supporting line — the cash-flow on-ramp, deliberately ranked below the pillars.
+// Supporting line - the cash-flow on-ramp, deliberately ranked below the pillars.
 const supporting = {
   eyebrow: "Also",
   title: "Interactive products",
-  body: "Game-engine craft beyond games — gamified products and onboarding, configurators, interactive 3D and data experiences. Things people use, not pages they skim.",
+  body: "Game-engine craft beyond games - gamified products and onboarding, configurators, interactive 3D and data experiences. Things people use, not pages they skim.",
   href: "/services/interactive-products",
   cta: "What we build",
   icon: Boxes,
@@ -68,7 +68,7 @@ export function WhatWeDo() {
           </h2>
           <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
             Game co-development for studios and publishers, and digital twins
-            for high-stakes training, built in the same engines — plus
+            for high-stakes training, built in the same engines - plus
             interactive products for teams outside games.
           </p>
         </motion.div>
@@ -110,7 +110,7 @@ export function WhatWeDo() {
           })}
         </div>
 
-        {/* Supporting third — interactive products */}
+        {/* Supporting third - interactive products */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}

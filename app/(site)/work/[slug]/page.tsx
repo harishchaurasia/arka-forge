@@ -42,6 +42,7 @@ export default async function WorkPostPage({ params }: Props) {
     client?: string;
     tags: string[];
     date: string;
+    hero?: string;
     metrics?: Record<string, string>;
   };
 
@@ -89,8 +90,10 @@ export default async function WorkPostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Cover media — placeholder until real capture is in hand */}
+        {/* Cover media */}
         <MediaFrame
+          src={fm.hero}
+          alt={`In-engine view of ${fm.title}`}
           label={`${fm.title} · selected views`}
           note="UE5 · real-time"
           aspect="16/9"
@@ -115,37 +118,10 @@ export default async function WorkPostPage({ params }: Props) {
           </dl>
         )}
 
-        {/* Body — prose follows the theme tokens */}
+        {/* Body - prose follows the theme tokens. Images are now embedded
+            inline in the MDX via <MediaFrame /> at editorial breakpoints. */}
         <div className="prose max-w-none prose-headings:font-grotesk prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-primary prose-hr:border-border prose-em:text-muted-foreground/80">
           <MDXRemote source={work.content} components={mdxComponents} />
-        </div>
-
-        {/* Gallery — placeholders for screenshots / the clip */}
-        <div className="mt-14">
-          <span className="mb-5 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-            // selected views
-          </span>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <MediaFrame
-              label="In-engine — environment"
-              note="screenshot"
-              aspect="16/9"
-              dims="1600 × 900"
-            />
-            <MediaFrame
-              label="Assessment overlay — scoring"
-              note="screenshot"
-              aspect="16/9"
-              dims="1600 × 900"
-            />
-            <MediaFrame
-              label="Task sequence — walkthrough"
-              note="clip · 1080p"
-              aspect="16/9"
-              dims="1920 × 1080"
-              className="sm:col-span-2"
-            />
-          </div>
         </div>
       </div>
     </section>

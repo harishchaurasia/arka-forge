@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/site/reveal";
 
 export function GameCoDev() {
   return (
     <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-3xl px-5 text-center">
+      <Reveal className="mx-auto max-w-3xl px-5 text-center">
         <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
           01 / Game co-development
         </span>
@@ -12,11 +13,11 @@ export function GameCoDev() {
           <CoDevSchematic />
         </div>
         <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-          We co-develop games —{" "}
+          We co-develop games -{" "}
           <span className="text-primary">extend your team.</span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Embed us in your UE5 or Unity pipeline as a senior co-dev partner —
+          Embed us in your UE5 or Unity pipeline as a senior co-dev partner -
           features, systems, AI gameplay, prototypes, and vertical slices.
           Outsource the build burden without growing headcount.
         </p>
@@ -26,12 +27,12 @@ export function GameCoDev() {
         >
           How co-dev works <ArrowRight className="h-4 w-4" />
         </Link>
-      </div>
+      </Reveal>
     </section>
   );
 }
 
-// "Two streams merge into one build" — the co-development idea.
+// "Two streams merge into one build" - the co-development idea.
 function CoDevSchematic() {
   return (
     <svg

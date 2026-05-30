@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | ArkaForge",
   },
   description:
-    "ArkaForge is a video games engineering & technology studio. We co-develop games with studios and publishers — UE5 and Unity, features, systems, AI, prototypes, vertical slices — and build game-engine digital twins for high-stakes training, the depth behind a performance-tracked nuclear glovebox simulator. Interactive products for teams outside games, too.",
+    "ArkaForge is a video games engineering & technology studio. We co-develop games with studios and publishers - UE5 and Unity, features, systems, AI, prototypes, vertical slices - and build digital twins for high-stakes training, the depth behind a performance-tracked nuclear glovebox simulator. Interactive products for teams outside games, too.",
   keywords: [
     "game co-development",
     "game development outsourcing",
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
     siteName: "ArkaForge",
     title: "ArkaForge - Video Games Engineering & Technology Studio",
     description:
-      "Game co-development for studios and publishers, and game-engine digital twins for high-stakes training — plus interactive products for teams outside games.",
+      "Game co-development for studios and publishers, and digital twins for high-stakes training - plus interactive products for teams outside games.",
   },
   twitter: {
     card: "summary_large_image",
     title: "ArkaForge - Video Games Engineering & Technology Studio",
     description:
-      "Game co-development for studios and publishers, and game-engine digital twins for high-stakes training — plus interactive products for teams outside games.",
+      "Game co-development for studios and publishers, and digital twins for high-stakes training - plus interactive products for teams outside games.",
   },
   robots: {
     index: true,

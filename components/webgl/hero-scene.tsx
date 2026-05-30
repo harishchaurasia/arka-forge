@@ -161,10 +161,10 @@ function alignForwardQuat(
   return out;
 }
 
-/* ── Ship — procedural sci-fi vessel + flyby ────
+/* ── Ship - procedural sci-fi vessel + flyby ────
    FUTURE: swap the procedural geometry below for a loaded GLTF asset.
    The animation logic (flight path, banking, settle-to-display) is
-   driven via groupRef and is geometry-agnostic — replace just the
+   driven via groupRef and is geometry-agnostic - replace just the
    mesh tree inside the return, keep the rest. Materials and HDR
    emissives (cockpit, wing-tips, exhausts) should remain on the
    asset so bloom still catches them. */
@@ -326,7 +326,7 @@ function Ship({
     [],
   );
 
-  /* Flight path — Catmull-Rom curve through control points.
+  /* Flight path - Catmull-Rom curve through control points.
      Coords are in world space. With the canvas now spanning the full
      hero width, the sweep extends across both sides: enters off-screen
      lower-left, swoops past the camera, arcs up-right, then crosses
@@ -360,7 +360,7 @@ function Ship({
     [],
   );
 
-  // Scratch objects — reused across frames to avoid GC pressure
+  // Scratch objects - reused across frames to avoid GC pressure
   const scratch = React.useMemo(
     () => ({
       pos: new THREE.Vector3(),
@@ -435,7 +435,7 @@ function Ship({
         flightStartRef.current = -1;
       }
     } else {
-      // Display mode — turntable + bob, parked right of the headline area
+      // Display mode - turntable + bob, parked right of the headline area
       groupRef.current.rotation.y += delta * 0.085;
       groupRef.current.position.set(
         2.6,
@@ -464,7 +464,7 @@ function Ship({
         <meshStandardMaterial color="#1a2028" roughness={0.5} metalness={0.86} />
       </mesh>
 
-      {/* Main fuselage cylinder — axis along X */}
+      {/* Main fuselage cylinder - axis along X */}
       <mesh rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.42, 0.42, 3.2, 14]} />
         <meshStandardMaterial color="#1c232c" roughness={0.48} metalness={0.88} />
@@ -496,13 +496,13 @@ function Ship({
         <boxGeometry args={[0.36, 0.18, 0.4]} />
         <meshStandardMaterial color="#181c22" roughness={0.5} metalness={0.86} />
       </mesh>
-      {/* Cockpit canopy strip — emissive cyan */}
+      {/* Cockpit canopy strip - emissive cyan */}
       <mesh position={[0.78, 0.84, 0]}>
         <boxGeometry args={[0.1, 0.08, 0.3]} />
         <meshBasicMaterial color={COCKPIT_C} toneMapped={false} />
       </mesh>
 
-      {/* Wings — port and starboard, swept */}
+      {/* Wings - port and starboard, swept */}
       <mesh position={[-0.55, -0.05, 1.1]} rotation={[0, 0.22, 0]}>
         <boxGeometry args={[1.5, 0.06, 0.9]} />
         <meshStandardMaterial color="#222931" roughness={0.55} metalness={0.85} />
@@ -668,7 +668,7 @@ function SceneContent({ lowPower }: { lowPower: boolean }) {
 
       <group ref={groupRef}>
         <Stars count={lowPower ? 160 : 360} />
-        {/* Wrapper makes the ship clickable — bubbles up from any child mesh */}
+        {/* Wrapper makes the ship clickable - bubbles up from any child mesh */}
         <group
           onPointerDown={(e) => {
             e.stopPropagation();

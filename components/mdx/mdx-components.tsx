@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { MediaFrame } from "@/components/site/media-frame";
 
 export const mdxComponents = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -124,6 +125,12 @@ export const mdxComponents = {
       />
     );
   },
+  MediaFrame,
+  MediaRow: ({ children }: { children: React.ReactNode }) => (
+    <div className="not-prose my-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
+      {children}
+    </div>
+  ),
   Callout: ({
     variant = "info",
     children,

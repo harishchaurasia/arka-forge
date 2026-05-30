@@ -47,7 +47,7 @@
 
 @layer base {
   :root {
-    /* ── Base: cool near-black — "the engine viewport" ─── */
+    /* ── Base: cool near-black - "the engine viewport" ─── */
     --background: 224 16% 4%;
     --foreground: 210 14% 96%;
 
@@ -57,15 +57,15 @@
     --popover: 224 16% 6%;
     --popover-foreground: 210 14% 96%;
 
-    /* ── Primary: molten orange — the one warm element ──── */
+    /* ── Primary: molten orange - the one warm element ──── */
     --primary: 15 100% 50%;
     --primary-foreground: 210 14% 97%;
 
-    /* ── Accent: amber — with primary it reads as hot metal ─ */
+    /* ── Accent: amber - with primary it reads as hot metal ─ */
     --accent: 32 100% 55%;
     --accent-foreground: 224 16% 6%;
 
-    /* ── Signal: cold cyan — "real-time / live", used sparingly ─ */
+    /* ── Signal: cold cyan - "real-time / live", used sparingly ─ */
     --signal: 190 90% 56%;
     --signal-foreground: 224 16% 6%;
 
@@ -88,13 +88,13 @@
     --radius: 0.875rem;
   }
 
-  /* ── Light theme — applied per-section via [data-theme="light"].
+  /* ── Light theme - applied per-section via [data-theme="light"].
      Ember accent (#C2410C) is the contrast-safe rung of the orange ramp on paper. ── */
   [data-theme="light"] {
-    --background: 40 22% 93%;        /* dimmer warm off-white — lower glare, less eye strain */
+    --background: 40 22% 93%;        /* dimmer warm off-white - lower glare, less eye strain */
     --foreground: 220 18% 15%;       /* soft dark slate */
 
-    --card: 42 33% 98%;              /* near-white — now reads as distinct from the bg */
+    --card: 42 33% 98%;              /* near-white - now reads as distinct from the bg */
     --card-foreground: 220 18% 15%;
     --popover: 42 33% 98%;
     --popover-foreground: 220 18% 15%;
@@ -116,7 +116,7 @@
     --destructive: 0 70% 45%;
     --destructive-foreground: 42 33% 98%;
 
-    --border: 36 16% 79%;            /* clearly visible hairline — divisions read now */
+    --border: 36 16% 79%;            /* clearly visible hairline - divisions read now */
     --input: 36 16% 79%;
     --ring: 16 88% 44%;
     --grid: 34 12% 62%;
@@ -150,7 +150,7 @@
 
 @layer utilities {
 
-  /* ── Surfaces — token-based, theme-aware ───── */
+  /* ── Surfaces - token-based, theme-aware ───── */
   .glass-surface {
     background: hsl(var(--background) / 0.7);
     backdrop-filter: blur(20px) saturate(160%);
@@ -159,7 +159,7 @@
     box-shadow: 0 4px 24px -8px hsl(var(--foreground) / 0.12);
   }
 
-  /* ── Cards — clean editorial panel ─────────── */
+  /* ── Cards - clean editorial panel ─────────── */
   .glass-card {
     position: relative;
     background: hsl(var(--card));

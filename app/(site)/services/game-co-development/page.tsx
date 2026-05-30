@@ -2,26 +2,27 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/site/section";
 import { BackLink } from "@/components/site/back-link";
+import { Reveal } from "@/components/site/reveal";
 import { Layers, Cpu, Rocket, Gamepad2, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Game Co-Development - ArkaForge",
   description:
-    "Embed ArkaForge into your UE5 or Unity pipeline as a senior co-development partner — features, systems, AI, prototypes, and vertical slices.",
+    "Embed ArkaForge into your UE5 or Unity pipeline as a senior co-development partner - features, systems, AI, prototypes, and vertical slices.",
 };
 
 const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Features & systems engineering",
     description:
-      "Combat, AI, netcode, tools, UI, content pipelines. Scoped sprints that ship into your codebase at your quality bar — the fastest way to add senior UE5 or Unity capacity without growing headcount.",
+      "Combat, AI, netcode, tools, UI, content pipelines. Scoped sprints that ship into your codebase at your quality bar - the fastest way to add senior UE5 or Unity capacity without growing headcount.",
     icon: Layers,
   },
   {
     title: "AI & agentic systems",
     description:
-      "LLM-driven NPCs, agentic behaviours, generative content pipelines, in-game AI tooling — built by an AI/ML engineer who's been shipping agentic systems since before the category had a name.",
+      "LLM-driven NPCs, agentic behaviours, generative content pipelines, in-game AI tooling - built by an AI/ML engineer who's been shipping agentic systems since before the category had a name.",
     icon: Cpu,
   },
   {
@@ -33,7 +34,7 @@ const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Serious games & gamification",
     description:
-      "Game design applied to non-game products — branching scenarios, scoring, progression, performance analytics. Where game design crosses into product; the bridge into our Interactive Products work.",
+      "Game design applied to non-game products - branching scenarios, scoring, progression, performance analytics. Where game design crosses into product; the bridge into our Interactive Products work.",
     icon: Gamepad2,
   },
 ];
@@ -42,17 +43,17 @@ const engagements = [
   {
     title: "Scoped sprint",
     description:
-      "Two-to-six-week fixed scope. One or two engineers from our network embedded into your pipeline. Best for a defined feature, system, or audit. Indicative range: $8k–$40k.",
+      "Two-to-six-week fixed scope. One or two engineers from our network embedded into your pipeline. Best for a defined feature, system, or audit. Indicative range: $8k-$40k.",
   },
   {
     title: "Fixed-bid prototype / vertical slice",
     description:
-      "Four-to-twelve-plus weeks to a defined milestone — a playable demo, a vertical slice, a system proof. Fixed price, fixed deliverable. Indicative range: $15k for a prototype to $60k+ for a vertical slice.",
+      "Four-to-twelve-plus weeks to a defined milestone - a playable demo, a vertical slice, a system proof. Fixed price, fixed deliverable. Indicative range: $15k for a prototype to $60k+ for a vertical slice.",
   },
   {
     title: "Co-dev retainer",
     description:
-      "Ongoing capacity month-to-month — useful when you need a partner who stays in your codebase across multiple feature waves.",
+      "Ongoing capacity month-to-month - useful when you need a partner who stays in your codebase across multiple feature waves.",
   },
 ];
 
@@ -63,7 +64,7 @@ export default function GameCoDevelopmentPage() {
         <BackLink href="/services" label="Back to Services" />
 
         {/* Centered header */}
-        <div className="mt-8 text-center">
+        <Reveal className="mt-8 text-center">
           <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
             Game co-development
           </span>
@@ -72,14 +73,14 @@ export default function GameCoDevelopmentPage() {
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
             We embed into your pipeline as a senior co-development partner. You
-            bring the vision; we bring engineering, AI, and delivery — scoped to
+            bring the vision; we bring engineering, AI, and delivery - scoped to
             your roadmap. Outsource the build burden, or commission an original
             title.
           </p>
           <div className="mt-10 flex justify-center">
             <CoDevSchematic />
           </div>
-        </div>
+        </Reveal>
 
         {/* What we build */}
         <div className="mt-16">
@@ -87,10 +88,10 @@ export default function GameCoDevelopmentPage() {
             What we build
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {shapes.map((s) => {
+            {shapes.map((s, i) => {
               const Icon = s.icon;
               return (
-                <div key={s.title} className="glass-card p-6 text-center">
+                <Reveal key={s.title} delay={i * 0.06} className="glass-card p-6 text-center">
                   <div className="glass-icon mx-auto mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
@@ -100,7 +101,7 @@ export default function GameCoDevelopmentPage() {
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {s.description}
                   </p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -112,18 +113,18 @@ export default function GameCoDevelopmentPage() {
             Engagement models
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-center text-sm text-muted-foreground">
-            Pricing below is indicative — every engagement is scoped on a call.
+            Pricing below is indicative - every engagement is scoped on a call.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {engagements.map((e) => (
-              <div key={e.title} className="glass-card p-6 text-center">
+            {engagements.map((e, i) => (
+              <Reveal key={e.title} delay={i * 0.06} className="glass-card p-6 text-center">
                 <h3 className="mb-2 text-sm font-semibold text-foreground">
                   {e.title}
                 </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {e.description}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -132,11 +133,11 @@ export default function GameCoDevelopmentPage() {
         <div className="mt-14 text-center">
           <h2 className="text-xl font-semibold tracking-tight">How we work</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            We embed into your pipeline — your tools, your processes, your
+            We embed into your pipeline - your tools, your processes, your
             standards. ArkaForge is led from the US, so your project lead and
             single point of contact works your hours; the engineering team behind
             them keeps building around the clock. We assemble a project-fit team
-            from a curated network of senior engineers, artists, and designers —
+            from a curated network of senior engineers, artists, and designers -
             the team is scoped to the project, not the other way around.
           </p>
         </div>
@@ -172,7 +173,7 @@ export default function GameCoDevelopmentPage() {
   );
 }
 
-// "Two streams merge into one build" — a co-development schematic.
+// "Two streams merge into one build" - a co-development schematic.
 function CoDevSchematic() {
   return (
     <svg
@@ -181,7 +182,7 @@ function CoDevSchematic() {
       fill="none"
       aria-hidden
     >
-      {/* Your team — neutral stream */}
+      {/* Your team - neutral stream */}
       <path
         d="M28 38 H150 C184 38 184 70 214 70"
         className="stroke-muted-foreground/50"
@@ -198,7 +199,7 @@ function CoDevSchematic() {
         YOUR TEAM
       </text>
 
-      {/* ArkaForge — accent stream */}
+      {/* ArkaForge - accent stream */}
       <path
         d="M28 102 H150 C184 102 184 70 214 70"
         className="stroke-primary"
