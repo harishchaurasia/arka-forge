@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
+import { HomePillarLabel } from "@/components/site/home-pillar-label";
 
 export function GameCoDev() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative pt-24 pb-14 md:pt-32 md:pb-16">
       <Reveal className="mx-auto max-w-3xl px-5 text-center">
-        <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-          01 / Game co-development
-        </span>
+        <HomePillarLabel index="01" title="Game co-development" />
         <div className="mb-8 flex justify-center">
           <CoDevSchematic />
         </div>

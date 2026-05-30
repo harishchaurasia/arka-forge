@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
+import { HomePillarLabel } from "@/components/site/home-pillar-label";
 import { TwinSchematic } from "@/components/site/twin-schematic";
 
 export function DigitalTwins() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative pt-14 pb-14 md:pt-16 md:pb-20">
       <Reveal className="mx-auto max-w-3xl px-5 text-center">
-        <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-          02 / Digital twins
-        </span>
-        <div className="mb-8 flex justify-center">
+        <HomePillarLabel index="02" title="Digital twins" />
+        <div className="mb-6 flex justify-center">
           <TwinSchematic />
         </div>
         <h2 className="text-3xl font-bold tracking-tight md:text-4xl">

@@ -1,7 +1,9 @@
+import { cn } from "@/lib/utils";
+
 // Physical → digital twin (train/learn/assess) → physical — the full training
 // loop. Endpoints muted (real world); middle two primary (digital). Last cube
 // carries a small primary tick: the skill has landed, closing the cycle.
-export function TwinSchematic() {
+export function TwinSchematic({ className }: { className?: string }) {
   const cubes = [
     { cx: 80, tone: "muted", label1: "PHYSICAL WORLD", label2: "WORKSPACE", tick: false, glyph: false },
     { cx: 240, tone: "primary", label1: "DIGITAL TWIN", label2: "TRAIN · LEARN · ASSESS", tick: false, glyph: true },
@@ -12,8 +14,8 @@ export function TwinSchematic() {
 
   return (
     <svg
-      viewBox="0 0 480 150"
-      className="h-auto w-full max-w-2xl"
+      viewBox="40 25 400 112"
+      className={cn("block h-auto w-full max-w-xl", className)}
       fill="none"
       strokeLinejoin="round"
       aria-hidden

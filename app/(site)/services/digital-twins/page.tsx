@@ -78,8 +78,8 @@ export default function DigitalTwinsPage() {
             applied where the cost of error is severe. Immersive training twins,
             not industrial IoT dashboards.
           </p>
-          <div className="mt-10 flex justify-center">
-            <TwinSchematic />
+          <div className="mt-8 flex justify-center">
+            <TwinSchematic className="max-w-2xl" />
           </div>
         </Reveal>
 
