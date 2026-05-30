@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { MediaFrame } from "@/components/site/media-frame";
 import { Reveal } from "@/components/site/reveal";
+import { TwinSchematic } from "@/components/site/twin-schematic";
 
 export function DigitalTwins() {
   return (
@@ -10,6 +10,9 @@ export function DigitalTwins() {
         <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
           02 / Digital twins
         </span>
+        <div className="mb-8 flex justify-center">
+          <TwinSchematic />
+        </div>
         <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
           Digital twins for{" "}
           <span className="text-primary">high-stakes training.</span>
@@ -19,15 +22,6 @@ export function DigitalTwins() {
           built in a game engine, with every task, error, and readiness signal
           measured. It&apos;s the depth behind our nuclear glovebox trainer.
         </p>
-        <div className="mx-auto mt-8 max-w-2xl">
-          <MediaFrame
-            src="/work/glovebox-1.png"
-            alt="In-engine view of the nuclear glovebox training simulator built in Unreal Engine 5"
-            label="Glovebox digital twin · selected views"
-            note="UE5 · real-time"
-            aspect="16/9"
-          />
-        </div>
         <Link
           href="/services/digital-twins"
           className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
