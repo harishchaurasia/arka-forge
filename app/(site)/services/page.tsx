@@ -53,13 +53,13 @@ export default function ServicesPage() {
       </Reveal>
 
       {/* Two primary pillars */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid auto-rows-fr gap-6 md:grid-cols-2">
         {pillars.map((s, i) => {
           const Icon = s.icon;
           return (
-            <Reveal key={s.href} delay={i * 0.08}>
-            <Link href={s.href} className="group block">
-              <div className="h-full glass-card p-8 transition-all duration-300 hover:-translate-y-1.5">
+            <Reveal key={s.href} delay={i * 0.08} className="h-full">
+            <Link href={s.href} className="group flex h-full flex-col">
+              <div className="flex h-full flex-1 flex-col glass-card p-8 transition-all duration-300 hover:-translate-y-1.5">
                 <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl glass-icon">
                   <Icon className="h-5 w-5 text-primary" />
                 </div>
@@ -67,7 +67,7 @@ export default function ServicesPage() {
                   {s.title}
                   <ArrowUpRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-60" />
                 </h2>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
                   {s.body}
                 </p>
               </div>

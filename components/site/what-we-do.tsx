@@ -74,19 +74,20 @@ export function WhatWeDo() {
         </motion.div>
 
         {/* Two primary pillars */}
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid auto-rows-fr gap-5 md:grid-cols-2">
           {pillars.map((item, i) => {
             const Icon = item.icon;
             return (
               <motion.div
                 key={item.title}
+                className="h-full"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: i * 0.08, ease }}
               >
-                <Link href={item.href} className="group block h-full">
-                  <div className="panel-brackets h-full rounded-xl border border-border bg-card p-8 ring-1 ring-primary/15 transition-all duration-300 hover:-translate-y-1.5 hover:ring-primary/30">
+                <Link href={item.href} className="group flex h-full flex-col">
+                  <div className="panel-brackets flex h-full flex-1 flex-col rounded-xl border border-border bg-card p-8 ring-1 ring-primary/15 transition-all duration-300 hover:-translate-y-1.5 hover:ring-primary/30">
                     <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-primary transition-transform duration-300 group-hover:scale-105">
                       <Icon className="h-5 w-5" />
                     </div>
@@ -97,10 +98,10 @@ export function WhatWeDo() {
                       {item.title}
                       <ArrowUpRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-60" />
                     </h3>
-                    <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                       {item.body}
                     </p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                       {item.cta} <ArrowUpRight className="h-3.5 w-3.5" />
                     </span>
                   </div>

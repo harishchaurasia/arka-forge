@@ -128,7 +128,7 @@ export function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <div className="mt-9 flex flex-row flex-wrap items-center gap-x-4 gap-y-3">
             <a
               href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
               target="_blank"
