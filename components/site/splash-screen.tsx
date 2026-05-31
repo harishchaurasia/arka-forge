@@ -77,13 +77,18 @@ export function SplashScreen() {
             className="h-24 w-24 rounded-full object-contain md:h-36 md:w-36 lg:h-40 lg:w-40"
           />
         </div>
-        <span
-          className={`splash-text font-display text-lg font-semibold tracking-tight text-primary md:text-2xl lg:text-3xl ${
+        <div
+          className={`splash-text flex flex-col items-center gap-2 md:gap-3 ${
             phase === "collapse" ? "splash-text-collapse" : ""
           }`}
         >
-          ArkaForge
-        </span>
+          <span className="font-display text-2xl font-bold tracking-tight text-primary md:text-4xl lg:text-5xl">
+            ArkaForge
+          </span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-primary/60 md:text-[10px] md:tracking-[0.22em]">
+            Game Engineering &amp; Technology Studio
+          </span>
+        </div>
       </div>
     </div>
   );
