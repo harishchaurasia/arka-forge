@@ -25,6 +25,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://arkaforge.com"),
   title: {
     default: "ArkaForge - Video Games Engineering & Technology Studio",
     template: "%s | ArkaForge",

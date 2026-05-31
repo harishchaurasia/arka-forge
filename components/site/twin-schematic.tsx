@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-// Physical → digital twin (train/learn/assess) → physical — the full training
+// Physical -> digital twin (train/learn/assess) -> physical - the full training
 // loop. Endpoints muted (real world); middle two primary (digital). Last cube
 // carries a small primary tick: the skill has landed, closing the cycle.
 export function TwinSchematic({ className }: { className?: string }) {
