@@ -14,7 +14,7 @@ export function TwinSchematic({ className }: { className?: string }) {
 
   return (
     <svg
-      viewBox="40 25 400 112"
+      viewBox="10 25 460 112"
       className={cn("block h-auto w-full max-w-xl", className)}
       fill="none"
       strokeLinejoin="round"
