@@ -34,19 +34,20 @@ export function Reveal({ children, delay = 0, y = 12, className }: RevealProps) 
     return () => clearTimeout(timer);
   }, [isInView]);
 
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   const visible = isInView || forceVisible;
 
+  // Always render motion.div — never branch to a plain div based on reduceMotion.
+  // Branching causes a hydration mismatch: server renders motion.div (opacity:0),
+  // client with prefers-reduced-motion renders plain div (no style), React cannot
+  // reconcile them and the SSR opacity:0 is left permanently. Keep the same
+  // element tree on both sides; use duration:0 for the reduced-motion path instead.
   return (
     <motion.div
       ref={ref}
       className={className}
       initial={{ opacity: 0, y }}
       animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y }}
-      transition={{ duration: 0.5, delay, ease }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 0.5, delay, ease }}
     >
       {children}
     </motion.div>
