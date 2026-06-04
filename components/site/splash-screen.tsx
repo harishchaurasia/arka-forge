@@ -10,50 +10,27 @@ export function SplashScreen() {
   const [phase, setPhase] = React.useState<"spin" | "collapse" | "done">(
     "spin",
   );
-  const [skip, setSkip] = React.useState(false);
 
-  // useLayoutEffect fires synchronously before the browser paints, so
-  // reduced-motion users never see a static flash of the splash frame.
-  React.useLayoutEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
-      setSkip(true);
-      return;
-    }
-    const onChange = () => {
-      if (mq.matches) setSkip(true);
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+  React.useEffect(() => {
+    const spinTimer = setTimeout(() => setPhase("collapse"), SPIN_DURATION);
+    return () => clearTimeout(spinTimer);
   }, []);
 
   React.useEffect(() => {
-    if (skip) return;
-    const spinTimer = setTimeout(
-      () => setPhase("collapse"),
-      SPIN_DURATION,
-    );
-    return () => clearTimeout(spinTimer);
-  }, [skip]);
-
-  React.useEffect(() => {
-    if (skip || phase !== "collapse") return;
-    const collapseTimer = setTimeout(
-      () => setPhase("done"),
-      COLLAPSE_DURATION,
-    );
+    if (phase !== "collapse") return;
+    const collapseTimer = setTimeout(() => setPhase("done"), COLLAPSE_DURATION);
     return () => clearTimeout(collapseTimer);
-  }, [phase, skip]);
+  }, [phase]);
 
   React.useEffect(() => {
-    if (skip || phase === "done") return;
+    if (phase === "done") return;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [phase, skip]);
+  }, [phase]);
 
-  if (skip || phase === "done") return null;
+  if (phase === "done") return null;
 
   return (
     <div
