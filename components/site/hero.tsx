@@ -40,7 +40,9 @@ const PILLARS = [
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = React.useState(false);
-  React.useEffect(() => {
+  // useLayoutEffect fires before the browser paints so the value is correct
+  // on the first frame — avoids the one-render lag of useEffect on Windows.
+  React.useLayoutEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
     const on = () => setReduced(mq.matches);
@@ -54,11 +56,11 @@ export function Hero() {
   const reduced = usePrefersReducedMotion();
   const [index, setIndex] = React.useState(0);
 
+  // Always cycle — reduced motion suppresses the animation, not the content switch.
   React.useEffect(() => {
-    if (reduced) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % PILLARS.length), 4200);
     return () => clearInterval(id);
-  }, [reduced]);
+  }, []);
 
   const pillar = PILLARS[index];
 
