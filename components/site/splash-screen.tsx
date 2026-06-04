@@ -12,7 +12,9 @@ export function SplashScreen() {
   );
   const [skip, setSkip] = React.useState(false);
 
-  React.useEffect(() => {
+  // useLayoutEffect fires synchronously before the browser paints, so
+  // reduced-motion users never see a static flash of the splash frame.
+  React.useLayoutEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mq.matches) {
       setSkip(true);
