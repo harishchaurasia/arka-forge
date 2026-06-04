@@ -352,4 +352,11 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  /* Restore splash durations — it's intentional branded motion, not decoration */
+  .splash-logo-img               { animation-duration: 2.4s   !important; }
+  .splash-logo-img.splash-logo-collapse { animation-duration: 600ms !important; }
+  .splash-text                   { animation-duration: 0.7s   !important; }
+  .splash-text.splash-text-collapse     { animation-duration: 400ms !important; }
+  .splash-overlay.splash-collapse       { animation-duration: 600ms !important; }
+  .splash-container-collapse     { animation-duration: 600ms  !important; }
 }
