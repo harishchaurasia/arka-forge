@@ -210,28 +210,6 @@
     background-clip: text;
   }
 
-  /* ── Panel brackets: top-left + bottom-right corners ─── */
-  .panel-brackets::before,
-  .panel-brackets::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .panel-brackets::before {
-    top: -1px;
-    left: -1px;
-    border-top: 1px solid hsl(var(--primary) / 0.45);
-    border-left: 1px solid hsl(var(--primary) / 0.45);
-  }
-  .panel-brackets::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 1px solid hsl(var(--primary) / 0.45);
-    border-right: 1px solid hsl(var(--primary) / 0.45);
-  }
 
   /* ── Technical grid texture (use on an abs-positioned overlay) ─── */
   .grid-texture {

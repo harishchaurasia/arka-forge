@@ -51,7 +51,7 @@ export function HowWeWork() {
               <Reveal
                 key={point.title}
                 delay={index * 0.08}
-                className="glass-card panel-brackets p-6 md:p-7"
+                className="glass-card p-6 md:p-7"
               >
                 <div className="mb-5 flex items-center justify-between gap-4">
                   <span className="rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1 font-mono text-[11px] font-medium text-primary">

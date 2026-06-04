@@ -150,7 +150,7 @@ export function Hero() {
 
         {/* ── Right: switching datasheet panel (fills the space) ── */}
         <div className="hidden lg:block">
-          <div className="panel-brackets relative rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm">
+          <div className="relative rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60">
               <span>// {pillar.index} · spec</span>
               <span className="flex items-center gap-1.5 text-primary">
