@@ -131,15 +131,13 @@ export function Hero() {
 
           {/* CTAs */}
           <div className="mt-9 flex flex-row flex-wrap items-center gap-x-4 gap-y-3">
-            <a
-              href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               Schedule a call
               <Phone className="h-4 w-4" />
-            </a>
+            </Link>
             <Link
               href="/work"
               className="group inline-flex items-center gap-2 text-sm font-semibold text-foreground"

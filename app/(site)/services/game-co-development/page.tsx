@@ -160,9 +160,7 @@ export default function GameCoDevelopmentPage() {
             timeline, and the delivery standard before anything begins.
           </p>
           <Link
-            href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/contact"
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
           >
             Schedule a scoping call <ArrowRight className="h-4 w-4" />

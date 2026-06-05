@@ -119,13 +119,7 @@ export default function CompanyPage() {
               </Link>
             </Button>
             <Button asChild size="lg" className="glow px-8">
-              <a
-                href="https://calendar.app.google/9HXdsiKfCXCPeUya9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Schedule a Call
-              </a>
+              <Link href="/contact">Schedule a Call</Link>
             </Button>
           </div>
         </Reveal>

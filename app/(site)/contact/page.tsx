@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { Mail, Clock, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import { BackLink } from "@/components/site/back-link";
+import { CalEmbed } from "@/components/site/cal-embed";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -65,56 +65,17 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-[1fr,1.4fr] items-stretch">
-          {/* Left - info cards */}
-          <div className="grid h-full min-h-0 grid-rows-4 gap-4">
-            <div className="glass-card h-full p-6 flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
-                <Mail className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold mb-1">Email</h3>
-                <a href="mailto:contact@arkaforge.com" className="text-sm text-primary hover:underline">
-                  contact@arkaforge.com
-                </a>
-              </div>
-            </div>
-            <div className="glass-card h-full p-6 flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
-                <Clock className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold mb-1">Response Time</h3>
-                <p className="text-sm text-muted-foreground">Typically within 1-2 business days</p>
-              </div>
-            </div>
-            <div className="glass-card h-full p-6 flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
-                <Linkedin className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold mb-1">LinkedIn</h3>
-                <a href="https://www.linkedin.com/company/arkaforge" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-                  ArkaForge on LinkedIn
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </div>
-            <div className="glass-card h-full flex items-start gap-4 p-6">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg glass-icon flex items-center justify-center">
-                <Instagram className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold mb-1">Instagram</h3>
-                <a href="https://instagram.com/arka.forge" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-                  @arka.forge
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </div>
-          </div>
+        {/* Cal embed — full width */}
+        <CalEmbed />
 
-          {/* Right - form */}
+        {/* Send a message — secondary */}
+        <div className="mt-16">
+          <div className="mb-6">
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-2 block">
+              Prefer to write?
+            </span>
+            <h2 className="text-xl font-semibold tracking-tight">Send a message</h2>
+          </div>
           <div className="glass-card p-6 md:p-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <input type="text" {...register("honeypot")} className="hidden" tabIndex={-1} autoComplete="off" />

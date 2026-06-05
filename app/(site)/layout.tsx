@@ -6,6 +6,7 @@ import { SmoothScroll } from "@/components/site/smooth-scroll";
 import { SkipToContent } from "@/components/site/skip-to-content";
 import { GalaxyBackground } from "@/components/site/galaxy-background";
 import { SplashScreen } from "@/components/site/splash-screen";
+import { CalPreloader } from "@/components/site/cal-preloader";
 
 export default function SiteLayout({
   children,
@@ -24,6 +25,7 @@ export default function SiteLayout({
         </main>
         <Footer />
         <Toaster />
+        <CalPreloader />
       </SmoothScroll>
     </ThemeProvider>
   );
