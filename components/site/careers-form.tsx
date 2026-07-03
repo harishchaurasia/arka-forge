@@ -16,6 +16,8 @@ export function CareersForm() {
     role: "",
     background: "",
     links: "",
+    source: "",
+    sourceOther: "",
     message: "",
   });
 
@@ -38,7 +40,7 @@ export function CareersForm() {
           name: form.name,
           email: form.email,
           subject: `Careers - ${form.role}`,
-          message: `Background: ${form.background}\n\nLinks: ${form.links}\n\nMessage: ${form.message}`,
+          message: `Background: ${form.background}\n\nLinks: ${form.links}\n\nHeard about us: ${form.source === "Other" ? form.sourceOther : form.source}\n\nMessage: ${form.message}`,
           honeypot: "",
           company: "",
         }),
@@ -54,6 +56,8 @@ export function CareersForm() {
         role: "",
         background: "",
         links: "",
+        source: "",
+        sourceOther: "",
         message: "",
       });
     } catch {
@@ -182,6 +186,44 @@ export function CareersForm() {
           value={form.message}
           onChange={handleChange}
         />
+      </div>
+
+      <div>
+        <Label
+          htmlFor="source"
+          className="text-xs font-medium text-muted-foreground mb-1.5 block"
+        >
+          How did you hear about us? *
+        </Label>
+        <select
+          id="source"
+          name="source"
+          value={form.source}
+          onChange={handleChange}
+          required
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        >
+          <option value="">Select an option</option>
+          <option>LinkedIn</option>
+          <option>Instagram</option>
+          <option>Twitter / X</option>
+          <option>Google Search</option>
+          <option>Referral (friend or colleague)</option>
+          <option>Discord or community</option>
+          <option>Job board</option>
+          <option>Other</option>
+        </select>
+        {form.source === "Other" && (
+          <Input
+            id="sourceOther"
+            name="sourceOther"
+            placeholder="Please specify"
+            value={form.sourceOther}
+            onChange={handleChange}
+            required
+            className="mt-2"
+          />
+        )}
       </div>
 
       <Button
