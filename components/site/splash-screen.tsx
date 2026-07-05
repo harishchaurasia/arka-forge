@@ -61,10 +61,10 @@ export function SplashScreen() {
             phase === "collapse" ? "splash-text-collapse" : ""
           }`}
         >
-          <span className="font-display text-xl font-bold tracking-tight text-primary md:text-3xl lg:text-4xl">
+          <span className="font-display text-3xl font-bold leading-none tracking-tight text-primary text-center md:text-5xl lg:text-6xl">
             ArkaForge
           </span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary/60 md:text-xs md:tracking-[0.22em] lg:text-sm">
+          <span className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary/70 text-center text-balance max-w-[15rem] md:max-w-none md:text-sm md:tracking-[0.2em] lg:text-base">
             Game Engineering &amp; Technology Studio
           </span>
         </div>

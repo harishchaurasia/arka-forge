@@ -43,6 +43,15 @@ const nextConfig: NextConfig = {
       },
       { source: "/labs", destination: "/work", permanent: true },
       { source: "/labs/:slug", destination: "/work", permanent: true },
+      // careers.arkaforge.com -> arkaforge.com/careers (add the subdomain in
+      // Vercel Domains + a CNAME so requests reach the app; this rule then
+      // redirects any path on the subdomain to the canonical careers page).
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "careers.arkaforge.com" }],
+        destination: "https://arkaforge.com/careers",
+        permanent: true,
+      },
     ];
   },
 };
