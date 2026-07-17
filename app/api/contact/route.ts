@@ -130,7 +130,7 @@ export async function POST(request: NextRequest) {
       from: fromEmail,
       to: toEmail,
       replyTo: validated.email,
-      subject: `${isCareers ? "Careers Application" : "Contact Form"}: ${validated.subject}`,
+      subject: `${isCareers ? "Careers Application" : "Contact Form"}: ${validated.subject} - ${validated.name}`,
       attachments,
       html,
       text: textLines.join("\n"),
