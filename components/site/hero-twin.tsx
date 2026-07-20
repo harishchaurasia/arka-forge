@@ -75,6 +75,35 @@ export function HeroTwin() {
           fail();
         });
 
+        // Diagnostic overlay (only on ?twindebug) - reports the real GPU
+        // capabilities and whether the shaded mesh's triangles actually draw.
+        const debug = new URLSearchParams(window.location.search).has(
+          "twindebug",
+        );
+        let dbgEl: HTMLDivElement | null = null;
+        let dbgHead = "";
+        let meshCount = 0;
+        if (debug) {
+          const gl = renderer.getContext();
+          const ext = gl.getExtension("WEBGL_debug_renderer_info");
+          const hp = gl.getShaderPrecisionFormat(
+            gl.FRAGMENT_SHADER,
+            gl.HIGH_FLOAT,
+          );
+          dbgHead =
+            "GPU: " +
+            (ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : "hidden") +
+            "\nGL: " +
+            gl.getParameter(gl.VERSION) +
+            "\nfrag highp: " +
+            (!!hp && hp.precision > 0) +
+            "\n";
+          dbgEl = document.createElement("div");
+          dbgEl.style.cssText =
+            "position:absolute;top:8px;left:8px;z-index:9;font:11px/1.5 monospace;color:#7CFC9A;background:rgba(0,0,0,.8);padding:8px;white-space:pre;pointer-events:none;max-width:95%;";
+          el.appendChild(dbgEl);
+        }
+
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100000);
 
@@ -184,6 +213,7 @@ export function HeroTwin() {
           root.traverse((o) => {
             const mesh = o as THREE.Mesh;
             if (mesh.isMesh && mesh.geometry) {
+              meshCount++;
               // Rebuild the "reality" material as a plain opaque lit material.
               // The GLB ships KHR_materials_transmission / clearcoat, which the
               // transmission pass renders INVISIBLE on many Windows/ANGLE (D3D)
@@ -196,13 +226,15 @@ export function HeroTwin() {
               // material with no normals renders black. Recompute if missing.
               if (!mesh.geometry.getAttribute("normal"))
                 mesh.geometry.computeVertexNormals();
-              // Low metalness so it never needs an env map to look lit.
-              const solid = new THREE.MeshStandardMaterial({
+              // MeshPhong (classic Blinn-Phong) uses a much simpler shader than
+              // the PBR MeshStandard, so it compiles/runs on limited Windows/ANGLE
+              // GPUs where the PBR shader rendered the mesh invisible.
+              const solid = new THREE.MeshPhongMaterial({
                 map: src?.map ?? null,
                 normalMap: src?.normalMap ?? null,
                 color: src?.color?.clone() ?? new THREE.Color(0xcfcfcf),
-                metalness: 0.15,
-                roughness: 0.7,
+                shininess: 18,
+                specular: new THREE.Color(0x2a2a2a),
               });
               solid.clippingPlanes = [planeSolid];
               solid.side = THREE.DoubleSide;
@@ -250,6 +282,17 @@ export function HeroTwin() {
           scan.scale.setScalar(0.62 * modelH);
           controls.update();
           renderer.render(scene, camera);
+          if (dbgEl)
+            dbgEl.textContent =
+              dbgHead +
+              "meshes: " +
+              meshCount +
+              "\ntris drawn: " +
+              renderer.info.render.triangles +
+              "\ndraw calls: " +
+              renderer.info.render.calls +
+              "\nglError: " +
+              renderer.getContext().getError();
           raf = requestAnimationFrame(frame);
         }
         function start() {
@@ -286,6 +329,7 @@ export function HeroTwin() {
           document.removeEventListener("visibilitychange", onVis);
           controls.dispose();
           renderer.dispose();
+          if (dbgEl) dbgEl.remove();
           if (renderer.domElement.parentNode === el)
             el.removeChild(renderer.domElement);
         };
