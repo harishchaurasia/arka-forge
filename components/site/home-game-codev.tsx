@@ -1,24 +1,22 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
-import { HomePillarLabel } from "@/components/site/home-pillar-label";
 
 export function GameCoDev() {
   return (
-    <section className="relative pt-24 pb-14 md:pt-32 md:pb-16">
+    <section className="relative pt-14 pb-14 md:pt-16 md:pb-20">
       <Reveal className="mx-auto max-w-3xl px-5 text-center">
-        <HomePillarLabel index="01" title="Game co-development" />
         <div className="mb-8 flex justify-center">
           <CoDevSchematic />
         </div>
         <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-          We co-develop games -{" "}
-          <span className="text-primary">extend your team.</span>
+          The same engine team,{" "}
+          <span className="text-primary">pointed at your game.</span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-          Embed us in your UE5 or Unity pipeline as a senior co-dev partner -
-          features, systems, AI gameplay, prototypes, and vertical slices.
-          Outsource the build burden without growing headcount.
+          Studios and publishers embed us into their UE5 or Unity pipeline for
+          features, systems, AI gameplay, prototypes, and vertical slices. Senior
+          hands, no headcount to carry.
         </p>
         <Link
           href="/services/game-co-development"

@@ -16,11 +16,6 @@ export default async function WorkPage() {
     <Section>
       <BackLink href="/" label="Back to Home" />
       <Reveal className="mb-12">
-        <span
-          className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-3 block"
-        >
-          Portfolio
-        </span>
         <h1
           className="text-3xl md:text-4xl font-bold
         tracking-tight"

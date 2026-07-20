@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Company - ArkaForge",
   description:
-    "ArkaForge is a video games engineering & technology studio - game co-development for studios and publishers, plus interactive products and the simulation depth behind a nuclear training simulator.",
+    "ArkaForge is a game engineering & technology studio - digital twins for high-stakes training, game co-development for studios and publishers, and interactive products beyond games.",
 };
 
 const values = [
@@ -37,29 +37,23 @@ export default function CompanyPage() {
       <div className="max-w-4xl mx-auto">
         {/* Masthead */}
         <Reveal className="text-center mb-20">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-4 block">
-            About ArkaForge
-          </span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
             A game engineering &amp; technology studio.
           </h1>
           <div className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto space-y-4">
             <p>
-              ArkaForge co-develops games with studios and publishers - UE5 and
-              Unity, features, systems, AI, prototypes, vertical slices - and
-              builds interactive products for teams outside games. Led directly
-              by its founder and run as a distributed studio - a curated network
-              of senior engineers, developers, and designers, several
-              US-educated.
+              ArkaForge builds digital twins for high-stakes training: real-world
+              procedures rebuilt inside a game engine and measured to the fidelity
+              safety-critical work demands. We also co-develop games with studios
+              and publishers, and build interactive products beyond games.
+              Founder-led, run as a distributed studio - a curated network of
+              senior engineers, developers, and designers, several US-educated.
             </p>
           </div>
         </Reveal>
 
         {/* Origin */}
         <Reveal className="mb-20">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-4 block">
-            Origin
-          </span>
           <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
             <p>
               ArkaForge was founded by Harish - a US-based computer science
@@ -69,29 +63,24 @@ export default function CompanyPage() {
               clients.
             </p>
             <p>
-              Before founding ArkaForge, Harish worked on the design and
-              development of a nuclear glovebox training simulator connected to
-              Los Alamos National Laboratory - as a graduate researcher at
-              ASU&apos;s School of Manufacturing Systems and Networks.
-              Interactive environment, custom game logic, task-sequence
-              tracking, real-time performance assessment. That work is the
-              technical foundation this company is built on.
+              He engineered a performance-tracked nuclear glovebox training
+              simulator inside a national-lab research program at Los Alamos,
+              with ASU&apos;s School of Manufacturing Systems and Networks:
+              interactive environment, custom game logic, task-sequence tracking,
+              real-time performance assessment. That work is the technical
+              foundation this company is built on.
             </p>
             <p>
-              Today ArkaForge works with game studios and publishers as a
-              co-development partner - full-cycle Unreal Engine 5 and Unity
-              capability for teams that need high-quality execution without
-              growing headcount - and with teams outside games who need
-              interactive product work.
+              Today ArkaForge builds training digital twins for high-consequence
+              work, co-develops games with studios and publishers on full-cycle
+              Unreal Engine 5 and Unity, and builds interactive products for
+              teams outside games - high-quality execution without the headcount.
             </p>
           </div>
         </Reveal>
 
         {/* Values */}
         <Reveal className="mb-20">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-primary/70 mb-5 block">
-            How we work
-          </span>
           <div className="grid gap-5 md:grid-cols-3">
             {values.map((v) => (
               <div key={v.title} className="glass-card p-7">

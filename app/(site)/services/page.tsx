@@ -8,21 +8,21 @@ import { Layers, Gauge, Boxes, ArrowUpRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Services - ArkaForge",
   description:
-    "Game co-development for studios and publishers, and digital twins for high-stakes training - plus interactive products for teams outside games.",
+    "Digital twins for high-stakes training, and game co-development for studios and publishers - plus interactive products for teams outside games.",
 };
 
 const pillars = [
+  {
+    title: "Digital twins",
+    body: "Real-world procedures rebuilt as interactive training simulations in a game engine - environments, task-sequence logic, real-time error detection, readiness scoring. Engineered to the standard nuclear-grade training demands.",
+    href: "/services/digital-twins",
+    icon: Gauge,
+  },
   {
     title: "Game co-development",
     body: "Embed into your UE5 or Unity pipeline as a senior co-dev partner - features and systems engineering, AI and agentic systems, prototypes and vertical slices. The fastest way to add senior engine capacity without growing headcount.",
     href: "/services/game-co-development",
     icon: Layers,
-  },
-  {
-    title: "Digital twins",
-    body: "Real-world procedures rebuilt as interactive training simulations in a game engine - environments, task-sequence logic, real-time error detection, readiness scoring. The depth behind our nuclear glovebox trainer.",
-    href: "/services/digital-twins",
-    icon: Gauge,
   },
 ];
 
@@ -38,15 +38,12 @@ export default function ServicesPage() {
     <Section>
       <BackLink href="/" label="Back to Home" />
       <Reveal className="mb-12 max-w-2xl">
-        <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
-          What we do
-        </span>
         <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
           Services
         </h1>
         <p className="text-base leading-relaxed text-muted-foreground">
-          Two specialties, one engine room: game co-development for studios and
-          publishers, and digital twins for high-stakes training. Plus
+          Two specialties, one engine room: digital twins for high-stakes
+          training, and game co-development for studios and publishers. Plus
           interactive products for teams outside games - same engineers, same
           engines, same bar.
         </p>

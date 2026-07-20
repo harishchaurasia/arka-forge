@@ -10,8 +10,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <GameCoDev />
       <DigitalTwins />
+      <GameCoDev />
       <Proof />
       <HowWeWork />
       <TheStudio />

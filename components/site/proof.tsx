@@ -20,11 +20,8 @@ export async function Proof() {
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mb-10 flex items-end justify-between">
           <div>
-            <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-              // selected work
-            </span>
             <h2 className="font-grotesk text-3xl font-bold tracking-tight md:text-4xl">
-              Proof, not promises.
+              Selected work.
             </h2>
           </div>
           <Link

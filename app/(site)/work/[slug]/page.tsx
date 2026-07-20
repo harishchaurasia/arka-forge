@@ -64,9 +64,6 @@ export default async function WorkPostPage({ params }: Props) {
 
         {/* Editorial header */}
         <header className="mb-10 mt-8">
-          <span className="mb-4 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-            // case study
-          </span>
           <h1 className="font-grotesk text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
             {fm.title}
           </h1>

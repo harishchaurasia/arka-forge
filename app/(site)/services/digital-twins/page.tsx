@@ -66,17 +66,14 @@ export default function DigitalTwinsPage() {
 
         {/* Centered header */}
         <Reveal className="mt-8 text-center">
-          <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
-            Digital twins
-          </span>
           <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Digital twins for high-stakes training
+            We build digital twins of high-stakes work
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            We turn real-world procedures into interactive, performance-tracked
-            training simulations - the real-time 3D systems that power games,
-            applied where the cost of error is severe. Immersive training twins,
-            not industrial IoT dashboards.
+            We rebuild the procedure, the equipment, and the failure modes inside
+            a game engine, then measure every action against it. The real-time 3D
+            systems that power games, applied where the cost of error is severe.
+            Training twins of the work itself, not industrial IoT dashboards.
           </p>
           <div className="mt-8 flex justify-center">
             <TwinSchematic className="max-w-2xl" />
@@ -112,11 +109,11 @@ export default function DigitalTwinsPage() {
         <div className="mt-14 text-center">
           <h2 className="text-xl font-semibold tracking-tight">Proof</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            ArkaForge&apos;s founder built a performance-tracked nuclear glovebox
-            training simulator - interactive environment, custom task-sequence
-            logic, real-time error detection and readiness scoring - as a
-            graduate researcher connected to Los Alamos National Laboratory.
-            It&apos;s the direct technical foundation for this work.
+            We engineered a performance-tracked nuclear glovebox training
+            simulator - interactive environment, custom task-sequence logic,
+            real-time error detection, and readiness scoring - inside a
+            national-lab research program at Los Alamos. It is the technical
+            foundation this work is built on.
           </p>
           <Link
             href="/work/los-alamos-asu-simulation"

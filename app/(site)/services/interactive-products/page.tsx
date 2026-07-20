@@ -47,9 +47,6 @@ export default function InteractiveProductsPage() {
 
         {/* Centered header */}
         <Reveal className="mt-8 text-center">
-          <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
-            Interactive products
-          </span>
           <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
             Game-engine craft, outside games
           </h1>

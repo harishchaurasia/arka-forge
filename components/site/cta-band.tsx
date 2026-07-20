@@ -6,21 +6,15 @@ export function CTABand() {
   return (
     <section className="relative py-24 text-foreground md:py-32">
       <Reveal className="relative mx-auto max-w-6xl px-5">
-        <div className="mb-12 flex items-center justify-between border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px]">
-          <span>// let&apos;s talk</span>
-          <span className="hidden items-center gap-1.5 text-primary sm:flex">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-            open for partners
-          </span>
-        </div>
+        <div className="mb-12 border-t border-border pt-4" />
 
         <h2 className="max-w-3xl text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em]">
           Tell us what you&apos;re building.
         </h2>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          A game in production and not enough hands. A pitch that needs a
-          vertical slice. A real-world procedure that should be a digital twin.
-          If it runs on a game engine - or should - that&apos;s the work we take.
+          A high-stakes procedure that should be a digital twin. A game in
+          production that needs more hands. A pitch that needs a vertical slice.
+          If it runs on a game engine, or should, that is the work we take.
         </p>
 
         <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">

@@ -39,20 +39,16 @@ export default function CareersPage() {
         {/* Hero */}
         <Reveal>
           <header className="text-center">
-            <span className="mb-4 block font-mono text-xs font-medium uppercase tracking-wider text-primary/70">
-              Join us
-            </span>
             <h1 className="mb-5 text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl">
               Grow with us.
               <br />
               Build what&apos;s next.
             </h1>
             <p className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              ArkaForge is a game engineering &amp; technology studio building
-              real-time interactive experiences - from video games to digital
-              twins. We&apos;re not just hiring; we&apos;re building a stronger
-              team. You add value to what we make, and we invest in you right
-              back.
+              ArkaForge builds digital twins for high-stakes training and
+              co-develops games with studios and publishers. Small team, high
+              bar, real ownership of the work. If you build things that have to
+              work under pressure, you will fit here.
             </p>
           </header>
         </Reveal>
@@ -60,9 +56,6 @@ export default function CareersPage() {
         {/* What you bring */}
         <Reveal>
           <section className="text-center">
-            <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary/70">
-              What you bring
-            </span>
             <p className="mx-auto mb-6 max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">
               Whether you&apos;re seasoned or just starting out, bring what you
               do best.
@@ -84,9 +77,6 @@ export default function CareersPage() {
         <section>
           <Reveal>
             <div className="mb-8 text-center">
-              <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary/70">
-                What you get
-              </span>
               <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
                 A team that invests back
               </h2>
@@ -125,9 +115,6 @@ export default function CareersPage() {
         <section>
           <Reveal>
             <div className="mb-8 text-center">
-              <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary/70">
-                Apply
-              </span>
               <h2 className="mb-3 text-2xl font-bold tracking-tight md:text-3xl">
                 Let&apos;s connect
               </h2>

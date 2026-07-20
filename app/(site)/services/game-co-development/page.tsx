@@ -65,17 +65,14 @@ export default function GameCoDevelopmentPage() {
 
         {/* Centered header */}
         <Reveal className="mt-8 text-center">
-          <span className="mb-3 block font-mono text-xs font-medium uppercase tracking-wider text-primary">
-            Game co-development
-          </span>
           <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-            End-to-end UE5 &amp; Unity co-development
+            The same engine team, pointed at your game
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            We embed into your pipeline as a senior co-development partner. You
-            bring the vision; we bring engineering, AI, and delivery - scoped to
-            your roadmap. Outsource the build burden, or commission an original
-            title.
+            We embed into your UE5 or Unity pipeline as a senior co-development
+            partner and ship into your codebase at your quality bar: features,
+            systems, AI, prototypes, and vertical slices. Senior hands, scoped to
+            your roadmap, no headcount to carry.
           </p>
           <div className="mt-10 flex justify-center">
             <CoDevSchematic />

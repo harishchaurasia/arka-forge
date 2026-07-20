@@ -31,16 +31,13 @@ export function HowWeWork() {
     <section className="relative py-24 text-foreground md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mb-12 max-w-2xl">
-          <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-            // how we work
-          </span>
           <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Production-grade delivery for digital twins and co-development.
+            We build to the standard the work demands.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            We work like an extension of your studio, turning complex
-            real-world systems into interactive, maintainable experiences while
-            fitting into the way your team already builds.
+            Every build ships production-grade and lands in your stack:
+            versioned, tested, documented, and yours. We work inside your engine,
+            your repo, and your review process, and we measure what we make.
           </p>
         </Reveal>
 
