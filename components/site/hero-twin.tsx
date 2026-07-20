@@ -44,12 +44,11 @@ export function HeroTwin() {
       try {
         if (!mount) return;
         const THREE = await import("three");
-        const [{ GLTFLoader }, { DRACOLoader }, { OrbitControls }, { RoomEnvironment }] =
+        const [{ GLTFLoader }, { DRACOLoader }, { OrbitControls }] =
           await Promise.all([
             import("three/examples/jsm/loaders/GLTFLoader.js"),
             import("three/examples/jsm/loaders/DRACOLoader.js"),
             import("three/examples/jsm/controls/OrbitControls.js"),
-            import("three/examples/jsm/environments/RoomEnvironment.js"),
           ]);
         if (disposed || !mount) return;
         const el: HTMLDivElement = mount;
@@ -78,14 +77,24 @@ export function HeroTwin() {
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100000);
-        const pmrem = new THREE.PMREMGenerator(renderer);
-        scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 
-        const key = new THREE.DirectionalLight(0xffffff, 2.2);
+        // Lit purely by direct + hemisphere lights - NO image-based lighting /
+        // PMREM env map. Env-map generation uses float render targets that fail
+        // on some Windows/ANGLE GPU configs, which rendered the shaded side
+        // invisible (wireframe-only). Plain lights render on every GPU.
+        const key = new THREE.DirectionalLight(0xffffff, 3.0);
         key.position.set(3, 4, 2);
-        const rim = new THREE.DirectionalLight(0xff8a3a, 1.4);
-        rim.position.set(-3, 1, -2);
-        scene.add(key, rim, new THREE.AmbientLight(0xffffff, 0.25));
+        const fillLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        fillLight.position.set(-2, 1, 3);
+        const rim = new THREE.DirectionalLight(0xff8a3a, 1.6);
+        rim.position.set(-3, 2, -2);
+        scene.add(
+          key,
+          fillLight,
+          rim,
+          new THREE.HemisphereLight(0x9db4d0, 0x2a2620, 0.7),
+          new THREE.AmbientLight(0xffffff, 0.35),
+        );
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
@@ -183,14 +192,17 @@ export function HeroTwin() {
               const src = (
                 Array.isArray(mesh.material) ? mesh.material[0] : mesh.material
               ) as THREE.MeshStandardMaterial;
+              // Draco/simplify can leave geometry without usable normals; a lit
+              // material with no normals renders black. Recompute if missing.
+              if (!mesh.geometry.getAttribute("normal"))
+                mesh.geometry.computeVertexNormals();
+              // Low metalness so it never needs an env map to look lit.
               const solid = new THREE.MeshStandardMaterial({
                 map: src?.map ?? null,
                 normalMap: src?.normalMap ?? null,
-                roughnessMap: src?.roughnessMap ?? null,
-                metalnessMap: src?.metalnessMap ?? null,
-                color: src?.color?.clone() ?? new THREE.Color(0xd8d8d8),
-                metalness: 0.5,
-                roughness: 0.6,
+                color: src?.color?.clone() ?? new THREE.Color(0xcfcfcf),
+                metalness: 0.15,
+                roughness: 0.7,
               });
               solid.clippingPlanes = [planeSolid];
               solid.side = THREE.DoubleSide;
@@ -273,7 +285,6 @@ export function HeroTwin() {
           ro.disconnect();
           document.removeEventListener("visibilitychange", onVis);
           controls.dispose();
-          pmrem.dispose();
           renderer.dispose();
           if (renderer.domElement.parentNode === el)
             el.removeChild(renderer.domElement);
