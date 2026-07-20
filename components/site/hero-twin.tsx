@@ -175,10 +175,26 @@ export function HeroTwin() {
           root.traverse((o) => {
             const mesh = o as THREE.Mesh;
             if (mesh.isMesh && mesh.geometry) {
-              const mat = mesh.material as THREE.Material;
-              mat.clippingPlanes = [planeSolid];
-              mat.side = THREE.DoubleSide;
-              mat.needsUpdate = true;
+              // Rebuild the "reality" material as a plain opaque lit material.
+              // The GLB ships KHR_materials_transmission / clearcoat, which the
+              // transmission pass renders INVISIBLE on many Windows/ANGLE (D3D)
+              // GPUs - leaving only the wireframe. A simple MeshStandardMaterial
+              // lit by the scene lights renders consistently everywhere.
+              const src = (
+                Array.isArray(mesh.material) ? mesh.material[0] : mesh.material
+              ) as THREE.MeshStandardMaterial;
+              const solid = new THREE.MeshStandardMaterial({
+                map: src?.map ?? null,
+                normalMap: src?.normalMap ?? null,
+                roughnessMap: src?.roughnessMap ?? null,
+                metalnessMap: src?.metalnessMap ?? null,
+                color: src?.color?.clone() ?? new THREE.Color(0xd8d8d8),
+                metalness: 0.5,
+                roughness: 0.6,
+              });
+              solid.clippingPlanes = [planeSolid];
+              solid.side = THREE.DoubleSide;
+              mesh.material = solid;
               const edges = new THREE.LineSegments(
                 new THREE.EdgesGeometry(mesh.geometry, 28),
                 new THREE.LineBasicMaterial({
