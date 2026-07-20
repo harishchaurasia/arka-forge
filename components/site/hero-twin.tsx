@@ -18,23 +18,18 @@ export function HeroTwin() {
   const [mode, setMode] = React.useState<"pending" | "live" | "image">(
     "pending",
   );
-  const [reduced, setReduced] = React.useState(false);
   const mountRef = React.useRef<HTMLDivElement>(null);
 
   // Decide up front whether to run the live visual at all.
   // Note: prefers-reduced-motion does NOT force the static image - Windows
   // reports "reduce" whenever OS animation effects are off, which would hide
-  // the twin for a huge share of Windows users. Instead we still render the
-  // interactive model and just suppress the automatic motion (see `reduced`).
+  // the twin for a huge share of Windows users. The interactive model (with
+  // its auto-rotate + scan sweep) renders whenever the device can handle it.
   React.useEffect(() => {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     const desktop = window.matchMedia("(min-width: 1024px)").matches;
     const conn = (navigator as unknown as { connection?: { saveData?: boolean } })
       .connection;
     const saveData = conn?.saveData === true;
-    setReduced(reducedMotion);
     setMode(!desktop || saveData ? "image" : "live");
   }, []);
 
@@ -133,9 +128,7 @@ export function HeroTwin() {
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
-        // Honor prefers-reduced-motion: no unsolicited spinning. Drag/zoom
-        // (user-initiated) still work.
-        controls.autoRotate = !reduced;
+        controls.autoRotate = true;
         controls.autoRotateSpeed = 0.7;
         controls.enablePan = false;
         controls.enableZoom = true; // mouse wheel zoom, clamped below
@@ -281,9 +274,8 @@ export function HeroTwin() {
         function frame() {
           if (disposed) return;
           const t = clock.getElapsedTime();
-          // auto wireframe-reveal sweep - frozen mid-model when the user
-          // prefers reduced motion (shows the reality/twin split, no animation)
-          const f = reduced ? 0.5 : 0.5 + 0.5 * Math.sin(t * 0.28);
+          // auto wireframe-reveal sweep
+          const f = 0.5 + 0.5 * Math.sin(t * 0.28);
           const y = modelBottom + f * modelH;
           planeSolid.constant = y;
           planeWire.constant = -y;
@@ -351,7 +343,7 @@ export function HeroTwin() {
       disposed = true;
       cleanup();
     };
-  }, [mode, reduced]);
+  }, [mode]);
 
   if (mode === "image") {
     return (
