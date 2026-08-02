@@ -8,13 +8,13 @@ import { CareersForm } from "@/components/site/careers-form";
 export const metadata: Metadata = {
   title: "Careers - ArkaForge",
   description:
-    "Grow with ArkaForge. We're not just hiring - it's a two-way exchange: you bring your craft and will to learn, we invest back with real work, mentorship, and fair pay. Experience with Digital Twins is a plus.",
+    "Grow with ArkaForge. Bring your craft and your will to learn; we invest back with real work, mentorship, and fair pay. Experience with digital twins is a plus.",
 };
 
 const perks = [
   {
     title: "Room to grow",
-    body: "Real ownership, mentorship, and new skills on real projects.",
+    body: "Real ownership, mentorship, and new skills on live projects.",
     icon: Sprout,
   },
   {
@@ -107,7 +107,7 @@ export default function CareersPage() {
           </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground/70">
-            Experience with Digital Twins is a plus, not a requirement.
+            Experience with digital twins is a plus, not a requirement.
           </p>
         </section>
 
@@ -119,8 +119,7 @@ export default function CareersPage() {
                 Let&apos;s connect
               </h2>
               <p className="mx-auto max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">
-                Tell us what you do and how you&apos;d like to contribute. We
-                review every submission.
+                Tell us what you do and how you&apos;d like to contribute.
               </p>
             </div>
           </Reveal>

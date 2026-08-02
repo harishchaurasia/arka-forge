@@ -26,6 +26,20 @@ Newest first. Keep entries short: what changed, and why.
 - Illustrations set to equal height, centered over their text; both CTAs pinned
   to a shared baseline so they align.
 
+### Company page (`app/(site)/company/page.tsx`)
+- Trimmed the founder bio from a 7-item buzzword list to the load-bearing skills.
+- Value card `Distance is a non-issue` → **`Led from the US`** (+ tightened body).
+- Dropped "several US-educated" (US signaling appeared 3×) and "technical" filler.
+- Rewrote the origin's closing paragraph as a payoff instead of a third re-list
+  of the offer ("Today the studio holds that same standard… senior execution
+  without the headcount to carry").
+
+### Careers page (`app/(site)/careers/page.tsx`)
+- Metadata: dropped the "we're not just hiring" hedge; lowercase "digital twins".
+- Removed the duplicated "We review every submission" from the intro (kept once,
+  in the form footer).
+- Fixed "Digital Twins" → "digital twins"; de-duped "real…real" in a perk card.
+
 ### Homepage — Hero (`components/site/hero.tsx`)
 - H1 → **"Games & Digital Twins for high-stakes training."**
 - Folded the separate co-dev supporting line into the primary subcopy.

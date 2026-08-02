@@ -19,9 +19,9 @@ const values = [
       "We don't lead with a stack. We start with what's broken and work backward to the right system.",
   },
   {
-    title: "Distance is a non-issue",
+    title: "Led from the US",
     description:
-      "Led from the US - your project lead works your hours. A named lead, your pipeline, your standards. We run the studio so geography never costs you anything.",
+      "A named lead in your time zone, on your pipeline, to your standards. We run the studio so geography never costs you anything.",
   },
   {
     title: "Craft over throughput",
@@ -47,7 +47,7 @@ export default function CompanyPage() {
               safety-critical work demands. We also co-develop games with studios
               and publishers, and build interactive products beyond games.
               Founder-led, run as a distributed studio - a curated network of
-              senior engineers, developers, and designers, several US-educated.
+              senior engineers, developers, and designers.
             </p>
           </div>
         </Reveal>
@@ -57,24 +57,22 @@ export default function CompanyPage() {
           <div className="glass-card p-8 md:p-10 space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
             <p>
               ArkaForge was founded by Harish - a US-based computer science
-              graduate with a background spanning AI/ML, LLMs and agentic AI,
-              game development, AR/VR systems, full-stack engineering, and
-              applied simulation. He leads engineering and works directly with
-              clients.
+              graduate working across game development, simulation, AI, AR/VR,
+              and full-stack engineering. He leads engineering and works directly
+              with clients.
             </p>
             <p>
               He engineered a performance-tracked nuclear glovebox training
               simulator inside a national-lab research program at Los Alamos,
               with ASU&apos;s School of Manufacturing Systems and Networks:
               interactive environment, custom game logic, task-sequence tracking,
-              real-time performance assessment. That work is the technical
-              foundation this company is built on.
+              real-time performance assessment. That work is the foundation
+              this company is built on.
             </p>
             <p>
-              Today ArkaForge builds training digital twins for high-consequence
-              work, co-develops games with studios and publishers on full-cycle
-              Unreal Engine 5 and Unity, and builds interactive products for
-              teams outside games - high-quality execution without the headcount.
+              Today the studio holds that same standard across training twins,
+              game co-development, and interactive products - senior execution
+              without the headcount to carry.
             </p>
           </div>
         </Reveal>
