@@ -20,8 +20,11 @@ export async function Proof() {
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mb-10 flex items-end justify-between">
           <div>
-            <h2 className="font-grotesk text-3xl font-bold tracking-tight md:text-4xl">
-              Selected work.
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+              Proof
+            </span>
+            <h2 className="mt-2 font-grotesk text-3xl font-bold tracking-tight md:text-4xl">
+              What we&apos;re capable of.
             </h2>
           </div>
           <Link
