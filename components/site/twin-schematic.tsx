@@ -3,42 +3,14 @@ import { cn } from "@/lib/utils";
 // Physical -> digital twin (train/learn/assess) -> physical - the full training
 // loop. Endpoints muted (real world); middle two primary (digital). Last cube
 // carries a small primary tick: the skill has landed, closing the cycle.
-//
-// `tone` recolours the digital accent (default orange; "sky" for the blue
-// training side of the home split). `glow` adds a soft bloom behind the
-// digital-twin cube so the accent reads as emissive.
+// `glow` adds a soft bloom behind the digital-twin cube so it reads as emissive.
 export function TwinSchematic({
   className,
-  tone = "primary",
   glow = false,
 }: {
   className?: string;
-  tone?: "primary" | "sky";
   glow?: boolean;
 }) {
-  const accent =
-    tone === "sky"
-      ? {
-          stroke: "stroke-sky-400",
-          fill: "fill-sky-400",
-          fillSoft: "fill-sky-400/70",
-          fillSub: "fill-sky-400/60",
-          top: "fill-sky-400/15",
-          left: "fill-sky-400/10",
-          right: "fill-sky-400/20",
-          bloom: "fill-sky-400/40",
-        }
-      : {
-          stroke: "stroke-primary",
-          fill: "fill-primary",
-          fillSoft: "fill-primary/70",
-          fillSub: "fill-primary/60",
-          top: "fill-primary/15",
-          left: "fill-primary/10",
-          right: "fill-primary/20",
-          bloom: "fill-primary/40",
-        };
-
   const cubes = [
     { cx: 80, tone: "muted", label1: "PHYSICAL WORLD", label2: "WORKSPACE", tick: false, glyph: false },
     { cx: 240, tone: "primary", label1: "DIGITAL TWIN", label2: "TRAIN · LEARN · ASSESS", tick: false, glyph: true },
@@ -67,7 +39,7 @@ export function TwinSchematic({
           cy="63"
           rx="42"
           ry="30"
-          className={accent.bloom}
+          className="fill-primary/40"
           filter="url(#twinGlow)"
         />
       )}
@@ -81,13 +53,13 @@ export function TwinSchematic({
           <g key={`conn-${i}`}>
             <path
               d={`M${startX} 65 H${endX}`}
-              className={accent.stroke}
+              className="stroke-primary"
               strokeWidth="1.5"
               strokeDasharray="3 4"
             />
             <path
               d={`M${endX - 7} 60 L${endX + 3} 65 L${endX - 7} 70`}
-              className={accent.stroke}
+              className="stroke-primary"
               strokeWidth="1.5"
               strokeLinecap="round"
             />
@@ -95,7 +67,7 @@ export function TwinSchematic({
               x={midX}
               y="57"
               textAnchor="middle"
-              className={`${accent.fillSoft} font-mono`}
+              className="fill-primary/70 font-mono"
               fontSize="7"
               letterSpacing="1.5"
             >
@@ -107,15 +79,19 @@ export function TwinSchematic({
 
       {cubes.map((c, i) => {
         const stroke =
-          c.tone === "primary" ? accent.stroke : "stroke-muted-foreground";
-        const topFill = c.tone === "primary" ? accent.top : "fill-card/40";
+          c.tone === "primary" ? "stroke-primary" : "stroke-muted-foreground";
+        const topFill =
+          c.tone === "primary" ? "fill-primary/15" : "fill-card/40";
         const leftFill =
-          c.tone === "primary" ? accent.left : "fill-background/50";
-        const rightFill = c.tone === "primary" ? accent.right : "fill-card/30";
+          c.tone === "primary" ? "fill-primary/10" : "fill-background/50";
+        const rightFill =
+          c.tone === "primary" ? "fill-primary/20" : "fill-card/30";
         const labelStroke =
-          c.tone === "primary" ? accent.fill : "fill-muted-foreground";
+          c.tone === "primary" ? "fill-primary" : "fill-muted-foreground";
         const labelSubStroke =
-          c.tone === "primary" ? accent.fillSub : "fill-muted-foreground/60";
+          c.tone === "primary"
+            ? "fill-primary/60"
+            : "fill-muted-foreground/60";
 
         return (
           <g key={`cube-${i}`}>
@@ -135,7 +111,7 @@ export function TwinSchematic({
             </g>
 
             {c.glyph && (
-              <g className={accent.fill}>
+              <g className="fill-primary">
                 <circle cx={c.cx} cy="30" r="2.8" />
                 <path d={`M${c.cx - 5.5} 41 Q${c.cx} 33.5 ${c.cx + 5.5} 41 Z`} />
               </g>
@@ -143,7 +119,7 @@ export function TwinSchematic({
 
             {c.tick && (
               <g
-                className={accent.stroke}
+                className="stroke-primary"
                 strokeWidth="1.4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
