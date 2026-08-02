@@ -1,6 +1,5 @@
 import { Hero } from "@/components/site/hero";
-import { GameCoDev } from "@/components/site/home-game-codev";
-import { DigitalTwins } from "@/components/site/home-digital-twins";
+import { TwinCodevSplit } from "@/components/site/home-twin-codev-split";
 import { Proof } from "@/components/site/proof";
 import { HowWeWork } from "@/components/site/how-we-work";
 import { TheStudio } from "@/components/site/the-studio";
@@ -10,8 +9,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <DigitalTwins />
-      <GameCoDev />
+      <TwinCodevSplit />
       <Proof />
       <HowWeWork />
       <TheStudio />
