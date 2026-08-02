@@ -14,7 +14,7 @@ const HeroTwin = dynamic(
 // Digital twins is the primary offer: the headline is locked on it, with the
 // interactive twin on the right. Co-dev stays a small supporting line.
 const PRIMARY_SUB =
-  "We rebuild real-world procedures inside a game engine and measure every task, error, and readiness signal. People prove they are ready before they ever touch the real thing.";
+  "We co-develop games for studios and publishers - features, systems, AI, prototypes, and vertical slices. We also build digital twins for high-stakes training, using the same real-time engine work, and interactive products beyond games.";
 
 export function Hero() {
   return (
@@ -37,6 +37,8 @@ export function Hero() {
               We build
             </span>
             <span className="mt-1 block text-[clamp(2.5rem,5.2vw,3.75rem)] font-extrabold leading-[0.98] tracking-[-0.03em] text-primary">
+              Games &
+              <br />
               Digital Twins
             </span>
             <span className="mt-2 block text-[clamp(1.55rem,2.9vw,2.15rem)] font-semibold leading-[1.08] text-foreground">
@@ -48,17 +50,6 @@ export function Hero() {
           <p className="mt-7 max-w-lg text-base leading-relaxed text-muted-foreground">
             {PRIMARY_SUB}
           </p>
-
-          {/* Supporting line - co-dev, deliberately subordinate */}
-          <div className="mt-7 max-w-lg border-t border-border pt-4">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              We also co-develop{" "}
-              <span className="text-foreground">games</span> for studios and
-              publishers, and build{" "}
-              <span className="text-foreground">interactive products</span>{" "}
-              beyond games.
-            </p>
-          </div>
 
           {/* CTAs */}
           <div className="mt-9 flex flex-row flex-wrap items-center gap-x-4 gap-y-3">
