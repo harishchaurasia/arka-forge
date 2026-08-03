@@ -43,10 +43,10 @@ const DISCIPLINES = [
 ];
 
 const OFFER = [
-  { title: "Real ownership", body: "Mentorship and new skills on live projects." },
+  { title: "Real ownership", body: "Own the work end to end, mentorship along the way." },
   { title: "Fair pay", body: "Strong work earns strong pay. We don't hire cheap." },
-  { title: "Work that matters", body: "Games, engines, digital twins, physical AI." },
-  { title: "Work from anywhere", body: "Distributed studio, led from the US, on your clock." },
+  { title: "Work that matters", body: "Across games, engines, digital twins, and physical AI." },
+  { title: "Work from anywhere", body: "A distributed studio, led from the US, on your clock." },
 ];
 
 const PROCESS = [

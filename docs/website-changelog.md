@@ -46,6 +46,14 @@ Newest first. Keep entries short: what changed, and why.
   either), optional Gender (defaults to "Prefer not to say"), and a
   "Who referred you?" field when Referral is chosen.
 
+### Homepage — The Studio (`components/site/the-studio.tsx`)
+- Trimmed the founder buzzword list (matches the Company page); dropped
+  "several US-educated"; kept the honest founder-led Los Alamos research mention.
+- Vague "More about ArkaForge" link → "About the studio".
+
+### Careers — "What you get" cards (`app/(site)/careers/page.tsx`)
+- Leveled the four card bodies to a consistent length so they read as a set.
+
 ### Service page — Game co-dev (`app/(site)/services/game-co-development/page.tsx`)
 - Headline "The same engine team, pointed at your game" → "We plug into your
   team and own the build" (self-contained, matches the home section).

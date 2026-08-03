@@ -15,21 +15,19 @@ export function TheStudio() {
           <div className="max-w-2xl space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
             <p>
               Every engagement is led by ArkaForge&apos;s founder, whose work
-              spans AI and agentic systems, game development, AR/VR, full-stack
-              engineering, and applied simulation, including national-lab
-              training-simulator research at Los Alamos.
+              spans game development, simulation, AI, AR/VR, and full-stack
+              engineering - including training-simulator research at Los Alamos.
             </p>
             <p>
               Behind that core is a curated network of senior engineers,
-              developers, and designers, several US-educated, assembled to fit
-              the work in front of us. The team is scoped to the project, not the
-              project to the team.
+              developers, and designers, assembled to fit the work in front of
+              us. The team is scoped to the project, not the project to the team.
             </p>
             <Link
               href="/company"
               className="inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary transition-all hover:gap-3"
             >
-              More about ArkaForge <ArrowRight className="h-4 w-4" />
+              About the studio <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </Reveal>
