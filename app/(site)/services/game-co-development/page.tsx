@@ -22,7 +22,7 @@ const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "AI & agentic systems",
     description:
-      "LLM-driven NPCs, agentic behaviours, generative content pipelines, and in-game AI tooling - built by an AI/ML engineer.",
+      "LLM-driven NPCs, agentic behaviors, generative content pipelines, and in-game AI tooling. Built by an AI/ML engineer, not bolted on after the fact.",
     icon: Cpu,
   },
   {

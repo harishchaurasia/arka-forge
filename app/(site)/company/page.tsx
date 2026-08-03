@@ -66,13 +66,12 @@ export default function CompanyPage() {
               simulator inside a national-lab research program at Los Alamos,
               with ASU&apos;s School of Manufacturing Systems and Networks:
               interactive environment, custom game logic, task-sequence tracking,
-              real-time performance assessment. That work is the foundation
-              this company is built on.
+              real-time performance assessment. That project set the bar he now
+              runs the studio to.
             </p>
             <p>
-              Today the studio holds that same standard across training twins,
-              game co-development, and interactive products - senior execution
-              without the headcount to carry.
+              Today the studio holds that same standard across every engagement -
+              senior execution without the headcount to carry.
             </p>
           </div>
         </Reveal>
@@ -101,12 +100,12 @@ export default function CompanyPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="outline" className="glow px-8">
-              <Link href="/contact">
-                Get In Touch <ArrowRight className="ml-1.5 h-4 w-4" />
+              <Link href="/work">
+                See our work <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild size="lg" className="glow px-8">
-              <Link href="/contact">Schedule a Call</Link>
+              <Link href="/contact">Schedule a call</Link>
             </Button>
           </div>
         </Reveal>

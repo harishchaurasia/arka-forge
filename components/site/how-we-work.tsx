@@ -35,9 +35,9 @@ export function HowWeWork() {
             We build to the standard the work demands.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Every build ships production-grade and lands in your stack:
-            versioned, tested, documented, and yours. We work inside your engine,
-            your repo, and your review process, and we measure what we make.
+            Every build ships production-grade: versioned, tested, documented,
+            and measured. What we make becomes part of your product, not a
+            handoff.
           </p>
         </Reveal>
 

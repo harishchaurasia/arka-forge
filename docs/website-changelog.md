@@ -5,6 +5,38 @@ Newest first. Keep entries short: what changed, and why.
 
 ## 2026-08-02
 
+### Full-site content pass (applied from a 5-agent review)
+Honesty / guardrail (the Los Alamos work is founder-led INDIVIDUAL research, never
+a company client win or the studio's identity):
+- Digital Twins "Proof" reframed - "built as founder-led research with ASU, inside
+  a national-lab program at Los Alamos ... not a client engagement."
+- Company: "the foundation this company is built on" -> "That project set the bar
+  he now runs the studio to."
+- Case study: description no longer implies a system deployed "at Los Alamos";
+  "Los Alamos ... needed a better answer" -> "This research ... set out to build a
+  better answer."
+- Services twins card: dropped the broken, nuclear-leaning standard line for
+  "built to safety-critical standards."
+
+Physical AI (was absent from the twins pages): added to the Services intro, the
+twins pillar card, the Digital Twins subhead, and a new "Who it's for" bullet.
+
+Interactive Products de-cannibalized: "Training simulations" -> "Product & process
+training" (cross-links to digital twins); the industrial "Who it's for" line routed
+to enablement instead of operator/safety training.
+
+Consistency: US spelling (behaviours->behaviors, modelled->modeled); footer
+"Video games engineering" -> "Game engineering"; Company CTAs sentence-cased with a
+real secondary (See our work); cta-band secondary (dup /contact) -> "See our work";
+case-study link verb unified to "Read the case study."
+
+De-dup / tightening: Company origin no longer re-lists the offers; Careers process
+step + apply subhead de-duped; HowWeWork intro no longer repeats a card; home split
+co-dev softened ("own the technical execution") and twin body trimmed for parity.
+
+Held for the client's call (not applied): hero H1 order, hero-sub lead offer,
+service-page section reorders, adding interactive products to the homepage.
+
 ### Homepage — Proof section (`components/site/proof.tsx`, case-study frontmatter)
 - Header: `Selected work.` → eyebrow **Proof** + **"What we're capable of."**
   Reframed as proof of skill/capability, not a portfolio.

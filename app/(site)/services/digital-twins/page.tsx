@@ -72,8 +72,9 @@ export default function DigitalTwinsPage() {
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
             We rebuild the procedure, the equipment, and the failure modes inside
             a game engine, then measure every action against it. The real-time 3D
-            systems that power games, applied where the cost of error is severe.
-            Training twins of the work itself, not industrial IoT dashboards.
+            systems that power games, applied where the cost of error is severe -
+            to train people and physical-AI systems alike. Twins of the work
+            itself, not industrial IoT dashboards.
           </p>
           <div className="mt-8 flex justify-center">
             <TwinSchematic className="max-w-2xl" />
@@ -109,17 +110,17 @@ export default function DigitalTwinsPage() {
         <div className="mt-14 text-center">
           <h2 className="text-xl font-semibold tracking-tight">Proof</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            We engineered a performance-tracked nuclear glovebox training
-            simulator - interactive environment, custom task-sequence logic,
-            real-time error detection, and readiness scoring - inside a
-            national-lab research program at Los Alamos. It is the technical
-            foundation this work is built on.
+            A performance-tracked nuclear glovebox training simulator -
+            interactive environment, task-sequence logic, real-time error
+            detection, readiness scoring - built as founder-led research with
+            ASU, inside a national-lab program at Los Alamos. That research is
+            the technical foundation this work builds on.
           </p>
           <Link
             href="/work/los-alamos-asu-simulation"
             className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
           >
-            See the case study <ArrowRight className="h-4 w-4" />
+            Read the case study <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -155,6 +156,7 @@ export default function DigitalTwinsPage() {
             <li>Teams where on-equipment training carries cost, risk, or scheduling constraints</li>
             <li>Programs that need objective, measurable readiness signals - not impressions</li>
             <li>Research and industrial groups exploring simulation-based training</li>
+            <li>Robotics and physical-AI teams that need faithful simulation to train and validate systems</li>
           </ul>
         </div>
 

@@ -20,9 +20,9 @@ const shapes: { title: string; description: string; icon: LucideIcon }[] = [
     icon: Trophy,
   },
   {
-    title: "Training simulations",
+    title: "Product & process training",
     description:
-      "Interactive 3D environments modelled from real systems and workflows - task tracking, error detection, readiness reporting. Desktop, web, and VR.",
+      "Hands-on training built into web, desktop, or VR - guided tasks, feedback, and progress. For high-consequence procedure training, see digital twins.",
     icon: MonitorPlay,
   },
   {
@@ -34,7 +34,7 @@ const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Interactive data experiences",
     description:
-      "Datasets and dashboards turned into things people explore, not just read.",
+      "Datasets and dashboards turned into things people explore, not just read - real-time, interactive, and built to surface what matters.",
     icon: LineChart,
   },
 ];
@@ -103,7 +103,7 @@ export default function InteractiveProductsPage() {
           </h2>
           <ul className="mx-auto mt-4 max-w-xl space-y-2 text-sm text-muted-foreground">
             <li>Companies whose product would land harder as an experience</li>
-            <li>Manufacturers, energy, and industrial operators who need operator training, safety simulations, or operational visualization</li>
+            <li>Manufacturers and industrial teams who need product, sales, or field enablement as an interactive experience</li>
             <li>Teams replacing passive e-learning with something interactive</li>
             <li>Technical onboarding for complex systems and procedures</li>
             <li>Anyone who needs users to do, not just read</li>

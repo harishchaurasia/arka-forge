@@ -51,7 +51,7 @@ const OFFER = [
 
 const PROCESS = [
   { step: "01", title: "Send your work", body: "Use the form. A portfolio or code beats a résumé." },
-  { step: "02", title: "We review", body: "We read every application. If there's a fit, we reach out." },
+  { step: "02", title: "We review", body: "A person reads every one, no keyword filter or ATS." },
   { step: "03", title: "We talk", body: "A conversation about your work and how you'd contribute." },
 ];
 
@@ -228,7 +228,7 @@ export default function CareersPage() {
             <Heading
               eyebrow="Apply"
               title="Show us your work."
-              sub="No formal opening for your role? Apply anyway - we grow the team as the right people show up."
+              sub="No opening for your role? Apply anyway - that's how we hire."
             />
           </Reveal>
           <Reveal className="glass-card mt-8 p-6 md:p-8">

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 const pillars = [
   {
     title: "Digital twins",
-    body: "Real-world procedures rebuilt as interactive training simulations in a game engine - environments, task-sequence logic, real-time error detection, readiness scoring. Engineered to the standard nuclear-grade training demands.",
+    body: "Real-world procedures rebuilt in a game engine - for high-stakes human training and as simulation for physical AI. Task-sequence logic, real-time error detection, readiness scoring, built to safety-critical standards.",
     href: "/services/digital-twins",
     icon: Gauge,
   },
   {
     title: "Game co-development",
-    body: "Embed into your UE5 or Unity pipeline as a senior co-dev partner - features and systems engineering, AI and agentic systems, prototypes and vertical slices. The fastest way to add senior engine capacity without growing headcount.",
+    body: "Embed into your UE5 or Unity pipeline as a senior co-dev partner - features, systems, AI, prototypes, and vertical slices. Add senior engine capacity without growing headcount.",
     href: "/services/game-co-development",
     icon: Layers,
   },
@@ -43,9 +43,9 @@ export default function ServicesPage() {
         </h1>
         <p className="text-base leading-relaxed text-muted-foreground">
           Two specialties, one engine room: digital twins for high-stakes
-          training, and game co-development for studios and publishers. Plus
-          interactive products for teams outside games - same engineers, same
-          engines, same bar.
+          training and physical AI, and game co-development for studios and
+          publishers. Plus interactive products for teams outside games - same
+          engineers, same engines, same bar.
         </p>
       </Reveal>
 

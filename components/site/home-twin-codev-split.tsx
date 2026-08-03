@@ -37,10 +37,10 @@ export function TwinCodevSplit() {
             training &amp; <span className="text-primary">physical AI</span>.
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-            We rebuild real equipment, procedures, and failure modes inside a
-            game engine - a high-fidelity world to train people and physical-AI
-            systems. People practice the real task, fail without consequence, and
-            leave a record that proves they are ready.
+            We rebuild real equipment, procedures, and failure modes in a game
+            engine to train people and physical-AI systems. People practice the
+            real task, fail without consequence, and leave a record that proves
+            they are ready.
           </p>
           <Link
             href="/services/digital-twins"
@@ -63,10 +63,9 @@ export function TwinCodevSplit() {
             <span className="text-primary">own the build</span>.
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-            As your co-development partner, we own the entire technical
-            execution stack - features, systems, AI gameplay, prototypes, and
-            vertical slices on UE5 or Unity. Senior hands, no headcount to
-            carry.
+            As your co-development partner, we own the technical execution -
+            features, systems, AI gameplay, prototypes, and vertical slices on
+            UE5 or Unity. Senior hands, no headcount to carry.
           </p>
           <Link
             href="/services/game-co-development"
