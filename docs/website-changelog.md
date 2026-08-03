@@ -82,8 +82,10 @@ service-page section reorders, adding interactive products to the homepage.
 - Trimmed the founder buzzword list (matches the Company page); dropped
   "several US-educated"; kept the honest founder-led Los Alamos research mention.
 - Vague "More about ArkaForge" link → "About the studio".
-- Heading "The people who pitch are the people who build." → "You work directly
-  with the people who build it." (plain and instant, no decoding).
+- Heading "The people who pitch are the people who build." → "No account
+  managers. No handoffs." - a negation "stop statement" (boutique-studio
+  precedent: Applaud, Vynn), with a simple payoff line ("You brief the people
+  who build it."). Cut the founder buzzword list and the redundant paragraph.
 
 ### Careers — "What you get" cards (`app/(site)/careers/page.tsx`)
 - Leveled the four card bodies to a consistent length so they read as a set.

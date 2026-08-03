@@ -9,20 +9,16 @@ export function TheStudio() {
         <Reveal className="grid gap-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-14">
           <div>
             <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-              You work directly with the people who build it.
+              No account managers. No handoffs.
             </h2>
           </div>
           <div className="max-w-2xl space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
             <p>
-              Every engagement is led by ArkaForge&apos;s founder, whose work
-              spans game development, simulation, AI, AR/VR, and full-stack
-              engineering - including training-simulator research at Los Alamos.
+              You brief the people who build it. Every engagement is led by the
+              founder, backed by a curated network of senior engineers and
+              designers.
             </p>
-            <p>
-              Behind that core is a curated network of senior engineers,
-              developers, and designers, assembled to fit the work in front of
-              us. The team is scoped to the project, not the project to the team.
-            </p>
+            <p>The team is scoped to the project, not the project to the team.</p>
             <Link
               href="/company"
               className="inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary transition-all hover:gap-3"
