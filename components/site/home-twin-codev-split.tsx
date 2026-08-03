@@ -38,7 +38,7 @@ export function TwinCodevSplit() {
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
             We rebuild real equipment, procedures, and failure modes inside a
-            game engine — a high-fidelity world to train people and physical-AI
+            game engine - a high-fidelity world to train people and physical-AI
             systems. People practice the real task, fail without consequence, and
             leave a record that proves they are ready.
           </p>
@@ -64,7 +64,7 @@ export function TwinCodevSplit() {
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
             As your co-development partner, we own the entire technical
-            execution stack — features, systems, AI gameplay, prototypes, and
+            execution stack - features, systems, AI gameplay, prototypes, and
             vertical slices on UE5 or Unity. Senior hands, no headcount to
             carry.
           </p>

@@ -42,6 +42,8 @@ Newest first. Keep entries short: what changed, and why.
   process/timelines.
 - Cut first-stage form friction: Phone and "How did you hear about us?" are now
   optional. Metadata de-hedged; "digital twins" lowercased throughout.
+- Form: added optional Engagement (full-time / contract / project-based /
+  either) and a "Who referred you?" field when Referral is chosen.
 
 ### Homepage — Hero (`components/site/hero.tsx`)
 - H1 → **"Games & Digital Twins for high-stakes training."**
@@ -59,3 +61,5 @@ Newest first. Keep entries short: what changed, and why.
 - **Fewest words, best communication** — see the `concise-copy` skill.
 - **Match the existing understated, senior voice.** Learn from current wordings
   before rewriting; no hype, no hedging.
+- **No em dashes.** Use ` - ` (spaced hyphen) in copy, matching the site's
+  convention.
