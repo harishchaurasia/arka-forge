@@ -226,7 +226,7 @@ export function CareersForm() {
             htmlFor="phone"
             className="text-xs font-medium text-muted-foreground mb-1.5 block"
           >
-            Phone *
+            Phone
           </Label>
           <div className="flex gap-2">
             <select
@@ -252,7 +252,6 @@ export function CareersForm() {
               value={form.phone}
               onChange={handleChange}
               className="min-w-0 flex-1"
-              required
             />
           </div>
         </div>
@@ -394,14 +393,13 @@ export function CareersForm() {
           htmlFor="source"
           className="text-xs font-medium text-muted-foreground mb-1.5 block"
         >
-          How did you hear about us? *
+          How did you hear about us?
         </Label>
         <select
           id="source"
           name="source"
           value={form.source}
           onChange={handleChange}
-          required
           className="h-10 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground transition-all duration-200 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
         >
           <option value="">Select an option</option>

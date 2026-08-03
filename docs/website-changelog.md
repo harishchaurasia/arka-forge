@@ -34,11 +34,14 @@ Newest first. Keep entries short: what changed, and why.
   of the offer ("Today the studio holds that same standard… senior execution
   without the headcount to carry").
 
-### Careers page (`app/(site)/careers/page.tsx`)
-- Metadata: dropped the "we're not just hiring" hedge; lowercase "digital twins".
-- Removed the duplicated "We review every submission" from the intro (kept once,
-  in the form footer).
-- Fixed "Digital Twins" → "digital twins"; de-duped "real…real" in a perk card.
+### Careers page — full overhaul (`app/(site)/careers/page.tsx`, `careers-form.tsx`)
+- Rebuilt as an editorial, culture-forward page: hero EVP → honest "we don't
+  post job reqs" model → the bar (what we look for) → disciplines → what you
+  get → how hiring works (3 steps) → apply.
+- Owns the open-application reality honestly; nothing oversold; no fabricated
+  process/timelines.
+- Cut first-stage form friction: Phone and "How did you hear about us?" are now
+  optional. Metadata de-hedged; "digital twins" lowercased throughout.
 
 ### Homepage — Hero (`components/site/hero.tsx`)
 - H1 → **"Games & Digital Twins for high-stakes training."**
