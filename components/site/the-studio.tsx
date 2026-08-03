@@ -9,7 +9,7 @@ export function TheStudio() {
         <Reveal className="grid gap-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-14">
           <div>
             <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-              The people who pitch are the people who build.
+              You work directly with the people who build it.
             </h2>
           </div>
           <div className="max-w-2xl space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
