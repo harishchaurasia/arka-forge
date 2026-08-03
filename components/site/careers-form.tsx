@@ -81,6 +81,7 @@ export function CareersForm() {
     location: "",
     role: "",
     engagement: "",
+    gender: "",
     background: "",
     links: "",
     source: "",
@@ -145,7 +146,7 @@ export function CareersForm() {
           name: form.name,
           email: form.email,
           subject: `Careers - ${form.role}`,
-          message: `Area of interest: ${form.role}\n\nEngagement: ${form.engagement}\n\nPhone: ${form.countryCode} ${form.phone}\n\nLocation: ${form.location}\n\nBackground: ${form.background}\n\nLinks: ${form.links}\n\nHeard about us: ${form.source === "Other" ? form.sourceOther : form.source === "Referral (friend or colleague)" ? `Referral - ${form.sourceOther}` : form.source}\n\nAnything else: ${form.message}`,
+          message: `Area of interest: ${form.role}\n\nEngagement: ${form.engagement}\n\nPhone: ${form.countryCode} ${form.phone}\n\nLocation: ${form.location}\n\nGender: ${form.gender || "Prefer not to say"}\n\nBackground: ${form.background}\n\nLinks: ${form.links}\n\nHeard about us: ${form.source === "Other" ? form.sourceOther : form.source === "Referral (friend or colleague)" ? `Referral - ${form.sourceOther}` : form.source}\n\nAnything else: ${form.message}`,
           honeypot: "",
           company: "",
           resumeName: resume?.name,
@@ -166,6 +167,7 @@ export function CareersForm() {
         location: "",
         role: "",
         engagement: "",
+        gender: "",
         background: "",
         links: "",
         source: "",
@@ -274,34 +276,35 @@ export function CareersForm() {
         </div>
       </div>
 
+      <div>
+        <Label
+          htmlFor="role"
+          className="text-xs font-medium text-muted-foreground mb-1.5 block"
+        >
+          Area of Interest *
+        </Label>
+        <select
+          id="role"
+          name="role"
+          value={form.role}
+          onChange={handleChange}
+          required
+          className="h-10 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground transition-all duration-200 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+        >
+          <option value="">Select an area</option>
+          <option>Video Game Development</option>
+          <option>Narrative Design &amp; World Building</option>
+          <option>Software Engineering / Development</option>
+          <option>Digital Twins &amp; Simulations</option>
+          <option>Digital Experiences</option>
+          <option>AI / Machine Learning</option>
+          <option>3D Art, Graphics &amp; Animation</option>
+          <option>UI/UX &amp; Graphic Design</option>
+          <option>Other</option>
+        </select>
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <Label
-            htmlFor="role"
-            className="text-xs font-medium text-muted-foreground mb-1.5 block"
-          >
-            Area of Interest *
-          </Label>
-          <select
-            id="role"
-            name="role"
-            value={form.role}
-            onChange={handleChange}
-            required
-            className="h-10 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground transition-all duration-200 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-          >
-            <option value="">Select an area</option>
-            <option>Video Game Development</option>
-            <option>Narrative Design &amp; World Building</option>
-            <option>Software Engineering / Development</option>
-            <option>Digital Twins &amp; Simulations</option>
-            <option>Digital Experiences</option>
-            <option>AI / Machine Learning</option>
-            <option>3D Art, Graphics &amp; Animation</option>
-            <option>UI/UX &amp; Graphic Design</option>
-            <option>Other</option>
-          </select>
-        </div>
         <div>
           <Label
             htmlFor="engagement"
@@ -321,6 +324,26 @@ export function CareersForm() {
             <option>Contract</option>
             <option>Project-based</option>
             <option>Open to either</option>
+          </select>
+        </div>
+        <div>
+          <Label
+            htmlFor="gender"
+            className="text-xs font-medium text-muted-foreground mb-1.5 block"
+          >
+            Gender
+          </Label>
+          <select
+            id="gender"
+            name="gender"
+            value={form.gender}
+            onChange={handleChange}
+            className="h-10 w-full rounded-lg border border-border bg-card px-3 text-sm text-foreground transition-all duration-200 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          >
+            <option value="">Prefer not to say</option>
+            <option>Female</option>
+            <option>Male</option>
+            <option>Non-binary</option>
           </select>
         </div>
       </div>

@@ -43,7 +43,8 @@ Newest first. Keep entries short: what changed, and why.
 - Cut first-stage form friction: Phone and "How did you hear about us?" are now
   optional. Metadata de-hedged; "digital twins" lowercased throughout.
 - Form: added optional Engagement (full-time / contract / project-based /
-  either) and a "Who referred you?" field when Referral is chosen.
+  either), optional Gender (defaults to "Prefer not to say"), and a
+  "Who referred you?" field when Referral is chosen.
 
 ### Homepage — Hero (`components/site/hero.tsx`)
 - H1 → **"Games & Digital Twins for high-stakes training."**
