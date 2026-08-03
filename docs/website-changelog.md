@@ -46,6 +46,18 @@ Newest first. Keep entries short: what changed, and why.
   either), optional Gender (defaults to "Prefer not to say"), and a
   "Who referred you?" field when Referral is chosen.
 
+### Service page — Game co-dev (`app/(site)/services/game-co-development/page.tsx`)
+- Headline "The same engine team, pointed at your game" → "We plug into your
+  team and own the build" (self-contained, matches the home section).
+- Tightened the subhead (dropped the feature list the cards already cover).
+- Removed the unfalsifiable "before the category had a name" brag.
+
+### Contact page (`app/(site)/contact/page.tsx`)
+- H1 "Contact" → "Book a call, or send a note." (previews both paths).
+- Added "We reply within 1-2 business days." next to Send (reassurance before
+  the click, not only in the post-submit toast).
+- Open: Subject is still required; making it optional needs a schema/API change.
+
 ### Homepage — Hero (`components/site/hero.tsx`)
 - H1 → **"Games & Digital Twins for high-stakes training."**
 - Folded the separate co-dev supporting line into the primary subcopy.

@@ -54,7 +54,7 @@ export default function ContactPage() {
       <div className="mx-auto max-w-6xl px-5">
         <BackLink href="/" label="Back to Home" />
         <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Contact</h1>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Book a call, or send a note.</h1>
           <p className="text-base text-muted-foreground max-w-md">
             A game that needs more hands, a pitch that needs a vertical slice, or
             a product that should be an experience - tell us what you&apos;re
@@ -62,10 +62,10 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Cal embed — full width */}
+        {/* Cal embed - full width */}
         <CalEmbed />
 
-        {/* Send a message — secondary */}
+        {/* Send a message - secondary */}
         <div className="mt-16">
           <div className="mb-6">
             <h2 className="text-xl font-semibold tracking-tight">Send a message</h2>
@@ -108,6 +108,9 @@ export default function ContactPage() {
               <Button type="submit" size="lg" disabled={isSubmitting} className="w-full glow">
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
+              <p className="text-center text-xs text-muted-foreground">
+                We reply within 1-2 business days.
+              </p>
             </form>
           </div>
         </div>

@@ -22,7 +22,7 @@ const shapes: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "AI & agentic systems",
     description:
-      "LLM-driven NPCs, agentic behaviours, generative content pipelines, in-game AI tooling - built by an AI/ML engineer who's been shipping agentic systems since before the category had a name.",
+      "LLM-driven NPCs, agentic behaviours, generative content pipelines, and in-game AI tooling - built by an AI/ML engineer.",
     icon: Cpu,
   },
   {
@@ -66,13 +66,12 @@ export default function GameCoDevelopmentPage() {
         {/* Centered header */}
         <Reveal className="mt-8 text-center">
           <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-            The same engine team, pointed at your game
+            We plug into your team and own the build
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
             We embed into your UE5 or Unity pipeline as a senior co-development
-            partner and ship into your codebase at your quality bar: features,
-            systems, AI, prototypes, and vertical slices. Senior hands, scoped to
-            your roadmap, no headcount to carry.
+            partner and ship into your codebase at your quality bar. Senior
+            hands, scoped to your roadmap, no headcount to carry.
           </p>
           <div className="mt-10 flex justify-center">
             <CoDevSchematic />
