@@ -22,6 +22,9 @@ export default async function WorkPage() {
         >
           Work
         </h1>
+        <p className="mt-3 max-w-lg text-base leading-relaxed text-muted-foreground">
+          Simulation and training systems, built with game technology.
+        </p>
       </Reveal>
       <div className="grid gap-5 md:grid-cols-2">
         {work.map((item, i) => (
