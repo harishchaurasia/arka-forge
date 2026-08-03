@@ -103,8 +103,10 @@ service-page section reorders, adding interactive products to the homepage.
 - Open: Subject is still required; making it optional needs a schema/API change.
 
 ### Homepage — Hero (`components/site/hero.tsx`)
-- H1 → **"Games & Digital Twins for high-stakes training."**
-- Folded the separate co-dev supporting line into the primary subcopy.
+- H1 → **"Games & Digital Twins for high-stakes training."** (kept games-first
+  for typographic balance: one-word "Games &" over two-word "Digital Twins").
+- Subcopy reordered to lead with digital twins - the canonical offer order is
+  digital twins, then game co-dev - and now names physical AI.
 
 ### Tooling / docs
 - Added `docs/content-audit.md` — 10-part audit with prioritized copy/flow fixes.

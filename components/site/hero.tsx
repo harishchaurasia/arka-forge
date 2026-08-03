@@ -14,7 +14,7 @@ const HeroTwin = dynamic(
 // Digital twins is the primary offer: the headline is locked on it, with the
 // interactive twin on the right. Co-dev stays a small supporting line.
 const PRIMARY_SUB =
-  "We co-develop games for studios and publishers - features, systems, AI, prototypes, and vertical slices. We also build digital twins for high-stakes training, using the same real-time engine work, and interactive products beyond games.";
+  "We build digital twins for high-stakes training and physical AI. We co-develop games for studios and publishers - features, systems, AI, prototypes, and vertical slices. Plus interactive products beyond games, all on the same real-time engines.";
 
 export function Hero() {
   return (
